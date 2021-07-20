@@ -1,4 +1,4 @@
-# Team Kosk Project & Source Code storage 
+# Team Kosk Project & Source Code Storage 
 This is a workplace of team Kosk, containing several projects(case studies) that the team has been studying. 
 
 Team Kosk is a group of people who believe in a huge potential of blockchain and its enormous influence towards the upcoming future.
