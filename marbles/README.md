@@ -1,3 +1,5 @@
+# This repository is a clone of existing hyperledger marbles demo. Only cloned for the purpose of studying marbles(no copyright infringement intended)
+
 *Read this in other languages: [中国](README-cn.md), [한국어](README-ko.md), [日本](README-ja.md), [português](README-pt.md)
 # Marbles Demo
 
