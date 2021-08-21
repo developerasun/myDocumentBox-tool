@@ -5,7 +5,7 @@ Github: https://github.com/designerasun
 Medium: https://designerasun.medium.com/
 
 
-** Personal projects
+## Personal projects
   * Caffeine checker
   
     
@@ -16,7 +16,7 @@ Medium: https://designerasun.medium.com/
     ** screenshot automator
 
  
-** Team project participated
+## Team project participated
 
 * goBlock program Hackathon 
     https://youtu.be/wY4mBHACn08 
