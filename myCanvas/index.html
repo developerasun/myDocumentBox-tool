@@ -13,6 +13,15 @@
     <canvas id = "myCanvas" class = "canvas"></canvas>
 
     <div class = "controls">
+        <!-- Create brush and adjust its size -->
+        <div class="controls_range">
+            <input type="range" name="my_brush" id="brush_range"
+            min = "0.1"
+            max = "10.1"
+            step = "0.5"
+            value = "2.5"
+            />
+        </div>
         <!-- Create buttons : Fill and Save -->
         <div class="controls_btns">
             <button id="jsMode">Fill</button>
@@ -21,15 +30,15 @@
 
          <!-- Create color pickers -->
         <div class="controls_colors" id = myColors>
-            <div class="controls_color" style="background-color: black;"></div>
-            <div class="controls_color" style="background-color: white;"></div>
-            <div class="controls_color" style="background-color: red;"></div>
-            <div class="controls_color" style="background-color: orange;"></div>
-            <div class="controls_color" style="background-color: yellow;"></div>
-            <div class="controls_color" style="background-color: green;"></div>
-            <div class="controls_color" style="background-color: rgb(140, 222, 255);"></div>
-            <div class="controls_color" style="background-color: blue;"></div>
-            <div class="controls_color" style="background-color: purple;"></div>
+            <div class="controls_color jsColor" style="background-color: white;"></div>
+            <div class="controls_color jsColor" style="background-color: red;"></div>
+            <div class="controls_color jsColor" style="background-color: orange;"></div>
+            <div class="controls_color jsColor" style="background-color: yellow;"></div>
+            <div class="controls_color jsColor" style="background-color: black;"></div>
+            <div class="controls_color jsColor" style="background-color: green;"></div>
+            <div class="controls_color jsColor" style="background-color: rgb(140, 222, 255);"></div>
+            <div class="controls_color jsColor" style="background-color: blue;"></div>
+            <div class="controls_color jsColor" style="background-color: purple;"></div>
         </div>
 
     </div>
