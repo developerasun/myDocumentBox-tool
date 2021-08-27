@@ -18,14 +18,14 @@ This is a secret box of designerasun, containing the sum of his blood, sweat, an
 </ol>
  
 ## Team project participated
-
+<ol>
 <li>goBlock program Hackathon : Metaverse wedding platform with Icon loop LFT2 algorithm 
     https://1drv.ms/p/s!AtfkTrM2j9UvlGo-LexXUWe709rg?e=loJnDu </li>
     
 <li>Blockchain consensus algorithm concept proposal
     Proof of Safe Number(PoSN)
     https://github.com/designerasun/golang/blob/master/PoSN/demo/demo.go </li>
-    
+</ol>
 
 
 
