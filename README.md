@@ -9,11 +9,10 @@ caffeine checker - calcuating proper amount of daily caffeine consumption : Go
 Hyperledger Fabric Marbles Demo - modificating front end element : HTML, CSS (https://youtu.be/4N7nvLq-9Qg)
  
   
-  * Attendance automator
-    ** Folder generator - Go
-    https://youtu.be/KyOQGR0VlBc
+Attendance automator
+Folder generator -  creating folders with the input from user : https://youtu.be/KyOQGR0VlBc : Go
     
-    ** screenshot automator : (screenshot and YT link will be added)- Python
+screenshot automator - taking an automated screenshot at reserved time : (screenshot and YT link will be added)- Python
 
  
 ## Team project participated
