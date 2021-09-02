@@ -18,6 +18,17 @@ body {
     box-shadow: 0 4px 6px rgba(50, 50, 93, 0.11);
 }
 
+.promotion {
+    padding-top: 20px;
+    font-weight: 600;
+    font-size: 15px;
+    color: black;
+}
+
+.paypal{
+    padding-top: 20px;
+}
+
 .controls{
     margin-top: 80px;
     display: flex;
@@ -56,4 +67,8 @@ body {
     height: 50px;
     border-radius: 30px;
     margin-left: 10px;
+}
+
+.social-share {
+    padding-top : 20px;
 }
