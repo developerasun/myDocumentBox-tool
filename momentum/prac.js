@@ -61,6 +61,69 @@ console.log("getElementByTagName: ",myH1);
 const myQuery = document.querySelector(".hello h1");
 console.log("query selector: ", myQuery);
 
+// Javascript has style object - style element can be adjusted in JS
+myQuery.style.color = "red";
+
 // Use querySelectorAll to get all the involved tags from HTML
 const getAllQuery = document.querySelectorAll(".hello h1"); 
 console.log("all grabbed: ", getAllQuery);
+
+// Create an addEventListeners and corresponding function for the myQuery variable
+function handleMyQueryClick(){ 
+    // console.log("myQuery was clicked! Color red to blue!");
+    // console.log("myQuery was clicked! innerText changed!");
+    // myQuery.style.color = "blue"; 
+    myQuery.innerText = "clicked and content changed";
+
+    const currentColor = myQuery.style.color; 
+    let newColor; 
+
+    if (currentColor === "black"){
+        newColor = "red"; 
+    } else { 
+        newColor = "black";
+    }
+
+    myQuery.style.color = newColor;
+
+}
+
+function handleMouseEnter(){ 
+    console.log("log - mouse is here!");
+    myQuery.innerText = "Mouse is here!"; 
+} 
+
+function handleMouseLeave(){ 
+    myQuery.innerText = "Mouse just left!";
+}
+
+function handleWindowResize(){ 
+    document.body.style.backgroundColor = "green";
+}
+
+function handleWindowCopy(){ 
+    alert("You can't copy this");
+}
+
+function handleWindowOffline(){ 
+    alert("No internet connection");
+}
+
+function handleWindowOnline(){ 
+    alert("internet connected");
+}
+
+// Notice that the function handleMyQueryClick was not called directly by developer
+// instead, it is called by Javascript when click event happend. 
+// JS web workflow: select HTML tag -> write function -> add the tag and function in addEventListener
+myQuery.addEventListener("click", handleMyQueryClick); // not ("click", handleMyQueryClick());, but ("click", handleMyQueryClick);
+myQuery.addEventListener("mouseenter", handleMouseEnter);
+myQuery.addEventListener("mouseleave", handleMouseLeave);
+
+window.addEventListener("resize", handleWindowResize);
+window.addEventListener("copy", handleWindowCopy); 
+
+// if offline & online addEventListener does not works, follow below steps below
+// access to Chrome Dev tools with F12 command -> Network tab -> No throttling to Offline.
+window.addEventListener("offline", handleWindowOffline); 
+window.addEventListener("online", handleWindowOnline); 
