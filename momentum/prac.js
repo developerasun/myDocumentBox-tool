@@ -52,8 +52,8 @@ console.log(title.id);
 const hellos = document.getElementsByClassName("hello");
 console.log("typeof hellos: ", typeof hellos); 
 
-const myH1 = document.getElementsByTagName("h1");
-console.log("getElementByTagName: ",myH1);
+const myH2 = document.getElementsByTagName("h2");
+console.log("getElementByTagName: ",myH2);
 
 // Use of querySelector : search HTML css-like
 // advantage of querySelector function compared to above ones, 
@@ -67,6 +67,8 @@ myQuery.style.color = "red";
 // Use querySelectorAll to get all the involved tags from HTML
 const getAllQuery = document.querySelectorAll(".hello h1"); 
 console.log("all grabbed: ", getAllQuery);
+
+const jsToCssTest = document.querySelector(".testing h1");
 
 // Create an addEventListeners and corresponding function for the myQuery variable
 function handleMyQueryClick(){ 
@@ -113,12 +115,27 @@ function handleWindowOnline(){
     alert("internet connected");
 }
 
+function jsToCss(){ 
+    // Delcare a constant variable to avoid raw value
+    const jsToCssClassName = "active";
+    
+    if (jsToCssTest.className === jsToCssClassName){
+        jsToCssTest.className = "";
+    } else {
+        jsToCssTest.className = jsToCssClassName;
+    }
+}
+
 // Notice that the function handleMyQueryClick was not called directly by developer
 // instead, it is called by Javascript when click event happend. 
 // JS web workflow: select HTML tag -> write function -> add the tag and function in addEventListener
 myQuery.addEventListener("click", handleMyQueryClick); // not ("click", handleMyQueryClick());, but ("click", handleMyQueryClick);
 myQuery.addEventListener("mouseenter", handleMouseEnter);
 myQuery.addEventListener("mouseleave", handleMouseLeave);
+
+
+jsToCssTest.addEventListener("click", jsToCss); 
+
 
 window.addEventListener("resize", handleWindowResize);
 window.addEventListener("copy", handleWindowCopy); 
