@@ -1,0 +1,12 @@
+body {
+    background-color: bisque;
+}
+
+h1 { 
+    color : blue ;
+    transition: color 1s ease-in-out;
+}
+
+.active { 
+    color: tomato;
+}
