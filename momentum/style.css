@@ -10,3 +10,7 @@ h1 {
 .active { 
     color: tomato;
 }
+
+.hidden {
+    display: none;
+}
