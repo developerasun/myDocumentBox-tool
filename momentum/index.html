@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="css/style.css">
     <title>momentum</title>
 </head>
 
@@ -13,7 +13,7 @@
     <!-- Restriction on user login data input can be done in JS level as well
     however browser alreadys provides a form tag like below so for productivity use
     below form tag in HTML-->
-    <form id="login-form"> 
+    <form id="login-form" class="login-form"> 
         <input 
         required
         maxlength="15"
@@ -26,13 +26,22 @@
     <!-- action attribute in form tag represent a destination URL when form data is sent
     to server. 
     example : <form action="www.abcd.com/index.html" -->
-    <form><a href="https://nomadcoders.co/">Nomad Homepage</a></form>
-
-    <form class="not-hidden">Hide Me!</form>
+    <!-- <form><a href="https://nomadcoders.co/">Nomad Homepage</a></form> -->
+    
+    
 
     <h1 id="greeting" class="hidden"></h1>
-    <!-- HTML loads app.js and prac.js -->
-    <script src="app.js"></script> 
+    <h2 id="clock">00:00</h2>
+    
+    <div id="quote">
+        <span></span>
+        <span></span>
+    </div>
+
+    <!-- HTML loads Javascript files -->
+    <script src="js/clock.js"></script>
+    <script src="js/greeting.js"></script> 
+    <script src="js/quote.js"></script> 
     
 </body>
 
