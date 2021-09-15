@@ -10,6 +10,8 @@
 
 
 <body>
+    <h2 id="clock">00:00</h2>
+    
     <!-- Restriction on user login data input can be done in JS level as well
     however browser alreadys provides a form tag like below so for productivity use
     below form tag in HTML-->
@@ -28,11 +30,22 @@
     example : <form action="www.abcd.com/index.html" -->
     <!-- <form><a href="https://nomadcoders.co/">Nomad Homepage</a></form> -->
     
-    
-
     <h1 id="greeting" class="hidden"></h1>
-    <h2 id="clock">00:00</h2>
-    
+
+    <!-- Create a to-do form -->
+    <form id="todo-form">
+        <input type="text" placeholder="Write your to-dos" required />
+    </form>
+
+    <!-- Create a to-do list -->
+    <ul id="todo-list">
+        <li>
+            <span>text</span>
+            <button>X</button>
+        </li>
+    </ul>
+
+    <!-- Create a random quote -->
     <div id="quote">
         <span></span>
         <span></span>
@@ -41,7 +54,9 @@
     <!-- HTML loads Javascript files -->
     <script src="js/clock.js"></script>
     <script src="js/greeting.js"></script> 
-    <script src="js/quote.js"></script> 
+    <script src="js/quote.js"></script>
+    <script src="js/background.js"></script>
+    <script src="js/todo.js"></script> 
     
 </body>
 
