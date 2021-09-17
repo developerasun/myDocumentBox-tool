@@ -25,11 +25,18 @@ function handleToDoSubmit(event){
     // console.log(`newToDo value: ${newToDo}`);
     // console.log(`toDoFormInput value: ${toDoFormInput.value}`); 
 
-    // Add a new to-do into list
-    toDos.push(newToDo); 
+    // Add a new to-do into list in an object format 
+    const newToDoObject = {
+        text :newToDo, 
+        
+        // Assign a random id number to each object
+        id : Date.now(),
+    }; 
+
+    toDos.push(newToDoObject); 
 
     // Show(paint) the to-do into screen
-    paintToDo(newToDo); 
+    paintToDo(newToDoObject); 
 
     // Save the to-do into localStorage
     saveToDos(); 
@@ -37,10 +44,12 @@ function handleToDoSubmit(event){
 
 function paintToDo(newToDo){ 
     const li = document.createElement("li"); 
+    li.id = newToDo.id; 
+
     const span = document.createElement("span"); 
     const toDoBtn = document.createElement("button");
 
-    span.innerText = newToDo; 
+    span.innerText = newToDo.text; 
     toDoBtn.innerText = "❌";
 
     li.append(span, toDoBtn); 
@@ -56,6 +65,12 @@ function deleteToDo(event){
     console.log("parentElement: ", event.target.parentElement); // 
     const li = event.target.parentElement; 
     li.remove(); 
+    console.log(`${li.id} deleted`); 
+
+    // parseInt converts a string into a number
+    toDos = toDos.filter((toDo)=>toDo.id !== parseInt(li.id));
+    console.log(typeof(parseInt(li.id))); 
+    saveToDos()
 }
 
 toDoForm.addEventListener("submit", handleToDoSubmit); 
@@ -83,3 +98,9 @@ if (savedToDos !== null){
     // arrow function is easy to read but has its own limitation
     parsedToDos.forEach(paintToDo); 
 }
+
+// filter method in Javascript : return a new array with the elements that have passed the given function's test
+// filter in JS does not affect an original array
+// const words = ['spray', 'limit', 'elite', 'exuberant', 'destruction', 'present'];
+// const result = words.filter(word => word.length > 6);
+// console.log(result);
