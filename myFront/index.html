@@ -61,7 +61,119 @@ this section is not for users but for browsers. -->
         <q>q tag is for a short quote</q>
         <blockquote>blockquote is for a long quote. Lorem ipsum dolor sit amet consectetur adipisicing elit. Distinctio dolores incidunt qui! Qui in consequatur voluptate! Quos facere saepe hic quam pariatur voluptatem consequatur possimus molestiae ipsam? Recusandae, quas pariatur.</blockquote>
     </p>
-</body>
+
+    <!-- ul and ol describe a group of lists depending on the list's characteristic -->
+    <ul>
+        <li>first list in unordered list</li>
+        <li>second list in unordered list</li>
+        <li>third list in unordered list</li>
+    </ul>
+
+    <ol>
+        <li>first list in ordered list</li>
+        <li>second list in ordered list</li>
+        <li>third list in ordered list</li>
+    </ol>
+<!-- target attribute determins how the link will be opened. 
+e.g: target="_blank" : open the link in a new window
+default value of target attr is _self (open in a current window)-->
+    <a href="http://www.naver.com" target="_blank" rel="noopener noreferrer">Open naver in a new tap</a> <br/>
+    <a href="http://www.naver.com" target="_self" rel="noopener noreferrer">Open naver in a current tap</a>
+
+    <a href=".bookshelves" target="_blank" rel="noopener noreferrer">Check our bookshelves</a>
+
+    <!-- link to link in a HTML doc 
+    a href=".your_class_name" did not work 
+    a href="#your_id_name" worked -->
+    <ol class="bookshelves">
+        <li><a href="#novel-titles" target="_self">novel</a></li>
+        <li><a href="#comics-titles" target="_blank">comics</a></li>
+        <li><a href="#romance-titles" target="_blank">romance</a></li>
+    </ol>
+
+    <div id="novel-titles">testing
+    <ul>
+        <li>Happy days</li>
+        <li>Tom and Jerry</li>
+        <li>Rose will come back</li>
+    </ul>
+    </div>
+
+    <ul id="comics-titles">
+        <li>Hulk</li>
+        <li>Spiderman</li>
+        <li>Batman</li>
+    </ul>
+
+    <ul id="romance-titles">
+        <li>Love July</li>
+        <li>We broken yesterday</li>
+        <li>No love no more</li>
+    </ul>
+
+    <!-- a href="#top" will move you to at the top of the page -->
+    <span class="go-to-top"><a href="#top" target="_self">Go to top</a></span>
+    
+    <!-- Good code convention: use src, alt attribute together when importing an image 
+    alt tag contributes to browser's accessibility. 
+    lazy or eager attrs decides either website loads an image right away or defeter when user's
+    scroll is nearby the image -->
+    <img src="./assets/img/1.jpg" alt="cute cat image" class="cat" loading="lazy" /> 
+    
+    <!-- controls attr in video tag adds a play button as a controler -->
+    <video 
+    autoplay
+    class="kitten"
+    controls 
+    src="./assets/clip/kitten.mp4" 
+    width="500px" 
+    height="400px"
+    ></video>
+
+    <!-- audio tag is almost the same with video tag -->
+    <audio 
+    controls
+    autoplay
+    src="./assets/audio/Hall of the Mountain King.mp3" 
+    class="bgm">
+    </audio>
+
+    <!-- div and span : div is a block tag and span is a in-line tag 
+    class attr can be applied multiple times-->
+    <div class="class-1 class-2">
+        <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. <br/>
+            Sunt totam asperiores voluptatibus quidem rerum minus, <br/>
+            eum <span>labore consectetur </span>molestiae mollitia ipsam modi odit vero porro. Repellendus asperiores praesentium quia commodi?</p>
+    </div>
+
+    <!-- form tag : used to get input from user and send the input data to server  
+    action, method attr are used in sending data - 
+    action : address -> e.g www.naver.com
+    method : http method -> e.g GET(default) || POST
+    -->
+    <form action="">
+        <!-- Create a sing-up tab -->
+        <input type="text" placeholder="Your name" /> <br/>
+        <input type="email" placeholder="Your email"/> <br/>
+        <input type="password" placeholder="Your password"/> <br/>
+        <input type="submit" value="Sign up"/>
+        <button>🐈🐈🐈</button> <!-- button tag has a submit functionality inside as a default -->
+    </form>
+
+    <!-- label tag is connected to input tag using id  -->
+    <label for="name">your name</label>
+    <input type="text" id="name" placeholder="name" />
+
+    <div class="radio-btn">
+    <span>Check your pet preference</span> <br/>
+    <label for="cat">cat</label>
+    <input type="radio" id="cat"/>
+    <label for="dog">dog</label>
+    <input type="radio" id="dog"/>
+    </div>
+
+</body> 
+
 
 <!-- html tag covers all the sub-tags -->
 </html>
