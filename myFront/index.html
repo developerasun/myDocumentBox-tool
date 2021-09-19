@@ -2,7 +2,14 @@
 DOCTYPE should be pre-declared before html tag -->
 <!DOCTYPE html>
 
-<!-- html tag covers all the sub-tags -->
+<!-- 3 elements of web standard: 1) Markup(HTML) 2) Style(CSS) 3) Script(Javascript) 
+web standard should be adhered for improving several types of platforms and devices 
+HTML matters in terms of SEO since web browser bots are collecting HTML documents when searching
+-->
+
+<!-- html tag covers all the sub-tags 
+lang attribute is for web accessibility, which automatically pops translation interface
+in browser -->
 <html lang="en">
 
 <!-- Head section is about the meta tags and title of the document. 
@@ -12,6 +19,14 @@ this section is not for users but for browsers. -->
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+
+    <!-- Use link tag and rel attribute to connect CSS with HTML doc -->
+    <link rel="stylesheet" href="./style.css">
+
+    <!-- importing web font from Google font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Italianno&display=swap" rel="stylesheet">
 </head>
 
 <!-- Body section is for user, meaning it is the section users will see -->
@@ -170,6 +185,45 @@ default value of target attr is _self (open in a current window)-->
     <input type="radio" id="cat"/>
     <label for="dog">dog</label>
     <input type="radio" id="dog"/>
+    </div>
+
+    <!-- Semantic elements in HTML5 
+    tags like header, section, main, footer, article let browser know that they are 
+    placed in a specific place for a reason. The sole purpose of this is to let browser and 
+    search engine know that these have a specific function.
+    -->
+
+    <!-- Semantic tags are important for improving SEO and web standard -->
+    <header>
+        <h1>Today's diary</h1>
+    </header>
+
+    <nav class="list-without-symbol">
+        <li>show all diaries</li>
+        <li>move to previous note</li>
+        <li>leave a comment</li>
+    </nav>
+    <div class="semantic-p">
+        <p>
+            Lorem, ipsum dolor sit amet consectetur adipisicing elit. Vel, facilis similique molestiae dolor dolorum aliquid magnam eos modi inventore labore nesciunt reprehenderit temporibus, dolore sunt odit esse? Doloribus, voluptatibus molestiae.
+        </p>
+    <div class="semantic-p-second">
+        <p>
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Quaerat, qui voluptatem possimus voluptate obcaecati architecto quas. Aspernatur delectus repudiandae error placeat, beatae aliquam distinctio dolorem accusamus magni recusandae neque harum.
+        </p>
+    </div>
+
+    </div>
+    <footer>
+        ⓒ Copyright by DeveloperAsun
+    </footer>
+
+    <div class="first">
+        <h1>first children</h1>
+        <div class="second">
+            <h1>first grand-children</h1>
+            <h1>second children</h1>
+        </div>
     </div>
 
 </body> 
