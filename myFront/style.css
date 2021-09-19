@@ -1,0 +1,68 @@
+
+@import url('https://fonts.googleapis.com/css2?family=Italianno&family=Pacifico&display=swap');
+
+/* standard CSS grammar: selector { declaration } */
+h1 {
+    color: red;
+    font-size: 40px;
+    font-family: 'Times New Roman', Times, serif;
+}
+
+#novel-titles, 
+.kitten, 
+h2 {
+    color: blue;
+}
+
+/* parent > children : > css selector only selects parent's children */
+.first > h1 {
+    color: green;
+}
+
+.semantic-p > p {
+    color: green;
+    text-align: center;
+
+    /* line-height property sets a line spacing */
+    line-height: 200%;
+
+    font-size: 40px;
+
+    /* font-weight property sets how thick a font is */
+    font-weight: 400;
+
+    /* font-family property sets family-name and generic-name(serif, san-serif) 
+    generic-name selects a font to use if fonts in family-name are not available */
+    /* font-family: 'Times New Roman', Times, serif; */
+
+    /* importing web fonts : 1) HTML link tag 2) @import in CSS */
+    font-family: 'Italianno', cursive;
+}
+
+.semantic-p-second{
+    font-size: 30px;
+    font-family: 'Pacifico', cursive;
+}
+
+/* link states in CSS
+link: default 
+hover: on mouse 
+active: mouse click 
+visited: link visited
+focus: link focused
+*/
+a {
+    text-decoration: none;
+    background-color: black;
+    color:white;
+}
+
+a:hover { 
+    background-color: green;
+}
+
+.list-without-symbol {
+    /* list-style property sets how a list should be placed  */
+    /* list-style: none; */
+    list-style: upper-latin;
+}
