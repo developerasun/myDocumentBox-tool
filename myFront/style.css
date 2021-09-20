@@ -66,3 +66,96 @@ a:hover {
     /* list-style: none; */
     list-style: upper-latin;
 }
+
+body { 
+    background-color: aliceblue;
+    background-image: url("./assets/img/2.jpg");
+
+    /* cover is often used for background-size property. It scales the image 
+    as large as possible. Image will be stretched if needed */
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+
+.margin {
+    width:100px;
+    height:100px;
+    background-color: bisque;
+
+    /* padding : inner margin 
+    margin : outer margin */
+    padding: 20px;
+    margin: 20px;
+
+    /* border property sets a edge size, style, and color
+    edge style available:solid, double, dashed  */
+    border: 10px dashed black;
+    /* border-radius: 20px;*/
+
+    border-top-right-radius: 10px;
+    border-bottom-left-radius: 10px;
+}
+
+.box1,
+.box2,
+.box3{
+    width:150px;
+    height: 50px;
+    background-color: yellow;
+
+    /* Set box size as a standard when calculating whole element size */
+    box-sizing: border-box;
+}
+
+.box2 {
+    border: 10px solid blue;
+}
+
+.box3 {
+    padding:20px;   
+}
+
+/* display attribute in CSS is : 1) block 2) in-line */
+.display {
+    width:100px;
+    height: 100px;
+    border: 2px solid black;
+    background-color: lightblue;
+
+    /* inline: only takes a place as itself
+    block: takes a whole horizontal space */
+    display: inline;
+}
+
+/* position attribute in CSS is 1) static(default) 2) fixed 3) absolute 4) relative 
+these attributes can be used keywords like top, left, right, bottom */
+.fixed-menu {
+    position: fixed;
+    width: 100%;
+    height: 50px;
+    background-color: white;
+    top:0;
+    left: 0;
+}
+
+/* position: relative */
+.relative-menu{
+    position: relative;
+    width: 100px;
+    height: 100px;
+    background-color: aquamarine;
+    top: 100px;
+    left: 400px;
+}
+
+/* position: absolute
+search parent element that has a relative position and set it a starting point.
+if no parent element has a relative position, it sets a body as a starting point  */
+.absolute-menu{
+    position: absolute;
+    width: 100%;
+    height: 55px;
+    background-color: aqua;
+    top: 80px;
+    left:0;
+}
