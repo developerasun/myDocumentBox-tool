@@ -133,7 +133,13 @@ default value of target attr is _self (open in a current window)-->
     alt tag contributes to browser's accessibility. 
     lazy or eager attrs decides either website loads an image right away or defeter when user's
     scroll is nearby the image -->
-    <img src="./assets/img/1.jpg" alt="cute cat image" class="cat" loading="lazy" /> 
+    <img 
+    src="./assets/img/1.jpg" 
+    alt="cute cat image" 
+    class="cat" 
+    loading="lazy"
+    weight="200px"
+    height="200px" /> 
     
     <!-- controls attr in video tag adds a play button as a controler -->
     <video 
@@ -141,8 +147,8 @@ default value of target attr is _self (open in a current window)-->
     class="kitten"
     controls 
     src="./assets/clip/kitten.mp4" 
-    width="500px" 
-    height="400px"
+    width="200px" 
+    height="200px"
     ></video>
 
     <!-- audio tag is almost the same with video tag -->
@@ -224,6 +230,33 @@ default value of target attr is _self (open in a current window)-->
             <h1>first grand-children</h1>
             <h1>second children</h1>
         </div>
+    </div>
+
+    <div class="margin"></div>
+
+
+    <!-- Box model in HTML: 1) content 2) padding(inner margin)
+    3) border 4) margin(outer margin) -->
+
+    <div class="box1">Box1</div>
+    <div class="box2">Box2</div>
+    <div class="box3">Box3</div>
+
+    
+        <div class="display">cat</div>
+        <div class="display">dog</div>
+        <div class="display">hamster</div>
+    
+    <div class="fixed-menu">
+        this is a fixed position attr
+    </div>
+
+    <div class="relative-menu">
+        this is a relative position attr.
+    </div>
+
+    <div class="absolute-menu">
+        this is an absolute position attr
     </div>
 
 </body> 
