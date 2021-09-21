@@ -141,10 +141,10 @@ these attributes can be used keywords like top, left, right, bottom */
 /* position: relative */
 .relative-menu{
     position: relative;
-    width: 100px;
+    width: 20px;
     height: 100px;
     background-color: aquamarine;
-    top: 100px;
+    top: 50px;
     left: 400px;
 }
 
@@ -158,4 +158,83 @@ if no parent element has a relative position, it sets a body as a starting point
     background-color: aqua;
     top: 80px;
     left:0;
+}
+
+/* flex is the one of the core functionalities in CSS for layout 
+Usually a container, items, and display(flex) are used to implement flex box
+Note that container property and item property are divided
+
+e.g. display : flex -> container property
+
+axis : 1) main(items) 2) cross(vertical to main) 
+*/
+
+.container {
+    /* set display property as 'flex' to use flex box */
+    display: flex;
+
+    /* viewport: virtual page that is used to adjust whole page's magnification 
+    vh: viewport height
+    vw: viewport width */
+
+    height: 100vh;
+
+    /* flex-direction property set a main axis in flex box */
+    flex-direction: row;
+
+    /* flex-wrap property does a line space when flex box items are
+    bigger than flex box container */
+    flex-wrap: wrap;
+
+    /* flex-flow property are the sum of the direction and wrap */
+
+    /* justify-content sets a main axis' item alignment direction */
+    justify-content: center;   
+
+    /* align-item sets a cross axis' item alignment row direction. Note that
+    setting container's height is required to use this align-item property */
+    align-items: center;
+
+    /* align-content sets a cross axis' item alignment column direction */
+    /* align-content: flex-start; */
+}
+
+
+/* .item{
+    /* flex-basis property sets a flex-item's size depending on main axis
+    if main axis (row) -> set width size
+    if main axis(column) -> set height size */
+    /* flex-basis: 300px;
+    flex-grow: 1;
+    flex-shrink: 0; */
+    
+/* } */
+
+#box1 {
+    /* flex-grow property tells the flex box items that how much left space 
+    they can additionally take 
+    flex-shrink property sets a limitation that how much space the flex box
+    items should keep. It adds a horizontal scroll bar when set 0. */
+    /* flex-grow:1;  */
+    background-color: blueviolet;
+    
+    /* align-self property sets the oneself's cross axis alignment */
+    align-self: flex-start;
+
+    /* order property changes the items' order  */
+    order: 3;
+}
+
+#box2 {
+    /* flex-grow:2;  */
+    background-color: goldenrod;
+    align-self: stretch;
+    order: 2;
+}
+
+#box3 {
+    /* flex-grow:3; */
+    background-color: brown;
+    align-self: flex-end;
+    order: 1;
 }
