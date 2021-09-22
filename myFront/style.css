@@ -1,4 +1,3 @@
-
 @import url('https://fonts.googleapis.com/css2?family=Italianno&family=Pacifico&display=swap');
 
 /* standard CSS grammar: selector { declaration } */
@@ -8,18 +7,18 @@ h1 {
     font-family: 'Times New Roman', Times, serif;
 }
 
-#novel-titles, 
-.kitten, 
+#novel-titles,
+.kitten,
 h2 {
     color: blue;
 }
 
 /* parent > children : > css selector only selects parent's children */
-.first > h1 {
+.first>h1 {
     color: green;
 }
 
-.semantic-p > p {
+.semantic-p>p {
     color: green;
     text-align: center;
 
@@ -39,7 +38,7 @@ h2 {
     font-family: 'Italianno', cursive;
 }
 
-.semantic-p-second{
+.semantic-p-second {
     font-size: 30px;
     font-family: 'Pacifico', cursive;
 }
@@ -54,10 +53,10 @@ focus: link focused
 a {
     text-decoration: none;
     background-color: black;
-    color:white;
+    color: white;
 }
 
-a:hover { 
+a:hover {
     background-color: green;
 }
 
@@ -67,7 +66,7 @@ a:hover {
     list-style: upper-latin;
 }
 
-body { 
+body {
     background-color: aliceblue;
     background-image: url("./assets/img/2.jpg");
 
@@ -78,8 +77,8 @@ body {
 }
 
 .margin {
-    width:100px;
-    height:100px;
+    width: 100px;
+    height: 100px;
     background-color: bisque;
 
     /* padding : inner margin 
@@ -98,8 +97,8 @@ body {
 
 .box1,
 .box2,
-.box3{
-    width:150px;
+.box3 {
+    width: 150px;
     height: 50px;
     background-color: yellow;
 
@@ -112,12 +111,12 @@ body {
 }
 
 .box3 {
-    padding:20px;   
+    padding: 20px;
 }
 
 /* display attribute in CSS is : 1) block 2) in-line */
 .display {
-    width:100px;
+    width: 100px;
     height: 100px;
     border: 2px solid black;
     background-color: lightblue;
@@ -134,12 +133,12 @@ these attributes can be used keywords like top, left, right, bottom */
     width: 100%;
     height: 50px;
     background-color: white;
-    top:0;
+    top: 0;
     left: 0;
 }
 
 /* position: relative */
-.relative-menu{
+.relative-menu {
     position: relative;
     width: 20px;
     height: 100px;
@@ -151,13 +150,13 @@ these attributes can be used keywords like top, left, right, bottom */
 /* position: absolute
 search parent element that has a relative position and set it a starting point.
 if no parent element has a relative position, it sets a body as a starting point  */
-.absolute-menu{
+.absolute-menu {
     position: absolute;
     width: 100%;
     height: 55px;
     background-color: aqua;
     top: 80px;
-    left:0;
+    left: 0;
 }
 
 /* flex is the one of the core functionalities in CSS for layout 
@@ -189,7 +188,7 @@ axis : 1) main(items) 2) cross(vertical to main)
     /* flex-flow property are the sum of the direction and wrap */
 
     /* justify-content sets a main axis' item alignment direction */
-    justify-content: center;   
+    justify-content: center;
 
     /* align-item sets a cross axis' item alignment row direction. Note that
     setting container's height is required to use this align-item property */
@@ -204,10 +203,10 @@ axis : 1) main(items) 2) cross(vertical to main)
     /* flex-basis property sets a flex-item's size depending on main axis
     if main axis (row) -> set width size
     if main axis(column) -> set height size */
-    /* flex-basis: 300px;
+/* flex-basis: 300px;
     flex-grow: 1;
     flex-shrink: 0; */
-    
+
 /* } */
 
 #box1 {
@@ -217,7 +216,7 @@ axis : 1) main(items) 2) cross(vertical to main)
     items should keep. It adds a horizontal scroll bar when set 0. */
     /* flex-grow:1;  */
     background-color: blueviolet;
-    
+
     /* align-self property sets the oneself's cross axis alignment */
     align-self: flex-start;
 
@@ -237,4 +236,43 @@ axis : 1) main(items) 2) cross(vertical to main)
     background-color: brown;
     align-self: flex-end;
     order: 1;
+}
+
+/* grid in CSS: set display property as grid
+grid - 1) container property 2) item property */
+.grid-container {
+    display: grid;
+    text-align: center;
+
+    /* grid-template-row(column) sets a row(column) size. Use fraction to divide
+    based on ratio, not the numbers. 
+    repeat function in CSS: repeating as specified (number of repetition, unit) 
+    minmax function in CSS: defining a size range - (minimum, maximum) */
+    /* grid-template-rows: repeat(auto-fit, minmax(200px, 100)); */
+    grid-template-rows: repeat(3, 100px);
+    grid-auto-rows: 100px;
+    grid-template-columns: repeat(3,100px);
+    /* grid-template-columns: repeat(2, minmax(200px, 1fr)); */
+
+    /* gap property sets a margin between each grid item */
+    /* gap: 10px 50px; */
+
+    /* justify-items: center;
+    align-items: center;
+     */
+
+    /* set container's height value for verical alignment */
+    height: 100vh;
+
+    justify-content: center;
+    align-content: center;
+}
+
+.grid-item2{
+    /* grid-column-start: 2;
+    grid-column-end: 4;
+
+    grid-row-start: 1;
+    grid-row-end: 4; */
+    order: -1;
 }
