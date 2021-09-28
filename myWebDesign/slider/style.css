@@ -1,0 +1,21 @@
+.slider1 { 
+    overflow: hidden;
+}
+
+.container {
+    /* vw: viewport width, vh: viewport height */
+    width:300vw; 
+}
+
+.item { 
+    width: 100vw;
+    float: left;
+}
+
+.item img { 
+    width: 100%;
+}
+
+.buttons { 
+    transform: translate(50%);
+}
