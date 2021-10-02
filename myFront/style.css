@@ -137,7 +137,9 @@ these attributes can be used keywords like top, left, right, bottom */
     left: 0;
 }
 
-/* position: relative */
+/* position: relative - the element now can be moved to 1) left 2) right 3) top 4) bottom. 
+HTML elements are stacked in order of : left to right, top to bottom in default. 
+*/
 .relative-menu {
     position: relative;
     width: 20px;
