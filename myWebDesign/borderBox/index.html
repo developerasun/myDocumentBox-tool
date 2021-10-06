@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Understanding border-size in CSS</title>
+    <style>
+        /* Box model in CSS: a box that wraps around every HTML element. 
+        - border : added to define space between elements
+        - margin : outside the border
+        - padding : inside the border
+        - content : text and image 
+        */
+
+        /* Setting width and height in CSS means setting the width and height 
+        of content area. Thus, a fully size of an element becomes all the sum of the 
+        element(content), margin, padding, border. */ 
+        div { 
+            margin: 20px;
+            padding: 20px;
+            border: 20px solid black;
+        }
+
+        .content-box {
+             /* box-sizing default: content-box. Set box size as much as content size*/
+            box-sizing: content-box;
+            display: inline-block;
+            width: 400px;
+            height: 200px;
+        }
+
+        .border-box { 
+            /* border-box: edge decides box size */
+            box-sizing: border-box;
+            display: inline-block;
+            width: 400px;
+            height: 200px;
+        }
+    </style>
+</head>
+<body>
+    <div class="content-box"><span>content box</span></div>
+    <div class="border-box"><span>border box</span></div>
+</body>
+</html>
