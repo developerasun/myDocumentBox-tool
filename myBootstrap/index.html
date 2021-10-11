@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+    <!-- Be sure to have HTML 5 doctype declared and viewport meta tag is set
+    These are the standards of the latest design and development
+    -->
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="bootstrap-5.1.3-dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="style.css">
+    <title>Document</title>
+</head>
+<body>
+    <h1 class="hello">Hello <strong>Bootstrap</strong> </h1>
+
+    <!-- Bootstrap latout provides 12 columns with 1.5rem-width gutter and six breakpoints. 
+    Refer below example to easily resizing each column. Rows are wrappers for columns in bootstrap
+    e.g. .col-sm-6
+    -->
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-2">1/6</div>
+            <div class="col-sm-2">2/6</div>
+            <div class="col-sm-2">3/6</div>
+            <div class="col-sm-2">4/6</div>
+            <div class="col-sm-2">5/6</div>
+            <div class="col-sm-2">6/6</div>
+        </div>
+        <div class="row">
+            <div class="col-sm-6">1/2</div>
+            <div class="col-sm-6">2/2</div>
+        </div>
+    </div>
+    <br/>
+
+    <!-- before bootstrap css grid -->
+    <div class="container">
+        <div class="row">
+            <div class="content-text-before">
+                <h2>content left : text before css grid</h2>
+                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. In, debitis!</p>
+            </div>
+            <div class="content-img-before">
+                <img src="img/1.jpg" alt="first cat">
+            </div>
+        </div>
+    </div>
+
+    <!-- after bootstrap css grid -->
+    <div class="container">
+            <div class="row">
+                <div class="content-text col-md-5">
+                    <h2>content left : text</h2>
+                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptate, fuga?</p>
+                </div>
+                <div class="content-img col-md-7">
+                    <img src="img/2.jpg" alt="second cat"/>
+                </div>
+            </div>
+    </div>
+    <br/>
+
+
+    <!-- Hide 3 paragraphs when devide-width is mobile one. -->
+    <div class="container">
+        <div class="row paragraphs">
+            <div class="para-first col-md-4">
+                <p>
+                    Lorem ipsum dolor sit amet consectetur, adipisicing elit. Eaque dolore dolorem, illum facilis tempora eligendi expedita beatae quia tenetur molestiae.
+                </p>
+            </div>
+            <div class="para-second col-md-4">
+                <p>
+                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Consectetur, sit.
+                </p>
+                </div>
+            <div class="para-third col-md-4">
+                <p>
+                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Exercitationem molestias perspiciatis, quibusdam ipsum rem itaque explicabo labore commodi, voluptatem possimus temporibus cumque amet facere, officia nihil pariatur totam nesciunt. Totam!
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Create login and sign up buttons for meow canvas -->
+    <div class="nav-login">
+        <button type="button" class="btn btn-outline-primary">
+            <span>Login</span>
+        </button>
+        <button type="button" class="btn btn-primary">
+            <span>Sign Up</span>
+        </button>
+    </div>
+
+
+    <script src="bootstrap-5.1.3-dist/js/bootstrap.min.js"></script>
+</body>
+</html>
