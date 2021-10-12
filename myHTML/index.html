@@ -23,7 +23,7 @@
     unique data. 
     -->
  
-    <form action="http:localhost/login.php">
+    <form action="http:localhost/login.php" name="form-login">
     <p>id<input type="text" name="id"/></p> <!-- name attr will be shown web url as queries -->
     <p>pw<input type="password" name="password" /></p>
     <p>last name<input type="text" name="lastName"/></p>
@@ -35,5 +35,66 @@
     <p>text : <input type="text" name="text" value="Enter your ID"/></p>
     <p>password : <input type="password" name="password" placeholder="enter your password"></p>
     <p>textarea : <textarea name="paragraph" cols="30" rows="5">default text</textarea></p>
+
+    <!-- dropdown(combobox) menu in HTML 
+    select~option pairs is similar to ul/ol~li ones. 
+    -->
+    <form action="http:localhost/color.php" name="form-color">
+        <h1>Pick Color</h1>
+        <select name="Color" id="">
+            <!-- text value "Red" is used to be recognized by us(human)
+            To a server, value "red" is tranmitted. 
+            -->
+            <option value="red">Red</option>
+            <option value="green">Green</option>
+            <option value="blue">Blue</option>
+        </select>
+        <input type="submit" value="Submit"/>
+    </form>
+
+    <form action="http:localhost/identity.php" name="form-identity">
+    <h2>Radios</h2>
+    <p>
+    <!-- value "Male" is transmitted to backend -->
+    Male <input type="radio" name="sex" value="Male"/> 
+
+    <!-- below code does not transmit value "female" to backend unlike above,
+    since value attr not designated. Do not forget to set value attr if you want data 
+    to be sent to backend.
+    -->
+    Female <input type="radio" name="sex"/>
+    </p>
+
+    <p>
+    under 30 <input type="radio" name="age" value="under30"/>
+    between 30~60<input type="radio" name="age" value="between3060"/>
+    over 60<input type="radio" name="age" value="over60"/>
+    </p>
+
+    <input type="submit" value="submit"/>
+    </form>
+
+    <form action="http:localhost/size.php" name="form-size">
+        <h2>Size(mutliple choide)</h2>
+            small <input type="checkbox" name="size" value="small"/>
+            medium <input type="checkbox" name="size" value="medium"/>
+            large <input type="checkbox" name="size" value="large"/>
+            custom <input type="checkbox" name="size" value="custom"/>
+            <p> by chekcing the size above, I recognize a product will not be refunded for 
+                size mischoice.
+                <input type="checkbox" name="caution" value="true" required/></p>
+        <input type="submit" value="submit"/>
+    </form>
+
+    <form action="http:localhost/sendHello.php" name="form-hello" class="form-hello">
+        <p>
+        say hi to stranger <input type="text" name="text"/>
+        <input type="button" value="Send" class="submitBtn" onclick="sendHi(event)"/>
+        <input type="reset" value="Reset"/>
+        <input type="button" value="Generate Lorem" onclick="genLorem()"></button>
+        </p>
+    </form>
+
+<script src="app.js"></script>
 </body>
 </html>
