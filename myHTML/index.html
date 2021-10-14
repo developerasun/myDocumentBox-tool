@@ -4,7 +4,15 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+
+    <!-- description and keywords in meta tag helps a browser understand 
+    better with the webpage's additional info
+    -->
+    <meta name="description" content="egoing's inflearn HTML online lecture">
+    <meta name="keywords" content="coding, HTML, HTML5, markup language, front end">
+    
+    <!-- <meta http-equiv="refresh" content="6"> : refreshes a webpage by 6 sec -->
+    <title>HTML exercise</title>
 </head>
 <body>
     <!-- form tag is used when data that is entered by user needs to be
@@ -92,9 +100,47 @@
         <input type="button" value="Send" class="submitBtn" onclick="sendHi(event)"/>
         <input type="reset" value="Reset"/>
         <input type="button" value="Generate Lorem" onclick="genLorem()"></button>
+        <input type="submit" value="submit"/>
         </p>
     </form>
 
+    <form action="http:localhost/hiddenElement.php" name="form-hidden">
+        <input type="text" name="firstName" placeholder="Enter your first name"/>
+
+        <!-- hidden type will not be visible in UI but still send the data to backend -->
+        <input type="hidden" name="hiddenValue" value="incomeLevel"/>
+        <input type="submit" value="submit"/>
+    </form>
+
+    <!-- Method in form tag : In principle, backend engineer decides which method
+    should be used in front end form tag and usually "post" method is used to prevent
+    sensitive information such as password from revealing in URL. 
+    "get" method : send data to backend and it is shown in URL
+    "post" method : send data to backend without showing the data in URL
+    -->
+    <form action="http:localhost/whichMethod.php" method="post" name="form-method">
+        <label for="id"> ID :
+            <input type="text" name="id" id="id"/>
+        </label>
+        <label for="password"> Password : 
+            <input type="password" name="password" id="password"/>
+        </label>
+        <input type="submit" value="submit">
+    </form>
+
+    <br><br><br><br><br>
+
+    <!-- file upload using form tag 
+    enctype="multipart/form-data" attr is used when file uploading (consider it a convention)
+    file upload in HTML is paired with backend programming(server). 
+    -->
+    <form action="http:localhost/fileUpload.php" method="post" enctype="multipart/form-data">
+        <label for="fileUpload"> Upload your logo : 
+            <input type="file" name="logo" id="fileUpload"/>
+        </label>
+    </form>
+
+    
 <script src="app.js"></script>
 </body>
 </html>
