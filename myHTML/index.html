@@ -140,7 +140,45 @@
         </label>
     </form>
 
-    
+    <br><br><br><br><br>
+
+    <!-- Semantic tags in HTML(ref:https://www.w3schools.com/html/html5_semantic_elements.asp) 
+    - around 13 tags(header, main, section, article, aside, footer ...)
+    - <article></article> : independent content. An article should makes sense on its own regardless of the
+    rest of the web site.
+    - <section></secion> : group of cotents, usually comes with a heading
+    - <header></header> : introductory content or navigational links 
+    - nesting section>article <-> article>section
+    -->
+    <section class="first">
+        <h1>first section</h1>
+        <article>
+            <h3>first article</h3>
+            <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Sit, cumque.</p>
+        </article>
+        <article>
+            <h3>second article</h3>
+            <p>Velit, iure aut veritatis consequuntur autem perferendis labore voluptatum deleniti.</p>
+        </article>
+        <article>
+            <h3>third article</h3>
+            <p>Et eligendi tempora rem debitis nisi! Officiis quia voluptate error?</p>
+        </article>
+    </section>
+
+    <!-- SEO in HTML : using appropriate semantic tags in web pages 
+    - title
+    - meta name="description"
+    - meta name="keyword"
+    - url : should display info clearly for user 
+    - directory : avoid complicated one.
+    - when a few links point to the same url, 
+        if (301 redirection) else(rel="canonical") => canonical means "as promised"
+-->
+
+
+
+
 <script src="app.js"></script>
 </body>
 </html>
