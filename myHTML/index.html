@@ -3,6 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+    <!-- mobile support using content attr in HTML 
+    - set page's width by device width
+    - set no zoom in, no zoom out at an initial screen
+    -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <!-- description and keywords in meta tag helps a browser understand 
@@ -13,6 +18,7 @@
     
     <!-- <meta http-equiv="refresh" content="6"> : refreshes a webpage by 6 sec -->
     <title>HTML exercise</title>
+
 </head>
 <body>
     <!-- form tag is used when data that is entered by user needs to be
@@ -174,9 +180,62 @@
     - directory : avoid complicated one.
     - when a few links point to the same url, 
         if (301 redirection) else(rel="canonical") => canonical means "as promised"
+        redirection is done in server side. 
+    - hyperlink connects page to page (avoid of using Javascript for linking pages)
+    - clarify what type of content it is in anchor tag
+    (e.g. <a href="www.google.com">my website</a> => X
+          <a href="www.google.com">Google search engine</a> => O
+    )
+    - how page rank works : if page A is linked with a few different web pages when 
+    page B only stands by itself, search engine considers page A > page B. 
+    - consider web as the sum of the hyperlinks. 
 -->
 
+<!-- alt attr displays image info when the image is now shown for some reason -->
+<img src="img/22.jpg" alt="alt text : cat image" style="width: 400px; height:auto">
 
+<!-- web browser and web server
+    browser : download 2.jpg file from web server and display it to user
+    server : store and save 2.jpg file.
+    network tap in Chrome developer tools : checking if the image download fails or finishes.
+-->
+
+<br><br><br><br><br>
+
+<!-- create a table by semantic tags 
+name sex address       age
+Amy female USA         27
+Jake male South Korea  27
+total                  54
+-->
+
+<!-- emmet : table>thead+tbody+tfoot -->
+<table border="1" style="text-align: center;">
+    <thead>
+        <th>name</th>
+        <th>sex</th>
+        <th>address</th>
+        <th>age</th>
+    </thead>
+    <tbody>
+    <tr>
+        <td>Amy</td>
+        <td>female</td>
+        <td>USA</td>
+        <td rowspan="2">27</td>
+    </tr>
+    <tr>
+        <td>Jake</td>
+        <td>male</td>
+        <td>South Korea</td>
+        <!-- <td>27</td> -->
+    </tr>
+    </tbody>
+    <tfoot>
+        <td colspan="3">total</td>
+        <td>54</td>
+    </tfoot>
+</table>
 
 
 <script src="app.js"></script>
