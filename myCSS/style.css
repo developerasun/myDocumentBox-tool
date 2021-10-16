@@ -1,0 +1,56 @@
+ol li {
+    color: red;
+}
+
+/* selector is very important in CSS since it decides in what element
+a style should be applied. CSS selector's priority : descending order
+
+- tag selector : select every tags in HTML : e.g. html, body, li, span ...
+- id selector : select a tag that has the chosen id e.g #header, #footer
+- class selector : select every tags that have the chosen class name : e.g .slider .name
+ 
+parent>child selector in CSS. 
+In emmet, it is like : ol>li*3 (ol: parent, li: child)
+*/
+.pet>li { 
+    color: blue;
+}
+
+a {
+    margin:0 10px;
+}
+
+/* peuso selector: applied by context */
+a:link {
+    color: black;
+}
+
+a:visited { 
+    color: blueviolet;
+}
+
+a:active { 
+    color: green;
+}
+
+a:hover { 
+    color: lightcoral;
+}
+
+/* Use tab key in browser to check focus state */
+input:focus {
+    background-color: black;
+    color: white;
+}
+
+/* inheritance in CSS : used to increase code productivity.
+it may differ if inheritance could be applied by property
+*/
+#inherit {
+    color: deepskyblue;
+}
+
+/* give id attr in HTML to select one thing in group */
+#selected-list { 
+    color: black;
+}
