@@ -12,16 +12,17 @@ During this YouTube tutorial, I had encountered one github troubleshooting. A co
   <li>git reset --soft HEAD~1</li>
 </ol>
 
-HEAD~1 : one step before HEAD  
-HEAD~2 : two steps before HEAD  
-  
-e.g. git reset --soft HEAD~2  : undo two commits(HEAD, HEAD~1)  
-
 
 In the below example, do __*git reset --soft HEAD~2*__ to undo the hightlighted commit fb43dd4.  
   
 ![git reset](https://user-images.githubusercontent.com/83855174/137629565-f74687a9-c5be-40aa-8c0c-f7875b750270.png)
 
+
+<ul>
+  <li>HEAD~1 : one step before HEAD</li>  
+  <li>HEAD~2 : two steps before HEAD</li>  
+  <li>e.g. git reset --soft HEAD~2  : undo two commits(HEAD, HEAD~1)</li>  
+</ul>
 
 ## How to undo git push 
 <ol>
