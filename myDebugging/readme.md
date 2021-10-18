@@ -45,6 +45,10 @@ Below git trouble shooting will be added
 
 ![fastForward](https://user-images.githubusercontent.com/83855174/137629035-4a47b69b-a9fa-4118-9de2-168950ac79e1.png)
 
+similiar issue and solution 
+![git push er](https://user-images.githubusercontent.com/83855174/137717460-0e32b2f8-124b-4f2a-85d4-e5cc4c4d1135.png)
+
+
 
 # List of references
 [how to undo git commit](https://devconnected.com/how-to-undo-last-git-commit/)
