@@ -54,3 +54,59 @@ it may differ if inheritance could be applied by property
 #selected-list { 
     color: black;
 }
+
+ /* cascading priority in CSS
+ 1. style attribute  > 2. id selector  >  3.class selector > 4. tag selector
+ (most detailed)     (somewhat detailed)     (detailed)          (general) 
+  => add "!important" keyword to increase priority to the first. 
+ */
+ /* ===== tag selector ===== */
+li { 
+     color: powderblue;
+ }
+
+ /* ===== id selector ===== */
+ #idSelector {
+     color:green !important; 
+ }
+
+ /* ===== class selector ===== */
+ .classSelector { 
+     color: blueviolet;
+ }
+
+ /* Font size(unit) in CSS : 1) px 2) em 3) rem (modern standard) 
+  px => fixed font size
+  em : current font size
+  rem : root element's font size
+  *em, rem => font size changes depending on browser setting 
+ */
+
+ #px { 
+     font-size: 16px;
+ }
+
+ /* refer to image in reference folder 
+ changing font size in web == changing HTML tag font size
+ rem => proportional to the HTML tag font
+
+ e.g if HTML tag font size : 24px && below #rem font size : 2rem 
+ => #rem font size = 24px * 2 = 48px 
+ */
+ #rem { 
+     font-size: 1rem;
+ }
+
+ /* color unit in CSS : 1) rgb 2) name 3) hex code */
+ #black { 
+     color: rgb(0, 0, 0);
+ }
+
+ #powderblue { 
+     color: powderblue;
+ }
+
+ /* hexadecimal colors */
+ #hex {
+     color: #445681;
+ }
