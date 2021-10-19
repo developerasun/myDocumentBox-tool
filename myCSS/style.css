@@ -110,3 +110,101 @@ li {
  #hex {
      color: #445681;
  }
+
+ .text-center { 
+     text-align: center;
+     border: 1px solid #222;
+     
+     /* font-family : fonts in order of preference, serif/monospaced/variable-width font */
+     font-family: 'Courier New', Courier,  monospace;
+     font-weight: bold;
+     line-height: 2;
+ }
+
+ .text-justify { 
+     margin-top: 1rem;
+     text-align: justify;
+     border:1px solid #222;
+ }
+
+ .text-justify>h2 { 
+     text-align: center;
+ }
+
+ .h2Block {
+     border: 2px solid palevioletred;
+ }
+
+ .spanInline {
+     border: 2px solid powderblue; 
+ }
+
+ .pBorder {
+     border: 2px solid orange;
+ }
+
+ .pPadding {
+    border: 2px solid orange;
+    padding: 20px;
+ }
+
+ .pMargin {
+     border: 2px solid orange;
+     margin: 20px;
+ }
+
+
+
+ /* setting width == setting content's width 
+     (box-sizing's default : content-box; )
+    
+     if a content has margin/padding/border set, measuring the content's size
+    becomes somewhat difficult. Thus box-sizing property has become important
+    box-sizing:border-box is more convenient to align each element that has 
+    different box properties. 
+  */
+ #small {
+     border: 10px solid tomato;
+     /* margin: 10px; */
+     padding: 30px;
+     width: 200px;
+ }
+
+ #big { 
+     border: 10px solid lightblue;
+     width: 200px;
+ }
+
+ #small-bb {
+    border: 10px solid tomato;
+    padding: 30px;
+    width: 200px;
+    box-sizing: border-box;
+ }
+
+ #big-bb {
+    border: 10px solid lightblue;
+    width: 200px;
+    box-sizing: border-box;
+ }
+
+ .h1Margin-up, 
+ .h1Margin-down {
+     border:5px solid tomato;
+     margin: 50px;
+ }
+
+.borderline { 
+    display: block;
+    text-align: center;
+}
+
+ #parent { 
+     /* border: 5px solid tomato; */
+     margin-top: 100px;
+ }
+
+ #child { 
+     margin-top: 50px;
+     background-color: powderblue;
+ }

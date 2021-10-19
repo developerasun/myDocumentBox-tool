@@ -72,5 +72,85 @@
     <span id="powderblue">powderblue</span>
     <span id="hex">#445861</span>
     
+    <!-- text align in CSS -->
+    <article class="text-center">
+        <h2>Text align : center</h2>
+        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Dignissimos deleniti, vitae vero, tempore magni, eveniet exercitationem nesciunt quae dolorem quis aperiam obcaecati est incidunt atque.
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Aut quisquam iure maiores quam expedita. Harum placeat deleniti perspiciatis, eligendi consequuntur impedit rem. Voluptatum facilis praesentium fugit iure laboriosam sint sapiente.
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Cumque nihil deserunt iusto quis natus quibusdam praesentium eaque dicta pariatur, expedita molestias blanditiis, harum numquam? Explicabo quasi delectus et est eum dignissimos totam quidem debitis, voluptatem nobis ullam temporibus officiis voluptatibus!
+        </p>
+    </article>
+
+    <article class="text-justify">
+        <h2>Text align : text-justify</h2>
+        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Dignissimos deleniti, vitae vero, tempore magni, eveniet exercitationem nesciunt quae dolorem quis aperiam obcaecati est incidunt atque.
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Aut quisquam iure maiores quam expedita. Harum placeat deleniti perspiciatis, eligendi consequuntur impedit rem. Voluptatum facilis praesentium fugit iure laboriosam sint sapiente.
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Cumque nihil deserunt iusto quis natus quibusdam praesentium eaque dicta pariatur, expedita molestias blanditiis, harum numquam? Explicabo quasi delectus et est eum dignissimos totam quidem debitis, voluptatem nobis ullam temporibus officiis voluptatibus!
+        </p>
+    </article>
+
+    <br><br><br><br><br>
+
+    <!-- inline and block level in CSS
+    inline : takes a only self-wide width e.g h1~h7 tags
+    block : takes a whole horizontal width e.g span, a tags 
+    *inline <-> block are changeable
+
+    h tags mean title, which needs whole space.
+    span tag mean a piece of text, which needs only self-wide space. 
+    -->
+    <h2 class="h2Block">Inline and Block</h2>
+    <span class="spanInline"><a href="www.naver.com">I am inline</a></span>
+
+    <br><br><br><br><br>
+
+    <!-- box model in CSS 
+    Box model properties take around 70~80% of CSS usage in global. 
+    top 1 : font-size
+    top 2 : color 
+    top 3 : margin-top
+    top 4 : margin-left
+    top 5 : width ==========> setting width == setting content's width.
+    
+    <Box model>
+   |------------|
+   |   margin   |
+   | =========  |
+   |   border   |
+   | =========  |
+   |   padding  |
+   | =========  |
+   |   content  |
+   |------------|
+    -->
+    <p class="pBorder">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Repudiandae, fuga minima. Odio repellat quisquam eaque ex ducimus autem earum facilis, omnis animi dolorum ullam aperiam voluptate blanditiis fugiat doloribus sapiente quam tempora in optio nostrum laborum distinctio? Eos, facere. Vel.</p>
+    <p class="pPadding">Id accusamus provident earum omnis nostrum nobis delectus optio blanditiis soluta corporis harum pariatur dolor quos nemo dolores officia accusantium rerum laboriosam magni adipisci aliquam molestiae amet, culpa cumque. Vitae, hic porro minima ad iure assumenda reprehenderit eligendi nulla necessitatibus.</p>
+    <p class="pMargin">Repellendus mollitia voluptatum at aperiam similique. Ex debitis adipisci impedit voluptas neque nesciunt temporibus corrupti unde incidunt fuga sapiente, culpa ut veniam. Hic dolorum necessitatibus officiis debitis quasi sunt odit ullam quam, corrupti aliquam, magni harum commodi, illo consequuntur alias.</p>
+
+    <br><br><br><br><br>
+
+    <h2>box-sizing : content-box (default)</h2>
+    <div id="small">content width 200px</div> <br>
+    <div id="big">content width 200px</div>
+
+    <h2>box-sizing : border-box (mostly used)</h2>
+    <div id="small-bb">content width 200px</div>
+    <div id="big-bb">content width 200px</div>
+
+    <br><br><br><br><br>
+
+    <!-- margin collapsing in CSS : if margins collapsed, it sets as the bigger one -->
+    <h1 class="h1Margin-up">Hello World</h1>
+    <h1 class="h1Margin-down">Hello World</h1>
+    <span class="borderline">===========================================</span>
+    <br>
+
+    <div id="parent">
+        <div id="child">margin collapsing example 2</div>
+        <p>when parent element is clean, child's margin is decided as 
+            the bigger one between the parent's margin and that of child
+        </p>
+    </div>
+
 </body>
 </html>
