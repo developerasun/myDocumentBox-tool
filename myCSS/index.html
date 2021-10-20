@@ -152,5 +152,30 @@
         </p>
     </div>
 
+    <br><br><br><br><br>
+    <!-- position in CSS : default: static -->
+    <div id="container-position">
+        <div id="other">other</div>
+        <div id="parent-position"> parent
+            <div id="me">me</div>
+        </div>
+    </div>
+
+    <br><br><br><br><br>
+    <!-- position: absolute
+    search parent element that has a relative position and set it a starting point.
+    if no parent element has a relative position, it sets a body as a starting point -->
+    <div id="container-position-second">
+        <div id="other">other</div>
+        <div id="parent-position-rel"> parent-rel</div>
+        <div id="parent-position-st"> parent-st
+            <div id="me-abs">me - abs</div>
+        </div>
+    </div>
+
+
+    <br><br><br><br><br>
+
+
 </body>
 </html>

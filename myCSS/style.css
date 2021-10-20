@@ -208,3 +208,54 @@ li {
      margin-top: 50px;
      background-color: powderblue;
  }
+
+ #container-position {
+     border: 0.5rem solid #222;
+ }
+
+ #other,
+ #parent-position,
+ #me {
+     border: 0.2rem solid powderblue;
+
+     /* 0.2rem: 3.2px, 1rem: 16px*/
+     /* #other ~ #parent-position's margin becomes 1rem, not 0.2rem 
+     since below #parent-position's margin-top is 1rem(margin-collapsing)
+
+     parent margin > child margin => parent margin 
+     child margin > parent margin => child margin 
+
+     */
+     margin: 0.2rem; 
+ }
+
+ #parent-position {
+     margin-top: 1rem;
+ }
+
+ #me { 
+     /* position : static(default) */
+     position: relative;
+     left: 5rem; /* top, right, bottom, left : offset value */
+     top: 5rem;
+ }
+
+ #container-position-second { 
+     border: 2px solid black;
+     position: relative;
+ }
+
+ #parent-position-rel {
+     position: relative;
+ }
+
+ #me-abs {
+     background-color: tomato;
+     /* 
+        1) search any parent element with relative position 
+        2) if not exists, set body as offset point. 
+        3) link between parent<->child disappears. 
+     */
+     position: absolute;
+     top: 10px;
+ }
