@@ -11,16 +11,26 @@ This is a secret box of developerasun, containing the sum of his blood, sweat, a
  <li>Screenshot Automator - Taking an automated screenshot at reserved time : Python (screenshot and YT link will be added)  </li>
 </ol>
 
-## Tutorial And Clone Coding 
+## Tutorials 
 <ol>
- <li>simple-nft - Creating a NFT app : Solidity, React.js</li>
- <li>myCanvas - Clone-coding a paintbrush web demo : Javascript, HTML</li>
  <li>myFront - Front end HTML, CSS basic exercise </li>
  <li>myWebDesign - Front end HTML, CSS intermediate exercise</li>
- <li>myBlockchain - Creating a blockchain with typescript </li>
- <li>momentum - Clone-coding a momentum chrome extension web with vanilla script</li>
  <li>starport - Creating a hello world blockchain</li>
  <li>smart-contract - Creating a hello world smart contract in iconloop(docker + tbears)</li>
+ <li>myBootstrap - Exercising bootstrap pre-made elements</li>
+ <li>myCSS - Learning basic CSS knowledges</li>
+ <li>myCSknowledge - Learning college-level computer science knowledge</li>
+ <li>myDebugging - Debugging Javascript using debugger</li>
+ <li>myFront - Learning basic HTML tags</li>
+ <li>myHTML - Learning essential HTML tags</li>
+</ol>
+
+## Clone Codings
+<ol> 
+ <li>simple-nft - Creating a NFT app : Solidity, React.js</li>
+ <li>myCanvas - Clone-coding a paintbrush web demo : Javascript, HTML</li>
+ <li>myBlockchain - Creating a blockchain with typescript </li>
+ <li>momentum - Clone-coding a momentum chrome extension web with vanilla script</li>
 </ol>
 
 ## Code Reference
