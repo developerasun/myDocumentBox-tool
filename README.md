@@ -1,7 +1,5 @@
 # DeveloperAsun Side Projects
 This is a secret box of developerasun, containing the sum of his blood, sweat, and tears derived from a few projects and studies he has done. 
-[Portfolio website - will be added](www.google.com)
-[Check it in YouTube](https://www.youtube.com/playlist?list=PLXgNzUP3l3KW7roDf6ciH14V9xkkF0tbK)
 
 ## Personal Project
 <ol>
@@ -40,6 +38,6 @@ This is a secret box of developerasun, containing the sum of his blood, sweat, a
 </ol>
  
 ## Team project participated
-[goBlock program Hackathon](https://1drv.ms/p/s!AtfkTrM2j9UvlGo-LexXUWe709rg?e=loJnDu) - Metaverse wedding platform with Icon loop LFT2 algorithm 
-[Blockchain consensus algorithm concept](https://github.com/designerasun/golang/blob/master/PoSN/demo/demo.go) - Quarkchain 2-layers consensus algorithm motivated
+[goBlock program Hackathon](https://1drv.ms/p/s!AtfkTrM2j9UvlGo-LexXUWe709rg?e=loJnDu) - Metaverse wedding platform with Icon loop LFT2 algorithm <br/>
+[Blockchain consensus algorithm concept](https://github.com/designerasun/golang/blob/master/PoSN/demo/demo.go) - Quarkchain 2-layers consensus algorithm motivated <br/>
 [Blockchain hyperledger fabric marbles](https://www.youtube.com/watch?v=4N7nvLq-9Qg&list=PLXgNzUP3l3KW7roDf6ciH14V9xkkF0tbK&index=7) - Improving front end elements : HTML, CSS
