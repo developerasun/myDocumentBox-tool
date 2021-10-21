@@ -81,4 +81,62 @@ Document <strong>edited and translated</strong> by <br/>
 [how to undo git push](https://stackoverflow.com/questions/37606168/how-to-undo-a-git-push)
 
 
+## git permission denied (publickey) error solution
+
+issue : git permission denied (publickey). fatal: Could not read from remote repository. Please make sure you have the correct access rights and the repository exists
+
+reason : Git is used based on SSH or http. If you an SSH key to connect, you need to register an ssh key for each PC.
+
+1. Open the terminal and insert ssh key generate command.
+
+![image](https://user-images.githubusercontent.com/73014464/138223854-d489bd6c-61aa-465b-a0df-f5d081ccc5cb.png)
+
+2. Press Enter.  id_rsa file is generated path is C:\Users\[사용자]/.ssh/id_rsa 
+
+![image](https://user-images.githubusercontent.com/73014464/138224031-70450f8b-3425-44a6-98b8-1db8875561ab.png)
+
+3. If you want enter a password, enter the password  otherwise press enter
+
+![image](https://user-images.githubusercontent.com/73014464/138225410-9fff0071-5185-4da8-aae1-f6db99659045.png)
+
+4. SSH KEY IS GENERATED
+
+![image](https://user-images.githubusercontent.com/73014464/138225495-36c47afd-8026-4fcf-8470-a298a0123e82.png)
+
+5. Move to Setting menu in Github.
+
+![image](https://user-images.githubusercontent.com/73014464/138225630-1d1165a1-c8cb-4c69-92ed-555e8fbff577.png)
+
+6. if you press SSH keys in Settings The following screen appear.
+
+![image](https://user-images.githubusercontent.com/73014464/138229074-7d427303-add2-4120-8b0e-70989ffb3dbd.png)
+
+7. if you open id_rsa.pub file in ssh folder using notepad you can see the key value.
+
+Copy the entire file and paste it where you entered the SSH key value earlier.
+
+![image](https://user-images.githubusercontent.com/73014464/138229707-c76074d5-ada2-452c-be78-f0f49706d2d0.png)
+
+8. After the generation is complete, check in the terminal whether it has been successfully generated on the PC.
+
+![image](https://user-images.githubusercontent.com/73014464/138230392-59d584da-18bd-48e1-b366-82cea3c13949.png)
+
+result Now you can git push or git commit
+
+Reference
+
+https://maliceit.tistory.com/51
+
+
+
+
+
+
+
+
+
+
+
+
+
 Make sure that you have backed up the local file before following the above instructions to avoid missing out your hard work. 
