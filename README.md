@@ -9,6 +9,11 @@ This is a secret box of developerasun, containing the sum of his blood, sweat, a
  <li>Screenshot Automator - Taking an automated screenshot at reserved time : Python (screenshot and YT link will be added)  </li>
 </ol>
 
+## Team Project
+<ol> 
+  <li>myCSknowledge - Learning college-level computer science knowledge for beginner developer </li>
+</ol>
+
 ## Tutorials 
 <ol>
  <li>myFront - Front end HTML, CSS basic exercise </li>
@@ -17,7 +22,6 @@ This is a secret box of developerasun, containing the sum of his blood, sweat, a
  <li>smart-contract - Creating a hello world smart contract in iconloop(docker + tbears)</li>
  <li>myBootstrap - Exercising bootstrap pre-made elements</li>
  <li>myCSS - Learning basic CSS knowledges</li>
- <li>myCSknowledge - Learning college-level computer science knowledge</li>
  <li>myDebugging - Debugging Javascript using debugger</li>
  <li>myFront - Learning basic HTML tags</li>
  <li>myHTML - Learning essential HTML tags</li>
@@ -37,7 +41,7 @@ This is a secret box of developerasun, containing the sum of his blood, sweat, a
  <li>von-network - blockchain DID(decentralized id) web demo reference</li>  
 </ol>
  
-## Team project participated
+## Previous team projects
 [goBlock program Hackathon](https://1drv.ms/p/s!AtfkTrM2j9UvlGo-LexXUWe709rg?e=loJnDu) - Metaverse wedding platform with Icon loop LFT2 algorithm <br/>
 [Blockchain consensus algorithm concept](https://github.com/designerasun/golang/blob/master/PoSN/demo/demo.go) - Quarkchain 2-layers consensus algorithm motivated <br/>
 [Blockchain hyperledger fabric marbles](https://www.youtube.com/watch?v=4N7nvLq-9Qg&list=PLXgNzUP3l3KW7roDf6ciH14V9xkkF0tbK&index=7) - Improving front end elements : HTML, CSS
