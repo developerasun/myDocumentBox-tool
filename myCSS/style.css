@@ -259,3 +259,58 @@ li {
      position: absolute;
      top: 10px;
  }
+
+
+
+ #fixed-parent {
+     position: relative;
+     height: 100px;
+ }
+
+ #fixed { 
+     color:white;
+     background-color: #222;
+     position: fixed;
+     top: 0;
+     width: 100%;
+     height: 1rem;
+     margin-top: 1rem;
+     display: flex;
+     justify-content: center;
+     align-items: center;
+ }
+
+.bookshelf {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    height: 300px;
+    background-color: turquoise;
+    color:white;
+    font-weight: bolder;
+    font-size: 3rem;
+    text-align: center;
+}
+
+.book  {
+    background-color: tomato;
+    border: 1px solid powderblue;
+}
+
+.book:nth-child(3) {
+    flex-grow: 2;
+
+    /* flex-basis : set the inital main size of a flex item.
+    follow flex container's direction, set the width/height. */
+    flex-basis: 200px;
+}
+
+#img-float { 
+    float: left;
+    margin: 1rem;
+}
+
+
+/* #img-float p:nth-child(2) { 
+    clear: both;
+} */
