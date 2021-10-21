@@ -14,9 +14,7 @@ During this YouTube tutorial, I had encountered one github troubleshooting. A co
 
 
 In the below example, do __*git reset --soft HEAD~2*__ to undo the hightlighted commit fb43dd4.  
-  
-![git reset](https://user-images.githubusercontent.com/83855174/137629565-f74687a9-c5be-40aa-8c0c-f7875b750270.png)
-
+<img src="https://user-images.githubusercontent.com/83855174/137629565-f74687a9-c5be-40aa-8c0c-f7875b750270.png" width=500px height=300px/>  
 
 <ul>
   <li>HEAD~1 : one step before HEAD</li>  
@@ -39,46 +37,106 @@ By following above instruction, the expected result is as follows :
 </ul>
 
 
-## Git Non-fast-forward Troubleshooting (석환)
+# Git Non-fast-forward error
+Troubleshoting <strong>done</strong> by <br/>
+<a href="https://github.com/jshhhhh">
+<img src="https://github.com/jshhhhh.png" width=50px height=50px alt="정석환"/>
+</a>
 
-====================================================================== <br/>
-Below git trouble shooting will be added  
+Document <strong>edited and translated</strong> by <br/>
+<a href="https://github.com/developerasun">
+<img src="https://github.com/developerasun.png?size=50" alt="Jake Sung"/>
+</a>
 
-![fastForward](https://user-images.githubusercontent.com/83855174/137629035-4a47b69b-a9fa-4118-9de2-168950ac79e1.png)
 
-similiar issue and solution <br/>
-![git push er](https://user-images.githubusercontent.com/83855174/137717460-0e32b2f8-124b-4f2a-85d4-e5cc4c4d1135.png)
+## Problems happened
+![1](https://user-images.githubusercontent.com/86046319/138065504-ee12da03-a540-4398-8b88-ae5f7308f46c.png?size=50)<br/>
+1. Git push rejected / git push 문제 발생
 
-======================================================================
-
-![1](https://user-images.githubusercontent.com/86046319/138065504-ee12da03-a540-4398-8b88-ae5f7308f46c.png)<br/>
-문제 발생
-
+## Troubleshooting process
 ![2](https://user-images.githubusercontent.com/86046319/138065599-b4b16381-78ac-4f5a-bb97-fb34c92fcbc2.png)<br/>
-pull로 먼저 병합 시도
+2. Trying to merge with pull keyword / pull로 먼저 병합 시도
+
 
 ![3](https://user-images.githubusercontent.com/86046319/138065625-7bed0dc6-43f0-4feb-837d-8bb7b922533f.png)<br/>
-branch --set-upstream-to=origin/main main 명령어 사용
-<ul>
-  <li>브랜치 리네임을 했을 때, 원격 레포와 로컬 레포에 매핑이 깨질 수 있다</li>
-  <li>그럴 때 바로잡아주는 명령어</li>
-</ul>
+3. Fixing repo mapping(occured because of branch rename) / branch --set-upstream-to=origin/main main 명령어 사용
+
 
 ![4](https://user-images.githubusercontent.com/86046319/138065634-5fa4e08c-0ac7-4e4f-ad07-e7d0591a344b.png)<br/>
-확실하지 않지만 pull이 진행된 것 같음
+4. Pull done(not clear) / 확실하지 않지만 pull이 진행된 것 같음
+
 
 ![5](https://user-images.githubusercontent.com/86046319/138065642-9325f635-0b1c-4362-8ebf-a04f94cc8cd9.png)<br/>
-push 시도 → email privacy restrictions 오류 발생
+5. Push attempt and email error occured / push 시도 → email privacy restrictions 오류 발생
 
+
+## Solution and result
 ![6](https://user-images.githubusercontent.com/86046319/138065652-abb41621-63fb-4991-b214-b685401e4a9b.png)<br/>
-프로필 Settings → Emails에서 Block command line pushes that expose my email 체크 해제
-
-push 성공
+6. Adjusting profile setting for the email error / 프로필 Settings → Emails에서 Block command line pushes that expose my email 체크 해제 <br/>
+7. Push success / push 성공
 
 
 # List of references
 [how to undo git commit](https://devconnected.com/how-to-undo-last-git-commit/) <br/>
 [how to undo git push](https://stackoverflow.com/questions/37606168/how-to-undo-a-git-push)
+
+
+## git permission denied (publickey) error solution
+
+issue : git permission denied (publickey). fatal: Could not read from remote repository. Please make sure you have the correct access rights and the repository exists
+
+reason : Git is used based on SSH or http. If you an SSH key to connect, you need to register an ssh key for each PC.
+
+1. Open the terminal and insert ssh key generate command.
+
+![image](https://user-images.githubusercontent.com/73014464/138223854-d489bd6c-61aa-465b-a0df-f5d081ccc5cb.png)
+
+2. Press Enter.  id_rsa file is generated path is C:\Users\[사용자]/.ssh/id_rsa 
+
+![image](https://user-images.githubusercontent.com/73014464/138224031-70450f8b-3425-44a6-98b8-1db8875561ab.png)
+
+3. If you want enter a password, enter the password  otherwise press enter
+
+![image](https://user-images.githubusercontent.com/73014464/138225410-9fff0071-5185-4da8-aae1-f6db99659045.png)
+
+4. SSH KEY IS GENERATED
+
+![image](https://user-images.githubusercontent.com/73014464/138225495-36c47afd-8026-4fcf-8470-a298a0123e82.png)
+
+5. Move to Setting menu in Github.
+
+![image](https://user-images.githubusercontent.com/73014464/138225630-1d1165a1-c8cb-4c69-92ed-555e8fbff577.png)
+
+6. if you press SSH keys in Settings The following screen appear.
+
+![image](https://user-images.githubusercontent.com/73014464/138229074-7d427303-add2-4120-8b0e-70989ffb3dbd.png)
+
+7. if you open id_rsa.pub file in ssh folder using notepad you can see the key value.
+
+Copy the entire file and paste it where you entered the SSH key value earlier.
+
+![image](https://user-images.githubusercontent.com/73014464/138229707-c76074d5-ada2-452c-be78-f0f49706d2d0.png)
+
+8. After the generation is complete, check in the terminal whether it has been successfully generated on the PC.
+
+![image](https://user-images.githubusercontent.com/73014464/138230392-59d584da-18bd-48e1-b366-82cea3c13949.png)
+
+result Now you can git push or git commit
+
+Reference
+
+https://maliceit.tistory.com/51
+
+
+
+
+
+
+
+
+
+
+
 
 
 Make sure that you have backed up the local file before following the above instructions to avoid missing out your hard work. 
