@@ -308,9 +308,70 @@ li {
 #img-float { 
     float: left;
     margin: 1rem;
+    /* giving a shadow effect in CSS : box-shadow
+    offset-x | offset-y | blur-radius | color */
+    box-shadow:8px 8px 10px #222;
 }
 
+#img-float:hover { 
+    transform: translateY(-0.5rem);
+}
 
 /* #img-float p:nth-child(2) { 
     clear: both;
 } */
+
+/*   */
+
+/*  media query in CSS : essential of a responsive design  
+exercise conditions : 
+0) screen size over than 1000px -> brown
+1) screen size over than 700px -> background color : red
+2) screen size less than 600px -> blue
+3) screen size between 600px~700px -> green
+- note that latter CSS rules apply first based on cascading priority
+*/
+
+@media (min-width:701px) { 
+    body { 
+        background: red;
+    }
+}
+
+@media (min-width:1001px) {
+    body { 
+        background: yellowgreen;
+    }
+}
+
+@media (max-width:700px) { 
+    body { 
+        background: green;
+    }
+}
+
+@media (max-width:600px) { 
+    body { 
+        background: blue;
+    }
+}
+
+/* multi column in CSS : separating contents into a few columns
+for increasing readability */
+#multi-column { 
+    /* adjust column number and width with column-count and column-width property */
+    column-count: 4;
+    column-width: 200px;
+    column-gap: 50px;
+    column-rule-style: dashed;
+    text-align: justify;
+}
+
+#column-title { 
+    /* column-span make the text penetrate all the columns horizontally */
+    column-span: all;
+    font-size: 3rem;
+    font-weight: bolder;
+    text-align: center;
+    margin: 1rem;
+}
