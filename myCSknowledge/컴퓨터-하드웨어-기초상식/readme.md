@@ -72,8 +72,8 @@ SSD는 하드디스크(HDD)를 대체안으로 제시된 보조기억장치로, 
 ## 내 노트북의 파워 용량 계산하기
 [파워 용량 계산 웹사이트](https://seasonic.com/wattage-calculator)
 
-<span style="text-align:center">계산된 파워 용량 </span>
-<img src="./power-supply-wattage.png" alt="소켓 예시 이미지" style="width:300px height:300px"/>
+<li>계산된 파워 용량 : 450W~750W </li>
+<img src="./power-supply-wattage.png" alt="소켓 예시 이미지" width=700px height=500px/>
 
 # 그래픽 처리 장치 (GPU, Graphic Processing Unit)
 ## 그래픽 칩셋 제조사와 대표 상품
@@ -81,9 +81,13 @@ SSD는 하드디스크(HDD)를 대체안으로 제시된 보조기억장치로, 
 <li>NVIDIA - GTX, RTX : 1000번대 미만은 사무용, 1060 & 1070ti - 가벼운 게임, 3070 - 최고사양 게임 </li>
 
 [CPU GPU 그래픽 연산 속도 비교](https://www.youtube.com/watch?v=-P28LKWTzrI)
+
+
 [그래픽 카드 성능 체크 웹사이트](https://www.videocardbenchmark.net/)
 
 
 # 컴퓨터 부품 구매 웹사이트(참고용)
 [다나와](http://www.danawa.com/)
+
+
 [컴퓨존](https://www.compuzone.co.kr/)
