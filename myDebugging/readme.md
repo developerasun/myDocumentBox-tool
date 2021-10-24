@@ -139,10 +139,22 @@ result Now you can git push or git commit
 
 <br/><br/><br/><br/><br/>
 
+
+
+# Contributors
+<a href="https://github.com/developerasun">
+<img src="https://github.com/developerasun.png?size=50" alt="Jake Sung"/>
+</a>
+
+<a href="https://github.com/jshhhhh">
+<img src="https://github.com/jshhhhh.png" width=50px height=50px alt="정석환"/>
+</a>
+
+<a href="https://github.com/omago123">
+<img src="https://github.com/omago123.png" width=50px height=50px alt="김정기"/>
+</a>
+
 # List of references
 [how to undo git commit](https://devconnected.com/how-to-undo-last-git-commit/) <br/>
 [how to undo git push](https://stackoverflow.com/questions/37606168/how-to-undo-a-git-push) <br/>
-https://maliceit.tistory.com/51 <br/>
-
-
-Make sure that you have backed up the local file before following the above instructions to avoid missing out your hard work. 
+[git permission - tistory blog post](https://maliceit.tistory.com/51) <br/>
