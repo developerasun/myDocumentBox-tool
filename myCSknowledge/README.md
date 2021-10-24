@@ -35,3 +35,7 @@ Kmooc - 네트워크 기초 <br/>
 <a href="https://github.com/omago123">
 <img src="https://github.com/omago123.png" width=50px height=50px alt="김정기"/>
 </a>
+
+<a href="https://github.com/oh971021">
+<img src="https://github.com/oh971021.png" width=50px height=50px alt="오준석"/>
+</a>
