@@ -1,10 +1,17 @@
-# Github trouble shooting in this tutorial
+# Git undoing commit and push 
+Troubleshoting <strong>done</strong> by <br/>
+<a href="https://github.com/developerasun">
+<img src="https://github.com/developerasun.png?size=50" alt="Jake Sung"/>
+</a>
+
+Paragraph <strong>edited and translated</strong> by <br/>
+<a href="https://github.com/developerasun">
+<img src="https://github.com/developerasun.png?size=50" alt="Jake Sung"/>
+</a>
 
 [See JS debugging tutorial in YouTube](https://www.youtube.com/watchv=eGpCdJ8DDaM&t=81s)
 
 During this YouTube tutorial, I had encountered one github troubleshooting. A commit for image file had been placed in javascript code, not the original image one. Undoing a git push I made had always been a unwelcome guest so I decided to face it and figure out this time.
-
-
 
 ## How to undo git commit
 <ol>
@@ -36,14 +43,15 @@ By following above instruction, the expected result is as follows :
 <li>The file being deleted in your local</li>
 </ul>
 
+<br/><br/><br/><br/><br/>
 
-# Git Non-fast-forward error
+# Git non-fast-forward error
 Troubleshoting <strong>done</strong> by <br/>
 <a href="https://github.com/jshhhhh">
 <img src="https://github.com/jshhhhh.png" width=50px height=50px alt="정석환"/>
 </a>
 
-Document <strong>edited and translated</strong> by <br/>
+Paragraph <strong>edited and translated</strong> by <br/>
 <a href="https://github.com/developerasun">
 <img src="https://github.com/developerasun.png?size=50" alt="Jake Sung"/>
 </a>
@@ -75,13 +83,19 @@ Document <strong>edited and translated</strong> by <br/>
 6. Adjusting profile setting for the email error / 프로필 Settings → Emails에서 Block command line pushes that expose my email 체크 해제 <br/>
 7. Push success / push 성공
 
+<br/><br/><br/><br/><br/>
 
-# List of references
-[how to undo git commit](https://devconnected.com/how-to-undo-last-git-commit/) <br/>
-[how to undo git push](https://stackoverflow.com/questions/37606168/how-to-undo-a-git-push)
+# Git permission denied (publickey) error solution
+Troubleshoting <strong>done</strong> by <br/>
+<a href="https://github.com/omago123">
+<img src="https://github.com/omago123.png" width=50px height=50px alt="김정기"/>
+</a>
 
+Paragraph <strong>edited and translated</strong> by <br/>
+<a href="https://github.com/developerasun">
+<img src="https://github.com/developerasun.png?size=50" alt="Jake Sung"/>
+</a>
 
-## git permission denied (publickey) error solution
 
 issue : git permission denied (publickey). fatal: Could not read from remote repository. Please make sure you have the correct access rights and the repository exists
 
@@ -123,20 +137,12 @@ Copy the entire file and paste it where you entered the SSH key value earlier.
 
 result Now you can git push or git commit
 
-Reference
+<br/><br/><br/><br/><br/>
 
-https://maliceit.tistory.com/51
-
-
-
-
-
-
-
-
-
-
-
+# List of references
+[how to undo git commit](https://devconnected.com/how-to-undo-last-git-commit/) <br/>
+[how to undo git push](https://stackoverflow.com/questions/37606168/how-to-undo-a-git-push) <br/>
+https://maliceit.tistory.com/51 <br/>
 
 
 Make sure that you have backed up the local file before following the above instructions to avoid missing out your hard work. 
