@@ -334,25 +334,25 @@ exercise conditions :
 
 @media (min-width:701px) { 
     body { 
-        background: red;
+        background: rgb(224, 240, 205);
     }
 }
 
 @media (min-width:1001px) {
     body { 
-        background: yellowgreen;
+        background: rgb(219, 163, 163);
     }
 }
 
 @media (max-width:700px) { 
     body { 
-        background: green;
+        background: rgb(164, 192, 235);
     }
 }
 
 @media (max-width:600px) { 
     body { 
-        background: blue;
+        background: rgb(199, 112, 192);
     }
 }
 
@@ -396,4 +396,17 @@ for increasing readability */
     background : (color) (image url) (repetition) (attachment) (position)
     background : #eee url(./myImage.png) no-repeat fixed center
     */
+}
+
+.filter-img img {
+    filter: grayscale(100%) blur(0.3rem);
+    transition: all 0.5s;
+}
+
+.filter-img img:hover { 
+    filter:grayscale(0%) blur(0rem); 
+}
+
+.filter-h { 
+    filter: blur(3px);
 }
