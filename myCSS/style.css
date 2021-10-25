@@ -375,3 +375,25 @@ for increasing readability */
     text-align: center;
     margin: 1rem;
 }
+
+#background-logo { 
+    height: 1100px;
+    /* Use .png format when an image is mixed with background color */
+    background-image: url("reference/logo-fixed.png");
+    /* image repetition : 1) repeat-x 2) repeat-y 3) no-repeat  */
+    background-repeat: no-repeat;
+    /* background-attachement: fixed(img will move along scroll) / scroll(default) */
+    background-attachment: scroll;
+    /* background-size : contain/cover
+    contain : over-sized image will not be cut from screen(margin happens)
+    cover : image will be fit into screen (over-sized image will be cut) 
+    */
+    /* background-size: cover; */
+    /* background-position : moves bg image */
+    background-position: right;
+
+    /* short expression for all above
+    background : (color) (image url) (repetition) (attachment) (position)
+    background : #eee url(./myImage.png) no-repeat fixed center
+    */
+}
