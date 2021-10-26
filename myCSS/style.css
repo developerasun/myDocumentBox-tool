@@ -1,3 +1,7 @@
+body { 
+    transition: all 1s ease-in-out;
+}
+
 ol li {
     color: red;
 }
@@ -409,4 +413,72 @@ for increasing readability */
 
 .filter-h { 
     filter: blur(3px);
+}
+
+#transform > h1 { 
+    background-color: deepskyblue;
+    color: white;
+    font-size: 3rem;
+    display: inline-block;
+    /* types of supported transforms in CSS
+    - translate : move X,Y axis
+    - scale : expand X,Y axis
+    - rotate : rotate 0 degree ~ 360 degree
+    
+    */
+    /* transform : scaleX(1) scaleY(2); => this is the same expression as below */
+    /* transform: scale(1, 2); */
+    transition: all 2s;
+}
+
+#transform:hover { 
+    transform: scale(1.5);
+}
+
+#button-transition {
+    font-size: 3rem;
+    display: block;
+    /* 
+    transition effect has four elements : 
+        1) property(subject) 
+        2) duration 
+        3) delay
+        4) timing-function
+
+        transition-property:all => apply to all changed properties
+        transition-property:transform => apply to transform properties
+        transition-property:transform font-size => apply to transform and
+        font-size property.
+    */
+    transition-property: all; 
+    transition-duration: 0.5s;
+    transition-delay: 1s;
+}
+
+/* do not give a space between pseudo class and selector in CSS.
+For example, 
+    #button-transition :active => won't work
+    #button-transition:active => will work
+*/
+#button-transition:active { 
+    transform: translate(20px, 20px);
+    /* if transition-property is 'all', button will be moved and at the same
+    time font size will be decreased. */
+    font-size: small;
+}
+
+.height {
+    background-color: deepskyblue;
+    color: #eee;
+    width: 200px;
+    height: 200px;
+    /* transition : property duration delay timing-function */
+    /* transition : height 1s 0.1s ease-in-out; 
+       cubic-bezier => custom transition effect
+    */
+    transition: height 500ms cubic-bezier(0.680, -0.550, 0.265, 1.550);
+}
+
+.height:hover { 
+    height: 500px; 
 }
