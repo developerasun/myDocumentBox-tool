@@ -5,6 +5,8 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="myFontello/fontello-asset/css/fontello.css">
+    <link rel="stylesheet" href="myFontello/fontello-asset/css/animation.css">
     <title>My CSS</title>
 </head>
 <body>
@@ -279,6 +281,22 @@
         Use class name if prefer simpler way. 
     -->
     
+    <!-- how fontello works using pseudo element -->
+    <div class="fontello">
+        fontello
+    </div>
+
+    <!-- premade class can be added for CSS animation in fontello 
+    e.g. i class="icon-comment animate-spin"
+    -->
+    <i class="demo-icon icon-comment animate-spin"></i>
+
+    <!-- custom web font using fontello : create or download custom 
+    svg file and upload it into fontello to generate web font. Rest 
+    part of using the font is the same. Set the config file to use
+    the fonts created again in other browsers.  
+    -->
+
     <script src="./app.js"></script>
 </body>
 </html>

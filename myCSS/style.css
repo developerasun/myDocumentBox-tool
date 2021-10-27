@@ -1,3 +1,7 @@
+/* Use pre-made CSSs for code reusability */
+@import url("import/theme_1.css");
+@import url("import/theme_2.css");
+
 body { 
     transition: all 1s ease-in-out;
 }
@@ -481,4 +485,23 @@ For example,
 
 .height:hover { 
     height: 500px; 
+}
+
+/* Note that pseudo element like ::before, ::after do not work in SEO.
+Search engine will ignore the pseudo elements' content
+*/
+.fontello::before {
+    content: "hello";
+    color: tomato;
+}
+
+.fontello::after { 
+    content:"!"; 
+    color: deepskyblue;
+    font-weight: bold;
+}
+
+.icon-comment { 
+    font-size: 3rem;
+    margin: 2rem;
 }
