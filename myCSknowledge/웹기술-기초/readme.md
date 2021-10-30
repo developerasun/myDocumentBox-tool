@@ -38,15 +38,16 @@
 ## 클라이언트와 서버
 <li>클라이언트 : 웹브라우저를 사용해 서버에 서비스를 요구하는 주체</li>
 <li>서버 : 웹 서버를 통해 클라이언트에게 서비스를 제공하는 주체</li>
-클라이언트(request message)와 서버(response message)는 HTTP 메세지를 통해 교류하게 된다.
+<li>클라이언트(request message)와 서버(response message)는 HTTP 메세지를 통해 교류하게 된다.</li> <br/>
 
-<img src="./http-message.png" width="600px" height="250px"/>
+<b>HTTP 메세지 구조</b><br/>
+<img src="./http-message.png" width="800px" height="400px"/>
 
 ## 웹의 3대 요소
 <li>HTML : 웹 콘텐츠 정보 구성</li>
 <li>HTTP : 웹 클라이언트와 웹 서버의 통신 규약</li>
 <li>URL : 웹 클라이언트 => 웹 서버 자원 요청</li>
-
+<br/>
 <ol>
     <li>클라이언트의 http request 메세지 작성</li>
     <li>request 메세지가 URL을 통해 서버에게 전달됨(자원 요청)</li>
@@ -61,30 +62,30 @@
     <li>File system Transfer Protocol</li>
     <li>Simple Mail Transfer Protocol</li>
 
-### Request logo image file to server using URL
-<img src="./ftp-webroot.png" width="300px"/>
+### 클라이언트 - URL - 서버 통신 예시
+아래 이미지는 로고 이미지를 클라이언트 상에서 URL을 통해 요청(request)하고, 서버가 응답(response)하여 다시 클라이언트 측으로 로고 파일을 전달하는 과정을 도표로 나타낸 것이다.  
+<img src="./ftp-webroot.png" width="800px" height="400px"/>
 
-### URL structure 
-<p>
-(protocol name) + :// + (IP/domain, port number) + (resource directory) + (resource)
-
-리소스 디렉토리 없이 도메인이 바로 불러졌을 경우 index.html과 같은 디폴트 값을 불러온다. 
+### URL 구성 
+Unique Resource Locator, 즉 URL의 구성요소는 아래와 같고 리소스 디렉토리 없이 도메인이 바로 불러졌을 경우 index.html과 같은 디폴트 값을 불러온다. 
+<li> (protocol name) + :// + (IP/domain, port number) + (resource directory) + (resource) </li> <br/>
 
 대표적인 예약 URL 키워드는 아래와 같다. 
-? : 파라미터 시작점
-= : 파라미터 값
-& : 파라미터 식별자
-(+) : 공백
 
-예를 들어, 구글에서 강아지를 이미지 검색했다면 
-www.google.com/search?keyword=dog&format=image&text=cute+dog
+<li>? : 파라미터 시작점</li>
+<li>= : 파라미터 값</li>
+<li>& : 파라미터 식별자</li>
+<li>(+) : 공백</li> <br/>
+
+    
+예를 들어, 구글에서 강아지를 이미지 검색했다면 <br/>
+www.google.com/search?keyword=dog&format=image&text=cute+dog  <br/>
 (도메인) + (리소스 디렉토리) + (파라미터 1과 그 값) + (파라미터 2와 그 값) + (파라미터3과 그 값과 공백) 의 형식으로 표현될 수 있다.
-</p>
 
 ### URL 인코딩
 &, #, ? 와 같이 예약 URL 키워드를 사용자가 URL 이외의 곳에서 입력했을 경우 데이터 전송 손실을 막기 위해서(예약 키워드를 단순 데이터로 전송하기 위해서) 그 값을 인코딩하여 전달하게 된다. 웹 브라우저 상에서는 URL 인코딩은 자동으로 지원한다. e.g. 공백 => %20 으로 인코딩 후 서버에게 전달됨. 
 
-URL 인코딩 예시
+<b>URL 인코딩 예시</b> <br/>
 <img src="./url-encoding.png" width="300px" height="500px"/>
 
 ## 쿠키와 세션
@@ -100,7 +101,7 @@ URL 인코딩 예시
  <li>세션 쿠키(session cookie) : 클라이언트 웹 브라우저 캐시에 저장됨. 서버에서는 이 세션 정보를 메모리/파일시스템/데이터베이스에 저장한다(일반적으로는 *메모리에 저장함). 세션은 임의의 문자를 무작위로 나열하고, 나열된 문자들을 유저의 로그인 정보와 매핑시켜 특정 유저의 세션을 파악하기는 어렵다는 보안 상의 장점이 있음. </li>
 </ul>
 
-로그인 폼과 세션 쿠키
+<b>로그인 폼과 세션 쿠키</b><br/>
 <img src="./session-cookie-login.png" width="600px" height="400px"/>
 
 세션 쿠키는 보안 상의 장점이 있으나, 세션 정보를 메모리에 저장하므로 대규모 웹 서비스에 적용할 경우 서버에 큰 부하를 가지고 온다는 단점이 존재한다. 반면 지속 쿠키 방식은 서버에 부담이 적은 편이므로 사용 유저가 많은 기업들의 경우 지속 쿠키 사용을 선호하는 편이다. 웹 서비스의 규모와 인프라 구성에 알맞게 쿠키 방식을 검토해야 한다. 
