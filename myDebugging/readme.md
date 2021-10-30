@@ -158,3 +158,4 @@ result Now you can git push or git commit
 [how to undo git commit](https://devconnected.com/how-to-undo-last-git-commit/) <br/>
 [how to undo git push](https://stackoverflow.com/questions/37606168/how-to-undo-a-git-push) <br/>
 [git permission - tistory blog post](https://maliceit.tistory.com/51) <br/>
+[git reset --hard, --soft](https://kyounghwan01.github.io/blog/etc/git/git-reset-revert/#reset)
