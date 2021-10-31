@@ -35,6 +35,8 @@
 </ol>
 
 # 웹 기본 구조
+웹이란 여러 네트워크, 즉 여러 통신망이 모여 정보를 주고 받는 곳이다. 
+
 ## 클라이언트와 서버
 <li>클라이언트 : 웹브라우저를 사용해 서버에 서비스를 요구하는 주체</li>
 <li>서버 : 웹 서버를 통해 클라이언트에게 서비스를 제공하는 주체</li>
@@ -65,6 +67,8 @@
 ### 클라이언트 - URL - 서버 통신 예시
 아래 이미지는 로고 이미지를 클라이언트 상에서 URL을 통해 요청(request)하고, 서버가 응답(response)하여 다시 클라이언트 측으로 로고 파일을 전달하는 과정을 도표로 나타낸 것이다.  
 <img src="./ftp-webroot.png" width="800px" height="400px"/>
+
+ 클라이언트는 상태 코드(e.g. statusCode=200)를 통해 요청의 결과, 즉 서버의 응답 상태를 확인할 수 있다. 
 
 ### URL 구성 
 Unique Resource Locator, 즉 URL의 구성요소는 아래와 같고 리소스 디렉토리 없이 도메인이 바로 불러졌을 경우 index.html과 같은 디폴트 값을 불러온다. 
@@ -110,6 +114,65 @@ www.google.com/search?keyword=dog&format=image&text=cute+dog  <br/>
 <li>서버 부하 : 지속 쿠키 < 세션 쿠키</li>
 <li>유저 수 : 지속 쿠키 > 세션 쿠키</li>
 
+# HTTP 프로토콜
+Hyper Text Transfer Protocol은 하이퍼텍스트 문서(HTML)를 전송하기 위해 사용되는 통신 규약으로, 웹의 핵심 기술이다. 
+
+## OSI 7계층
+Open System Interconnection(OSI)이란 네트워크 통신이 일어나는 과정을 7단계 계층으로 나누어 설명한 모델이다. 각각의 하위 계층이 정상적으로 동작해야 상위 계층 역시 동작하므로, 네트워크 통신이 실패할 경우 어느 계층에서 실패했는지 파악하기 쉽다는 유지보수적인 장점을 가진다. HTTP 프로토콜은 응용 계층, 즉 가장 상단에 위치하며, TCP/IP 계층을 기반으로 동작한다.
+
+<li>TCP/IP => HTTP</li>
+
+<b>OSI 7 계층 구조</b><br/>
+<img src="./osi7-model.jpg" width="720px" height="360px"/>
+
+## TCP/IP 프로토콜
+컴퓨터와 컴퓨터가 소통하기 위해 정해둔 통신 규약을 프로토콜이라고 부르며, 많은 프로토콜 중 인터넷과 관련된 프로토콜을 모은 것을 TCP(Transmission Control Protocol)/IP(Internet Protocol)라고 부른다. TCP/IP 프로토콜은 아래와 같은 4계층으로 나뉘어진다. 
+
+<li>애플리케이션 계층</li>
+<li>트랜스포트 계층</li>
+<li>네트워크 계층</li>
+<li>링크 계층</li>
+
+대부분의 네트워크 통신은 TCP/IP 기반으로 이루어진다. TCP/IP에서는 IP를 통해 통신을 위한 물리적 호스트 대상을 찾으며, port를 통해 논리적 대상을 찾게 된다. 
+
+예를 들어, 웹 브라우저 상에서 www.naver.com을 입력할 경우
+
+<ol>
+    <li>클라이언트 측에서 임의의 포트 번호를 할당</li>
+    <li>통신을 위해 출발지&목적지 IP/port를 설정(디폴트 포트 번호는 80으로 세팅됨)</li>
+    <li>서버에서 요청한 데이터를 처리 후 클라이언트에게 전달</li>
+</ol>
+
+### TCP/IP상에서의 3 way handshake
+3 way handshake란 TCP 프로토콜 상에서 송/수신자 간의 연결이 원활하게 되어 있는지 확인하기 위해 클라이언트와 서버간 메세지를 주고 받는 작업이다. 
+
+<li>SYN : synchronize sequence numbers</li>
+<li>ACK : acknowledgment</li>
+
+<b> 3 way handshake 프로세스 </b><br/>
+<img src="./3way-handshake.png" width="800px" height="400px"/>
+
+## HTTP 메시지
+HTTP 메세지는 1) 시작줄 2) 메시지 헤더 3) 메시지 바디로 나뉘어지고, 각 부분은 개행 문자(\n)를 기준으로 분류된다. 헤더의 끝나는 부분에 개행 문자 2개가 연달아 오고 메시지 바디 부분이 시작된다. 
+
+<b>HTTP 메시지의 섹션 구분</b><br/>
+<img src="http메시지-개행문자.png" width="1000px", height="200px"/>
+
+## HTTP 메소드
+HTTP 메소드 중 GET/POST 메소드가 가장 보편적으로 사용된다. GET 방식은 URL에 유저가 입력한 데이터가 표시되고, POST 방식은 HTTP 메시지 바디 부분에 그 값이 나타나게 된다. POST 방식의 경우 HTTP 메시지 헤더에 content-type을 명시해줘야 메시지 바디 부분을 정상적으로 동작시킬 수 있다는 점을 유의해야 한다. 
+
+## HTTP 상태 코드
+서버는 클라이언트의 요청에 대한 결과를 HTTP 상태 코드를 통해 알려준다. 상태 코드는 3자리 숫자와 응답 문구로 이루어지고, 상세 분류는 아래와 같다.
+
+<ul>
+    <li>1xx : 정보</li>
+    <li>2xx : 성공 e.g 200 OK, 정상처리</li>
+    <li>3xx : 리다이렉션</li>
+    <li>4xx : 클라이언트 에러 e.g 404 Not Found, 존재하지 않음</li>
+    <li>5xx : 서버 에러</li>
+</ul>
+
+사용하는 웹 서버의 종류에 따라 에러 페이지가 다르게 나타나므로 상태 코드를 통해 서버의 종류를 추측할 수 있다. 
 
 # 추천 도서 목록 
 <ul>
