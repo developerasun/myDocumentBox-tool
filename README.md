@@ -1,9 +1,9 @@
 # DeveloperAsun Side Projects
-This is a secret box of developerasun, containing the sum of his blood, sweat, and tears derived from a few projects and studies he has done. 
+This is a secret box of developerasun, containing the sum of his blood, sweat, and tears derived from several projects and studies he has done. 
 
 ## Personal Project
 <ol>
- <li>Meow Canvas(in-progress) - Self-cat drawing NFT marketplace : Javascript, HTML, CSS, Python, Go </li>
+ <li>Meow Canvas(in-progress) - Building a NFT marketplace : Javascript, HTML, CSS, Python, Go </li>
  <li>Caffeine Checker - Calcuating proper amount of daily caffeine consumption : Go, SQLite3 </li>
  <li>Folder Generator - Creating folders with the input from user : Go </li>
  <li>Screenshot Automator - Taking an automated screenshot at reserved time : Python (screenshot and YT link will be added)  </li>
@@ -11,7 +11,8 @@ This is a secret box of developerasun, containing the sum of his blood, sweat, a
 
 ## Team Project
 <ol> 
-  <li>myCSknowledge - Learning college-level computer science knowledge for beginner developer </li>
+  <li>myCSknowledge - Learning college-level computer science knowledge for beginner developers </li>
+  <li>myDebugging - Github troubleshooting </li>
 </ol>
 
 ## Tutorials 
@@ -22,9 +23,9 @@ This is a secret box of developerasun, containing the sum of his blood, sweat, a
  <li>smart-contract - Creating a hello world smart contract in iconloop(docker + tbears)</li>
  <li>myBootstrap - Exercising bootstrap pre-made elements</li>
  <li>myCSS - Learning basic CSS knowledges</li>
- <li>myDebugging - Debugging Javascript using debugger</li>
  <li>myFront - Learning basic HTML tags</li>
  <li>myHTML - Learning essential HTML tags</li>
+ <li>myJavascript - Learning Javascript essentials </li>
 </ol>
 
 ## Clone Codings
@@ -43,5 +44,3 @@ This is a secret box of developerasun, containing the sum of his blood, sweat, a
  
 ## Previous team projects
 [goBlock program Hackathon](https://1drv.ms/p/s!AtfkTrM2j9UvlGo-LexXUWe709rg?e=loJnDu) - Metaverse wedding platform with Icon loop LFT2 algorithm <br/>
-[Blockchain consensus algorithm concept](https://github.com/designerasun/golang/blob/master/PoSN/demo/demo.go) - Quarkchain 2-layers consensus algorithm motivated <br/>
-[Blockchain hyperledger fabric marbles](https://www.youtube.com/watch?v=4N7nvLq-9Qg&list=PLXgNzUP3l3KW7roDf6ciH14V9xkkF0tbK&index=7) - Improving front end elements : HTML, CSS
