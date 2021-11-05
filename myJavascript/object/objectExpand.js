@@ -23,3 +23,19 @@ const thanosJam = {name:'Thanos', location:'seoul'};
 
 city.findTreasure('seoul'); 
 thanosJam.findTreasure(city[2]); 
+
+// be careful to use Object.prototype since it affects every children objects.
+// note that below findTreasure is printed as a result of key values.
+for (let name in thanosJam) {
+    console.log(name); // result : name, location, findTreasure 
+}
+
+// method hasOwnProperty distinguishes object's own property and inherited one. 
+// hasOwnProperty is a prototype property of Object.
+// Object.prototype.hasOwnProperty : meaning that it is available in all the objects
+// for example, 
+for (let key in city) {
+    if (city.hasOwnProperty(key)) {
+        console.log(city[key]); // result : seoul, tokyo, london, berlin
+    }
+}
