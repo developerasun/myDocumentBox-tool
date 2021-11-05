@@ -3,7 +3,15 @@
 // a goal is to create nice modules that are well separated by their
 // functionality and data. 
 
-// how constructor works in javascript: (object) = (new)(function)
+
+// constructor in javascript : constructor is a function. The function is 
+// to create object and set object properties needed. When constructor gets called, 
+// 1) new empty object created 2) this keyword starts to refer the newly created
+// object 3) the newly created object returns. 
+
+// see this reference for more : https://www.educative.io/edpresso/what-is-a-constructor-in-javascript
+
+// how constructor is declared in javascript: (object) = (new)(function)
 // comparision : in Python -> (object) = class(containing constructor inside)
 
 function plus (obj1, obj2) {
