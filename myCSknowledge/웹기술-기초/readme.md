@@ -60,9 +60,10 @@
 
 ## URL(Uniform Resource Locator)
 인터넷 리소스를 가리키는 표준 명칭. 서버의 자원을 요청할 때 사용되며 인터넷 상의 모든 리소스를 요청할 수 있다.
-    <li>Hyper Text Transfrer Protocol</li>
-    <li>File system Transfer Protocol</li>
-    <li>Simple Mail Transfer Protocol</li>
+    <li> HTTP : Hyper Text Transfrer Protocol</li>
+    <li> FTP : File system Transfer Protocol</li>
+    <li> SMTP : Simple Mail Transfer Protocol e.g : smtp.google.com => 이메일이 보내질 때 SMTP 서버가 어느 서버로 해당 이메일을 전송할지 결정하고, 
+    수신자의 inbox service provider가 해당 이메일을 다운로드 후 수신자의 inbox에 메일을 표시한다. SMTP 서버는 이메일을 받고, 보내는 기능에 특화된 서버이다. </li>
 
 ### 클라이언트 - URL - 서버 통신 예시
 아래 이미지는 로고 이미지를 클라이언트 상에서 URL을 통해 요청(request)하고, 서버가 응답(response)하여 다시 클라이언트 측으로 로고 파일을 전달하는 과정을 도표로 나타낸 것이다.  
@@ -72,6 +73,7 @@
 
 ### URL 구성 
 Unique Resource Locator, 즉 URL의 구성요소는 아래와 같고 리소스 디렉토리 없이 도메인이 바로 불러졌을 경우 index.html과 같은 디폴트 값을 불러온다. 
+<li>https://www.naver.com(포트 번호 생략, 리소스 디렉토리 생략) => index.html을 불러옴</li>
 <li> (protocol name) + :// + (IP/domain, port number) + (resource directory) + (resource) </li> <br/>
 
 대표적인 예약 URL 키워드는 아래와 같다. 
@@ -82,12 +84,13 @@ Unique Resource Locator, 즉 URL의 구성요소는 아래와 같고 리소스 �
 <li>(+) : 공백</li> <br/>
 
     
-예를 들어, 구글에서 강아지를 이미지 검색했다면 <br/>
-www.google.com/search?keyword=dog&format=image&text=cute+dog  <br/>
-(도메인) + (리소스 디렉토리) + (파라미터 1과 그 값) + (파라미터 2와 그 값) + (파라미터3과 그 값과 공백) 의 형식으로 표현될 수 있다.
+예를 들어, 구글에서 "귀여운 강아지"를 이미지 검색했다면 <br/>
+www.google.com/search?keyword=dog&format=image&text=귀여운+강아지  <br/>
+(도메인) + (리소스 디렉토리) + (파라미터 1과 그 값) + (파라미터 2와 그 값) + (파라미터3과 그 값과 공백) 와 같은 형식으로 표현될 수 있다. 위 URL은 이해를 위해 만든 예시일 뿐 실제 구글 검색의
+URL과는 다를 수 있다. 
 
 ### URL 인코딩
-&, #, ? 와 같이 예약 URL 키워드를 사용자가 URL 이외의 곳에서 입력했을 경우 데이터 전송 손실을 막기 위해서(예약 키워드를 단순 데이터로 전송하기 위해서) 그 값을 인코딩하여 전달하게 된다. 웹 브라우저 상에서는 URL 인코딩은 자동으로 지원한다. e.g. 공백 => %20 으로 인코딩 후 서버에게 전달됨. 
+&, #, ? 와 같이 예약 URL 키워드를 사용자가 URL 이외의 곳에서 입력했을 경우 데이터 전송 손실을 막기 위해서(예약 키워드를 <b>단순 데이터로 전송</b>하기 위해서) 그 값을 인코딩하여 전달하게 된다. 웹 브라우저 상에서는 URL 인코딩은 자동으로 지원한다. e.g. 공백 => %20, ? => %3F 으로 인코딩 후 서버에게 전달됨. 
 
 <b>URL 인코딩 예시</b> <br/>
 <img src="./url-encoding.png" width="300px" height="500px"/>
@@ -96,7 +99,7 @@ www.google.com/search?keyword=dog&format=image&text=cute+dog  <br/>
 <p>
 최초의 웹은 정보 공유가 주된 목적이었으므로 상태 유지/관리의 필요성이 적었지만 현대의 웹은 이커머스가 확장됨에 따라 유저의 상태 정보를 관리해야할 필요성이 높아졌다(쇼핑, 장바구니, 결제, 배송일 체크 등 유저에 따라 달라지는 정보들이 많아졌기에).
 
-쿠키는 사용자 식별 및 세션 유지를 통해 클라이언트와 서버 간의 상태관리를 책임지는 인증방식이다. 
+쿠키는 사용자 식별 및 세션 유지를 통해 <b>클라이언트와 서버 간의 상태관리를 책임</b>지는 인증방식이다. 
 서버에서 Set-Cookie 헤더를 통해 클라이언트의 쿠키 값을 세팅하고, 클라이언트는 세팅된 쿠키 값을 Cookie 헤더에 세팅한다. 
 <p>
 
@@ -115,7 +118,7 @@ www.google.com/search?keyword=dog&format=image&text=cute+dog  <br/>
 <li>유저 수 : 지속 쿠키 > 세션 쿠키</li>
 
 # HTTP 프로토콜
-Hyper Text Transfer Protocol은 하이퍼텍스트 문서(HTML)를 전송하기 위해 사용되는 통신 규약으로, 웹의 핵심 기술이다. 
+Hyper Text Transfer Protocol은 하이퍼텍스트 문서(HTML)를 전송하기 위해 사용되는 <b>통신 규약으로, 웹의 핵심 기술</b>이다. 
 
 ## OSI 7계층
 Open System Interconnection(OSI)이란 네트워크 통신이 일어나는 과정을 7단계 계층으로 나누어 설명한 모델이다. 각각의 하위 계층이 정상적으로 동작해야 상위 계층 역시 동작하므로, 네트워크 통신이 실패할 경우 어느 계층에서 실패했는지 파악하기 쉽다는 유지보수적인 장점을 가진다. HTTP 프로토콜은 응용 계층, 즉 가장 상단에 위치하며, TCP/IP 계층을 기반으로 동작한다.
