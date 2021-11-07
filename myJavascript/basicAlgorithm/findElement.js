@@ -23,7 +23,7 @@ function findElement(arr, func) {
 
 function doFind(arr, func) {
     // Returns the value of the first element in the array where predicate is true, and undefined otherwise.
-    console.log(arr.find()); 
+    console.log(arr.find(func)); 
 }
 
 doIndexOf([1,2,33,4], num => num % 3 === 0); 
