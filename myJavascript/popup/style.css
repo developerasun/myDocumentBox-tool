@@ -24,6 +24,7 @@ body {
     display: none;
 }
 
+
 .pop-up h1 {
     position: relative;
     bottom: 1.3rem;
@@ -53,4 +54,17 @@ body {
     cursor: pointer;
     color: aliceblue;
     transform: translate(435px, -5px);
+}
+
+.modal-animate {
+    animation: fade-out 1s 1 ease;
+}
+
+@keyframes fade-out {
+    0% {
+        opacity: 100%;
+    }
+    100% {
+        opacity: 0;
+    }
 }
