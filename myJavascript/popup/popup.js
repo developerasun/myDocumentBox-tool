@@ -1,11 +1,13 @@
 const closeX = document.querySelector("#close");
 const closeLetsGo = document.querySelector(".pop-up>span");
 const popUp = document.querySelector(".pop-up");
-
+const FADE_OUT = "modal-animate-fade-out";
+const FADE_IN = "modal-animate-fade-in";
 
 // close and change display : button
 closeX.addEventListener("click", () => {
-    popUp.classList.add("modal-animate");
+    popUp.classList.remove(FADE_IN); 
+    popUp.classList.add(FADE_OUT);
     setTimeout(()=>{
         popUp.style.display = "none";
     },1000);
@@ -13,7 +15,8 @@ closeX.addEventListener("click", () => {
 
 // close and change display : let's go
 closeLetsGo.addEventListener("click", () => {
-    popUp.classList.add("modal-animate");
+    popUp.classList.remove(FADE_IN); 
+    popUp.classList.add(FADE_OUT);
     setTimeout(()=>{
         popUp.style.display = "none";
     },1000);
@@ -22,6 +25,7 @@ closeLetsGo.addEventListener("click", () => {
 // load and change display 
 window.addEventListener("load", () => {
     setTimeout(() => {
+        popUp.classList.add(FADE_IN);
         popUp.style.display = "block";
     }, 1500);
 });

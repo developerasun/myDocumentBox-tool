@@ -56,7 +56,7 @@ body {
     transform: translate(435px, -5px);
 }
 
-.modal-animate {
+.modal-animate-fade-out {
     animation: fade-out 1s 1 ease;
 }
 
@@ -68,3 +68,17 @@ body {
         opacity: 0;
     }
 }
+
+.modal-animate-fade-in {
+    animation: fade-in 1s 1 ease;
+}
+
+@keyframes fade-in {
+    0% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 100%;
+    }
+}
+
