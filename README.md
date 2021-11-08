@@ -1,5 +1,5 @@
 # DeveloperAsun Side Projects
-This is a secret box of developerasun, containing the sum of his blood, sweat, and tears derived from several projects and studies he has done. 
+This is a open code box of developerasun, containing the sum of his blood, sweat, and tears derived from several projects and studies he has done. 
 
 ## Personal Project
 <ol>
@@ -9,13 +9,13 @@ This is a secret box of developerasun, containing the sum of his blood, sweat, a
  <li>Screenshot Automator - Taking an automated screenshot at reserved time : Python (screenshot and YT link will be added)  </li>
 </ol>
 
-## Team Project
+## Group Study
 <ol> 
   <li>myCSknowledge - Learning college-level computer science knowledge for beginner developers </li>
   <li>myDebugging - Github troubleshooting </li>
 </ol>
 
-## Tutorials 
+## Tutorials and Self-taught
 <ol>
  <li>myFront - Front end HTML, CSS basic exercise </li>
  <li>myWebDesign - Front end HTML, CSS intermediate exercise</li>
@@ -36,7 +36,7 @@ This is a secret box of developerasun, containing the sum of his blood, sweat, a
  <li>momentum - Clone-coding a momentum chrome extension web with vanilla script</li>
 </ol>
 
-## Code Reference
+## Code Reference(folked)
 <ol>
  <li>dpos-pbft - blockchain consensus algorithm reference</li>
  <li>von-network - blockchain DID(decentralized id) web demo reference</li>  
