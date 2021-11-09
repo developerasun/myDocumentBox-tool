@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <style>
+        input {
+            position: absolute;
+            transform: translate(-50%, -50%);
+            top:  50%;
+            left: 50%; 
+        }
+    </style>
+
+</head>
+<body>
+    <!-- scripting a javascript in inline style : information + cotrol is put altogether  
+    not recommended. HTML is the one of the essential elements in web, which is targeting to
+    provide information. 
+    -->
+    <input type="button" value="Hello World" onclick="alert('hello world')"/>
+
+    <!-- if script tag is declared in HTML head section, unloaded variables in the 
+    script will be null values. Thus it will cause an error unless window.onload method is used.
+    Declaring in scripting tag at the bottom of body tag also loads webpage faster than 
+    it is declared in head tag. 
+    -->
+    <script>
+        window.addEventListener("load", ()=>{
+            setTimeout(()=>{
+            document.body.style.background = "grey";
+            }, 1000);
+        });
+    </script>
+</body>
+</html>
