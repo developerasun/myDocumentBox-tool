@@ -11,5 +11,10 @@ http.createServer(function(req, res){
     myReadStream.pipe(res);
 }).listen(8080, '127.0.0.1');
 
-// 
+// In website, turning off/on a pop-up is related to security topic. 
+// Javascript can manipulate brower objects - if someone is able to open
+// a A website in B website's pop-up, assume that window.open or other method 
+// used for that, uninteded changes can happen in the A website. 
+// Thus, web browsers have policy that user can set how a pop-up is displayed
+// meaning that user can turn on/off the pop-up by their preference.
 
