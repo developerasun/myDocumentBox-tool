@@ -22,7 +22,7 @@ LAN에 참여하는 네트워크 기기들의 통신 방법을 정해놓은 규�
 <li>Ethernet - 가장 광범위하게 사용되는 LAN 프로토콜. 네트워크 기기들은 반드시 물리적 케이블을 통해 연결되어 무선 LAN 기술보다 강한 보안 수준을 자랑함. Star, Bu, Tree와 같은 토폴로지를 사용</li>
 
 <details>
-    <summary>Ethernet 이미지</summary>
+    <summary>Ethernet 종류</summary>
     <img src="./ethernet.jpg" width=1000px height=600px/>
     <li>Fast Ethernet - 구리 재질 Ethernet 케이블(초당 100 메가 비트 데이터 전송 속도)</li>
     <li>Gig Ethernet - 광섬유 재질 Ethernet 케이블 (초당 10억 비트 데이터 전송 속도. 엔터프라이즈용 네트워크에 주로 사용됨)</li>
@@ -30,6 +30,49 @@ LAN에 참여하는 네트워크 기기들의 통신 방법을 정해놓은 규�
 
 <li>WiFi - WLAN(Wireless LAN). 데이터 캡슐화를 위해 전자기파 범주의 주파수를 사용함.  </li>
 <li>ATM LANE - Asynchronous Transfer Mode(비동기 전송 모드). 다른 LAN 프로토콜과 달리 데이터를 고정된 사이즈의 패킷으로 전송함(초당 155 메가 비트 이상의 데이터 전송 속도) </li>
+
+## WAN 프로토콜
+LAN보다 훨씬 큰 크기의 네트워크에서 기기들의 통신 방법을 정해놓은 규약. 광역 통신망 WAN은 서로 다른 지역의 근거리 통신망 유저들이 통신하도록 도와주는 역할을 한다. 통신망의 영역 범위는 아래와 같다.
+
+<span><b>LAN과 WAN의 상관 관계</b></span>
+<img src="./LAN-WAN.jpg" width=800px height=600px/>
+
+<detail>
+    <summary>영역별 네트워크 종류</summary>
+    PAN(방 단위) => LAN(건물 단위) => CAN(캠퍼스 단위) => MAN(도시 단위) => WAN(광역 단위)
+</detail>
+
+<span><b>WAN 프로토콜의 종류</b></span>
+<li>X.25</li>
+<li>Frame Relay</li>
+<li>ISDN</li>
+<li>DSL</li>
+
+WAN 프로토콜 종류에 대해서는 다루는 내용의 범위가 필요 이상을 넘었다고 판단하여 여기에서는 생략한다.
+
+## 네트워크 기기
+네트워크 기기들은 네트워크 상에서 데이터를 받거나 만들어내는 역할을 한다. 
+
+<span><b>네트워크 기기 종류</b></span>
+<li>HUB - Star 토폴로지를 사용하는 네트워크상에서 중앙 연결점이 되는 기기(통상 Concentrator라고 명칭함). 여러 개의 독립적인 포트를 가지고 있는 하드웨어. One to many connections. 기기 A가 기기 C에게 패킷1을 전달하고 싶을 경우 패킷 1은 허브를 통해 모든 기기들에게 뿌려짐.</li>
+
+<detail>
+    <summary>패킷이란?</summary>
+    패킷이란 네트워크 상에서 한 번에 전송할 데이터의 크기를 나타내는 말이다. 네트워크 종류에 따라 패킷의 크기가 달라진다. 패킷은 전송 시작 전 번호가 부여되고 나눠지며(A데이터 => 1,2,3,4, ...) 전송 완료 이후 다시 번호대로 정렬되고 복구된다(1,2,3,4 ... => A데이터). 데이터 분할 전송(패킷 단위)을 통해 전송 상의 이점을 챙기기 위해 사용됨(여러 컴퓨터에게 동시 전송, 대용량 데이터 분할 전송 등).  
+</detail>
+
+<span><b>HUB와 포트</b></span>
+<img src="./HUB.jpg" width=800px height=600px/>
+
+<li>Switches - 네트워크 부하를 낮추고 속도를 높이기 위해 특정 레이어를 추가해서 사용하는 HUB의 한 종류. One to one conneciton.</li>
+<li>Routers - 패킷 데이터를 전송하는 역할. 패킷에는 발신자, 데이터 유형, IP 주소 등 여러 식별 정보가 포함되어 있다. 라우터는 이 레이어를 읽어 우선 순위를 설정하고, 우선 순위에 맞추어 패킷 전송에 사용할 최적 라우트를 선택한다. </li>
+
+<detail>
+    <summary>라우터 작동 원리</summary>
+    <img src="./라우터.jpg" width=600px height=400px/>
+</detail>
+
+<li>NIC - Network Interface Card. 컴퓨터 내에 네트워크 통신을 위해 설치된 하드웨어 카드. 네트워크 케이블과 연결할 포트를 하나 이상 제공하고, 컴퓨터 역시 네트워크 어댑터를 컨트롤 하기 위한 드라이버를 제공한다. </li>
 
 # 네트워크 토폴로지
 토폴로(망 구성 방식)란 컴퓨터 네트워크를 연결해놓은 방식을 의미한다. LAN의 경우 물리적/논리적 토폴로지 둘 다 보여줄 수 있다. 
