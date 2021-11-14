@@ -94,3 +94,44 @@ WAN 프로토콜 종류에 대해서는 다루는 내용의 범위가 필요 이
 <li>Mesh - 모든 네트워크 노드가 서로에게 연결되어 있음. Full mesh와 partial mesh 구조로 나뉠 수 있으며, full mesh에서 필요 없는 노드 연결을 끊을 경우 partial mesh 구조로 변함. </li>
 <li>Tree - 하나의 루트 노드가 존재하고, 하위 노드들이 계층 구조를 이룸. 적어도 3개의 계층이 필요함. Star 토폴로지 + Bus 토폴로지</li>
 <li>Hybrid - 서로 다른 토폴로지가 합쳐서 새로운 토폴로지를 구성함. 새로운 컴포넌트를 추가해 네트워크의 크기를 키우는 데 유리하며, fault detection/trouble shooting이 용이하다는 장점이 있음.</li>
+
+# IP(Internet Protocol)
+<p>
+인터넷상에서 컴퓨터의 위치를 특정하고 기기 간 데이터를 전송하는 방법을 명시한 통신 규약. 컴퓨터들의 우편 시스템. 주로 TCP 프로토콜과 함꼐 사용되며 인터넷 상 각각의 컴퓨터(호스트)는 적어도 하나의 IP주소를 할당 받게 됨.
+</p>
+<p>
+TCP/IP 프로토콜을 통해 기기 간 통신을 할 경우 IP 주소가 필요함. IP 주소는 4개의 숫자로 구성되고 숫자의 크기에 따라 IPv4/IPv6로 구별됨. IP 패킷을 주고 받는 기기를 IP host라고 부르며, IP 주소를 사람이 알아보기 쉽게 네이밍 하는 역할을 DNS(Domain Name System)가 맡아줌. 
+</p>
+<p>
+각각의 IP 주소가 가지는 의미는 필요 이상의 내용을 담고 있다고 판단, 생략한다. 
+e.g. 클래스 E 주소 : 240.0.0.0.0 ~ 255.255.255.254. 
+</p>
+
+<details>
+    <summary>IP 주소란? (펼쳐보기)</summary>
+    네트워크 상에서 특정 컴퓨터 기기를 식별하기 위해 사용되는 주소로, 32비트 4개의 숫자로 이루어져 있다. 각 숫자들은 .(dot)으로 구별한다. 일반적으로 십진수를 사용하는 버전 4, 즉 IPv4가 보편화되어 있으며 0.0.0.0. ~ 255.255.255.255 범위 내에 IP 주소가 존재한다. 일부 번호들은 특정 목적을 위해 선 예약되어 있다. 예를 들어 127.0.0.1의 경우 localhost(로컬 호스트, 루프백(loopback))로 자기 자신을 가리킨다. 32 비트로 모든 단말기의 수를 지정하기 힘들어지자 IPv6에서는 주소 길이를 128비트로 늘리게 되었다. 
+</details>
+
+<span><b>터미널 명령어로 IP 주소 확인하기</b></span><br/>
+```
+ipconfig
+```
+<img src="./ip-확인.png" width=700px height=400px/>
+
+# TCP/IP
+<p>
+TCP/IP 크게 1) HTTP 2) HTTPS 3) FTP 3가지로 구성되어 있다. HTTPS와 달리 HTTP는 보안상 검증된(secure) 데이터 전송을 지원하지 않는다. HTTPS의 경우 웹 사이트-웹서버간의 인증(authentication)을 지원해 HTTP에 security를 의미하는 s를 덧붙여 HTTPS 라고 명칭한다. 
+</p>
+<p>
+FTP(File Transfer Protocol)는 2개 이상의 컴퓨터 기기 사이에서 데이터를 주고 받는 방법을 명시한 프로토콜이다. 클라이언트<->서버 아키텍쳐를 차용하며, SSL/TLS와 같은 보안을 활용한다. 
+</p>
+
+<details>
+    <summary>SSL/TLS란? (펼쳐보기)</summary>
+    SSL, 즉 Secure Socket Layer은 옛 명칭으로 현재는 TLS, Transport Layer Security로 정식 명칭이 바뀌었다. 웹 브라우저와 웹 서버 간의 암호화 통신을 위해 TCP/IP 계층에서 동작하는 프로토콜을 의미하며 아래와 같은 역할을 수행한다. 
+
+<li>인증</li>
+<li>암호화</li>
+<li>변조 방지</li>
+</details>
+
