@@ -129,14 +129,14 @@ Open System Interconnection(OSI)이란 네트워크 통신이 일어나는 과�
 <img src="./osi7-model.jpg" width="720px" height="360px"/>
 
 ## TCP/IP 프로토콜
-컴퓨터와 컴퓨터가 소통하기 위해 정해둔 통신 규약을 프로토콜이라고 부르며, 많은 프로토콜 중 인터넷과 관련된 프로토콜을 모은 것을 TCP(Transmission Control Protocol)/IP(Internet Protocol)라고 부른다. TCP/IP 프로토콜은 아래와 같은 4계층으로 나뉘어진다. 
+인터넷 상에서 식별된 컴퓨터간 데이터 패킷을 주고 받는 통신 규약을 일컬어 TCP(Transmission Control Protocol)/IP(Internet Protocol)라고 부른다. 데이터(패킷)를 주고 받는 규약을 TCP, 네트워크 상의 컴퓨터를 식별하는 규약을 IP로 이해하면 된다. TCP/IP 프로토콜은 아래와 같은 4계층으로 나뉘어진다. 
 
 <li>애플리케이션 계층</li>
 <li>트랜스포트 계층</li>
 <li>네트워크 계층</li>
 <li>링크 계층</li>
 
-대부분의 네트워크 통신은 TCP/IP 기반으로 이루어진다. TCP/IP에서는 IP를 통해 통신을 위한 물리적 호스트 대상을 찾으며, port를 통해 논리적 대상을 찾게 된다. 
+오늘날 대부분의 네트워크 통신은 TCP/IP 기반으로 이루어진다. TCP/IP에서는 IP를 통해 통신을 위한 물리적 호스트 대상을 찾으며, port를 통해 논리적 대상을 찾게 된다. 
 
 예를 들어, 웹 브라우저 상에서 www.naver.com을 입력할 경우
 
