@@ -1,13 +1,44 @@
 function mutation(arr) {
+  let bolt = new Array(); 
+  let nut = new Array(); 
+  let count = 0; 
 
-    // not solved yet
+  const first = arr[0].toLowerCase();
+  const second = arr[1].toLowerCase();
 
+  bolt = first.split("").sort();
+  nut = second.split("").sort();
+
+  // filter method creates a new array with only elements passed callback function.
+  // Array.filter((element, index, array))
+  // Removing duplicates : Array.indexOf(elem) === index
+  bolt.filter( (char, index)=> {
+    for (let key in nut) {
+      if (char === nut[key] && bolt.indexOf(char)===index) {
+        count++;
+      }
+    }
+  });
+
+  if (count >= second.length) {
+    console.log(true); 
+    return true;
+  } else {
+    console.log(false); 
+    return false;
   }
   
-  mutation(["hello", "hely"]);
+}
+  
+  mutation(["hello", "hey"]); // test 1
+  mutation(["hello", "Hello"]); // test 2
+  mutation(["zyxwvutsrqponmlkjihgfedcba", "qrstu"]); // test 3
+  mutation(["Mary", "Army"]); // test 4
+  mutation(["Mary", "Aarmy"]); // test 5
+  mutation(["voodoo", "no"]); // test 6
 
 
-  // trial 
+// trial 
 //   let first = arr[0]; 
 //   let second = arr[1];
 //   // let status = false; 
