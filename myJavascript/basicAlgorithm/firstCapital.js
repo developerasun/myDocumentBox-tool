@@ -1,11 +1,20 @@
 function titleCase(str) {
-  return str;
-// not solved yet
+  let bowl = [];
+  
+  const newArr = str.toLowerCase().split(" ");
+  const result = newArr.map((val)=>{
+    return val.replace(val.charAt(0), val.charAt(0).toUpperCase());
+  });
+
+  console.log(result.join(" ")); 
+  return result.join(" ");
+
   }
   
   titleCase("I'm a little tea pot");
 
 
+  // trial 1 
 // logic 
   // let test = "text".split("");
   // test[0] = test[0].toUpperCase();
@@ -25,3 +34,18 @@ function titleCase(str) {
   
   // console.log(result);
   // return str;
+
+  // trial 2
+    // bowl = bowl.join("");
+
+  //  for (let i=0; i<bowl.length; i+=2) {
+  //   bowl = bowl.join(",");
+  //  }
+  // for (let i=0; i<bowl.length; i+=2) {
+  //   // bowl[i] = bowl[i] + bowl[i+1];
+  // }
+  
+  // for (let i=1; i<bowl.length; i+=2) {
+  //   bowl.slice(i,1);
+  // }
+
