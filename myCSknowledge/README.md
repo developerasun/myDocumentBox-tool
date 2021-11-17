@@ -6,42 +6,40 @@ designerasun@gmail.com
 ```
 
 ## 온라인 학습 플랫폼
-[Kmooc](http://www.kmooc.kr/) <br/>
 [인프런](https://www.inflearn.com/) <br/>
+[Free Code Camp](https://www.freecodecamp.org/learn)
+[Udemy](https://www.udemy.com/) <br/>
+[생활코딩](https://opentutorials.org/course/1) <br/>
+[Kmooc](http://www.kmooc.kr/) <br/>
 [노마드 코더](https://nomadcoders.co/) <br/>
 [구름 에듀](https://edu.goorm.io/) <br/>
-[생활코딩](https://opentutorials.org/course/1) <br/>
-[Udemy](https://www.udemy.com/) <br/>
-[Free Code Camp](https://www.freecodecamp.org/learn)
 
-## 알고리즘, 코딩 테스트 플랫폼
-[leetcode (영문)](https://leetcode.com/problemset/all/) <br/>
-[Free Code Camp JS Basic Algorithm (영문)](https://www.freecodecamp.org/learn/javascript-algorithms-and-data-structures/basic-algorithm-scripting/convert-celsius-to-fahrenheit) <br/>
-[Programmers (국문)](https://programmers.co.kr/learn/challenges) <br/>
-
-## 알고리즘 학습 리스트
-<li>문자열과 배열</li>
-<li>큐, 스택</li>
-<li>해시맵</li>
-<li>재귀</li>
-<li>정렬</li>
-<li>트리</li>
-<li>탐색(DFS, BFS)</li>
-<li>그래프(Graph)</li>
-<li>DP(동적 프로그래밍)</li>
-
-## 추천 강의 리스트
-[유데미 - 반드시 알고 넘어가야 하는 웹 기술 기초](https://www.udemy.com/course/web-technology-fundamentals/) <br/>
+## 학습 리스트
+[유데미 - 반드시 알고 넘어가야 하는 웹 기술 기초(HTTP)](https://www.udemy.com/course/web-technology-fundamentals/) <br/>
 [유데미 - 네트워크 기초(영문)](https://www.udemy.com/course/networking-concepts-for-beginners/learn/lecture/6060530?start=15#overview) <br/>
 [인프런 - 컴알못이 보는 컴퓨터 하드웨어 기초상식](https://www.inflearn.com/course/%EC%BB%B4%ED%93%A8%ED%84%B0-%ED%95%98%EB%93%9C%EC%9B%A8%EC%96%B4-%EA%B8%B0%EC%B4%88%EC%83%81%EC%8B%9D/dashboard) <br/>
 [인프런 - 9가지 분류로 보는 IT 개발 회사 (취업, 이직, 진로 결정)](https://www.inflearn.com/course/9%EA%B0%80%EC%A7%80-it-%ED%9A%8C%EC%82%AC/dashboard) <br/>
 [신찬수 - 파이썬 자료구조와 알고리즘](https://www.youtube.com/c/ChanSuShin/featured) <br/>
-Kmooc - [집콕]인공지능을 위한 알고리즘과 자료구조: 이론, 코딩, 그리고 컴퓨팅 사고 <br/>
-Kmooc - 컴퓨터구조 <br/>
-Kmooc - 네트워크 기초 <br/>
-인프런 - 운영체제 공룡책 강의 <br/>
-인프런 - 파이썬으로 배우는 알고리즘 기초 <br/>
+Kmooc - 인터넷 프로토콜 <br/>
+Kmooc - 정보통신보안 <br/>
+Kmooc - 쉽게 배우는 소프트웨어 공학 <br/>
 노마드코더 - 개발자를 위한 윈도우 셋업 <br/>
+
+## 알고리즘, 코딩 테스트 플랫폼
+[Free Code Camp JS Basic Algorithm (영문)](https://www.freecodecamp.org/learn/javascript-algorithms-and-data-structures/basic-algorithm-scripting/convert-celsius-to-fahrenheit) <br/>
+[leetcode (영문)](https://leetcode.com/problemset/all/) <br/>
+[Programmers (국문)](https://programmers.co.kr/learn/challenges) <br/>
+
+## 알고리즘 학습 리스트
+- [X] 문자열과 배열
+- [X] 큐, 스택
+- [ ] 해시맵
+- [X] 재귀
+- [ ] 정렬
+- [ ] 트리
+- [ ] 탐색(DFS, BFS)
+- [ ] 그래프(Graph)
+- [ ] DP(동적 프로그래밍)
 
 # 참여자
 <a href="https://github.com/developerasun">
