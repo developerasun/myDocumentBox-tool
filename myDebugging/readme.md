@@ -1,4 +1,4 @@
-# Git undoing commit and push 
+# Undoing commit and push 
 Troubleshoting <strong>done</strong> by <br/>
 <a href="https://github.com/developerasun">
 <img src="https://github.com/developerasun.png?size=50" alt="Jake Sung"/>
@@ -31,17 +31,29 @@ In the below example, do __*git reset --soft HEAD~2*__ to undo the hightlighted 
 
 ## How to undo git push 
 <ol>
-<li>git log</li>
-<li>git revert [commit hash]</li>
-<li>git push [the repo where the misled commit was pushed] main</li>
+  <li>git log</li>
+  <li>git revert [commit hash]</li>
+  <li>git push [the repo where the misled commit was pushed] main</li>
 </ol>
 
 By following above instruction, the expected result is as follows : 
 <ul>
-<li>Message that say [Revert "your mis-typed commit"] </li>
-<li>Github deleting the file you added with the wrong commit</li>
-<li>The file being deleted in your local</li>
+  <li>Message that say [Revert "your mis-typed commit"] </li>
+  <li>Github deleting the file you added with the wrong commit</li>
+  <li>The file being deleted in your local</li>
 </ul>
+
+# Changing directory name
+<ol>
+  <li>git mv (current name) (change name)</li>
+  <li>git add</li>
+  <li>git commit</li>
+  <li>git push</li>
+</ol>
+
+<p>
+  Your folder name will be changed and the commits of the files belonging to the folder will be affected, meaning previous commits overwritten.    
+</p>
 
 <br/><br/><br/><br/><br/>
 
@@ -158,4 +170,5 @@ result Now you can git push or git commit
 [how to undo git commit](https://devconnected.com/how-to-undo-last-git-commit/) <br/>
 [how to undo git push](https://stackoverflow.com/questions/37606168/how-to-undo-a-git-push) <br/>
 [git permission - tistory blog post](https://maliceit.tistory.com/51) <br/>
-[git reset --hard, --soft](https://kyounghwan01.github.io/blog/etc/git/git-reset-revert/#reset)
+[git reset --hard, --soft](https://kyounghwan01.github.io/blog/etc/git/git-reset-revert/#reset) <br/>
+[git name change](https://blog.naver.com/1740948/222102496323)
