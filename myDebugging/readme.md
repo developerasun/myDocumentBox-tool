@@ -50,10 +50,16 @@ By following above instruction, the expected result is as follows :
   <li>git commit</li>
   <li>git push</li>
 </ol>
-
 <p>
   Your folder name will be changed and the commits of the files belonging to the folder will be affected, meaning previous commits overwritten.    
 </p>
+
+# How to do pull request 
+contents will be added
+
+[YouTube tutorial](https://youtu.be/9FZaYz0s8s4)
+
+
 
 <br/><br/><br/><br/><br/>
 
