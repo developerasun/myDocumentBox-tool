@@ -9,8 +9,10 @@ designerasun@gmail.com
 [유데미 - 반드시 알고 넘어가야 하는 웹 기술 기초(HTTP)](https://www.udemy.com/course/web-technology-fundamentals/) <br/>
 [유데미 - 네트워크 기초(영문)](https://www.udemy.com/course/networking-concepts-for-beginners/learn/lecture/6060530?start=15#overview) <br/>
 [인프런 - 컴알못이 보는 컴퓨터 하드웨어 기초상식](https://www.inflearn.com/course/%EC%BB%B4%ED%93%A8%ED%84%B0-%ED%95%98%EB%93%9C%EC%9B%A8%EC%96%B4-%EA%B8%B0%EC%B4%88%EC%83%81%EC%8B%9D/dashboard) <br/>
-[유튜브 - 디자인 패턴(영문)](https://youtu.be/BWprw8UHIzA) <br/> 
+[유튜브 - 디자인 패턴(영문)](https://youtube.com/playlist?list=PLZlA0Gpn_vH_CthENcPCM0Dww6a5XYC7f) <br/> 
 [유튜브 - 운영체제 (영문)](https://youtu.be/VjPgYcQqqN0) <br/>
+[유튜브 - 스탠포드 CS 101 프로그래밍 방법론 (영문)](https://youtu.be/KkMDCCdjyW8)<br/>
+[유튜브 - 자바스크립트 알고리즘](https://youtube.com/playlist?list=PLn2ipk-jqgZiAHiA70hOxAj8RMUeqYNK3)<br/>
 [Kmooc - 인터넷 프로토콜](http://www.kmooc.kr/courses/course-v1:AYUk+AYUK_IP_01+2020_T2/course/)<br/>
 [Kmooc - 정보통신보안](http://www.kmooc.kr/courses/course-v1:ANU+ANU01+2020_T3/course/)<br/>
 [Kmooc - 쉽게 배우는 소프트웨어 공학](http://www.kmooc.kr/courses/course-v1:KONGJUk+FD_KNU03+2021_01/course/)<br/>
