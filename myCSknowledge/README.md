@@ -21,6 +21,20 @@ designerasun@gmail.com
 [유튜브 - 자료구조와 알고리즘(파이썬)](https://www.youtube.com/c/ChanSuShin/featured) <br/>
 [인프런 - 9가지 분류로 보는 IT 개발 회사 (취업, 이직, 진로 결정)](https://www.inflearn.com/course/9%EA%B0%80%EC%A7%80-it-%ED%9A%8C%EC%82%AC/dashboard) <br/>
 
+## 추가 학습 리스트
+- 객체지향 패러다임 (OOP)
+- 함수형 패러다임 (Functional Paradigm)
+- 메시지 주도 개발 (Message Driven Development)
+- 도메인 주도 설계 (Domain Driven Design)
+- 테스트 주도 설계 (Test Driven Design)
+- 관점지향 프로그래밍 (AOP)
+- CQRS (Command and Query Responsibility Segregation)
+- 이벤트 소싱 (Event Sourcing)
+- 마이크로서비스 (Microservices)
+- 유닛 테스트 (Unit Testing)
+- AWS 또는 Azure 클라우드 서비스
+- 지속적 배포 (CI, CD)
+
 # 온라인 학습 플랫폼
 [인프런](https://www.inflearn.com/) <br/>
 [Free Code Camp](https://www.freecodecamp.org/learn)
