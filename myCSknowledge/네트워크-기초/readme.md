@@ -207,6 +207,7 @@ UDP(User Datagram Protocol)의 경우 패킷 전송 시 손실된 패킷을 무�
     SSH(Secure Shell)이란 암호학적 네트워크 프로토콜 중 하나이다. 주로 시스템 관리자가 보안화가 되지 않은 네트워크의 호스트에게 안전하게 접속할 수단을 제공하고, 원격으로 시스템/어플리케이션을 조작할 수 있도록 도와준다. 클라이언트(**세션** 표시) - 서버(세션 실행) 모델을 사용한다.
 <br/>
 <img src="./ssh.gif" width=640px height=250px/>
+</details>
 
 <details>
     <summary>로그인 세션이란 무엇인가? (펼쳐보기)</summary>
@@ -215,4 +216,45 @@ UDP(User Datagram Protocol)의 경우 패킷 전송 시 손실된 패킷을 무�
     [로그인 세션](https://velog.io/@junhok82/%EB%A1%9C%EA%B7%B8%EC%9D%B8%EC%9D%80-%EC%96%B4%EB%96%BB%EA%B2%8C-%EC%9D%B4%EB%A3%A8%EC%96%B4%EC%A7%88%EA%B9%8CCookie-Session) 
 </details> 
 
+<details>
+    <summary>Stateful과 Stateless란 무엇인가? (펼쳐보기)</summary>
+    어플리케이션의 상태(state)는 현재를 기준으로 결정되며, 상호 작용의 상태가 얼마 동안이나 기록되어져야 하는지에 따라 stateful과 stateless가 결정된다. Stateful과 Stateless 어플리케이션 모두 클라이언트의 요청을 서버에 저장하지만 
+
+<li>stateful - 이전 세션 정보들은 동일한 서버에 저장됨. 온라인 뱅킹과 같이 이전 거래 내역들을 그대로 보관하고 있어야 할 때 사용됨. 오늘날 대부분의 서비스는 stateful의 형태를 취하고 있으나 최근 컨테이너 기술의 발달로 인해 stateless의 효율성이 증가되고 있는 듯. 서버의 부하가 높은 편. 예시 : TCP, FTP</li>
+<li>stateless - 이전 세션 정보들을 서버에 저장하지 않고 데이터베이스에 저장함. 서버의 부하가 낮은 편. </li>
 </details>
+
+<details>
+    <summary>데이터베이스와 서버는 어떻게 다른가? (펼쳐보기)</summary>
+    데이터베이스는 백엔드 데이터를 모아서 가공하는 소프트웨어이며 서버는 네트워크 상에서 자원을 관리하며 중앙화된 저장 공간을 제공하는 하드웨어이다. 
+
+<img src="./server-database.png" width=600px height=400px/> <br/>
+
+[참고 아티클 (영문)](https://anydifferencebetween.com/difference-between-database-and-server/)
+</details>
+
+# 컴퓨터 보안 정책
+네트워크 접속시 지켜야 할 정책들을 의미함.
+
+<li>유저 정책 : 비밀 번호 정책, 모뎀 사용 제한 등</li>
+<li>IT 정책 : IT 부서들이 지켜야할 일반 정책들을 의미함. e.g : 백업 정책, 유저 공지 정책, 방화벽 정책(사용 가능 포트 구분 및 제한)</li>
+<li>일반 정책</li>
+
+<details>
+    <summary>스코프란? (펼쳐보기)</summary>
+    Scope란 정책이 적용되는 범위를 의미하며, 적용되는 범위와 되지 않는 범위에 대한 불확실성을 제거해야 한다. e.g : acceptable use policy, disaster recovery policy
+</details>
+
+# 비밀번호 관리
+비밀번호는 계층 보안의 시작점과도 같으므로 올바른 비밀번호 정책의 마련과 여러 개의 계정을 하나의 비밀번호로 통일하지 않는 등과 같은 조치가 필요하다. 비밀 번호 해킹은 매칭되는 결과가 있을 때까지 계속 시도하는 brutal force 방식 등이 이용된다. 
+
+## 인증 방식
+### 토큰 인증
+유저 네임과 비밀번호를 입력 => 일정 기간 후 사라지는 토큰 발급 => 토큰 사용 및 웹 사이트 접근 및 이용 
+### 신체 인증
+지문 인식이 가장 대표적. 
+### 홍체 인증
+망막의 혈관 패턴을 식별자로 삼고 패턴 매칭이 될 경우 인증이 성공함. 복제가 어렵다는 장점이 있으므로 핵 원자로, 군사 시설 등 높은 보안이 요구되는 곳에 사용됨. 
+
+## 통합 인증 (Single sign-on, single log out)
+하나의 아이디와 비밀 번호로 여러 곳의 어플리케이션에 로그인.로그아웃을 하는 방식. e.g : 구글
