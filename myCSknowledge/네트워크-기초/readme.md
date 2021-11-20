@@ -6,11 +6,17 @@
 
 핵심 목차는 아래와 같음. 
 
-<li>Networking fundamentals</li>
+<span><b> Section 1 : Networking fundamentals</b></span>
 <li>LAN/WAN protocols</li>
 <li>Packets, IP, TCP, DNS</li>
 <li>Routers</li>
 <li>Physical security</li>
+
+<span><b> Section 2 : Defense in-depth</b></span>
+<li>Information assurance</li>
+<li>Computer security</li>
+<li>Contingency and continuity</li>
+<li>Password management</li>
 
 # 네트워크 타입 : LAN과 WAN
 <li>LAN(Local Area Network) - 통신과 자원(프린터, 저장 공간 등)을 공유하는 여러 개의 컴퓨터와 주변 기기가 서버에 연결된 것이다.</li>
@@ -167,4 +173,46 @@ UDP(User Datagram Protocol)의 경우 패킷 전송 시 손실된 패킷을 무�
 [참고 기사 Modem vs Router(영문)](https://www.cnet.com/home/internet/modem-vs-router-whats-the-difference/)
 </details>
 
+## Access contrl 프로토콜
+라우터 업데이트, 트래픽 흐름 관리, 네트워크 접근 설정 관리 등을 정해놓은 규약. 네트워크 보안 유지를 위해 설정하며 어떤 아이피, 즉 어떤 호스트에게 네트워크 접근을 허용할 것인지 설정함.  
 
+# 물리적 보안(Pysical security)
+도난, 화재, 침수 등을 방지하기 위한 기기 및 데이터 보안의 첫 번째 출발선. 
+
+<li>자연 발생적 위험 - 지진, 화재 등</li>
+<li>인위적 위험 - 도난, 부주의로 인한 손상 등 : CCTV, 지문 인식, 외부인 출입 금지 등으로 대응 </li>
+
+# 심층 방어(Defense in depth)
+기업의 정보 자산을 보호하기 위한 다수의 보안 대책을 복합적으로 사용하는 것을 의미. 여러 보안 레이어를 섞어 사용함으로써 보안성을 높임. 
+
+## 계층 보안 (Layered security)
+다수의 보안 레이어(A, B, C ....)를 만들어 중요한 정보를 보호하는 방식. 각 레이어 간 상호 작용하며 보안성을 지키는데 기여함.  해커(공격자)의 경우 레이어 A,B,C ... 를 모두 돌파해야 정보를 탈취할 수 있음. 계층보안 전략은 정보 자산을 지키는 데 중요한 역할을 함. 
+
+# 위험 모델(Risk model)
+보안상 위험 요소들을 그 위험 정도에 따라 분류하고, 해당 위험으로 인해 발생한 미래 결과(주로 경제적 수치로 표시)를 예상하는 작업.
+
+[위험 모델 더 알아보기(영문)](https://www.bitsight.com/blog/cyber-security-risk-modeling)
+
+
+# 인증(Authentification)과 권한 부여(Authorization)
+유저 네임과 패스워드를 통해 유저를 식별하는 작업.
+
+<li> 인증 : Who are you?</li>
+<li> 권한 부여 : What can you do?</li>
+
+# 암호화(Encryption)
+
+<details>
+    <summary>SSH란 무엇인가? (펼쳐보기)</summary>
+    SSH(Secure Shell)이란 암호학적 네트워크 프로토콜 중 하나이다. 주로 시스템 관리자가 보안화가 되지 않은 네트워크의 호스트에게 안전하게 접속할 수단을 제공하고, 원격으로 시스템/어플리케이션을 조작할 수 있도록 도와준다. 클라이언트(**세션** 표시) - 서버(세션 실행) 모델을 사용한다.
+<br/>
+<img src="./ssh.gif" width=640px height=250px/>
+
+<details>
+    <summary>로그인 세션이란 무엇인가? (펼쳐보기)</summary>
+    세션이란 특정 시간 동안 벌어지는 일련의 작업들을 일컫는다. 로그인 세션은 유저 로그인 ~ 유저 로그아웃시 벌어지는 일련의 작업들을 지칭한다. 
+
+    [로그인 세션](https://velog.io/@junhok82/%EB%A1%9C%EA%B7%B8%EC%9D%B8%EC%9D%80-%EC%96%B4%EB%96%BB%EA%B2%8C-%EC%9D%B4%EB%A3%A8%EC%96%B4%EC%A7%88%EA%B9%8CCookie-Session) 
+</details> 
+
+</details>
