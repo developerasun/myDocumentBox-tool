@@ -20,6 +20,8 @@ designerasun@gmail.com
 [노마드코더 - 개발자를 위한 윈도우 셋업](https://nomadcoders.co/windows-setup-for-developers/lobby)<br/>
 [유튜브 - 자료구조와 알고리즘(파이썬)](https://www.youtube.com/c/ChanSuShin/featured) <br/>
 [인프런 - 9가지 분류로 보는 IT 개발 회사 (취업, 이직, 진로 결정)](https://www.inflearn.com/course/9%EA%B0%80%EC%A7%80-it-%ED%9A%8C%EC%82%AC/dashboard) <br/>
+[부스트코스 - 모두를 위한 컴퓨터 과학 - 데이비드 밀런](https://www.boostcourse.org/cs112)<br/>
+[부스트코스 - 웹 UI 개발 중 웹 표준](https://www.boostcourse.org/web344) 
 
 ## 추가 학습 리스트
 - 객체지향 패러다임 (OOP)
