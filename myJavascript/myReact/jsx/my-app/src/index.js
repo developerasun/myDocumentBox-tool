@@ -4,23 +4,44 @@ import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 
-const whoWhere = function(countries){
-  return name + " from " + countries.usa;
+
+function Bookshelf(props) {
+  return <li>{props.title} is in {props.category} section.</li>
 }
 
-const countries = {
-  usa : "Washington D.C",
-  canada : "Ottawa",
-};
+function Card() {
+  return (
+      <div>
+          <Bookshelf title="Hello React" category="front end"/>
+          <Bookshelf title="Introduction to VR" category="VR/AR"/>
+          <Bookshelf title="Mastering Go" category="Backend"/>
+      </div>
+  );
+}
 
-const name = "jake"; 
-const element = <h1>Hello {whoWhere(countries)}</h1>;
-
-ReactDOM.render(
-  element,
+// ReactDOM.render(element, container)
+ReactDOM.render( 
+  <Card />, // component name : Card
   document.getElementById('root')
-);
+); 
 
+// const whoWhere = function(countries){
+//   return name + " from " + countries.usa;
+// }
+
+// const countries = {
+//   usa : "Washington D.C",
+//   canada : "Ottawa",
+// };
+
+// const name = "jake"; 
+// const element = <h1>Hello {whoWhere(countries)}</h1>;
+// const testing = <span> {name} is testing React</span>
+
+// ReactDOM.render(
+//   element,
+//   document.getElementById('root')
+// );
 
 // npm start : dev build, npm run build : production build(for minified JS file)
 // see result in localhost:3000
