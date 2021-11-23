@@ -4,7 +4,7 @@
 - What to learn : React, JSX, Redux
 - Runtime : Node JS
 - Rivals : Vue, Angular
-- One step further : React with Typescript
+- One step further : React with Typescript, React with Node JS 
 - Goal : refactoring Meow Canvas with React/JS or React/TS
 
 # What is element in React
@@ -31,6 +31,7 @@ ReactDom.render(
     element, 
     document.getElementById('root')
 ); 
+
 ```
 
 # Components and Props(properties)
@@ -53,12 +54,13 @@ Types of React components is as follows :
 - function component
 - class component
 
-By building components in a component, a complicated UI component is made.
+Stacking too many elements in a component is a overkill. By spliting elements in a component, a reusuable UI component can be made. Classify related elements and make them a component for future reuse. 
 </p>
 
 ```JSX
-function Bookshelf(props) {
-    return <li>{props.title} is in {props.category} section.</li>
+// Bookshelf component
+function Bookshelf(props) { // property
+    return <li>{props.title} is in {props.category} section.</li> // element
 }
 
 function Card() {
@@ -73,7 +75,7 @@ function Card() {
 
 // ReactDOM.render(element, container)
 ReactDOM.render( 
-    <Card />, // component name : App
+    <Card />, // component name : Card
     document.getElementById('root')
 ); 
 
@@ -90,6 +92,59 @@ Props are inputs to the components. They are read-only and pure.
     
 </details>
 
+# State and lifecycle
+## State
+<p>
+State is a very important concept in React. State is the state of React component, meaning the component's data(the object in Javascript). It is defined by developer and should only include the data related to rendering. 
+</p>
+
+<details>
+
+<summary>setState method in React(tab to unfold)</summary>
+React manages the state thus state should only be changed with a setState method, meaning that developer should not change the state directly. 
+
+```JSX
+// Define Door component
+class Door extends React.Component {
+    constructor(props){
+        super(props);
+
+        // Javascript object in React
+        this.state = {
+            opened: false
+        };
+    }
+}
+
+// Rendering
+render() {
+    if (this.state.opened) {
+        return "Please close the door";
+    }
+
+    return e(
+        'button',
+        { onClick:()=>this.setState({ opened:true }) },
+        'Close the door'
+    )
+}
+
+```
+
+</details>
+
+## Lifecycle
+React component's lifecycle is as follows.
+- mounting
+- updating
+- unmounting
+
+<img src="reference/react-component-lifecycle.png" width=900 height=400/>
+
 # Additional
 - What is webpack : a static module bundler for large scale SPA projects
 - What is babel : a JS transcompiler (ECMA6++ => ECMA5--)
+
+# Reference
+[Goorm Edu - my first React (KOR)](https://edu.goorm.io/learn/lecture/12976/%EC%B2%98%EC%9D%8C-%EB%A7%8C%EB%82%9C-react-%EB%A6%AC%EC%95%A1%ED%8A%B8)
+
