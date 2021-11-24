@@ -5,9 +5,10 @@ import React from 'react';
 
 // Assume that below data is from server
 const commentsFromServer = [        
-  {name:"Jake", content:"Jake is learning React essentials"},
-  {name:"Elice", content:"Elice is learning Artifical intelligence"},
-  {name:"Smith", content:"Smith is working remote at home"}
+  {id:1, name:"Jake", content:"Jake is learning React essentials"},
+  {id:2, name:"Elice", content:"Elice is learning Artifical intelligence"},
+  {id:3, name:"Smith", content:"Smith is working remote at home"},
+  {id:4, name:"Brown", content:"Brown is studying blockchain"}
 ];
 
 // create a App class componenet to set state
@@ -72,7 +73,12 @@ class App extends React.Component {
           {
             comments.map((comment)=>{
               return (
-                <Comment name={comment.name} content={comment.content}/>
+                <Comment 
+                key={comment.id} 
+                id={comment.id} 
+                name={comment.name} 
+                content={comment.content}
+                />
               )
             })
           }
