@@ -141,6 +141,22 @@ React component's lifecycle is as follows.
 
 <img src="reference/react-component-lifecycle.png" width=900 height=400/>
 
+# React App browser configuration
+Open React app in Chrome to exploit React developer tools. 
+
+- [Download React dev tools here](https://chrome.google.com/webstore/detail/react-developer-tools/fmkadmapgofadopljbjfkapdkoienihi)
+
+And then, follow below instructions to set Chrome browser for npm start. 
+
+<ol>
+    <li>Create a new file named .env in your project folder</li>
+    <li>Type followings and save it : BROWSER=chrome</li>
+    <li>npm start</li>
+</ol>
+
+<img src="reference/react-dev-tool.png" width=800 height=700/>
+
+
 # Additional
 - What is webpack : a static module bundler for large scale SPA projects
 - What is babel : a JS transcompiler (ECMA6++ => ECMA5--)
