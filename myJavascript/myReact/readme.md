@@ -134,12 +134,43 @@ render() {
 </details>
 
 ## Lifecycle
-React component's lifecycle is as follows.
-- mounting
-- updating
-- unmounting
+React component's lifecycle and React's corresponding lifecycle method is as follows.
+- mounting(create) : componentDidMount
+- updating(update) : componeetDidUpdate
+- unmounting(delete) : componentWillUnmount
+- <img src="reference/react-component-lifecycle.png" width=900 height=400/>
 
-<img src="reference/react-component-lifecycle.png" width=900 height=400/>
+<details>
+    <summary>Code example (tab to unfold)</summary>
+
+```JSX
+    componentDidMount() {
+        console.log(`${this.props.id} componentDidMount() called`);
+    }
+
+    //componentDidUpdate : Called immediately after updating occurs. 
+    // Not called for the initial render.
+    componentDidUpdate() {
+        console.log(`${this.props.id} componentDidUpdate() called`);
+    }
+
+    // Called immediately before a component is destroyed. 
+    // Perform any necessary cleanup in this method
+    componentWillUnmount() {
+        console.log(`${this.props.id} componentWillUnmount() called`);
+    }
+
+```
+
+</details>
+
+when components created, the order of a list of methods called is as follows. 
+- <img src="reference/component-did-mount.png" width=440 height=280/>
+
+when components deleted, the order of a list of methods called is as follows.
+- <img src="reference/react-component-lifecycle.png" width=460 height=400/>
+
+Note that every componentDidUpdate method is called right after a new component is created/deleted.
 
 # React App browser configuration
 Open React app in Chrome to exploit React developer tools. 
