@@ -57,6 +57,50 @@ Types of React components is as follows :
 Stacking too many elements in a component is a overkill. By spliting elements in a component, a reusuable UI component can be made. Classify related elements and make them a component for future reuse. 
 </p>
 
+<p>
+If a component returns null, it won't be rendered. For example, look at below codes.
+</p>
+
+```JSX
+function MyComponent(props) { 
+    if (!props.shouldRender) {
+        return null;
+    } 
+    return ( // parenthesis() are used to return an object. not required to express a single line. curly braces {} are used to evaluate JS expression. 
+        <h1>Component rendered!</h1>
+        <h2>Try again!</h2>
+    );
+}
+```
+
+
+<p>
+What is a super in class component?
+
+```JSX
+// initialize state
+constructor(props) {
+    //  Must call super constructor in derived class
+    //  before accessing 'this' or returning from derived constructor
+    // super is a parent class contructor, which defines 'this' keyword.
+    // without super(props) defined, 'this' keyword won't be available below codes.
+    // see here for more details : https://overreacted.io/why-do-we-write-super-props/#:~:text=In%20JavaScript%2C%20super%20refers%20to,ve%20called%20the%20parent%20constructor.
+    super(props);
+    this.state = {
+      btnName : "hello react"
+    };
+  }
+```
+
+</p>
+
+<details>
+    <summary>What is this.method.bind in React? (tab to unfold)</summary>
+    content will be added
+
+</details>
+
+
 ```JSX
 // Bookshelf component
 function Bookshelf(props) { // property
@@ -187,6 +231,53 @@ And then, follow below instructions to set Chrome browser for npm start.
 
 <img src="reference/react-dev-tool.png" width=800 height=700/>
 
+# Conditional rendering
+Depending on control logic, what is render would vary.  
+
+```JSX
+// greeting message for a signed up user 
+function UserGreeting(props) { // the first letter of component name should be in captial
+    const userName = props.username;
+    return <h1>Welcome back, {userName}</h1>
+} 
+
+// greeting message for a new guest 
+function GuestGreeting(props) {
+    const guest = props.guest;
+    return <h1>Welcome, {guest}</h1>
+} 
+
+function Greeting(props) {
+    const isLoggedIn = props.isLoggedIn;
+
+    if (props.isLoggedIn) {
+        return <UserGreeting userName="jake"/>
+    } else {
+        return <GuestGreeting guest="guest" />
+    }
+}
+
+ReactDOM.render(
+    <Greeting  isLoggedIn={true} />, 
+    document.getElementById('root')
+);
+
+```
+
+# Element variable
+Assign element to a variable like below. 
+
+```JSX
+    const isComputerOff = this.state.isComputerOff;
+    let action;
+    
+    if (!isComputerOff) {
+        action = <TurnOff onclick={this.handlerTurnOff} />
+    } else {
+        action = <TurnOn onclick={this.handlerTurnOn} />
+    }
+    
+```
 
 # Additional
 - What is webpack : a static module bundler for large scale SPA projects
