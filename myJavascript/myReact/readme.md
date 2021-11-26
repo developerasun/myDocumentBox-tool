@@ -7,6 +7,19 @@
 - One step further : React with Typescript, React with Node JS 
 - Goal : refactoring Meow Canvas with React/JS or React/TS
 
+# Create a React app
+```Javascript
+npx create-react-app
+```
+Once you create a react app, look at the directories to get more understanding of React. 
+- /public : index.html => root div
+- /src : React codes contained
+- /src/App.js : Updates and compile React codes
+- /src/index.js : Imports React, ReactDOM, reportWebVitals, and css files
+- Everything loads into App component and export the App component into index.js
+- class component : (constructor) + render(required). A class component must include render method and return statement only can return one parent element. 
+- simple component : does not use class keyword 
+
 # What is element in React
 the smallest unit in React codes. It shows what is displayed in screen. 
 
@@ -93,13 +106,6 @@ constructor(props) {
 ```
 
 </p>
-
-<details>
-    <summary>What is this.method.bind in React? (tab to unfold)</summary>
-    content will be added
-
-</details>
-
 
 ```JSX
 // Bookshelf component
