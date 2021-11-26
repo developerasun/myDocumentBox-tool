@@ -285,6 +285,25 @@ Assign element to a variable like below.
     
 ```
 
+# Array and key
+<p>
+Array is a variable that contains a bunch of object in Javascript. Using array and provided array methods, reproducing a component can be easily done.
+</p>
+<p>
+Indices in array can distinguish each item in the array but recommend to use an unique and not-easily-changable value as key. Assign key value to array items like below. For example, 
+</p>
+
+```JSX
+<ListItem key={myNumber.toString()} value={myNumber}/> // correct>
+<li key={myValue.toString()}>{myValue}</li> // incorrect>
+
+``` 
+
+<details>
+    <summary>One more thing about the Key(tap to unfold)</summary>
+    Key is not deliverable as props. Meaning, this.props.key does not exist and developer should manage this key property separately. 
+</details>
+
 # Additional
 - What is webpack : a static module bundler for large scale SPA projects
 - What is babel : a JS transcompiler (ECMA6++ => ECMA5--)
