@@ -13,6 +13,12 @@ Paragraph <strong>edited and translated</strong> by <br/>
 
 During this YouTube tutorial, I had encountered one github troubleshooting. A commit for image file had been placed in javascript code, not the original image one. Undoing a git push I made had always been a unwelcome guest so I decided to face it and figure out this time.
 
+## How to undo git add
+<ol>
+  <li> git reset HEAD [file name] </li>
+  <li> check result with git status </li>
+</ol>
+
 ## How to undo git commit
 <ol>
   <li>git log</li>
