@@ -10,6 +10,8 @@
 # Null object 패턴
 아래 코드 블록과 같이 유저가 직접 null/nil 체크를 하는 것이 아니라 아무 처리를 하지 않는 null object(빈 객체)를 생성하고 리턴해줌으로써 예외 처리를 피하는 방식의 프로그래밍 패턴이다.
 
+<img src="./null-obj-diagram.png" width=400px height=200px/>
+
 <span>널 오브젝트 패턴 이전 코드</span><br/>
 
 ```Go
@@ -24,17 +26,61 @@ if (myError != nil) {
 <span>널 오브젝트 패턴 적용 코드</span><br/>
 
 ```Go
-type NullObj struct { message string}
-func (n nullObj) ReturnNullObj() string {n.message = "jake has made a mistake" return n.message }
+type NullObj struct { }
+func (n nullObj) ReturnNullObj() string {return "your name should be in English" }
 
-var myError error
-
-if (reflect.TypeOf(name) != reflect.TypeOf("")) {
-     newNull := new(NullObj)
-     message := newNull.ReturnNullObj()
+if (reflect.TypeOf(yourName) != reflect.TypeOf("")) {
+     newNullObj := new(NullObj)
+     message := newNullObj.ReturnNullObj()
      return  message // return nullObj
 } else {
    // do something else
 }
 
 ```
+
+# Builder 패턴
+하나의 객체 안에 많은 정보를 담아야 할 때 사용되며 객체의 생성 과정과 표현 방법을 분리하여 코드를 작성하는 패턴을 말한다. 객체의 정보들을 여러 갈래(메소드)로 나누고, 모든 정보를 입력한 후 마지막 단계에 Builder 메소드로 종합/객체 생성/리턴하는 패턴을 의미함. 
+
+```Javascript:builder.js
+// 빌더 패턴을 적용하지 않는 경우
+class User {
+    constructor(name, age, country) { 
+        this.name = name;
+        this.age = age;
+        this.country = country;
+    }
+}
+
+// 이름과 나이는 필수 입력, 국적이 필수 입력이 아닐 경우를 가정
+const user_jake = new User("jake", 27, undefined) // 유저가 파라미터 중 하나를 입력하지 않은 경우, 파라미터들의 순서가 바뀌는 경우가 있을 수 있음. 
+
+// 빌더 패턴을 적용하는 경우
+class UserBuilder {
+
+    constructor() {
+        this.user = new User(); 
+    }
+
+    setName(name) {
+        this.user.name = name;
+    }
+    setAge(age) {
+        this.user.age = age;
+    }
+    setCountry(country) {
+        this.user.country = country;
+    }
+    build() {
+        return this;
+    }
+}
+
+```
+
+<details>
+    <summary>오버로딩과 오버라이딩이란? (펼쳐보기)</summary>    
+
+- 오버로딩 : 같은 이름을 가진 메소드/생성자들을 매개변수의 타입과 개수로 구분하는 것. 생성자도 오버로딩이 가능하다(여러 개를 선언할 수 있다). 
+- 오버라이딩 : 부모 레벨에서 상속받은 메소드를 자식 레벨에서 재정의 하는 것. 
+</details>
