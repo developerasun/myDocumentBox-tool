@@ -1,3 +1,4 @@
+# Content editor : @developerasun
 # 디자인 패턴
 아래 강좌를 듣고 중요 내용을 요약함. 
 [Design patterns (영문)](https://www.youtube.com/watch?v=BWprw8UHIzA&list=PLZlA0Gpn_vH_CthENcPCM0Dww6a5XYC7f&index=1&t=1s)
@@ -57,11 +58,9 @@ const user_jake = new User("jake", 27, undefined) // 유저가 파라미터 중 
 
 // 빌더 패턴을 적용하는 경우
 class UserBuilder {
-
     constructor() {
         this.user = new User(); 
     }
-
     setName(name) {
         this.user.name = name;
     }
@@ -84,3 +83,18 @@ class UserBuilder {
 - 오버로딩 : 같은 이름을 가진 메소드/생성자들을 매개변수의 타입과 개수로 구분하는 것. 생성자도 오버로딩이 가능하다(여러 개를 선언할 수 있다). 
 - 오버라이딩 : 부모 레벨에서 상속받은 메소드를 자식 레벨에서 재정의 하는 것. 
 </details>
+
+# 싱글톤 패턴
+여러 리소스에서 공통적으로 사용되는 하나의 객체를 생성하는 패턴. 예를 들어, 아래 그림에서 객체 A,B,C,D는 싱글톤 객체에서 정의된 내용을 모두 공통적으로 사용함. 어플리케이션 전역에서 사용되므로 커플링 되는 사이드 이펙트를 만들어낼 수 있어 일부 개발자들은 싱글톤 패턴을 지양해야한다고 주장하기도 함. 
+
+<img src="./싱글톤-패턴.png" width=450 height=250 />
+
+```Python
+# time module has everything wrapped in a file and is being 
+# used here as a single instance.  
+import time 
+
+time.sleep(3)
+print("Module is a singleton instance.")
+
+```
