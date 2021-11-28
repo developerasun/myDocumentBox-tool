@@ -131,6 +131,30 @@ ReactDOM.render(
 
 ```
 
+### Controlled component
+Form elements that are controlled by React, meaning that the state of the elements is stored in a state and only can be changed with setState method. It has a merit that a developer can control user input with the setState method. For example, 
+
+```JSX
+handleChange(event) {
+    this.setState( {
+        value: event.target.value.toUpperCase() // change what user typed into uppercase. 
+    });
+}
+
+``` 
+
+HTML file tag is an uncontrolled component since it is read-only. 
+```HTML
+<form action="http:localhost/example.html" method="post" enctype="multipart/form-data" >
+    <input type="file" />
+</form>
+```
+
+<details>
+    <summary>What is input null value? (tap to unfold) </summary>
+    If input has a null value, it enables to enter some data. If not(when some value is hard-coded), not enabled.
+</details>
+
 ## Property
 Props are inputs to the components. They are read-only and pure. 
 
@@ -290,14 +314,11 @@ Assign element to a variable like below.
 Array is a variable that contains a bunch of object in Javascript. Using array and provided array methods, reproducing a component can be easily done.
 </p>
 <p>
-Indices in array can distinguish each item in the array but recommend to use an unique and not-easily-changable value as key. Assign key value to array items like below. For example, 
+Indices in array can distinguish each item in the array but recommend to use an unique and not-easily-changable value as key. Be aware of assigning key value to array items to avoid errors like below
 </p>
 
-```JSX
-<ListItem key={myNumber.toString()} value={myNumber}/> // correct>
-<li key={myValue.toString()}>{myValue}</li> // incorrect>
+<img src="reference/react-list-key.png" width=520 height=75 />
 
-``` 
 
 <details>
     <summary>One more thing about the Key(tap to unfold)</summary>
