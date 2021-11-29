@@ -98,3 +98,57 @@ time.sleep(3)
 print("Module is a singleton instance.")
 
 ```
+
+# 파사드(Facade) 패턴
+파사드 패턴은 코드 재사용성과 리팩토링을 용이하게 만드는 객체 지향 프로그래밍 디자인 패턴 중 하나이다. 파사드 객체는 A 소프트웨어의 일부 코드 부분에 대한 간략화된 인터페이스를 제공한다. 여러 곳에서 공통적으로 사용되는 코드 라인을 뽑아 인터페이스 B로 만들고 수정/개선할 일이 있을 경우 인터페이스 B만을 수정한다. 
+
+
+```Python :facade.py
+'''
+파이썬 파사드 디자인 패턴 
+'''
+class TypewriterKOR :
+    @staticmethod # staticmethod does not have a self argument.
+    def write() : # classmethod takes a cls argument, which points to a current class
+        return "일"
+
+class TypewriterJPN :
+    @staticmethod
+    def write() : 
+        return "いち"
+    
+class TypewriterCHN :
+    @staticmethod
+    def write() : 
+        return "一"
+
+class Facade : 
+    def __init__(self) :
+        self.korText = TypewriterKOR()
+        self.jpnText = TypewriterJPN()
+        self.chnText = TypewriterCHN()
+    def write(self) : 
+        result = self.korText.write()
+        result += self.jpnText.write()
+        result += self.chnText.write()
+        return result
+
+myFacade = Facade()
+result = myFacade.write()
+print(result)
+
+
+```
+
+<details>
+    <summary>파사드 패턴 + 정적메소드</summary>
+
+[파사드 패턴 알아보기(영문)](https://www.youtube.com/watch?v=VrRDami28N0)
+
+[파이썬 : 정적메소드와 클래스메소드](https://hckcksrl.medium.com/python-%EC%A0%95%EC%A0%81%EB%A9%94%EC%86%8C%EB%93%9C-staticmethod-%EC%99%80-classmethod-6721b0977372)
+
+</details>
+
+# 커맨드 패턴
+(내용 추가)
+
