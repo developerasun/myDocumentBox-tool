@@ -3,10 +3,9 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
-import Attendance from './attendance';
 
 ReactDOM.render(
-  <Attendance />,
+  <App />,
   document.getElementById('root')
 );
 
