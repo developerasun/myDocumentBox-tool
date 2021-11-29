@@ -5,7 +5,7 @@
 - Runtime : Node JS
 - Rivals : Vue, Angular
 - One step further : React with Typescript, React with Node JS 
-- Goal : refactoring Meow Canvas with React/JS or React/TS
+- Goal : 1) react side projects(caffeine checker, screenshot automator) 2) meow canvas refactoring with React/TS 
 
 # Create a React app
 ```Javascript
@@ -207,10 +207,45 @@ render() {
 
 </details>
 
+### Shared state
+<p>
+A state that is shared with various sub-components, removing possible duplicates of state. For example, if a person component has a name state, sub-components German and Russian do not have to have the name state in their components. 
+</p>
+<p>
+Sharing state is done by moving the state up to the closest common ancestor of the components that need it - which is called lifting state up. 
+</p>
+
+```JSX
+
+// shared state not lifted up. 
+class Russian extends React.Component {
+    // ~
+    this.state = { name:"", bear : ""}; 
+    // ~ 
+}
+class German Extends React.Component {
+    // ~
+    this.state = { name:"", beer : "" }; 
+    // ~ 
+}
+
+// shared state lifted up
+class Person extends React.Component {
+    this.state = { name : "" }
+}
+class Russian extends React.Component {
+    this.state = { bear : "" }; 
+}
+class German Extends React.Component {
+    this.state = { beer : "" }; 
+}
+
+```
+
 ## Lifecycle
 React component's lifecycle and React's corresponding lifecycle method is as follows.
 - mounting(create) : componentDidMount
-- updating(update) : componeetDidUpdate
+- updating(update) : componentDidUpdate
 - unmounting(delete) : componentWillUnmount
 - <img src="reference/react-component-lifecycle.png" width=900 height=400/>
 
