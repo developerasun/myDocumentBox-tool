@@ -3,12 +3,14 @@ import './App.css';
 import './attendance'; 
 import Attendance from './attendance';
 import SignUp from './form/signup';
+import Calculator from './temperature/calc';
 
 function App() {
   return (
     <div>
-      <SignUp></SignUp>
-      <Attendance></Attendance>
+      <Calculator />
+      {/* <SignUp></SignUp>
+      <Attendance></Attendance> */}
     </div>
   );
 }
