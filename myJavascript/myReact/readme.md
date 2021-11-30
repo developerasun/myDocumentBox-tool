@@ -7,6 +7,15 @@
 - One step further : React with Typescript, React with Node JS 
 - Goal : 1) react side projects(caffeine checker, screenshot automator) 2) meow canvas refactoring with React/TS 
 
+# Table of Contents
+- [Create a React app]()
+- [Create a React app]()
+- [Create a React app]()
+- [Create a React app]()
+- [Create a React app]()
+- [Create a React app]()
+- [Create a React app]()
+
 # Create a React app
 ```Javascript
 npx create-react-app
@@ -359,6 +368,60 @@ Indices in array can distinguish each item in the array but recommend to use an 
     <summary>One more thing about the Key(tap to unfold)</summary>
     Key is not deliverable as props. Meaning, this.props.key does not exist and developer should manage this key property separately. 
 </details>
+
+# Composition
+Composition means that a lot of components are gathered together to make a new component. Types of composition techinques is as follows :  
+
+- containment : children props used in a component when sub-components are not decided yet. Props in a top component are delivered to a bottom component and children props in the bottom component are delivered to the top component.  
+
+For example, 
+
+```JSX
+// Bottom component
+function FancyBorder(props) {
+    // props.children => MyBox component
+    return (
+        <div className="myFancyBorder">
+            {props.children} 
+        </div>
+        );
+}
+
+// Top component
+function MyBox() { 
+    // JSX(h1, p) => FancyBorder component 
+    return (
+        <FancyBorder>
+            <h1>Hello Box</h1> 
+            <p>Do you want to open this box?</p>
+        </FancyBorder>
+    );
+}
+
+```
+
+- Specialization : common concept in object-oriented programming, implemented with inheritance. For example, in Python : 
+
+```Python
+class Animal :
+    def __init__(self, habitat) : 
+        self.habitat = habitat
+    def walk(self) : 
+        return f"it is walking in {self.habitat}" 
+
+class Dog(Animal) : 
+    def __init__(self, habitat) : 
+        self.habitat = habitat
+    def bark(self) :
+        return "bark bark"
+
+myDog = Dog("London")
+print(myDog.walk())
+print(myDog.bark())
+
+```
+
+In React, specialization is implemented with composition. Facebook engineers recommend to not use inheritance in React but should be done in a composition manner.
 
 # Additional
 - What is webpack : a static module bundler for large scale SPA projects
