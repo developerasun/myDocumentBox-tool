@@ -71,6 +71,35 @@
 
  클라이언트는 상태 코드(e.g. statusCode=200)를 통해 요청의 결과, 즉 서버의 응답 상태를 확인할 수 있다. 
 
+<p>
+클라이언트가 자원을 요청할 때 아래와 같은 데이터를 http 메세지 body 부분에 담아 서버로 보내게 된다.
+
+- JSON
+- Buffer
+- String
+- URL encoded data
+
+서버는 이 body 데이터를 우선 분할(parse)하고 분석하여 클라이언트에게 응답한다.  
+</p>
+
+```JSON
+// Node JS의 package.json의 의존성 관리
+  "dependencies": {
+    "body-parser": "^1.19.0",
+    "ejs": "^3.1.6",
+    "express": "^4.17.1",
+    "mongoose": "^6.0.14"
+  }
+```
+
+```Javascript 
+// install body parser in terminal
+npm install body-parser --save
+
+// importing body parser node package to parse the data in HTTP.  
+const bodyParser = require('body-parser')
+```
+
 ### URL 구성 
 Unique Resource Locator, 즉 URL의 구성요소는 아래와 같고 리소스 디렉토리 없이 도메인이 바로 불러졌을 경우 index.html과 같은 디폴트 값을 불러온다. 
 <li>https://www.naver.com(포트 번호 생략, 리소스 디렉토리 생략) => index.html을 불러옴</li>
