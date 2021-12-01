@@ -1,5 +1,5 @@
 const ajaxBtn = document.querySelector(".ajaxSend")
-const formData = document.forms[0].elements[0].value
+const formData = document.querySelector("#email").value
 
 function sendAjax(url, data) {
     let myData = {'email':data}
@@ -8,7 +8,7 @@ function sendAjax(url, data) {
 
     xhr.open('POST', url) // Sets the request method, request URL, and synchronous flag.
     xhr.setRequestHeader('content-type', 'application/json') // Combines a header in author request headers.
-    xhr.send(data) // Initiates the request. 
+    xhr.send(myData) // Initiates the request. 
     xhr.addEventListener('load', function(){
         console.log(xhr.responseText)
     })
