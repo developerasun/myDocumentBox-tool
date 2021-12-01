@@ -8,6 +8,14 @@ html {
     background-color: #000000;
 }
 
+a {
+    position: absolute;
+    transform: translateX(-50%) translateY(-50%);
+    top: 30%;
+    left: 50%;
+    text-align: center;
+}
+
 .gradient {
     position: absolute;
     top: 50%;
