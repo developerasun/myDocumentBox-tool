@@ -35,4 +35,11 @@ const userSchema = mongoose.Schema({
 // mongoose.model('model name', schema)
 const User = mongoose.model('User', userSchema) 
 
-export default User // export a module for future usage
+module.exports = { User }  // export a module for future usage
+// { variable } => ES6 destructuring. 
+// Demonstration
+// const name = app.name;
+// const version = app.version;
+// const type = app.type;
+// as this
+// const { name, version, type } = app;
