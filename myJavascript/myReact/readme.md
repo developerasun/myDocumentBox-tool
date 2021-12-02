@@ -7,6 +7,11 @@
 - One step further : React with Typescript, React with Node JS 
 - Goal : 1) react side projects(caffeine checker, screenshot automator) 2) meow canvas refactoring with React/TS 
 
+Check your React version with below command
+```Javascript
+npm view react version
+```
+
 # Table of Contents
 - [Create a React app]()
 - [Create a React app]()
@@ -174,6 +179,26 @@ Props are inputs to the components. They are read-only and pure.
 - <img src="reference/components-in-component.png" width=500 height=450/>
     
 </details>
+
+You can set default prop in React. React assigns default props if the props are undefined. When null passed, it will remain null.
+
+```Javascript
+function MyComponent() {
+    return <p>Hello React</p>
+}
+MyComponent.defaultProp = {author: "Jake Sung"}
+```
+
+Also, prop type checking is supported with PropTypes.type. 
+
+```Javascript
+function MyComponent() {
+    return <p>Hello React</p>
+}
+MyComponent.propTypes = { myFunc : PropTypes.func.isRequired }
+// As of React v15.5.0++, PropTypes is independently imported.
+import PropTypes from 'prop-types' 
+```
 
 # State and lifecycle
 ## State
