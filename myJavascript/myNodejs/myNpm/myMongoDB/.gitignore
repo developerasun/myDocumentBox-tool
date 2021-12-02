@@ -1,1 +1,5 @@
+# Dependency 
 node_modules
+
+# DB info included
+app.js
