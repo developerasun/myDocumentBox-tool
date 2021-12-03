@@ -10,5 +10,10 @@
 	"repository": {
 		"type": "git",
 		"url": "https://idontknow/todo.git"
-	}
+	}, 
+	"author": "Jake Sung", 
+	"description":"Learning Node JS essentials",
+	"keywords": ["freecodecamp", "npm", "nodejs"],
+	"license": "MIT",
+	"version": "1.0.0"
 }
