@@ -9,7 +9,7 @@
 </head>
 <body>
 
-<form autocomplete="off">
+<form id="formInput" autocomplete="off">
     <div>
         <label for="fullName">Full Name
             <input type="text" id="fullName" name="fullName" required/>
@@ -39,6 +39,25 @@
 </form>
 
 <div id="display"></div>
+
+<form id="formOutput">
+    <fieldset>
+        <legend>Joogle.Com HR Report</legend>
+        <!-- HTML table
+        table cell : <td>, (table data)
+        table row : <tr>
+        table header : <th>
+        colum span : colspan=""
+        -->
+        <table>
+            <thead>Employ List</thead>
+                <th colspan="2">Name</th>
+                <th colspan="2">EMP</th>
+                <th colspan="2">Salary</th>
+                <th colspan="2">City</th>
+            <tbody id="formOutputTbody"></tbody>
+        </table>
+</form>
 
 
     <br><br><br><br><br>
