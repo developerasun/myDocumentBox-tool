@@ -1,10 +1,21 @@
 # Learning Sass essentials
-Sass can be called CSS having Javascript-like features. For example, 
-Sass has 
+Sass can be called CSS having Javascript-like features. <br>
 
-- Variable declared with $
-- Function called mixin
+Install Sass through npm. 
+```javascript
+npm install -g sass 
+npm install sass --save
+```
+
+# Table of Contents 
+- Variable 
 - Nesting
+- Mixin 
+- Conditional : @if @else if @else
+- Iteration : @for, @while, @each
+- Partial : importing modules
+- Extend
+
 
 ## Variable
 In sass, you can declare and assign variable just like Javascipt.
@@ -66,4 +77,103 @@ A mixin is a group of CSS declarations for reusability. Consider the mixin as a 
 ```
 
 ## Contional statement
-If and else statement works in Sass just like they do in Javascript. 
+If and else statement works in Sass just like they do in Javascript. Do not add parenthesis for conditions. For example, 
+
+```scss
+// Incorrect
+@if ($param == 1) { 
+    font-size : 1rem; 
+}
+
+// Correct
+@if $param == 1 {
+    font-size : 1rem;
+}
+```
+## For, Each, and While
+### For
+Add styles in a loop through for directive in Sass. 
+
+```
+@for (variable) from start to/through end { SCSS rules }
+```
+
+For loop in Sass has two ways : 
+- from (start) through (end) : including end
+- from (start) to (end) : excluding end
+
+```scss
+// syntax : CSS tag + #{$variable}
+@for $i from 1 through 12 { 
+    .col-#{$i} { 
+        width : 100%/12 * $i; 
+    }
+}
+```
+
+### Each
+Sass also provides @each directive, which iterates over each item in a list or map. 
+
+In the case of a list, 
+```scss 
+@each $size in 1rem, 2rem, 3rem {
+    .myFontSize-#{$size} { 
+        font-size : $size;
+    }
+}
+
+```
+
+In the case of a map, declare the map as varaible first and then call key and value in @each directive
+
+```scss
+$colorList : (1: red, 2: blue, 3: green); 
+
+@each $key, $color in $colorList { // note that key and value both called
+    .myColor-#{$color} {
+        color : $color;
+    }
+} 
+```
+
+### While
+Creates CSS rules until a certain condition is met. 
+
+```scss
+$x : 1; 
+@while $x < 6 {
+    .div-#{$x} { 
+        margin : 10px + $x;
+    }
+    $x : $x + 1; 
+}
+
+```
+
+## Partial
+Partial is a Sass moduel that can be imported to other Sass files. 
+Simply prefix underscore to your partials then Sass will understand it is a module and won't convert it into CSS. 
+
+```
+_myMixin.scss
+```
+
+Import above partial with @import. Once the partial is imported, all the mixins and variables can be approached. Should not include underscore when importing a partial
+```scss
+@import 'myMixin'
+```
+
+## Extend
+Extending in Scss enables easily scale a style to another element, copying properties from source and add a new style to scale the style.  
+
+```scss
+.info{
+    width: 200px;
+    border: 1px solid black;
+    margin: 0 auto;
+  }
+.info-important { 
+    @extend .info;
+    background-color : magenta;
+}
+```
