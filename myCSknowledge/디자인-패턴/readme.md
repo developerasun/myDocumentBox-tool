@@ -3,10 +3,17 @@
 아래 강좌를 듣고 중요 내용을 요약함. 
 [Design patterns (영문)](https://www.youtube.com/watch?v=BWprw8UHIzA&list=PLZlA0Gpn_vH_CthENcPCM0Dww6a5XYC7f&index=1&t=1s)
 
-<details>
-<summary>디자인 패턴이란? (펼쳐보기)</summary>
-흔히 찾아볼 수 있는 문제들에 대해 일반적이고 재사용 가능한 모범 사례(best practice)를 적용하여 해결책을 제시하는 것. 디자인 패턴을 익힌 후 문제 해결에 적합한 패턴이기만 하다면 플랫폼에 구애받지 않고 여러 소프트웨어에 적용이 가능하다는 장점이 있음. 패턴을 익히는 것보다 패턴을 언제 사용할지 결정하는 것이 어려움.
-</details>
+<p>
+디자인 패턴이란 흔히 찾아볼 수 있는 문제들에 대해 일반적이고 재사용 가능한 모범 사례(best practice)를 적용하여 해결책을 제시하는 것. 디자인 패턴을 익힌 후 문제 해결에 적합한 패턴이기만 하다면 플랫폼에 구애받지 않고 여러 소프트웨어에 적용이 가능하다는 장점이 있음. 패턴을 익히는 것보다 패턴을 언제 사용할지 결정하는 것이 어려움.
+</p>
+
+# 목차
+- Null object
+- Builder
+- Singleton
+- Facade
+- Command 
+- MVC
 
 # Null object 패턴
 아래 코드 블록과 같이 유저가 직접 null/nil 체크를 하는 것이 아니라 아무 처리를 하지 않는 null object(빈 객체)를 생성하고 리턴해줌으로써 예외 처리를 피하는 방식의 프로그래밍 패턴이다.
@@ -150,5 +157,53 @@ print(result)
 </details>
 
 # 커맨드 패턴
-(내용 추가)
+실행될 명령들을 추상화/캡슐화하고 여러 부가 기능을 실행할 수 있도록 재사용성이 높은 클래스로 설계하는 패턴을 말한다. 특정 기능을 수행하는 메소드를 실행/실행 취소하는 커맨드를 만들어 사용할 수 있다.단순한 문제에 커맨드 패턴을 적용하며 오히려 코드가 길고 복잡해지지만, 잘 설계된 커맨드 패턴일 수록 단 하나의 명령어로 하위 복잡한 실행들을 실행할 수 있다는 장점이 있다. 
+
+```Python 
+class Command : 
+    def execute() : 
+        pass 
+
+class GreetingCommand(Command) :
+    def __init__(self, cmd) : # __init__ : constructor in Python
+        self.cmd = cmd
+    def execute(self) : 
+        print(self.cmd)
+
+class SingCommand(Command) : 
+    def __init__(self, cmd) :
+        self.cmd = cmd
+    def execute(self) : 
+        if (self.cmd == "Beyonce") : 
+            print("Start song : Beyonce - Listen")
+        else : 
+            print("Only Beyonce available for now")
+        
+# Group of commands
+firstCommand = GreetingCommand("Hello World")
+secondCommand = SingCommand("Beyonce")
+thirdCommand = SingCommand("50 Cent")
+fourthCommand = GreetingCommand("Goodbye World")
+
+# Invoker : store commands and trigger all commands.
+class Invoker :
+    def __init__(self) : 
+        self.commands = []
+    def addCommand(self, command) : 
+        self.commands.append(command)
+    def runCommands(self) :
+        for command in self.commands : 
+            command.execute()
+
+# Invoke all the commands
+invoker = Invoker()
+invoker.addCommand(firstCommand)
+invoker.addCommand(secondCommand)
+invoker.addCommand(thirdCommand)
+invoker.addCommand(fourthCommand)
+invoker.runCommands()
+
+
+
+```
 
