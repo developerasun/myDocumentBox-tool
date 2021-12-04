@@ -203,7 +203,18 @@ invoker.addCommand(thirdCommand)
 invoker.addCommand(fourthCommand)
 invoker.runCommands()
 
-
-
 ```
 
+# MVC(Model, View, Controller) 패턴
+<p>
+MVC 패턴은 비교적 단순한 구조로 대중적으로 널리 쓰이며 가장 많은 프레임워크에서 사용됨. 각각의 영역이 종속성이 낮으므로 코드 재사용성이 좋아지나, 컨트롤러에 소스 코드가 집중되는 경향이 있음. 
+</p>
+
+- View : 웹 개발에서 HTML, CSS과 같은 화면 구성을 의미. 사용자들이 직접적으로 볼 수 있는 화면. 
+- Model : 화면에 사용할 데이터들이 저장되어 있는 메모리들을 의미. 사용자가 편집하길 원하는 모든 데이터들을 가지고 있어야 함. 
+- Controller : 뷰와 모델을 변화시키는 알고리즘/코드들이 위치한 곳. 1) 모델을 호출하여 데이터를 조작하거나 2) 뷰에서 배경 색상을 변경하는 등의 역할을 담당.
+
+<details>
+    <summary>MVC 패턴 도표 (펼쳐보기)</summary>
+    <img src="./mvc-pattern.png" width=800 height=370 />
+</details>
