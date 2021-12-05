@@ -13,18 +13,22 @@ nellow1102@gmail.com
 - [X] [유데미 - 반드시 알고 넘어가야 하는 웹 기술 기초(HTTP)](https://www.udemy.com/course/web-technology-fundamentals/)
 - [X] [유데미 - 네트워크 기초(영문)](https://www.udemy.com/course/networking-concepts-for-beginners/learn/lecture/6060530?start=15#overview)
 - [X] [인프런 - 컴알못이 보는 컴퓨터 하드웨어 기초상식](https://www.inflearn.com/course/%EC%BB%B4%ED%93%A8%ED%84%B0-%ED%95%98%EB%93%9C%EC%9B%A8%EC%96%B4-%EA%B8%B0%EC%B4%88%EC%83%81%EC%8B%9D/dashboard) 
-- [ ] [유튜브 - 디자인 패턴(영문)](https://youtube.com/playlist?list=PLZlA0Gpn_vH_CthENcPCM0Dww6a5XYC7f) 
-- [ ] [부스트코스 - 웹 UI 개발 중 웹 표준](https://www.boostcourse.org/web344) 
-- [ ] [유튜브 - 운영체제 (영문)](https://youtu.be/VjPgYcQqqN0) 
+- [X] [유튜브 - 디자인 패턴(영문)](https://youtube.com/playlist?list=PLZlA0Gpn_vH_CthENcPCM0Dww6a5XYC7f) 
+- [ ] [유튜브 - 운영체제 (영문)](https://youtube.com/playlist?list=PLBlnK6fEyqRiVhbXDGLXDk_OQAeuVcp2O) 
+- [ ] [유튜브 - 컴퓨터 네트워크 (영문)](https://youtube.com/playlist?list=PLBlnK6fEyqRgMCUAG0XRw78UA8qnv6jEx)
 - [ ] [유튜브 - 스탠포드 CS 101 프로그래밍 방법론 (영문)](https://youtu.be/KkMDCCdjyW8)
+- [ ] [부스트코스 - 모두를 위한 컴퓨터 과학 - 데이비드 밀런](https://www.boostcourse.org/cs112)
 - [ ] [Kmooc - 인터넷 프로토콜](http://www.kmooc.kr/courses/course-v1:AYUk+AYUK_IP_01+2020_T2/course/)
 - [ ] [Kmooc - 정보통신보안](http://www.kmooc.kr/courses/course-v1:ANU+ANU01+2020_T3/course/)
 - [ ] [Kmooc - 쉽게 배우는 소프트웨어 공학](http://www.kmooc.kr/courses/course-v1:KONGJUk+FD_KNU03+2021_01/course/)
+- [ ] [유튜브 - 프로그래머를 위한 수학 (영문)](https://youtube.com/playlist?list=PLWKjhJtqVAbndUuYBE5sVViMIvyzp_dB1)
+- [ ] [부스트코스 - 모두를 위한 선형 대수](https://www.boostcourse.org/ai151)
+- [ ] [부스트코스 - 확률론 기초](https://www.boostcourse.org/ai152)
 - [ ] [노마드코더 - 개발자를 위한 윈도우 셋업](https://nomadcoders.co/windows-setup-for-developers/lobby)
 - [X] [인프런 - 9가지 분류로 보는 IT 개발 회사 (취업, 이직, 진로 결정)](https://www.inflearn.com/course/9%EA%B0%80%EC%A7%80-it-%ED%9A%8C%EC%82%AC/dashboard) 
-- [ ] [부스트코스 - 모두를 위한 컴퓨터 과학 - 데이비드 밀런](https://www.boostcourse.org/cs112)
 
-## 추가 학습 리스트
+
+## 추가 개념
 - 객체지향 패러다임 (OOP)
 - 함수형 패러다임 (Functional Paradigm)
 - 메시지 주도 개발 (Message Driven Development)
@@ -55,11 +59,6 @@ nellow1102@gmail.com
 - [ ] 탐색(DFS, BFS)
 - [ ] 그래프(Graph)
 - [ ] DP(동적 프로그래밍)
-
-# 수학
-- [유튜브 - 프로그래머를 위한 수학 (영문)](https://youtube.com/playlist?list=PLWKjhJtqVAbndUuYBE5sVViMIvyzp_dB1)
-- [부스트코스 - 모두를 위한 선형 대수](https://www.boostcourse.org/ai151)
-- [부스트코스 - 확률론 기초](https://www.boostcourse.org/ai152)
 
 # 온라인 학습 플랫폼
 - [인프런](https://www.inflearn.com/)
