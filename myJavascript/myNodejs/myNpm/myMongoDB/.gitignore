@@ -1,5 +1,11 @@
 # Dependency 
 node_modules
 
-# DB info included
-app.js
+# Database config
+config
+
+# Notes/reminder
+reminder.md
+
+# Refs
+BoilerPlate-ref.html
