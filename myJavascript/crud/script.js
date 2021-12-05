@@ -1,12 +1,18 @@
+// tutorial here : https://youtu.be/-rNQeJi3Wp4
 const submitBtn = document.querySelector("#submitBtn");
 const displayHere = document.querySelector("#display");
 const resetBtn = document.querySelector("#resetBtn");
 const formOutputTbody = document.querySelector("#formOutputTbody");
 
+let selectedRow = null;
+
 submitBtn.addEventListener("click", (event)=>{
     event.preventDefault();
-    createFormDataOutput(readFormData());
-    resetFormData();
+    const isFilledOut = validateFormData();
+    if (isFilledOut) {
+        selectedRow === null ? createFormDataOutput(readFormData()) : updateFormData()
+        resetFormData();
+    } 
 });
 
 resetBtn.addEventListener("click", (event)=>{
@@ -42,7 +48,7 @@ function createFormDataOutput(readFormData) {
     empCell.innerHTML = readFormData.empCode; 
     salaryCell.innerHTML = readFormData.salary; 
     cityCell.innerHTML = readFormData.city;
-    editAndDeleteCell.innerHTML = `<a onClick="editFormData(this)">Edit</a>
+    editAndDeleteCell.innerHTML = `<a onClick="editFormData(event)">Edit</a>
                                    <a onClick="deleteFormData(event)">Delete</a>`;
 }
 
@@ -52,14 +58,28 @@ function resetFormData() {
     document.querySelector("#empCode").value = "";
     document.querySelector("#salary").value = "";
     document.querySelector("#city").value = "";
+    selectedRow = null;
 }
 
-// editFormData updates form inputs
-function editFormData(data) {
+// editFormData edits form inputs
+function editFormData(event) {
+    selectedRow = event.target.parentNode.parentNode;
 
+    const formInputs = document.querySelectorAll("input"); 
+    for (let i=0; i < formInputs.length-2; i++) {
+        formInputs[i].value = selectedRow.cells[i].innerHTML; 
+    }
 }
 
+// updateFormData updates form inputs
+function updateFormData() {
+    const getFormData = readFormData();
 
+    console.log(Object.values(getFormData));
+    for (let j=0; j < selectedRow.cells.length-1; j++) { 
+        selectedRow.cells[j].innerHTML = Object.values(getFormData)[j]; 
+    }
+}
 
 // deleteFormData deletes form inputs
 function deleteFormData(event) {
@@ -71,5 +91,19 @@ function deleteFormData(event) {
         console.log(row.rowIndex);
         console.log("hello");
         formOutputTbody.deleteRow(row.rowIndex-1);
+    }
+}
+
+// validateFormData checks validation of form inputs
+function validateFormData() {
+    let isFilledOut = false; 
+    const getFormData = readFormData();
+
+    if (getFormData.fullName === "") { 
+        alert("Your name is required");
+        return isFilledOut;
+    } else { 
+        isFilledOut = true; 
+        return isFilledOut; 
     }
 }
