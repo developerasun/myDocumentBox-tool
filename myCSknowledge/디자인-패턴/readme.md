@@ -14,6 +14,7 @@
 - Facade
 - Command 
 - MVC
+- SOLID
 
 # Null object 패턴
 아래 코드 블록과 같이 유저가 직접 null/nil 체크를 하는 것이 아니라 아무 처리를 하지 않는 null object(빈 객체)를 생성하고 리턴해줌으로써 예외 처리를 피하는 방식의 프로그래밍 패턴이다.
@@ -210,11 +211,41 @@ invoker.runCommands()
 MVC 패턴은 비교적 단순한 구조로 대중적으로 널리 쓰이며 가장 많은 프레임워크에서 사용됨. 각각의 영역이 종속성이 낮으므로 코드 재사용성이 좋아지나, 컨트롤러에 소스 코드가 집중되는 경향이 있음. 
 </p>
 
-- View : 웹 개발에서 HTML, CSS과 같은 화면 구성을 의미. 사용자들이 직접적으로 볼 수 있는 화면. 
-- Model : 화면에 사용할 데이터들이 저장되어 있는 메모리들을 의미. 사용자가 편집하길 원하는 모든 데이터들을 가지고 있어야 함. 
+- View(UI) : 웹 개발에서 HTML, CSS과 같은 화면 구성을 의미. 사용자들이 직접적으로 볼 수 있는 화면. 
+- Model(비즈니스 로직) : 화면에 사용할 데이터들이 저장되어 있는 메모리들을 의미. 사용자가 편집하길 원하는 모든 데이터들을 가지고 있어야 함. 
 - Controller : 뷰와 모델을 변화시키는 알고리즘/코드들이 위치한 곳. 1) 모델을 호출하여 데이터를 조작하거나 2) 뷰에서 배경 색상을 변경하는 등의 역할을 담당.
 
 <details>
     <summary>MVC 패턴 도표 (펼쳐보기)</summary>
     <img src="./mvc-pattern.png" width=800 height=370 />
 </details>
+
+<details>
+    <summary>MVP, MVVM 패턴이란? (펼쳐보기)</summary>
+
+- MVC : Model, View, Controller
+- MVP : Model, View, Presenter
+- MVVM : Model, View, View model
+
+<img src="./mvc-mvp-mvvm.jpg" width=650 height=260 />
+
+</details>
+
+# SOLID 디자인 패턴
+SOLID란 객체 지향 프로그래밍 및 설계의 5가지 기본 원칙을 정리한 것이다. 유지 보수와 확장성이 좋은 코드를 쓰기 위한 원칙으로 이해하면 된다. 
+
+- S (Single responsibility) : 단일 책임의 원칙. 하나의 모듈은 하나의 기능을 수행하는 것이 원칙. 
+- O (Open/closed): 개방 폐쇄의 원칙. 기존 요소는 수정하지 않아야 하면서도(closed) 확장성이 좋아야 함(open). 기존 코드를 바꾸지 않고, 새로운 코드를 추가함. 추가된 코드에서도 기존 코드는 정상 작동해야 함. 
+- L (Liskov substitution) : 리스코프 치환 원칙. 부모 클래스(상위 클래스)가 잘 작동하는 곳에 자식 클래스(서브 클래스)로 바꿔서 넣어도 코드가 정상적으로 작동해야 함.
+- I (Interface segregation) : 인터페이스 분리 원칙. 인터페이스(추상 클래스)를 구현하는 각각의 객체/클래스는 실제로 사용할 수 있는 기능/정보만을 실행해야 함. 하나의 인터페이스에 너무 많은 기능이 들어있을 경우 인터페이스를 사용하는 객체 또는 클래스는 필요 없는 기능/정보를 구현해야할 수 있기 때문.
+- D (Dependency inversion) : 의존관계 역전 원칙. 상위 개념의 기능이 하위 개념 기능에 의존하지 않고 독립적으로 구현되는 것. 
+
+<span>상위 기능이 하위 기능이 종속됨</span><br/>
+<img src="./dependency-not-inversion.png" width=800 height=225 />
+
+결제 모듈을 바꾸려면 Stripe API와 관련된 모든 코드를 변경해야함. 
+
+<span>상위 기능이 하위 기능과 관계없이 기능함</span><br/>
+<img src="./dependency-inversion.png" width=800 height=400 />
+
+결제 모듈을 변경하기 위해 Payment Processor(Wrapper API)에서 Stripe API => Paypal API로 변경함. 
