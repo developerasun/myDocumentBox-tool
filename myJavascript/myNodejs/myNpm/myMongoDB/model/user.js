@@ -1,4 +1,7 @@
 const mongoose = require('mongoose')
+const bcrypt = require('bcrypt')
+const saltRounds = 10
+const jwt = require('jsonwebtoken')
 
 // Model and Schema in database
 // Model : a list of concepts describing data(abstract)
@@ -30,6 +33,47 @@ const userSchema = mongoose.Schema({
         type: Number
     }
 })
+
+userSchema.pre('save', function(next){
+    const user = this
+
+    if (user.isModified('password')){
+        // encrypting password
+        bcrypt.genSalt(saltRounds, function(err, salt){
+            if(err) return next(err)
+    
+            bcrypt.hash(user.password, salt, function(err, hash){
+                if(err) return next(err)
+                user.password = hash    
+                next()
+            })
+        })
+    } else {
+        next()
+    }
+})
+
+userSchema.methods.comparePassword = function(plainPassword, cb) {
+    // check plainPw === encryptedPW
+    bcrypt.compare(plainPassword, this.password, function(err, isMatch){
+        if(err) return cb(err), 
+            cb(null, isMatch)
+    })
+}
+
+userSchema.methods.generateToken = function(cb) {
+    let user = this
+
+    // jsonwebtoken 
+    const token = jwt.sign(user._id.toHexString(), 'myToken')
+    user.token = token
+    user.save(function(err, user){
+        if(err) return cb(err)
+        cb(null, user)
+    })
+
+}
+
 
 // model wraps schema 
 // mongoose.model('model name', schema)
