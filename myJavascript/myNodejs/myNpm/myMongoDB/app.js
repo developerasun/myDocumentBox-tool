@@ -2,6 +2,7 @@ const express = require('express')
 const port = 3000
 const { User } = require('./model/user')
 const bodyParser = require('body-parser')
+const cookieParser = require('cookie-parser')
 const mongoose = require('mongoose')
 const config = require('./config/key')
 
@@ -18,6 +19,7 @@ const app = express()
 
 app.use(bodyParser.urlencoded({extended:true}))
 app.use(bodyParser.json())
+app.use(cookieParser())
 
 app.get('/', function(req, res) {
     res.send("learning mongodb essetials")
@@ -27,7 +29,8 @@ app.get('/', function(req, res) {
 app.post('/register', (req, res) => {
     // user sign-up info from Front end => putting them into database
     const user = new User(req.body) // body-parser modules enables to use req.body, which contains the client info
-    
+
+    // save the user info into database
     user.save((err, userInfo)=>{
         if(err) {
             return res.json({
@@ -38,6 +41,36 @@ app.post('/register', (req, res) => {
         return res.status(200).json({
             success:true
         })
+    })
+})
+
+app.post('/login', function(req, res){
+    // find if user email is in database. If exists, check user password
+    // If correct, generates a token.
+
+    User.findOne({email : req.body.email}, (err, user) => {
+        if (!user) {
+            return res.json( {
+                loginSuccess : false, 
+                message : "No user found" 
+            })
+        }
+        user.comparePassword( req.body.password, (err, isMatch)=>{
+            if(!isMatch) { 
+                return res.json({ loginSuccess : false, message : "incorrect password" })
+            } 
+
+        user.generateToken((err, user)=>{
+            if(err) {
+                return res.status(400).send(err)
+            }
+            // save token : cookie or localStorage
+            res.cookie("x_auth", user.token)
+                .status(200)
+                .json({ loginSuccess:true, userId:user._id })
+        })
+            
+        } )
     })
 })
 
