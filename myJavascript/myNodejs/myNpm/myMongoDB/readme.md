@@ -11,8 +11,8 @@ MongoDB is a NO-SQL database that stores JSON documents. Mongoose is a npm packa
 - Create an account in MongoDB website
 - Choose a plan : 1) serverless 2) dedicated 3) shared(free, 1 per account)
 - Set database username and password, which will be used in Mongoose. 
-- Set other configurations for the MongoDB, like IP Access List. 
-- Get your MongoDB Atlas URI by connecting
+- Set other configurations for the MongoDB, like IP Access List. One of the common reasons of DB connection failure is not to include your IP address.
+- Get your MongoDB Atlas URI and set environment variables. 
 - Require Mongoose/Express in your Javascript file and connect database like below.
 
 ```javascript
@@ -37,12 +37,8 @@ During connecting MongoDB using mongoose/express, database info such as username
 process.env // global object. approachable in whole application. 
 
 ```
-
-### Environment variable in local 
-
-
-
-
+(will be added : Environment variable in local 
+Environment variable in deployment )
 
 # Model and schema
 - Model : a list of concepts describing data(abstract)
@@ -68,6 +64,23 @@ const userSchema = moongose.Schema({
 
 ```
 
+# Collection, Login, and Hash
+- Database : MongoDB 
+- Client : [Advanced REST client](https://chrome.google.com/webstore/detail/advanced-rest-client/hgmloofddffdnphfgcellkdfbfbjeloo)
+- Password encryption : npm bcrypt library
+
+<span>Checking user info in collection(before password hashing</span>
+
+- <img src="reference/before-hash.png" width="800" height="600"/>
+
+<span>User password after hashing</span>
+
+- <img src="reference/after-hash.png" width="700" height="200"/>
+
+<span>User login failed with wrong password</span>
+
+- <img src="reference/login.failed.png" width="800" height="600"/>
+
 # ECMA 6 Destructuring
 ES6 provides a way to wrap and deliver properties by using curly braces. For example, 
 
@@ -76,6 +89,3 @@ const { name, age } = { name : "Jake", age : 27 }
 console.log(name, age) // result : "Jake", 27
 
 ```
-
-
-
