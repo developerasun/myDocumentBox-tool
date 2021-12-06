@@ -46,6 +46,16 @@ the smallest unit in React codes. It shows what is displayed in screen.
     <img src="reference/virtual-dom-browser-dom.png" width=660 height=450/>
 </details>
 
+
+<p>
+React has its own strength in performance since it updates HTML DOM where only update needed by exploiting virtual DOM. 
+
+- State changes (update needed)
+- Render virtual DOM
+- Updates the actual DOM
+
+</p> 
+
 ```JSX
 // element in react
 const element = <h1> Hello React </h1>
@@ -78,9 +88,15 @@ Component is an important subject in React since React is component-based. Think
 <p>
 Types of React components is as follows : 
 
-- function component
-- class component
+- Stateless functional component : Pure function. If take the same input, returns the same output. Does not use internal state. 
+- Stateful class component : Use internal state. 
+</p>
 
+<p>
+A common practice is to minimize statefulness and exploit stateless functional component whenever possible. It improves apllication development/maintenance. 
+</p>
+
+<p>
 Stacking too many elements in a component is a overkill. By spliting elements in a component, a reusuable UI component can be made. Classify related elements and make them a component for future reuse. 
 </p>
 
@@ -90,11 +106,12 @@ If a component returns null, it won't be rendered. For example, look at below co
 
 ```JSX
 function MyComponent(props) { 
+    // Javascript value here
     if (!props.shouldRender) {
         return null;
     } 
     return ( // parenthesis() are used to return an object. not required to express a single line. curly braces {} are used to evaluate JS expression. 
-        <h1>Component rendered!</h1>
+        <h1>Component rendered!</h1> // JSX value here
         <h2>Try again!</h2>
     );
 }
@@ -186,7 +203,7 @@ You can set default prop in React. React assigns default props if the props are 
 function MyComponent() {
     return <p>Hello React</p>
 }
-MyComponent.defaultProp = {author: "Jake Sung"}
+MyComponent.defaultProps = {author: "Jake Sung"}
 ```
 
 Also, prop type checking is supported with PropTypes.type. 
@@ -204,6 +221,10 @@ import PropTypes from 'prop-types'
 ## State
 <p>
 State is a very important concept in React. State is the state of React component, meaning the component's data(the object in Javascript). It is defined by developer and should only include the data related to rendering. 
+</p>
+
+<p>
+When state is defined in a class component, it is fully encapsulated and local. No other components are aware of the state. 
 </p>
 
 <details>
@@ -287,8 +308,12 @@ React component's lifecycle and React's corresponding lifecycle method is as fol
     <summary>Code example (tab to unfold)</summary>
 
 ```JSX
+    // Best practice : placing API calls in componentDidMount.
+    // Any calls to setState here will cause a re-rendering of your component. 
     componentDidMount() {
-        console.log(`${this.props.id} componentDidMount() called`);
+        setTimeout(()=>{
+            this.setState({name : "Jake"})
+        }, 2000)
     }
 
     //componentDidUpdate : Called immediately after updating occurs. 
@@ -298,9 +323,9 @@ React component's lifecycle and React's corresponding lifecycle method is as fol
     }
 
     // Called immediately before a component is destroyed. 
-    // Perform any necessary cleanup in this method
+    // Perform any necessary cleanup for component in this method. e.g : removing eventListener
     componentWillUnmount() {
-        console.log(`${this.props.id} componentWillUnmount() called`);
+        document.removeEventListener("click", this.handleClick)
     }
 
 ```
@@ -330,8 +355,10 @@ And then, follow below instructions to set Chrome browser for npm start.
 
 <img src="reference/react-dev-tool.png" width=800 height=700/>
 
+Most web developers handle API endpoint call to fetch data. In React, best practice of this is to place the API calls in componentDidMount method. The component will automatically re-render.
+
 # Conditional rendering
-Depending on control logic, what is render would vary.  
+Depending on control logic, what is rendered would vary.  
 
 ```JSX
 // greeting message for a signed up user 
@@ -446,7 +473,85 @@ print(myDog.bark())
 
 ```
 
+<p>
 In React, specialization is implemented with composition. Facebook engineers recommend to not use inheritance in React but should be done in a composition manner.
+</p>
+
+# Unidirectional data flow in React
+<p>
+React is a unidirectional data flow, meaning that data only flows from parent component to child one. The chilld component only receives the state data they need. State management is done in one part of codes and UI rendering is done in another part(separation)
+</p>
+
+```JSX
+class MyApp extends React.Component { 
+    constructor(props) { 
+        super(props)
+        this.state = { 
+            name: "Jake"
+        }
+    }
+    // class component must have a render method
+    render() { 
+        return (
+            <Person name={this.state.name} />
+        )
+    }
+}
+
+class Person extends React.Component {
+    constructor(props) { 
+        super(props)
+    }
+    render() { 
+        return (
+            <h1>My name is : {this.props.name}</h1> // passing state as props
+        )
+    }
+}
+```
+
+<p>
+You can also pass function, method. This is React way of communicating between parent component and child component. The passed state/function can be accessed like below.
+
+```
+this.props.(its name)
+```
+
+```JSX
+// delivering 'input', 'handleChange' attributes to custom HTML tag GetInput */}
+<GetInput input={this.state.inputValue} handleChange={this.handleChange}/>
+```
+
+</p>
+
+# Styling in React
+Inline styles is very common in React development. Set property and value in Javascript object form with camel case naming. Any hyphenated style properties should be converted to camel case in JSX.
+
+```JSX
+class Colorful extends React.Component {
+    render() {
+      return (
+        <div style={
+            {
+                color: "red",
+                fontSize: 72 // unit px is omitted
+            }
+        }>Big Red</div>
+      );
+    }
+  };
+
+```
+
+For a larget set of styles, create a style object in a global constant variable to manage that.
+
+```JSX
+const styles = {
+    color : "red",
+    fontSize : 40, 
+    border : "2px solid yellow" // do not add comma between.
+}
+```
 
 # Additional
 - What is webpack : a static module bundler for large scale SPA projects
