@@ -4,16 +4,52 @@ MongoDB is a NO-SQL database that stores JSON documents. Mongoose is a npm packa
 - SQL : saving all data across tables
 - NO-SQL : saving all data within one record
 
-# Create and connect
+MongoDB has a merit combinated with Javascript that its format is JSON, which is Javascript Object Notation. 
 
+<span>Web - Server - Database</span>
+<img src="reference/client-mongoose-db.png" width=250 height=350 />
+
+- Web client : HTML, CSS, <strong>Javascript</strong>
+- Web server : <strong>Node.js, Mongoose(npm package)</strong>
+- Database : <strong>JSON</strong>
+
+# Installation
+Deployment with MongoDB can be served with 
+- Atlas : MongoDB as a service
+- On-premises : Local MongoDB => install MongoDB Compass
+- Mobile & Edge : Realm mobile database. Lightweight data storage for mobile and edge
+
+# Models and collection
+In MongoDB, a lot of databases can exist. Choose the one that you need and connect it using mongoose. 
+Database is structured as follows
+
+- record(based on schema) => collection (based on model) => database
+- <img src="reference/database-collection-record.png" width=540 height=360 />
+
+<details>
+    <summary>What is schema?</summary>
+    - Model : a list of concepts describing data(abstract)
+    - Schema : a list of attributes and instructions where database engine reads/follows(concrete, physical). Schema is to decide and tell the record what type of property they should have. 
+
+    ```Javascript
+    const mongoose = require('mongoose') 
+    const HumanSchema = moongose.Schema({
+        name : String, 
+        age : Number
+    })
+
+    ```
+</details>
+
+# Connection
 <ol>
-
 - Create an account in MongoDB website
 - Choose a plan : 1) serverless 2) dedicated 3) shared(free, 1 per account)
 - Set database username and password, which will be used in Mongoose. 
 - Set other configurations for the MongoDB, like IP Access List. One of the common reasons of DB connection failure is not to include your IP address.
 - Get your MongoDB Atlas URI and set environment variables. 
 - Require Mongoose/Express in your Javascript file and connect database like below.
+</ol>
 
 ```javascript
 const mongoose = require('mongoose');
@@ -24,45 +60,20 @@ mongoose.connect('mongodb://user:pass@localhost:port/database');
 
 ```
 
-</ol>
+# Testing with Mocha
+Mocha is a testing framework used to make sure everything works just fine.
 
-## Protect DB admin info
-<p>
-During connecting MongoDB using mongoose/express, database info such as username and password is required and can be seen in codes. Also, sensitive information such as API key should not be displayed in public neither. Thus, environment variable/file is needed to manage that. 
-</p>
+- Creating records
+- Reading records
+- Updating records
+- Deleting records
 
-```javascript
-// Environment variable in Node.js
-// The process.env property returns an object containing the user environment.
-process.env // global object. approachable in whole application. 
-
+Install Mocha like below
 ```
-(will be added : Environment variable in local 
-Environment variable in deployment )
-
-# Model and schema
-- Model : a list of concepts describing data(abstract)
-- Schema : a list of attributes and instructions where database engine reads/follows(concrete, physical) 
-
-## Create a user schema
-Signed-up user information is stored in database. User model/schema is created to store the information. 
-
-```Javascript
-const mongoose = require('mongoose') 
-const userSchema = moongose.Schema({
-    name : { 
-        type: String, 
-        maxlength : 50
-    }, 
-    email : { 
-        type: String,
-    }, 
-    password : { 
-        type: String
-    }
-})
-
+npm install mocha --save
 ```
+
+
 
 # Collection, Login, and Hash
 - Database : MongoDB 
@@ -80,6 +91,27 @@ const userSchema = moongose.Schema({
 <span>User login failed with wrong password</span>
 
 - <img src="reference/login.failed.png" width="800" height="600"/>
+
+## Token 
+With json web token npm library, a token is created like below. 
+
+```javascript
+const token = jsonWebToken.sign(user._id.toHexString(), 'myToken')
+```
+- Client : setting the token into cookie
+- Server : setting the token into database
+
+## Configuration
+<p>
+During connecting MongoDB using mongoose/express, database info such as username and password is required and can be seen in codes. Also, sensitive information such as API key should not be displayed in public neither. Thus, environment variable/file is needed to manage that. 
+</p>
+
+```javascript
+// Environment variable in Node.js
+// The process.env property returns an object containing the user environment.
+process.env // global object. approachable in whole application. 
+
+```
 
 # ECMA 6 Destructuring
 ES6 provides a way to wrap and deliver properties by using curly braces. For example, 
