@@ -553,6 +553,19 @@ const styles = {
 }
 ```
 
+# React with Redux
+
+- 1. Creates a React component 
+- 2. Creates a Redux store
+- 3. Connect the component with the store using react-redux package
+
+- React : Javascript view library
+- Redux : State management framework. developed by React developers
+- Redux => creates a single Redux store, managing application state
+- React => subscribes to some of the store's data. If action dispatched, the React component gets updated
+- When application gets bigger and complicated, using Redux is recommended
+- Use react-redux package and pass Redux state/dispatch to React as props
+
 # Additional
 - What is webpack : a static module bundler for large scale SPA projects
 - What is babel : a JS transcompiler (ECMA6++ => ECMA5--)
