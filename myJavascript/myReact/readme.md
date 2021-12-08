@@ -554,6 +554,7 @@ const styles = {
 ```
 
 # React with Redux
+Connecting React with Redux is done like below. 
 
 - 1. Creates a React component 
 - 2. Creates a Redux store
@@ -565,6 +566,26 @@ const styles = {
 - React => subscribes to some of the store's data. If action dispatched, the React component gets updated
 - When application gets bigger and complicated, using Redux is recommended
 - Use react-redux package and pass Redux state/dispatch to React as props
+
+## Provider
+Provider is essential for React-Redux app. Provider is a wrapper component wrapping React app, accessing Redux store.
+
+```JSX
+<Provider store={store} > <App/> </Provider>
+```
+
+## Connect
+Connect is a method that connects React component with Redux, taking two optional arguments like below. It allows you to provide state and dispatch. Clarify what state and action you need so that component only approaches to the state it needs.
+
+```javascript
+connect(mapStateToProps, mapDispatchToProps)(MyComponent) // replace argument with null if needed
+```
+
+- mapStateToProps : provide a specific state to Redux store
+- mapDispatchToProps : provide a specific action creator to dispatch action against Redux store
+
+State and dispatch passed by mapStateToProps and mapDispatchToProps can be accessed as props in the MyComponent. 
+
 
 # Additional
 - What is webpack : a static module bundler for large scale SPA projects
