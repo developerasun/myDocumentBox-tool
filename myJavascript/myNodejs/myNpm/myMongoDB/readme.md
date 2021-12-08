@@ -1,3 +1,10 @@
+# Table of Contents
+- [Installation]()
+- [Installation]()
+- [Installation]()
+- [Installation]()
+- [Installation]()
+
 # Learning MongoDB essentials 
 MongoDB is a NO-SQL database that stores JSON documents. Mongoose is a npm package used to control MongoDB with Javascript, creating schemas. 
 
@@ -73,6 +80,33 @@ Install Mocha like below
 npm install mocha --save
 ```
 
+## Mocha configuration with Package.json
+Configurate Mocha like below in Package.json to use Mocha with command npm test.
+
+```json
+  "scripts": {
+    "test": "node_modules/.bin/mocha $(find your/foler/directory -name '*.js') --recursive -w",
+    "start": "nodemon"
+  },
+```
+
+## Handling Asynchronous Request With Mocha
+Saving model into database is an asynchronous request. Deliver 'done' function parameter provided by Node.js and call it after the asynchronous request is done. 
+
+```javascript
+myModel.save()
+       .then(function(done) {
+           // do what is needed
+           done(); // finish the asynchronous request
+       }); 
+
+```
+
+When the done parameter is not properly delivered
+- <img src="reference/mocha-test-async-fail.png" width=740 height=530 />
+
+When delivered
+- <img src="reference/mocha-test-async-sucess.png" width=740 height=530 />
 
 
 # Collection, Login, and Hash
