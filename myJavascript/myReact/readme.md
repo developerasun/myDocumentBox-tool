@@ -1,11 +1,11 @@
 # Learning React essentials
 - What is it : Javascript UI library
 - Why learn : is one of the core skill set of front end developer
-- What to learn : React, JSX, Redux
+- What to learn : React, JSX, Redux, React-Redux
 - Runtime : Node JS
 - Rivals : Vue, Angular
 - One step further : React with Typescript, React with Node JS 
-- Goal : 1) react side projects(caffeine checker, screenshot automator) 2) meow canvas refactoring with React/TS 
+- Goal : Meow canvas refactoring with React/TS 
 
 Check your React version with below command
 ```Javascript
@@ -14,12 +14,12 @@ npm view react version
 
 # Table of Contents
 - [Create a React app]()
-- [Create a React app]()
-- [Create a React app]()
-- [Create a React app]()
-- [Create a React app]()
-- [Create a React app]()
-- [Create a React app]()
+- [Components and Props]()
+- [State and Lifecycle]()
+- [Unidirectional data flow in React]()
+- [Styling in React]()
+- [React with Redux]()
+- [Reference]()
 
 # Create a React app
 ```Javascript
@@ -34,7 +34,17 @@ Once you create a react app, look at the directories to get more understanding o
 - class component : (constructor) + render(required). A class component must include render method and return statement only can return one parent element. 
 - simple component : does not use class keyword 
 
-# What is element in React
+<details>
+    <summary>What is reportWebVitals in React?</summary>
+    A built-in tool to measure your React app performance.
+
+    ```javascript
+    import reportWebVitals from './reportWebVitals'; 
+    reportWebVitals(console.log);
+    ```
+</details>
+
+# Element in React
 the smallest unit in React codes. It shows what is displayed in screen. 
 
 - Immutable, meaning can't add or change once react element is created. 
@@ -46,13 +56,12 @@ the smallest unit in React codes. It shows what is displayed in screen.
     <img src="reference/virtual-dom-browser-dom.png" width=660 height=450/>
 </details>
 
-
 <p>
 React has its own strength in performance since it updates HTML DOM where only update needed by exploiting virtual DOM. 
 
-- State changes (update needed)
-- Render virtual DOM
-- Updates the actual DOM
+- 1. State changes (update needed)
+- 2. Render virtual DOM
+- 3. Updates the actual DOM
 
 </p> 
 
@@ -63,7 +72,7 @@ const element = <h1> Hello React </h1>
 // Root DOM node : one and only. manages all the child elements
 <div id="root"></div>
 
-// ReactDom.render(element, container) - redners a React element and returns a referecne to that. Only mutate partial DOM if the previous element needs an update. 
+// ReactDom.render(element, container) - renders a React element and returns a reference to that. Only mutate partial DOM if the previous element needs an update. 
 ReactDom.render(
     element, 
     document.getElementById('root')
@@ -71,14 +80,14 @@ ReactDom.render(
 
 ```
 
-# Components and Props(properties)
-Component and property is the building blocks of React.
+# Components and Props
+Component and props(properties) is the building blocks of React.
 - Javascript : input => function => output
 - React : property => component => element
 
 ## Component 
 <p>
-Component is an important subject in React since React is component-based. Think of it as class in Python, function in Javascript, meaning it is a template used to make objects. Component should act like pure functions, maintaining props. Component name should always start with Capital. 
+Component is an important subject in React since React is component-based. Think of it as class in Python, function in Javascript, meaning it is a template used to make objects. Component should act like pure functions, maintaining props. <strong>Component name should always start with Capital.</strong> 
 
 - name starts with lower case => tag 
 - name starts with upper case => component
@@ -116,7 +125,6 @@ function MyComponent(props) {
     );
 }
 ```
-
 
 <p>
 What is a super in class component?
@@ -197,13 +205,14 @@ Props are inputs to the components. They are read-only and pure.
     
 </details>
 
-You can set default prop in React. React assigns default props if the props are undefined. When null passed, it will remain null.
+### Default Props and Props Type Check
+You can set default prop in React. React assigns default props if the props are undefined. When null passed, it will remain null. Note that propTypes and defaultProps is set through object.
 
 ```Javascript
 function MyComponent() {
     return <p>Hello React</p>
 }
-MyComponent.defaultProps = {author: "Jake Sung"}
+MyComponent.defaultProps = { author: "Jake Sung" }
 ```
 
 Also, prop type checking is supported with PropTypes.type. 
@@ -217,19 +226,18 @@ MyComponent.propTypes = { myFunc : PropTypes.func.isRequired }
 import PropTypes from 'prop-types' 
 ```
 
-# State and lifecycle
+# State and Lifecycle
 ## State
 <p>
 State is a very important concept in React. State is the state of React component, meaning the component's data(the object in Javascript). It is defined by developer and should only include the data related to rendering. 
 </p>
 
 <p>
-When state is defined in a class component, it is fully encapsulated and local. No other components are aware of the state. 
+When state is defined in a class component, it is <strong>fully encapsulated and local.</strong> No other components are aware of the state. 
 </p>
 
 <details>
-
-<summary>setState method in React(tab to unfold)</summary>
+    <summary>setState method in React(tab to unfold)</summary>
 React manages the state thus state should only be changed with a setState method, meaning that developer should not change the state directly. 
 
 ```JSX
@@ -251,9 +259,9 @@ render() {
         return "Please close the door";
     }
 
-    return e(
+    return (
         'button',
-        { onClick:()=>this.setState({ opened:true }) },
+        { onClick : () => this.setState( { opened:true }) },
         'Close the door'
     )
 }
@@ -316,7 +324,7 @@ React component's lifecycle and React's corresponding lifecycle method is as fol
         }, 2000)
     }
 
-    //componentDidUpdate : Called immediately after updating occurs. 
+    // componentDidUpdate : Called immediately after updating occurs. 
     // Not called for the initial render.
     componentDidUpdate() {
         console.log(`${this.props.id} componentDidUpdate() called`);
@@ -340,8 +348,8 @@ when components deleted, the order of a list of methods called is as follows.
 
 Note that every componentDidUpdate method is called right after a new component is created/deleted.
 
-# React App browser configuration
-Open React app in Chrome to exploit React developer tools. 
+<details> 
+    <summary>React Dev Tool</summary> 
 
 - [Download React dev tools here](https://chrome.google.com/webstore/detail/react-developer-tools/fmkadmapgofadopljbjfkapdkoienihi)
 
@@ -356,6 +364,9 @@ And then, follow below instructions to set Chrome browser for npm start.
 <img src="reference/react-dev-tool.png" width=800 height=700/>
 
 Most web developers handle API endpoint call to fetch data. In React, best practice of this is to place the API calls in componentDidMount method. The component will automatically re-render.
+
+</details>
+
 
 # Conditional rendering
 Depending on control logic, what is rendered would vary.  
@@ -452,7 +463,7 @@ function MyBox() {
 
 ```
 
-- Specialization : common concept in object-oriented programming, implemented with inheritance. For example, in Python : 
+- Specialization : a common concept in object-oriented programming, implemented with inheritance. For example, in Python : 
 
 ```Python
 class Animal :
@@ -479,7 +490,7 @@ In React, specialization is implemented with composition. Facebook engineers rec
 
 # Unidirectional data flow in React
 <p>
-React is a unidirectional data flow, meaning that data only flows from parent component to child one. The chilld component only receives the state data they need. State management is done in one part of codes and UI rendering is done in another part(separation)
+React has a unidirectional data flow, meaning that data only flows from parent component to child one. The chilld component only receives the state data they need. State management is done in one part of codes and UI rendering is done in another part(separation)
 </p>
 
 ```JSX
@@ -571,7 +582,9 @@ Connecting React with Redux is done like below.
 Provider is essential for React-Redux app. Provider is a wrapper component wrapping React app, accessing Redux store.
 
 ```JSX
-<Provider store={store} > <App/> </Provider>
+<Provider store={store} > 
+    <App/> 
+</Provider>
 ```
 
 ## Connect
@@ -587,10 +600,11 @@ connect(mapStateToProps, mapDispatchToProps)(MyComponent) // replace argument wi
 State and dispatch passed by mapStateToProps and mapDispatchToProps can be accessed as props in the MyComponent. 
 
 
-# Additional
+# Additional Topic
 - What is webpack : a static module bundler for large scale SPA projects
 - What is babel : a JS transcompiler (ECMA6++ => ECMA5--)
 
 # Reference
-[Goorm Edu - my first React (KOR)](https://edu.goorm.io/learn/lecture/12976/%EC%B2%98%EC%9D%8C-%EB%A7%8C%EB%82%9C-react-%EB%A6%AC%EC%95%A1%ED%8A%B8)
+[Free code camp - Front End Development Libraries](https://www.freecodecamp.org/learn/front-end-development-libraries/)
 
+[Goorm Edu - my first React (KOR)](https://edu.goorm.io/learn/lecture/12976/%EC%B2%98%EC%9D%8C-%EB%A7%8C%EB%82%9C-react-%EB%A6%AC%EC%95%A1%ED%8A%B8)
