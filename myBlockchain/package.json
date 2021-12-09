@@ -1,8 +1,0 @@
-{
-  "name": "myblockchain",
-  "version": "1.0.0",
-  "description": "typescript blockchain clone coding tutorial ",
-  "main": "index.js",
-  "author": "jake sung",
-  "license": "MIT"
-}
