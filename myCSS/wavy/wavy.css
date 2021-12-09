@@ -8,7 +8,20 @@ html {
     background-color: #000000;
 }
 
-a {
+.name { 
+    display: block;
+    color: black;
+    font-weight: bold;
+    background-color: rgb(235, 235, 235);
+    text-align: right;
+    padding: 0.5rem;
+}
+
+.name>a{
+    text-decoration: none;
+}
+
+#centerMe {
     position: absolute;
     transform: translateX(-50%) translateY(-50%);
     top: 30%;
@@ -33,12 +46,13 @@ a {
     -webkit-background-clip: text;
     color: transparent;
     transition: all 1s linear;
-    animation: blink 3s ease-in-out 1;
+    animation: blink 3s ease-in-out infinite;
 }
 
-/* text-shadow : offset-x, offset-y, blur-radius, color */
-.gradient:hover{
-    text-shadow: 5px 5px 50px rgb(255, 255, 255);
+.hoverMe {
+    color:white;
+    /* text-shadow : offset-x, offset-y, blur-radius, color */
+    text-shadow: 3px 3px 10px rgb(255, 223, 83);
 }
 
 footer {
@@ -104,7 +118,7 @@ footer {
 }
 
 @keyframes blink {
-    0% {
+    50% {
         opacity: 0;
     }
 
