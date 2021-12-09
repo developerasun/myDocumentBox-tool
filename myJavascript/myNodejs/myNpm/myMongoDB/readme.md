@@ -67,17 +67,67 @@ mongoose.connect('mongodb://user:pass@localhost:port/database');
 
 ```
 
-# Testing with Mocha
-Mocha is a testing framework used to make sure everything works just fine.
+# Saving records
+You can save the model in database, which is the purpose of creating it. Create a model instance and use save method. 
 
+- save : model.save => applied on a single model instance.
+
+```Javascript 
+    // Create a  model instance : myMario
+    const myMario = new Mario({
+        name: "Jake mario", 
+        weight: 75
+    });
+
+    // model(instance).save is an asynchronous request, provided by mongoose
+    myMario.save()
+        .then((done)=>{
+        assert(myMario.isNew === false);
+        done(); }); // finish the asynchronous test);
+    });
+```
+## Finding records
+- find(condition) : find multiple records matched with the conditions
+- findOne(condition) : find the first record matched with the condition
+
+### Object ID
+Once model instance is saved in the database, how do we know which one is which if the name is all the same? Finding a specific record is done with object id since each record in database has a different object id.
+ 
+<img src="reference/mongodb-object-id.png" width=800 height=400 />
+
+## Deleting records
+- model(instance).remove
+- model(whole collections).remove 
+- model.findOneAndRemove
+
+- 1. Create and save a new record
+- 2. Use findOneAndRemove to remove the record
+- 3. Use findOne to check if the removed record exists
+
+# Testing with Mocha
+<p>
+Mocha is a testing framework used to make test cases. Running tests consistently ensures newly added features are well integrated with previous ones. 
+</p>
+
+You can test such as : 
 - Creating records
 - Reading records
 - Updating records
 - Deleting records
 
 Install Mocha like below
-```
+```javascript
 npm install mocha --save
+
+// Installing mocha is not required for production setting.
+npm install mocha --save-dev
+```
+
+## Assert
+Assert is a built-in module in Node.js. It evaluates a value parameter and if it is not true, throw error. 
+
+```javascript
+assert(value, message) // message is optional
 ```
 
 ## Mocha configuration with Package.json
