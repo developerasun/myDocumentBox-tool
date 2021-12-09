@@ -156,7 +156,7 @@ When the done parameter is not properly delivered
 - <img src="reference/mocha-test-async-fail.png" width=740 height=530 />
 
 When delivered
-- <img src="reference/mocha-test-async-sucess.png" width=740 height=530 />
+- <img src="reference/mocha-test-async-success.png" width=740 height=530 />
 
 
 # Collection, Login, and Hash
@@ -174,7 +174,7 @@ When delivered
 
 <span>User login failed with wrong password</span>
 
-- <img src="reference/login.failed.png" width="800" height="600"/>
+- <img src="reference/login-failed.png" width="800" height="600"/>
 
 ## Token 
 With json web token npm library, a token is created like below. 
