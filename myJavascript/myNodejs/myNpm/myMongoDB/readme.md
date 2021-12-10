@@ -1,9 +1,9 @@
 # Table of Contents
 - [Installation]()
-- [Installation]()
-- [Installation]()
-- [Installation]()
-- [Installation]()
+- [Models and collection]()
+- [CRUD in MongoDB]()
+- [Login and Hash]()
+- [Comparison With Relational Database]()
 
 # Learning MongoDB essentials 
 MongoDB is a NO-SQL database that stores JSON documents. Mongoose is a npm package used to control MongoDB with Javascript, creating schemas. 
@@ -67,7 +67,8 @@ mongoose.connect('mongodb://user:pass@localhost:port/database');
 
 ```
 
-# Saving records
+# CRUD in MongoDB
+## Saving records
 You can save the model in database, which is the purpose of creating it. Create a model instance and use save method. 
 
 - save : model.save => applied on a single model instance.
@@ -102,7 +103,20 @@ Once model instance is saved in the database, how do we know which one is which 
 
 - 1. Create and save a new record
 - 2. Use findOneAndRemove to remove the record
-- 3. Use findOne to check if the removed record exists
+- 3. Use findOne to check if the removed record exists. It should be null if deleted. 
+
+## Updating records
+- model(instance).update
+- model(whole collections).update 
+```javascript
+myModel.update({}, {$inc : { weight : 1 } }) // update whole collections, increasing weight property by 1 
+```
+
+- model.findOneAndUpdate
+
+- 1. Create a save a new record
+- 2. Use findOneAndUpdate to update the record
+- 3. Use findOne to check the updated record. Its value should be changed.
 
 # Testing with Mocha
 <p>
@@ -159,7 +173,7 @@ When delivered
 - <img src="reference/mocha-test-async-success.png" width=740 height=530 />
 
 
-# Collection, Login, and Hash
+# Login and Hash
 - Database : MongoDB 
 - Client : [Advanced REST client](https://chrome.google.com/webstore/detail/advanced-rest-client/hgmloofddffdnphfgcellkdfbfbjeloo)
 - Password encryption : npm bcrypt library
@@ -197,11 +211,32 @@ process.env // global object. approachable in whole application.
 
 ```
 
-# ECMA 6 Destructuring
-ES6 provides a way to wrap and deliver properties by using curly braces. For example, 
+# Comparison With Relational Database
 
-``` Javascript
-const { name, age } = { name : "Jake", age : 27 }
-console.log(name, age) // result : "Jake", 27
+## Relational DB : SQL
+Create two different tables and tangle them with SQL. 
+<img src="reference/rdb-tables" width=550 height=330 />
 
+## MongoDB : No-SQL
+Create two different objects and nest. 
+<img src="reference/mongodb-no-tables.png" width=450 height=400 />
+
+```javascript
+const mongoose = require('mongoose')
+const Schema = mongoose.Schema
+
+const BookSchema = new Schema({
+    title: String, 
+    pages: Number
+})
+
+const AuthorScheam = new Schema({
+    name: String,
+    age: Number, 
+    book: [BookSchema] // nested
+}) 
+
+// mongoose.model(model name, model schema)
+const Author = mongoose.model('Author', AuthorSchema)
+module.exports = Author
 ```
