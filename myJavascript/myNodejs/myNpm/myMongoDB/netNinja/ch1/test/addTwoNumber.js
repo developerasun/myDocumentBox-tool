@@ -5,7 +5,7 @@ const Mario = require('../model/mario');
 describe('some demo test', function(){
     // it method for one single test
     it("add two numbers", function(done){
-        myAssert(2+3===5); 
+        myAssert(2+6===5); 
         done();
     });
 

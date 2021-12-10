@@ -14,9 +14,7 @@ describe("finding records", function() {
 
         // Save the instance
         myMario.save()
-        .then(()=>{
-        assert(myMario.isNew === false);});
-        done(); 
+        .then(()=>{ done(); });
     });
 
     // test : find one record with model.findOne method

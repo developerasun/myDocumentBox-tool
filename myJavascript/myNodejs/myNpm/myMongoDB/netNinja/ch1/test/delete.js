@@ -1,7 +1,7 @@
 const assert = require('assert');
 const Mario = require('../model/mario');
 
-describe("deleting records", function() {
+describe("Deleting records", function() {
 
     let myMario;
     // Use mocha hook : create and save model before eact test
@@ -14,10 +14,20 @@ describe("deleting records", function() {
 
         // Save the instance
         myMario.save()
-        .then(()=>{
-        assert(myMario.isNew === false);});
-        done(); 
+        .then(()=>{ done(); });
     });
 
-    
+    // create a deleting test
+    it('Deletes one record from database', function(done){
+        Mario.findOneAndRemove({name: 'Jake mario'})
+             .then(function(){
+                Mario.findOne({name:'Jake mario'})
+                     .then(function(result){
+                        assert(result === true);
+                        done();
+                    });
+                done();
+            });
+        done();
+    });
 });
