@@ -15,7 +15,7 @@ nellow1102@gmail.com
 - [X] [유데미 - 네트워크 기초(영문)](https://www.udemy.com/course/networking-concepts-for-beginners/learn/lecture/6060530?start=15#overview)
 - [X] [인프런 - 컴알못이 보는 컴퓨터 하드웨어 기초상식](https://www.inflearn.com/course/%EC%BB%B4%ED%93%A8%ED%84%B0-%ED%95%98%EB%93%9C%EC%9B%A8%EC%96%B4-%EA%B8%B0%EC%B4%88%EC%83%81%EC%8B%9D/dashboard) 
 - [X] [유튜브 - 디자인 패턴(영문)](https://youtube.com/playlist?list=PLZlA0Gpn_vH_CthENcPCM0Dww6a5XYC7f) 
-- [ ] [유튜브 - 운영체제 (영문)](https://youtube.com/playlist?list=PLBlnK6fEyqRiVhbXDGLXDk_OQAeuVcp2O) 
+- [ ] [유튜브 - 운영체제 (영문)](https://youtube.com/playlist?list=PLBlnK6fEyqRiVhbXDGLXDk_OQAeuVcp2O) ☜ 2021.12 진행 중
 - [ ] [유튜브 - 컴퓨터 네트워크 (영문)](https://youtube.com/playlist?list=PLBlnK6fEyqRgMCUAG0XRw78UA8qnv6jEx)
 - [ ] [유튜브 - 스탠포드 CS 101 프로그래밍 방법론 (영문)](https://youtu.be/KkMDCCdjyW8)
 - [ ] [부스트코스 - 모두를 위한 컴퓨터 과학 - 데이비드 밀런](https://www.boostcourse.org/cs112)
