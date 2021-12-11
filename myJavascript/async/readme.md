@@ -1,7 +1,37 @@
 # Understanding asynchronous Javascript
+Asynchronous Javascript is very important topic since it controls a work flow that takes long time to finish. For example, 
 
-- NetNinja : Asynchronous Javascript
-- Free code camp : JSON APIs and Ajax
+- saving model as an instance in database
+- fetching external data from APIs in server
+
+This markdown docs summarizes below to lectures about asynchronous Javascript and JSON APIs.
+
+- [NetNinja : Asynchronous Javascript](https://www.youtube.com/watch?v=ZcQyJ-gxke0&list=PL4cUxeGkcC9jx2TTZk3IGWKSbtugYdrlu&index=1&t=63s)
+- [Free code camp : JSON APIs and Ajax](https://www.freecodecamp.org/learn/data-visualization/#json-apis-and-ajax)
+
+# Asynchronous Javascript
+Javascript is a synchronous language/single threaded by default, meaning executing one statement at a time. Once async applied, the async function will be taken out of the single thread and will be addressed in somewhere else in browser while other functions are still being executed in the single thread. 
+
+<img src="reference/async-database.png" width=600 height=400 /><br/>
+
+## Non-blocking
+The async function is non-blocking, meaning it does not interfere/intercept other functions getting executed. 
+
+```javascript
+console.log(1)
+console.log(2)
+setTimeout(()=>{ console.log(55) }, 2000)
+console.log(3)
+console.log(4)
+
+// result : 1, 2, 3, 4, 55 (o)
+// result : 1, 2, 55, 3, 4 (x)
+```
+
+# HTTP Request
+Http request is about getting data from another server, which is made towards API endpoints(url). Use below website to test your code. 
+ 
+- [JSON placeholder - Fake API for testing](https://jsonplaceholder.typicode.com/)
 
 # API, AJAX, and JSON
 <p>
@@ -70,6 +100,7 @@ xhr.setRequestHeader('content-type', 'application/json; charset=UTF-8')
 // handles a change in the state of the request
 xhr.onreadystatechange = function() {
 
+    // XMLHttpRequest.readyState : Returns client's state.
     // A readyState of 4 means the operation is complete, and a status of 201 means it was a successful request
     if(xhr.readyState === 4 && xhr.status === 201) {
         const serverResponse = JSON.parse(xhr.response)
@@ -77,8 +108,21 @@ xhr.onreadystatechange = function() {
     }
 }
 const body = JSON.stringify( { userName : userName, suffix: ' loves cats!' } )
-xhr.send(body) // send the X
+xhr.send(body) // send the Http message body
 ```
+
+<details>
+    <summary>XMLHttpRequest.readyState in browser</summary>
+
+- <img src="reference/xml-http-request-readyState.png" width=700 height=700 />
+- <img src="reference/xml-readystate-number-change.png" width=700 height=500 />
+
+</details>
+
+### Checking XHR.readyState And XHR.status
+Even when an endpoint url is incorrect, XHR.readyState gets to 4, which means that its operation is done. Check XHR.status as well to get appropriate response from API. 
+
+<img src="reference/xhr-incorrect-url-status.png" width=700 height=500 />
 
 ## Request External Data With Fetch
 Fetch performs the same action as the above XMLHttpRequest with easier syntax. Fetch returns a Promise and built in all browsers. 
