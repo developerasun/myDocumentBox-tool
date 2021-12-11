@@ -6,7 +6,8 @@ nellow1102@gmail.com
 
 # 목차
 - [컴퓨터 사이언스](#cs-학습-리스트)
-- [알고리즘, 코딩테스트](#알고리즘-코딩-테스트)
+- [자료구조와 알고리즘](#자료구조와-알고리즘)
+- [기타 추가 토픽](#기타-추가-토픽)
 - [학습 플랫폼](#온라인-학습-플랫폼)
 
 # CS 학습 리스트
@@ -27,29 +28,14 @@ nellow1102@gmail.com
 - [ ] [노마드코더 - 개발자를 위한 윈도우 셋업](https://nomadcoders.co/windows-setup-for-developers/lobby)
 - [X] [인프런 - 9가지 분류로 보는 IT 개발 회사 (취업, 이직, 진로 결정)](https://www.inflearn.com/course/9%EA%B0%80%EC%A7%80-it-%ED%9A%8C%EC%82%AC/dashboard) 
 
+# 자료구조와 알고리즘
+- [ ] [유튜브 - 자료구조와 알고리즘(자바스크립트)](https://youtube.com/playlist?list=PLn2ipk-jqgZiAHiA70hOxAj8RMUeqYNK3)
+- [ ] [유튜브 - 자료구조와 알고리즘(파이썬)](https://www.youtube.com/c/ChanSuShin/featured) 
+- [ ] [Free Code Camp JS Basic Algorithm Exercise(영문)](https://www.freecodecamp.org/learn/javascript-algorithms-and-data-structures/basic-algorithm-scripting/convert-celsius-to-fahrenheit) 
+- [ ] [leetcode (영문)](https://leetcode.com/problemset/all/) 
+- [ ] [Programmers (국문)](https://programmers.co.kr/learn/challenges) 
 
-## 추가 개념
-- 객체지향 패러다임 (OOP)
-- 함수형 패러다임 (Functional Paradigm)
-- 메시지 주도 개발 (Message Driven Development)
-- 도메인 주도 설계 (Domain Driven Design)
-- 테스트 주도 설계 (Test Driven Design)
-- 관점지향 프로그래밍 (AOP)
-- CQRS (Command and Query Responsibility Segregation)
-- 이벤트 소싱 (Event Sourcing)
-- 마이크로서비스 (Microservices)
-- 유닛 테스트 (Unit Testing)
-- AWS 또는 Azure 클라우드 서비스
-- 지속적 배포 (CI, CD)
-
-# 알고리즘, 코딩 테스트
-- [Free Code Camp JS Basic Algorithm (영문)](https://www.freecodecamp.org/learn/javascript-algorithms-and-data-structures/basic-algorithm-scripting/convert-celsius-to-fahrenheit) 
-- [leetcode (영문)](https://leetcode.com/problemset/all/) 
-- [Programmers (국문)](https://programmers.co.kr/learn/challenges) 
-- [유튜브 - 자바스크립트 알고리즘](https://youtube.com/playlist?list=PLn2ipk-jqgZiAHiA70hOxAj8RMUeqYNK3)
-- [유튜브 - 자료구조와 알고리즘(파이썬)](https://www.youtube.com/c/ChanSuShin/featured) 
-
-## 학습 리스트
+## 알고리즘
 - [X] 문자열과 배열
 - [X] 큐, 스택
 - [ ] 해시맵
@@ -59,6 +45,20 @@ nellow1102@gmail.com
 - [ ] 탐색(DFS, BFS)
 - [ ] 그래프(Graph)
 - [ ] DP(동적 프로그래밍)
+
+# 기타 추가 토픽
+- [ ] 객체지향 패러다임 (OOP)
+- [X] 함수형 패러다임 (Functional Paradigm)
+- [ ] 메시지 주도 개발 (Message Driven Development)
+- [ ] 도메인 주도 설계 (Domain Driven Design)
+- [ ] 테스트 주도 설계 (Test Driven Design)
+- [ ] 관점지향 프로그래밍 (AOP)
+- [ ] CQRS (Command and Query Responsibility Segregation)
+- [ ] 이벤트 소싱 (Event Sourcing)
+- [ ] 마이크로서비스 (Microservices)
+- [ ] 유닛 테스트 (Unit Testing)
+- [ ] AWS 또는 Azure 클라우드 서비스
+- [ ] 지속적 배포 (CI, CD)
 
 # 온라인 학습 플랫폼
 - [인프런](https://www.inflearn.com/)
