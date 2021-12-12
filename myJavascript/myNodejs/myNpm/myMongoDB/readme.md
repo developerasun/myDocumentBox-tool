@@ -1,7 +1,8 @@
 # Table of Contents
 - [Installation]()
-- [Models and collection]()
-- [CRUD in MongoDB]()
+- [Connection]()
+- [Schema, Collection, And Model]()
+- [Testing With Mocha]()
 - [Login and Hash]()
 - [Comparison With Relational Database]()
 
@@ -26,77 +27,113 @@ Deployment with MongoDB can be served with
 - On-premises : Local MongoDB => install MongoDB Compass
 - Mobile & Edge : Realm mobile database. Lightweight data storage for mobile and edge
 
-# Models and collection
+# Connection
+1. Create an account in MongoDB website
+2. Choose a plan : 1) serverless 2) dedicated 3) shared(free, 1 per account)
+3. Set database username and password, which will be used in Mongoose. 
+4. Set other configurations for the MongoDB, like IP Access List. One of the common reasons of DB connection failure is not to include your IP address.
+5. Get your MongoDB Atlas URI and set environment variables. 
+6. Require Mongoose/Express in your Javascript file and connect database like below.
+
+```javascript
+// case 1 : using process.env to import MONGO_URI
+const mongoose = require('mongoose')
+const MONGO_URI = process.env['MONGO_URI'] // In .env file, MONGO_URI="your uri"
+
+mongoose.connect(MONGO_URI, {})
+        .then(()=>{ console.log("MongoDB connected") })
+        .catch((err)=>{ console.log(err) })
+
+// case 2 : using modules to import MONGO_URI
+module.exports = { MONGO_URI : "your uri" } // file name : key.js
+require('./key')
+
+mongoose.connect(MONGO_URI, {})
+        .then(()=>{ console.log("MongoDB connected") })
+        .catch((err)=>{ console.log(err) })
+```
+
+# Schema, Collection, And Model
+In creating database, the first thing we need is to create a schema. Each schema maps to a MongoDB collection. 
+
+- Schema => Collection => Model ===(instantiation)===> Document
+
 In MongoDB, a lot of databases can exist. Choose the one that you need and connect it using mongoose. 
 Database is structured as follows
 
-- record(based on schema) => collection (based on model) => database
 - <img src="reference/database-collection-record.png" width=540 height=360 />
 
 <details>
     <summary>What is schema?</summary>
-    - Model : a list of concepts describing data(abstract)
-    - Schema : a list of attributes and instructions where database engine reads/follows(concrete, physical). Schema is to decide and tell the record what type of property they should have. 
 
-    ```Javascript
-    const mongoose = require('mongoose') 
-    const HumanSchema = moongose.Schema({
-        name : String, 
-        age : Number
-    })
+- Model : a list of concepts describing data(abstract)
+- Schema : a list of attributes and instructions where database engine reads/follows(concrete, physical). Schema is to decide and tell the record what type of property they should have. 
 
-    ```
+```Javascript
+const mongoose = require('mongoose') 
+
+// Create a schema
+const HumanSchema = moongose.Schema({
+    name : {
+        type : String, 
+        required : true
+    }
+    age : Number
+})
+
+```
+
 </details>
 
-# Connection
-<ol>
-- Create an account in MongoDB website
-- Choose a plan : 1) serverless 2) dedicated 3) shared(free, 1 per account)
-- Set database username and password, which will be used in Mongoose. 
-- Set other configurations for the MongoDB, like IP Access List. One of the common reasons of DB connection failure is not to include your IP address.
-- Get your MongoDB Atlas URI and set environment variables. 
-- Require Mongoose/Express in your Javascript file and connect database like below.
-</ol>
+## CRUD in MongoDB
+Inserting, searching, updating, and deleting are asynchronous actions in database. The 'done' callback function should be called once the asynchronous operations are done.
 
 ```javascript
-const mongoose = require('mongoose');
-
-// MongoDB URI
-mongoose.connect('mongodb://user:pass@localhost:port/database');
-
+// done callback convention in Node.js
+const doSomething = function (done) { 
+    if (err) return done(err)
+    done(null, result)
+}
 
 ```
 
-# CRUD in MongoDB
-## Saving records
-You can save the model in database, which is the purpose of creating it. Create a model instance and use save method. 
-
-- save : model.save => applied on a single model instance.
+### Creating And Saving records
+You can create model and save the document(model instance) in database, which is the purpose of creating it. 
 
 ```Javascript 
-    // Create a  model instance : myMario
-    const myMario = new Mario({
-        name: "Jake mario", 
-        weight: 75
-    });
+// Create a model from schema
+let Person = mongoose.model('Person', personSchema);
 
-    // model(instance).save is an asynchronous request, provided by mongoose
-    myMario.save()
-        .then((done)=>{
-        assert(myMario.isNew === false);
-        done(); }); // finish the asynchronous test);
-    });
+const createAndSavePerson = (done) => {
+  // Create a document(model instance)
+  const person = new Person( {
+    name : "Jake Sung", 
+    age : 27, 
+    favoriteFoods : ["Pizza, Sushi"]
+   })
+
+   // Save the document in database
+   person.save(function(err, data) { 
+    if (err) return console.log(err)
+    done(null, data);
+   })
+};
 ```
-## Finding records
+
+<span>Document is stored in database</span><br/>
+<img src="reference/data-stored.png" width=700 height=400/>
+
+
+### Finding records
 - find(condition) : find multiple records matched with the conditions
 - findOne(condition) : find the first record matched with the condition
 
-### Object ID
+#### Object ID
 Once model instance is saved in the database, how do we know which one is which if the name is all the same? Finding a specific record is done with object id since each record in database has a different object id.
  
 <img src="reference/mongodb-object-id.png" width=800 height=400 />
 
-## Deleting records
+### Deleting records
 - model(instance).remove
 - model(whole collections).remove 
 - model.findOneAndRemove
@@ -105,7 +142,7 @@ Once model instance is saved in the database, how do we know which one is which 
 - 2. Use findOneAndRemove to remove the record
 - 3. Use findOne to check if the removed record exists. It should be null if deleted. 
 
-## Updating records
+### Updating records
 - model(instance).update
 - model(whole collections).update 
 ```javascript
@@ -118,7 +155,7 @@ myModel.update({}, {$inc : { weight : 1 } }) // update whole collections, increa
 - 2. Use findOneAndUpdate to update the record
 - 3. Use findOne to check the updated record. Its value should be changed.
 
-# Testing with Mocha
+# Testing With Mocha
 <p>
 Mocha is a testing framework used to make test cases. Running tests consistently ensures newly added features are well integrated with previous ones. 
 </p>
