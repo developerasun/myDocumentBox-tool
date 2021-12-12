@@ -1,5 +1,14 @@
 # Content editor : @developerasun
 
+# 목차
+- [운영체제의 이해]()
+- [운영체제의 이해]()
+- [운영체제의 이해]()
+- [운영체제의 이해]()
+- [운영체제의 이해]()
+- [운영체제의 이해]()
+- [운영체제의 이해]()
+
 # 운영 체제의 이해
 아래 강좌를 듣고 핵심 내용을 요약함. 대부분의 설명은 한국어이나 편의상 영문으로 기술한 부분이 있음. 
 
@@ -98,8 +107,86 @@ DMA의 경우 데이터 블록을 기준으로 device driver에게 1번의 inter
 # 컴퓨터 시스템 구조
 ## 컴퓨터 시스템의 종류 
 1. Single processor system : having one general purpose processor, dealing with only one process froom ready queue at a time.
-2. Multiprocessor system(parallel system) : having two or more general purpose processors, addressing multiple processes at the same time. Bus, clock, or memory can be shared.
 
-(5강 7분대에서 다시 시작)
+2. Multiprocessor system(parallel system) : having two or more general purpose processors, addressing multiple processes at the same time. Bus, clock, or memory can be shared. 
+
+<details>
+    <summary>Advantages of Multiprocessor system</summary>
+
+    - Higher throughput(measuring performance)
+    - Economy of scale
+    - Highr reliability => if one of the processors fails, other will function still. 
+</details>
+
+Types of multiprocessors is as follows : 1) symmetric multiprocessor 2) asymmetric multiprocessor
+<img src="./multiprocessor-types.png" width=700 height=350 />
+
+3. Clustered system : having multiple CPUs for caculation, composed of two or more <strong>individual systems</strong> combined.
+
+# 운영체제 구조
+윈도우, 맥, 우분투 등 각각의 운영체제의 내부 구조는 많은 차이점을 가지고 있으나, 공통/핵심적으로 1) 멀티 프로그래밍 2) 멀티 태스킹을 수행한다. 멀티 프로그래밍과 멀티 태스킹은 운영체제의 핵심 역할이라 할 수 있다. 
+
+## 멀티 프로그래밍(Multiprogramming)
+<p>
+멀티 프로그래밍의 목적은 CPU의 효용성을 증가시켜 여러 가지 프로그램을 동시에 실행하는 것에 있다. 
+
+메인 메모리 RAM은 Job pool에서 수행해야 할 작업 중 일부를 가지고 온다(RAM의 용량 한계로 인해 전체를 가지고 오지 않음).
+</p>
+
+- Job : code + data 
+- Job pool : a place where a group of jobs are stored, awaiting main memory and CPU allocation. 
+- OS fetches the some of the jobs into RAM, addressing multiprogramming. 
+
+<img src="./job-pool-ram.png" width=600 height=300 />
+
+<p>
+멀티 프로그래밍이 아닌 경우 CPU는 수행하던 job이 끝날 때까지 대기하고(CPU being idle), job이 끝난 것을 확인한 후에야 다음 job으로 넘어갈 수 있다.
+<br> 
+멀티 프로그래밍에서는 CPU는 항상 수행해야 할 job을 가지고 있으며, 수행하던 job이 끝날 때까지 대기하지 않고(CPU released) 다음 job을 수행한다(CPU not being idle). 
+</p>
+
+<p>
+멀티 프로그래밍의 경우 컴퓨터 자원(CPU, RAM, Jobs...)이 효율적으로 관리되게 하나, 유저에게 컴퓨터 시스템에 대한 상호작용을 제공하지는 아니한다. 
+</p>
+
+## 멀티 태스킹(multitasking or time sharing)
+<p>
+멀티 태스킹의 주된 목적은 여러 프로그램을 실행하는 동시에 여러 유저에게 상호작용을 제공하는 것에 있다. CPU는 A=>B=>C=>A=>C=>B 등 프로그램 간의 전환(switch)을 매우 빠르게 제공하여 유저 입장에서는 동시에 모든 프로그램을 제어(상호작용)하는 것처럼 느끼게 된다. 
+</p>
+
+<p>
+멀티 태스킹은 CPU 스케쥴링과 멀티프로그래밍을 통하여 유저에게 a time-share computer를 제공함으로써 이루어진다.  
+</p>
+
+<details>
+    <summary>★★★ What is process and instance?</summary>
+
+- A program loaded into memory and executing is called a process. 
+- Instance in computer science refers to any running process or specifically object as an instance of a class. 
+
+```Python
+class MyClass : 
+    def __init__(self, name) : 
+        self.name = name
+
+# myClass : an instance of MyClass
+myClass = MyClass("Jake's class")
+print(myClass.name) # result : "Jake's class"
+
+```
+
+</details>
+
+# 운영체제 서비스 
+운영체제는 프로그램 실행에 필요한 환경 구성을 유저에게 제공한다.
+
+1. 유저 인터페이스 : CLI(Commnad Line Interface)와 GUI(Graphical User Interface). CLI는 텍스트 기반으로 운영체제에게 명령을 내리며, GUI는 그래픽 기반으로 유저<=>운영체제 상호작용을 돕는다. 
+2. 
+
+
+# 레퍼런스
+- [Difference between Multiprogramming, multitasking, multithreading, and multiprocessing](https://www.geeksforgeeks.org/difference-between-multitasking-multithreading-and-multiprocessing/)
+
+- [Instantiation](https://en.wikipedia.org/wiki/Instantiation)
 
 
