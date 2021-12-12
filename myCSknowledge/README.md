@@ -17,48 +17,18 @@ nellow1102@gmail.com
 - [X] [유튜브 - 디자인 패턴(영문)](https://youtube.com/playlist?list=PLZlA0Gpn_vH_CthENcPCM0Dww6a5XYC7f) 
 - [ ] [유튜브 - 운영체제 (영문)](https://youtube.com/playlist?list=PLBlnK6fEyqRiVhbXDGLXDk_OQAeuVcp2O) ☜ 2021.12 진행 중
 - [ ] [유튜브 - 컴퓨터 네트워크 (영문)](https://youtube.com/playlist?list=PLBlnK6fEyqRgMCUAG0XRw78UA8qnv6jEx)
+- [ ] [유튭브 - 데이터베이스 (영문)](https://www.youtube.com/playlist?list=PLBlnK6fEyqRi_CUQ-FXxgzKQ1dwr_ZJWZ)
+- [ ] [유튜브 - 자료구조 (영문)](https://youtube.com/playlist?list=PLBlnK6fEyqRj9lld8sWIUNwlKfdUoPd1Y)
+- [ ] [유튜브 - 자료구조와 알고리즘(자바스크립트, 영문)](https://youtube.com/playlist?list=PLn2ipk-jqgZiAHiA70hOxAj8RMUeqYNK3)
+- [ ] [유튜브 - 자료구조와 알고리즘(파이썬)](https://www.youtube.com/c/ChanSuShin/featured) 
+- [ ] [유튜브 - 이산수학 (영문)](https://youtube.com/playlist?list=PLBlnK6fEyqRhqJPDXcvYlLfXPh37L89g3)
+- [ ] [유튜브 - 암호학과 네트워크 보안(영문)](https://youtube.com/playlist?list=PLBlnK6fEyqRgJU3EsOYDTW7m6SUmW6kII)
 - [ ] [유튜브 - 스탠포드 CS 101 프로그래밍 방법론 (영문)](https://youtu.be/KkMDCCdjyW8)
 - [ ] [부스트코스 - 모두를 위한 컴퓨터 과학 - 데이비드 밀런](https://www.boostcourse.org/cs112)
-- [ ] [Kmooc - 인터넷 프로토콜](http://www.kmooc.kr/courses/course-v1:AYUk+AYUK_IP_01+2020_T2/course/)
-- [ ] [Kmooc - 정보통신보안](http://www.kmooc.kr/courses/course-v1:ANU+ANU01+2020_T3/course/)
 - [ ] [Kmooc - 쉽게 배우는 소프트웨어 공학](http://www.kmooc.kr/courses/course-v1:KONGJUk+FD_KNU03+2021_01/course/)
 - [ ] [유튜브 - 프로그래머를 위한 수학 (영문)](https://youtube.com/playlist?list=PLWKjhJtqVAbndUuYBE5sVViMIvyzp_dB1)
 - [ ] [부스트코스 - 모두를 위한 선형 대수](https://www.boostcourse.org/ai151)
 - [ ] [부스트코스 - 확률론 기초](https://www.boostcourse.org/ai152)
-- [ ] [노마드코더 - 개발자를 위한 윈도우 셋업](https://nomadcoders.co/windows-setup-for-developers/lobby)
-- [X] [인프런 - 9가지 분류로 보는 IT 개발 회사 (취업, 이직, 진로 결정)](https://www.inflearn.com/course/9%EA%B0%80%EC%A7%80-it-%ED%9A%8C%EC%82%AC/dashboard) 
-
-# 자료구조와 알고리즘
-- [ ] [유튜브 - 자료구조와 알고리즘(자바스크립트)](https://youtube.com/playlist?list=PLn2ipk-jqgZiAHiA70hOxAj8RMUeqYNK3)
-- [ ] [유튜브 - 자료구조와 알고리즘(파이썬)](https://www.youtube.com/c/ChanSuShin/featured) 
-- [ ] [Free Code Camp JS Basic Algorithm Exercise(영문)](https://www.freecodecamp.org/learn/javascript-algorithms-and-data-structures/basic-algorithm-scripting/convert-celsius-to-fahrenheit) 
-- [ ] [leetcode (영문)](https://leetcode.com/problemset/all/) 
-- [ ] [Programmers (국문)](https://programmers.co.kr/learn/challenges) 
-
-## 알고리즘
-- [X] 문자열과 배열
-- [X] 큐, 스택
-- [ ] 해시맵
-- [X] 재귀
-- [ ] 정렬
-- [ ] 트리
-- [ ] 탐색(DFS, BFS)
-- [ ] 그래프(Graph)
-- [ ] DP(동적 프로그래밍)
-
-# 기타 추가 토픽
-- [ ] 객체지향 패러다임 (OOP)
-- [X] 함수형 패러다임 (Functional Paradigm)
-- [ ] 메시지 주도 개발 (Message Driven Development)
-- [ ] 도메인 주도 설계 (Domain Driven Design)
-- [ ] 테스트 주도 설계 (Test Driven Design)
-- [ ] 관점지향 프로그래밍 (AOP)
-- [ ] CQRS (Command and Query Responsibility Segregation)
-- [ ] 이벤트 소싱 (Event Sourcing)
-- [ ] 마이크로서비스 (Microservices)
-- [ ] 유닛 테스트 (Unit Testing)
-- [ ] AWS 또는 Azure 클라우드 서비스
-- [ ] 지속적 배포 (CI, CD)
 
 # 온라인 학습 플랫폼
 - [인프런](https://www.inflearn.com/)
