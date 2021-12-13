@@ -28,6 +28,9 @@ console.log(4)
 // result : 1, 2, 55, 3, 4 (x)
 ```
 
+## XMLHttpRequest And Fetch 
+Asynchronous Javascript can be achieved with two ways : 1) XMLHttpRequest 2) Fetch. The former requires a bit more complex writing and the latter is a built-in in all browser. XMLHttpRequest is a great to be familiar with what is going on in behind scene while Fetch is handy to write actual code since it has a simpler syntax. 
+
 # HTTP Request
 Http request is about getting data from another server, which is made towards API endpoints(url). Use below website to test your code. 
  
@@ -47,8 +50,10 @@ The data, meaning JSON, are sent as bytes and your application takes it as a str
 </p>
 
 ## Data Transmission : Web API to Application
+When server receives data, it receives JSON in string. In order for us to address this JSON easily, it needs to be converted to Javascript object with JSON.parse method. 
+
 ```
-Web API ===(send JSON in bytes)===> Application(receive JSON in string) ===(parse JSON)===> Javascript object constructed and can be used. 
+Web API ===(send JSON in bytes)===> Application(server receives JSON in string) ===(parse JSON)===> Javascript object constructed and can be used. 
 ```
 
 ## Request External Data with Ajax
@@ -140,4 +145,46 @@ fetch(url).then(
         something.innerHTML = JSON.stringify(data) // display the data
      }
 )
+```
+
+# Fetch 
+Fetch is a built-in function in Javascript, meaning you can call it right away.
+
+One thing to remember, Fetch returns a Promise, which only gets rejetced in the case of network failure.
+
+<img src="reference/wrong-url.png" width=700 height=270 />
+<img src="reference/still-resolved.png" width=540 height=350 />
+
+## Async and Await
+async and await is a relatively modern feature used to make Promise chains in a cleaner way. Whenver asynchronous function gets called, it always returns a Promise regardless of what's inside. If a function is asynchronous, which is non-blocking, the whole operation is non-blocking even when inside codes are blocking(waiting for Promise get asserted)
+
+- async : all the needed asynchronous codes
+- await : Stops Javascript from assigning value to the variable until the Promise is resolved. Chains Promises.
+
+```javascript
+
+const getTodos = async () => {
+    // async and await is useful to chain Promises without callback hell 
+    const response = await fetch('routes/test2.json')
+
+    if (response.status !== 200) {
+        // Use throw new Error to create your own error object
+        throw new Error('cannot fetch the data') // c
+    }
+
+    const data = await response.json()
+    console.log(response)
+    console.log(data[0].text)
+    return data // remember that asynchronous function always returns a Promise
+    // which means async function needs a then method
+}
+
+console.log(1)
+console.log(2)
+getTodos()
+        .then(data=>{console.log(data)})
+        .catch(err=>{console.log(err.message)}) // non-blocking
+console.log(3)
+console.log(4)
+
 ```
