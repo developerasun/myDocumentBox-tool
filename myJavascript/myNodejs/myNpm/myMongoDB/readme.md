@@ -14,7 +14,7 @@ MongoDB is a NO-SQL database that stores JSON documents. Mongoose is a npm packa
 
 MongoDB has a merit combinated with Javascript that its format is JSON, which is Javascript Object Notation. 
 
-<span>Web - Server - Database</span>
+<span>Web - Server - Database</span><br/>
 <img src="reference/client-mongoose-db.png" width=250 height=350 />
 
 - Web client : HTML, CSS, <strong>Javascript</strong>
@@ -97,6 +97,34 @@ const doSomething = function (done) {
 
 ```
 
+Types of Mongoose CRUD methods are as follows(cb : short for callback) : 
+- mongoose.Schema
+- mongoose.model
+- document.save
+- model.find(filter, cb) : find all matches
+- model.findOne(filter, cb) : find one match
+- model.findById(filter, cb)
+- model.findAndUpdate(filter, update, new) : set the third argument 'new'. Otherwise it will return unchanged object by default
+- model.findByIdAndRemove(filter, cb)
+- model.remove : delete all matches. returns JSON object, not updated(meaning some records deleted) docs. 
+- chain search : making query chains to narrow results.
+
+```javascript 
+// query chain search in MongoDB
+const queryChain = (done) => { 
+    const myKeyword = "sushi"
+    Sushi.find(myKeyword)
+         .sort( { price : 1 } ) // show expensive sushi first
+         .limit(5) // show 5 of them 
+         .select( { location : 1} ) // show location 
+         .exec(function(err, data) {
+             if (err) return console.log(err)
+             done(null, data)
+         }) // execute queries. If exec method is not provided with the callback, it won't work. 
+}
+
+```
+
 ### Creating And Saving records
 You can create model and save the document(model instance) in database, which is the purpose of creating it. 
 
@@ -123,6 +151,7 @@ const createAndSavePerson = (done) => {
 <span>Document is stored in database</span><br/>
 <img src="reference/data-stored.png" width=700 height=400/>
 
+When saving a document, MongoDB creates a field called "_id", which is a unqiue alphanumeric(letter + number) key. Searching records by _id is super common operation in MongoDB. 
 
 ### Finding records
 - find(condition) : find multiple records matched with the conditions
@@ -252,7 +281,7 @@ process.env // global object. approachable in whole application.
 
 ## Relational DB : SQL
 Create two different tables and tangle them with SQL. 
-<img src="reference/rdb-tables" width=550 height=330 />
+<img src="reference/rdb-tables.png" width=550 height=330 />
 
 ## MongoDB : No-SQL
 Create two different objects and nest. 
