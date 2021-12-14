@@ -599,12 +599,104 @@ connect(mapStateToProps, mapDispatchToProps)(MyComponent) // replace argument wi
 
 State and dispatch passed by mapStateToProps and mapDispatchToProps can be accessed as props in the MyComponent. 
 
+# React Hooks
+Hooks are added in React 16.08. Hooks API are useful to 
 
-# Additional Topic
-- What is webpack : a static module bundler for large scale SPA projects
-- What is babel : a JS transcompiler (ECMA6++ => ECMA5--)
+- make stateless components with function
+- do easier state management without Redux/Mobx 
+
+Hooks do not work inside class, meaning hook and class is incompatiable. You either use hook or class. 
+
+<br>
+
+<p>
+Before the hook is introduced, if you want to add some state but you were working on function component, you had to re-write class component to add the state. Once hook is introduced, adding state in functional component becomes available. Hook names always start with use and embraces clousure in Javascript.
+</p>
+
+## Types of Hooks
+- useState(initial state) : declare a state variable with initial state. Returns a current state and a function to update.
+- useEffect(effect function)
+- useContext
+- useReducer
+- useCallback .. and many more
+
+## useState and useEffect
+### useState
+Let's see how useState hook is defined in React offical homepage. 
+```
+~ useState is a new way to use the exact same capabilities that this.state provides in a class. Normally, variables “disappear” when the function exits but state variables are preserved by React. ... React will remember its current value between re-renders, and provide the most recent one to our function.
+```
+
+```javascript
+
+// class component with 'this' : A 
+class MyComonent extends React.Component { 
+    constructor(props) { 
+        super(props)
+        this.state = { 
+            count : 0
+        }
+    }
+}
+
+// function component with 'hook' : B 
+import { useState, useEffect } from "react"
+const MyComponent = () => {
+    const [count, setCount] = useState(0) // declare a state variable. 
+}
+
+// Component A and B is the same. 
+```
+
+### useEffect 
+useEffect lets you perform side effects(listed below) in function components. By default, it runs both after the first render and after every update. It is similar to componentDidMount and componentDidUpdate. 
+
+```
+React updates DOM => React calls useEffect
+```
+
+- data fetching or other API
+- setting up a subscription
+- changing DOM
+
+By using useEffect hook, your components will do something else additionally after render. Every time we re-render, we schedule a different effect, replacing the previous one.
+
+```javascript
+import { useState, useEffect } from "react"
+const MyComponent = () => {
+    const [count, setCount] = useState(0)
+
+    useEffect(()=>{ // pass a function to useEffect
+        document.title = `You clicked ${count} times` // in useEffect, you can access to the count in useState.
+    })
+}
+
+```
+
+#### Dependency
+Dependency of useEffect decides when the useEffect hook runs based on the depenedency.
+
+```javascript
+const MyComponent = () => { 
+    const [count, setCount] = useState(0)
+    useEffect(()=>{
+        console.log(`${count} is increased by 1`)
+    }, [count]) // [count] is a dependency of useEffect. If dependency given, useEffect would run only in the case of the dependency. If given emtpy array as a dependency, it will re-render at first time.
+    handleClick(
+        setCount(count + 1) //
+    )
+    return ( 
+        <div>
+            <button onclick={handleClick}>Click Me</button>
+            <p>Increased count : {count}</p>
+        </div>
+    )
+}
+```
 
 # Reference
+[React.org](https://reactjs.org/docs/hooks-effect.html)
+
 [Free code camp - Front End Development Libraries](https://www.freecodecamp.org/learn/front-end-development-libraries/)
 
 [Goorm Edu - my first React (KOR)](https://edu.goorm.io/learn/lecture/12976/%EC%B2%98%EC%9D%8C-%EB%A7%8C%EB%82%9C-react-%EB%A6%AC%EC%95%A1%ED%8A%B8)
