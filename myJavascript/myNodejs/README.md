@@ -226,8 +226,8 @@ For example,
 
 ```javascript
 app.get('/library', function(req, res){
-    const userId = req.query.userId
-    const bookId = req.query.bookId
+    const userId = req.query.userId // find the 'userId' in HTTP GET request body 
+    const bookId = req.query.bookId // find the 'bookId' in HTTP GET request body 
 
     res.json( { library : `${userId} ${bookId}` } )
 })
@@ -235,6 +235,10 @@ app.get('/library', function(req, res){
 
 ## Body Parser For Post Request
 HTTP Post method is a default method used to send client data with HTML form. It is conventioinally used to create a new record in database. 
+
+- Front End ===(send a encoded data with HTTP POST method) ==>
+- ====> Backend ===(decoding the data in request body with body parser)===>
+- ========> Database(saving the data)
 
 <p>
 These types of request, sending information to the database, the information is not presented in URL since it can contain user password or such things. Instead, the data is hidden in HTTP request body, which is a called payload, also.
@@ -260,11 +264,24 @@ Http request body by default is encoded with urlencoded, which looks like the ab
 
 To parse the data from HTTP request body, install body parser with npm package. It allows to use middleware to decode the data in many formats. 
 
-- Front End ===(send a encoded data with HTTP POST method) ==>
-- ====> Backend ===(decoding the data in request body with body parser)===>
-- ========> Database(saving the data)
+```javascript
+const bodyParser = require('body-parser')
+
+// case 1 : parse urlencoded data sent by POST request
+app.use(bodyParser.urlencoded({extended : false})) // configuration option. If false, use querystring library by default, when true, use qs library for pasring.
+
+app.post('/name', function(req, res){
+    const firstName = req.body.first // find the 'first' in HTTP POST request body 
+    const lastName = req.body.last // find the 'last' in HTTP POST request body 
+    res.json( {name : `${firstName} ${lastName}`} )
+})
+
+// case 2 : parse JSON data sent by POST request
+app.use(bodyParser.json())
+
+```
 
 
-# Learning materials
+# Reference
 - [Free code campe - ENG](https://www.freecodecamp.org/learn/back-end-development-and-apis/)
 - [Inflearn - KOR](https://www.inflearn.com/course/node-js-%EC%9B%B9%EA%B0%9C%EB%B0%9C#)
