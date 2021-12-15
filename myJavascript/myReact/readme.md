@@ -610,7 +610,7 @@ Hooks do not work inside class, meaning hook and class is incompatiable. You eit
 <br>
 
 <p>
-Before the hook is introduced, if you want to add some state but you were working on function component, you had to re-write class component to add the state. Once hook is introduced, adding state in functional component becomes available. Hook names always start with use and embraces clousure in Javascript.
+Before the hook is introduced, if you want to add some state but you were working on function component, you had to re-write class component to add the state. Once hook is introduced, adding state in functional component becomes available. <strong>Hook names always start with "use"</strong> and embraces clousure in Javascript.
 </p>
 
 ## Types of Hooks
@@ -681,7 +681,7 @@ const MyComponent = () => {
     const [count, setCount] = useState(0)
     useEffect(()=>{
         console.log(`${count} is increased by 1`)
-    }, [count]) // [count] is a dependency of useEffect. If dependency given, useEffect would run only in the case of the dependency. If given emtpy array as a dependency, it will re-render at first time.
+    }, [count]) // [count] is a dependency of useEffect. If dependency given, useEffect would run only in the case of the dependency. If given emtpy array as a dependency, it will re-render at first time(initial render).
     handleClick(
         setCount(count + 1) //
     )
@@ -692,6 +692,92 @@ const MyComponent = () => {
         </div>
     )
 }
+```
+
+## Custom hooks
+To increase code reusability, you can create your own hook and import the hook in different components. Consider custom hook nothing more than importing a new module in Javascript. You write a function, export it, and import it in another file. Remember that hook's name should start with 'use'.
+
+```javascript 
+// useMyHook.js
+export const useMyHook = () => { 
+    return <div>I am a custom hook!</div>
+}
+
+import { useMyHook } from './useMyHook'
+function MyComponent() { 
+    return (
+        <div>
+            <h1>My First Hook</h2>
+            {useMyHook()}
+        </div>
+    )
+}
+```
+
+# How website works
+## Non-React Website
+1. Web browser sends an initial request to server
+2. Server responds with index.html 
+3. The browser sends a new request based on what user did
+4. Server responds with it.
+5. Continues over and over
+
+## React Website(Single Page Application)
+The website built with React do not act like the above websites. React application delegates all the routings and resources to browser only.
+
+1. Web browser sends an initial request to server
+2. Server responds with index.html <strong>and React Javascript bundle</strong>
+3. React/React router takes a full control of the application
+
+<span>Empty HTML page of React app</span><br/>
+<img src="reference/react-empty-html.png" width=700 height=440 />
+
+4. React fills the empty HTML with components we created. 
+5. If user did something thus a request is generated, React prevents to deliver the request to server and lock it.
+6. React instead <strong>dynamically fills the content </strong> the user wanted into the HTML. 
+7. This React work flow leads to less requests to a server, making the website faster. 
+
+## React Router
+Install React router with npm to control routing.
+
+```javascript
+npm install react-router-dom --save
+```
+
+React router package consists of : 1) Router 2) Switch 3) Route
+
+- Router : a whole routing
+- Switch : contains multiple route components, making sure only one route component is shown in browser at one time. Find the route and render a component that is inside the route component.
+- Route : a single route component. Takes exact path or path parameter.
+
+<span>React routing</span><br/>
+<img src="reference/router-switch-route.png" width=670 height=700 />
+
+## React Router Link
+To avoid React application sends a request to server when link clicked, React router link should be used instead of html a tag. 
+
+```javascript
+// Without React Router Link => Still send requests to server 
+const Navigation = () => {
+    return (
+        <div>
+            <a href="/">Main</a>  
+            <a href="/contact">Contact</a>  
+        </div>
+    )
+}
+
+// With React Router Link : not sending requests to server
+import { Link } from 'react-router-dom'
+const Navigation = () => { 
+    return ( 
+        <div>
+            <Link to="/"> Main </Link>
+            <Link to="/create"> Create </Link>
+        </div>
+    )
+}
+
 ```
 
 # Reference
