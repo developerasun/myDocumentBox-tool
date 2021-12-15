@@ -1,5 +1,21 @@
+# Table of Contents
+## Node Js
+- [Node Package Manager]()
+- [Node Package Manager]()
+- [Node Package Manager]()
+- [Node Package Manager]()
+- [Node Package Manager]()
+
+## Express
+- [Node Package Manager]()
+- [Node Package Manager]()
+- [Node Package Manager]()
+- [Node Package Manager]()
+- [Node Package Manager]()
+
 # Learning Node JS and Express essentials
 Learn server-side Javascript for single page application development(SPA, built with Ajax usually). Backend essentials for SPA is as follows :
+
 
 # Contents learned
 - Managing Packages with NPM
@@ -125,7 +141,7 @@ Middleware function takes three arguments : 1) request object 2) response object
 - add information to request/response object
 - end cycle by sending a response or start next function in stack, calling the next. 
 
-Express evaluates functions in the order they appear in the code. This is true for middleware too. If you want it to work for all the routes, it should be mounted before them.
+Express evaluates functions in the order they appear in the code. Middleware shoule also be created before all the routes depending on it.
 
 </p>
 
@@ -177,6 +193,76 @@ app.get('/json', function(req, res) {
     // Note that despite the method being named json(), the result is not JSON but is instead the result of taking JSON as input and parsing it to produce a JavaScript object.
 })
 ```
+
+## Route parameter
+Getting route parameter is one way to get inputs from user. Route paramters are named segments of the URL, differentiated by slash. Each segment holds an actual value of the URL. For example, 
+
+```
+route_path: '/user/:userId/book/:bookId'
+actual_request_URL: '/user/546/book/6754'
+req.params: {userId: '546', bookId: '6754'}
+```
+
+Approach route parameter with request.params.
+```javascript
+app.get('/:userId/location', function(req, res){
+    const { userId } = req.params
+    res.json( {location : userId} )
+})
+```
+
+## Query parameter
+Encoding data with query string is also a way to get inputs from user. Query string is differentiated with question mark in the format of field and value.
+
+```
+route_path: '/library'
+actual_request_URL: '/library?userId=546&bookId=6754'
+query string : '?userId=546&bookId=6754'
+req.query: {userId: '546', bookId: '6754'}
+```
+
+Express breaks down the data from the query string and fills with req.query.
+For example,  
+
+```javascript
+app.get('/library', function(req, res){
+    const userId = req.query.userId
+    const bookId = req.query.bookId
+
+    res.json( { library : `${userId} ${bookId}` } )
+})
+```
+
+## Body Parser For Post Request
+HTTP Post method is a default method used to send client data with HTML form. It is conventioinally used to create a new record in database. 
+
+<p>
+These types of request, sending information to the database, the information is not presented in URL since it can contain user password or such things. Instead, the data is hidden in HTTP request body, which is a called payload, also.
+</p>
+
+<details>
+    <summary>What is a payload?</summary>
+
+Quoted from [Wikipedia - payload](https://en.wikipedia.org/wiki/Payload_(computing))
+
+```
+In computing and telecommunications, the payload is the part of transmitted data that is the actual intended message. Headers and metadata are sent only to enable payload delivery.
+
+In the context of a computer virus or worm, the payload is the portion of the malware which performs malicious action.
+
+The term is borrowed from transportation, where payload refers to the part of the load that pays for transportation.
+```
+</details>
+
+Http request body by default is encoded with urlencoded, which looks like the above query string. You can also implement this with Ajax in JSON format.  <br/>
+
+<img src="reference/http-request-body.png" width=650 height=270 />
+
+To parse the data from HTTP request body, install body parser with npm package. It allows to use middleware to decode the data in many formats. 
+
+- Front End ===(send a encoded data with HTTP POST method) ==>
+- ====> Backend ===(decoding the data in request body with body parser)===>
+- ========> Database(saving the data)
 
 
 # Learning materials
