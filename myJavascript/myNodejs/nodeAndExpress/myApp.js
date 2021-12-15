@@ -1,6 +1,7 @@
 require('dotenv').config()
 var express = require('express');
 var app = express();
+const bodyParser = require('body-parser')
 
 app.use(function(req, res, next) {
     // example format : GET /json - ::ffff:127.0.0.1
@@ -35,6 +36,27 @@ app.get('/now', function(req, res, next){
     } )
 })
 
+app.get('/:word/echo', function(req, res) {
+    const { word } = req.params
+    res.json( {
+        echo : word
+    } )
+})
+
+app.get('/name', function(req, res){
+    // query string : ?first=firstname&last=lastname
+    const firstName = req.query.first
+    const lastName = req.query.last
+    res.json( {name : `${firstName} ${lastName}`})
+})
+
+app.use(bodyParser.urlencoded({extended:false})) // querystring library applied
+
+app.post('/name', function(req, res){
+    const firstName = req.body.first 
+    const lastName = req.body.last
+    res.json( { name : `${firstName} ${lastName}`} )
+})
 
 
 module.exports = app;
