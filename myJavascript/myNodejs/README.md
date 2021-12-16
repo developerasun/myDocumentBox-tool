@@ -1,6 +1,6 @@
 # Table of Contents
 ## Node Js
-- [Node Package Manager]()
+- [Understanding how Node.js is invented]()
 - [Node Package Manager]()
 - [Node Package Manager]()
 - [Node Package Manager]()
@@ -13,14 +13,36 @@
 - [Node Package Manager]()
 - [Node Package Manager]()
 
-# Learning Node JS and Express essentials
-Learn server-side Javascript for single page application development(SPA, built with Ajax usually). Backend essentials for SPA is as follows :
+# Understanding how Node.js is invented
+Javascript had been used client side mostly but nowadays it can be used server side language as well. But why was it not possible then but now is good to go? 
 
+<img src="reference/javascript-in-browser.png" width=690 height=360 />
 
-# Contents learned
-- Managing Packages with NPM
-- Basic NOde And Express
-- MongoDB And Mongoose 
+<p>
+V8 engine compiles Javascript into machine code, which is the only language computer understands. The engine was only inside browser, making the Javascript available only in browser. 
+</p>
+
+<img src="reference/nodejs-wrapper.png" width=660 height=330 />
+
+<details>
+    <summary>What is V8? (tap to unfold)</summary>
+    V8 is Google’s open source high-performance JavaScript and WebAssembly engine, written in C++. It is used in Chrome and in Node.js, among others. It implements ECMAScript and WebAssembly ... V8 can run standalone, or can be embedded into any C++ application.
+
+- [See here for more](https://v8.dev/)
+
+</details>
+
+<p>
+Node js solves this problem by wrapping the engine, which was written in C++, making Javascript availiabe in server with more features. 
+</p>
+
+- Read and write files
+- Connect to a database 
+- Act as a server
+
+<p>
+You can tackle both front end and backend with only one language. Node js has a big community and third party packages as well.  
+</p>
 
 ## Client and Server interaction
 |Front End|Interaction|Backend|
@@ -283,5 +305,6 @@ app.use(bodyParser.json())
 
 
 # Reference
+- [NetNinja Node js crash course](https://www.youtube.com/watch?v=zb3Qk8SG5Ms&list=PL4cUxeGkcC9jsz4LDYc6kv3ymONOKxwBU&index=1&t=1s)
 - [Free code campe - ENG](https://www.freecodecamp.org/learn/back-end-development-and-apis/)
 - [Inflearn - KOR](https://www.inflearn.com/course/node-js-%EC%9B%B9%EA%B0%9C%EB%B0%9C#)
