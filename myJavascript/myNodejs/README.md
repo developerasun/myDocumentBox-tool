@@ -55,7 +55,30 @@ There a few tech combinations for Node JS, which is MERN stack.
 - React : UI library
 - Node JS : server
 
-# Node.js
+## Stream and Buffer
+Reading, deleteing, creating file is usually asynchronously done since it takes long time to perform. To go furthermore with addressing large data/file, understanding streams and buffers is essential. 
+
+- Streams : starting using data before fully read
+- Buffer : delivering a small chunk of data package
+
+<img src="reference/stream-buffer.png" width=700 height=350 />
+
+Waiting till a source of data gets fully filled is way slower than fetching a split data and starting using it. 
+
+```javascript
+// way 1 : create streams and buffer
+const fs = require('fs')
+const readStream = fs.createReadStream('./myPath/myFile.txt', { encoding : 'utf-8' })
+const writeStream = fs.createWriteStream('./myPath/myNewFile.txt')
+
+readStream.on('data', (smallData)=>{
+    writeStream.write(smallData)
+} )
+
+// way 2 : pipe : passing passing data from readable stream to writable stream eright away
+readStream.pipe(writeStream) 
+```
+
 ## Node Package Manager
 <p>
 One of the advantages to use npm is dependency control. Through package.json file, npm automatically install everything you need. 
