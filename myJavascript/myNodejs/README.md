@@ -44,7 +44,23 @@ Node js solves this problem by wrapping the engine, which was written in C++, ma
 You can tackle both front end and backend with only one language. Node js has a big community and third party packages as well.  
 </p>
 
-## Client and Server interaction
+## Client and Server 
+<p>
+At the end of the day, what we are trying to achieve with Node.js is to create a website run by Node.js.
+</p>
+<p>
+Server, Node js in this case, sends whatever browser requests to send : JSON, html pages ... 
+</p>
+
+1. When a user requests something in webpage, a browser tries to look up a host having an associated IP address with the webpage. 
+
+2. And then, the browser connects with a server/host using the IP address.
+
+3. Server responds with the resources requested(html pages in picture)
+
+<img src="reference/client-server-ip.png" width=730 height=430 />
+
+### Interaction
 |Front End|Interaction|Backend|
 |:-------:|:-------:|:-------:|
 |event, DOM, template, routing|HTTP, Ajax, JSON, RESTful|Web server, template, routing, database, APIs|
@@ -54,6 +70,32 @@ There a few tech combinations for Node JS, which is MERN stack.
 - Express : framework
 - React : UI library
 - Node JS : server
+
+### Createing a server
+In Node.js, we create a server manually. And the server lives in a backend of website, listening to browser requests and sending resources to it.
+
+### Localhost and port number
+Localhost is a domain name for a IP address : 127.0.0.1, meaning one's own computer. If Localhost used, browser points to directly back to your own computer as a host.
+
+- Request coming out of my computer => Listening the request in my own computer(localhost)
+
+Then what about port number? Port is a way for information/program can be plugged into your computer. Server also needs the port to communicate with others. Port 3000 is pre-set for web development.
+
+- localhost:3000 ===> 1) one's own computer 2) route to communicate
+
+```javascript
+const http = require('http')
+const server = http.createServer((req, res)=>{
+    console.log(req.url) // check request endpoint 
+    console.log(req.method) // check request http method
+})
+
+server.listen(3000, 'localhost', ()=>{
+    console.log("app is listening")
+})
+
+```
+
 
 ## Stream and Buffer
 Reading, deleteing, creating file is usually asynchronously done since it takes long time to perform. To go furthermore with addressing large data/file, understanding streams and buffers is essential. 
