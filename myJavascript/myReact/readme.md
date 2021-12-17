@@ -170,8 +170,8 @@ ReactDOM.render(
 
 ```
 
-### Controlled component
-Form elements that are controlled by React, meaning that the state of the elements is stored in a state and only can be changed with setState method. It has a merit that a developer can control user input with the setState method. For example, 
+### Controlled Input
+To add data to backend side, we need to add a POST request in front end side. Input values in form tag will be changed based on React state changes, meaning form values and states are synced with each other.
 
 ```JSX
 handleChange(event) {
@@ -181,6 +181,10 @@ handleChange(event) {
 }
 
 ``` 
+
+<p>
+Form elements that are controlled by React, meaning that the state of the elements is stored in a state and only can be changed with setState method. It has a merit that a developer can control user input with the setState method. 
+</p>
 
 HTML file tag is an uncontrolled component since it is read-only. 
 ```HTML
@@ -753,6 +757,23 @@ React router package consists of : 1) Router 2) Switch 3) Route
 <span>React routing</span><br/>
 <img src="reference/router-switch-route.png" width=670 height=700 />
 
+### React Route Parameters
+We really can't hard-code route parameters since user request changes. For example, asking blog posts by posting number could be 
+
+- /blogs/123
+- /blogs/456 <===== Can't hard-code this
+- /blogs/789
+
+So we can set a dynamic route paramter with colon in React like below
+
+```javascript 
+// Set a route parameter and devlier it as props in Link component. 
+<Route path="/blogs/:postingNumber">
+
+<Link to={`/blogs/${props.postingNumber}`}>Check the post</Link>
+
+```
+
 ## React Router Link
 To avoid React application sends a request to server when link clicked, React router link should be used instead of html a tag. 
 
@@ -770,13 +791,44 @@ const Navigation = () => {
 // With React Router Link : not sending requests to server
 import { Link } from 'react-router-dom'
 const Navigation = () => { 
+    // Note that a href attribute is changed to Link 'to' props. 
     return ( 
         <div>
-            <Link to="/"> Main </Link>
+            <Link to="/"> Main </Link> 
             <Link to="/create"> Create </Link>
         </div>
     )
 }
+
+```
+
+## useEffect Cleanup Function
+As the name implies, it is a function inside the useEffect.
+<br>
+<p>
+Cleanup function prevents application from unintended results such as memory leaks, improving the application's performance by removing what is not necessary before the component unmounts. 
+</p>
+
+<img src="reference/why-use-cleanup.png" width=700 height=120 />
+
+<p>
+Without the cleanup function, an error like the above one could happen. As the error log suggests, 1) cancel subscriptions 2) cancel asynchronous tasks not to update React state on components unmounted. 
+</p>
+
+```javascript
+// Create a AbortController instance
+const abortCtrl = new AbortController()
+
+useEffect(()=>{
+    // Connect the AbortController with fetch
+    fetch(myUrl, { signal : abortCtrl.signal }) { 
+        // do some operation
+    } 
+    // Cleanup the useEffect with the AbortController
+    // When abort() is called, the fetch() promise rejects with a DOMException named AbortError.
+    return () => { abortCtrl.abort() }
+
+},[myUrl])
 
 ```
 
@@ -786,3 +838,6 @@ const Navigation = () => {
 [Free code camp - Front End Development Libraries](https://www.freecodecamp.org/learn/front-end-development-libraries/)
 
 [Goorm Edu - my first React (KOR)](https://edu.goorm.io/learn/lecture/12976/%EC%B2%98%EC%9D%8C-%EB%A7%8C%EB%82%9C-react-%EB%A6%AC%EC%95%A1%ED%8A%B8)
+
+
+[LogRocket - understanding React useEffect cleanup](https://blog.logrocket.com/understanding-react-useeffect-cleanup-function/)
