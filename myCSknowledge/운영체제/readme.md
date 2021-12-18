@@ -227,6 +227,149 @@ Windows PowerShell 실행 후 아래 실습을 진행
 
 2. GUI : 그래피컬 인터페이스. 알아보기 쉬운 그래픽 요소를 활용해 운영체제에게 명령을 내림.
 
+## 시스템 콜(System call) 
+시스템 콜은 운영체제 서비스들에 대한 인터페이스를 제공한다. 보통 C나 C++로 작성된다. 시스템 콜에 대해서 알아보기 이전에, 프로그램 모드에 대한 이해가 선행되어야 한다. 
+
+<img src="./system-call.png" width=680 height=400 />
+
+<ol> 
+<span>프로그램 모드</span> 
+
+<ul> 
+    <span>유저 모드(User mode)</span>
+
+- 메모리, 하드웨어와 같은 자원에 대한 직접 접근 권한이 없음. Safe mode
+- 대부분의 프로그램은 유저 모드로 실행됨
+- 유저 모드로 접근한 프로그램이 모종의 이유로 crash 될 경우에도 전체 시스템은 유지됨
+- 메모리 등과 같은 자원에 접근해야 할 경우 <strong>시스템 콜을 요청해 커널 모드로 전환함(컨텍스트 스위칭, context switching)</strong>
+</ul>
+
+<ul>
+<span>커널 모드(Kernel mode)</span>
+
+- 직접 권한 있음. Previleged mode
+- 커널 모드로 접근한 프로그램이 모종의 이유로 crash 될 경우 전체 시스템도 crash 됨
+</ul>
+
+</ol>
+
+Let's see how often system call is used to copy some content from source file to destination file, which is a very simple task in file system. Each step needs a system call. 
+
+<img src="./source-to-copy.png" width=700 height=400 />
+
+In execution of a program, the thousands of system call is run per second. Consider that system all is always running once a program is turned on.
+
+## 시스템 콜의 종류
+
+<ol>
+
+<ul>
+<span>프로세스 컨트롤</span>
+
+- end, abort
+- load, execite
+</ul>
+
+<ul>
+<span>파일 컨트롤</span>
+
+- create and delete file
+- open and close file
+- read and write file
+
+</ul>
+
+<ul>
+<span>기기 컨트롤</span>
+
+- request and release device
+- read, write device
+- logically attach and detach device
+
+<details>
+    <summary>Logially attach vs Physically attach</summary>
+
+- Physically attach : device plugged into your computer 
+- Logically attach : checking if the device should be connected or disconnected
+</details>
+</ul>
+
+<ul>
+<span>정보 유지 보수<span>
+
+- get/set time and date
+- get/set system data
+- get/set process, file, and device attributes
+</ul>
+
+<ul>
+<span>커뮤니케이션</span>
+
+- create, delete communication connection between processes
+- send, receive messages
+- transfer status info 
+</ul>
+</ol>
+
+## 시스템 프로그램
+유저와 컴퓨터는 아래와 같은 구조로 서로 상호작용을 한다. 
+
+<img src="./user-computer.png" width=620 height=300/>
+
+시스템 프로그램은 4가지 종류로 이루어진다. 
+
+<ol>
+<ul>
+<span>파일 관리(file management)</span>
+
+- Create, delete, read files 
+- Print
+- Rename
+</ul>
+
+<ul>
+<span>상태 정보(status information)</span>
+
+- Date, time 
+- Memory, disk space
+- Number of users 
+- Detailed performance 
+- Logging and debugging 
+</ul>
+
+<ul>
+<span>파일 수정(file modification)</span>
+
+- managets inner contents in a file 
+- c.f file management : manages the file
+</ul>
+
+<ul>
+<span>프로그래밍 언어 지원</span>
+
+- compiler
+- assembler 
+- debugger
+- interpreter
+
+<span> C, C++, Java와 같은 프로그래밍 언어들은 운영체제를 통해서 유저에게 제공됨. </span>
+</ul>
+
+<ul>
+<span>프로그램 로딩 및 실행</span>
+
+- Absolute loaders
+- Relocatable loaders
+- Linkage editors 
+- Overlay loaders 
+<span>프로그램이 컴파일/어셈블 된 이후 실행되기 위해서는 메모리에 적재되는 과정이 필요하고, 위와 같은 운영체제의 시스템 프로그램이 이를 담당함. </span>
+
+</ul>
+
+</ol>
+
+
+
 # 레퍼런스
 - [Difference between Multiprogramming, multitasking, multithreading, and multiprocessing](https://www.geeksforgeeks.org/difference-between-multitasking-multithreading-and-multiprocessing/)
 
