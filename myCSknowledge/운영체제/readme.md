@@ -368,7 +368,55 @@ In execution of a program, the thousands of system call is run per second. Consi
 
 </ol>
 
+# 운영 체제 디자인 및 실행
+## 디자인 
+운영 체제를 디자인함에 있어서 고려해야 할 요소는 아래와 같다. 
 
+- 어떤 하드웨어를 쓸 것인가
+- 어떤 종류의 시스템을 쓸 것인가 : 멀티 프로세싱, 멀티 태스킹 등
+
+### 메커니즘과 정책 
+- 메커니즘 : determine how to do something
+- 정책 : what should be done
+
+메커니즘과 정책은 서로 분리되는 것이 중요 원칙이다. 
+
+<img src="./mechanism-policy.png" width=690 height=270 />
+
+## 실행
+운영 체제는 어셈블리어로 주로 작성이 되었으나 현대에는 아래와 같은 장점들로 인해 대개 C 또는 C++와 같은 higher-level language들로 작성된다. 
+
+- Codes written faster
+- More expandable
+- Easier to understand
+
+# 운영 체제의 구조
+## Simple structure
+Simple structure는 초기 운영 체제가 설계되었던 구조로, 응용 프로그램이 하드웨어 단에 직접적으로 접근할 수 있다는 점에서 우수한 구조로 평가받지는 않는다.
+
+<img src="./simple-structure.png" width=380 height=330 />
+
+## Monolithic structure
+Monolithic structure는 초기 UNIX가 설계되었던 구조로 simple structure의 일환이다.
+
+시스템 콜 인터페이스가 하나의 레벨에서 너무 많은 기능을 담당하고 있어 확장성이 좋지 않다는 단점이 존재한다. 
+
+<img src="./monolithic-system-call.png" width=700 height=160 />
+
+## Layered structure
+Monolithic structure를 보완하기 위해 하나의 운영 체제를 여러 개의 레이어로 나누고 각기 다른 functionality를 위임함으로서 구조적 단점을 보완하려고 노력함. 레이어 배치가 어렵고, 레이어간 top-down 방식으로 인한 시스템 콜 전달 속도가 느릴 수 있다는 단점이 존재.
+
+<img src="./layer-structure.png" width=400 height=370 />
+
+## Microkernels
+마이크로 커널 구조는 유저 모드와 커널 모드를 분리하고, 대부분의 기능을 유저 모드에 분배함으로써 시스템의 안정성을 높였다는 장점이 있다. 그러나 프로세스 간 커뮤니케이션을 담당하는 마이크로커널이 메세지를 계속 전달해야하므로 전체 퍼포먼스가 느려질 수 있다는 단점이 존재한다. 
+
+<img src="./microkernel.png" width=550 height=390 />
+
+## Modules
+모듈은 현재 운영 체제 구조 중에서 가장 적합하다는 평가를 받는다. 코어 커널은 가장 핵심 기능만을 수행하고, 다른 기능들은 코어 커널에 연결해서 사용할 수 있는 모듈로서 구현한다. Top-down 방식이었던 레이어 구조와 달리, 각각의 모듈은 서로 커뮤니케이션이 가능하여 효율이 좋다. 
+
+<img src="./modules.png" width=575 height=400 />
 
 # 레퍼런스
 - [Difference between Multiprogramming, multitasking, multithreading, and multiprocessing](https://www.geeksforgeeks.org/difference-between-multitasking-multithreading-and-multiprocessing/)
