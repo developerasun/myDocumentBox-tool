@@ -418,6 +418,122 @@ Monolithic structure를 보완하기 위해 하나의 운영 체제를 여러 �
 
 <img src="./modules.png" width=575 height=400 />
 
+# 가상 머신(Virtual Machine)
+가상 머신의 기본 논리는 다음과 같다. 하나의 컴퓨터에 있는 하드웨어 기기들을 <strong>추상화</strong>하여 서로 다른 영역에 넣어준다. 이런 방식을 통해 각각의 영역은 <bold>서로 다른 컴퓨터들을 가지고 실행되는 듯한</bold> 효과를 이룬다. 
+
+<img src="./understand-vm.png" width=760 height=320 />
+
+위 그림에서 (b)의 경우 하나의 하드웨어에서 가상 머신을 통해 여러 프로세스들에게 서로 다른 커널을 분배하지만 (a)의 경우 하나의 커널만이 제공된다. 
+
+## 가상 머신 구조 
+가상 머신은 실제 하드웨어(a whole disk)에서 일부 영역(mini disk)을 분배해 만들어진다. 각각의 가상 머신에 분배된 자원은 서로 독립적이고 공유될 수 없다. 실제 컴퓨터(Pysical machine)를 A라고 가정하고, 가상 머신 사용으로 인해 생겨나는 컴퓨터(Virtual machine)를 B라고 생각해보자.
+
+<ol>
+
+- 프로세스 ( B : 유저 모드)
+===================================
+- 가상 머신 커널 ( B : 커널 모드)
+===================================
+- 가상 머신(A : 유저 모드, B : B 또한 유저 모드와 커널 모드를 가져야 함)
+===================================
+- 가상 머신 소프트웨어(A : 커널 모드)
+- 하드웨어 (A)
+===================================
+
+</ol>
+
+# 운영 체제와 시스템 부팅
+Sysgen(system generation)이란 특정 머신에 특정 운영 체제를 유저가 세팅한 설정과 하드웨어가 요구하는 세부사항들에 맞게 설치하도록 도와주는 프로그램을 의미한다. 시스젠 프로그램이 설정하는 값들은 아래와 같다. 
+
+- CPU 종류
+- 가용 가능 메모리 
+- 가용 가능 기기
+- 운영 체제 옵션
+
+## 시스템 부팅
+컴퓨터는 커널을 로딩함으로써 시작된다. 흔히 알려진 '시스템을 부팅한다'라는 개념은 커널이 로딩 중이라는 의미와 같다.
+
+<p>
+하드웨어가 커널을 로드하기 위해서는 부트스트랩(bootstrap) 프로그램이 필요한데, 이는 하드웨어가 커널을 찾아내고 로드하는 과정을 도와준다. 대부분의 컴퓨터 시스템에서 부트스트랩 로더가 설치되어 있다. 부팅 프로그램은 virus로 인한 mutation을 막고 컴퓨터 전원을 끄더라도 유지되어야 하므로 ROM(read only memory)의 형태로 저장된다. 
+</p>
+
+<p>
+부트스트랩 프로그램이 완전히 로드되고 나면, 파일 시스템을 순회하며 운영 체제 커널을 찾기 시작한다. 커널이 로드되고 실행이 시작되는 순간을 가리켜 시스템이 부팅된다고 표현한다. 
+</p>
+
+# 프로세스 관리 : 프로세스와 쓰레드
+프로세스와 쓰레드를 이해하기 전 어떻게 하나의 프로그램이 개발되는지를 알아보자. 
+
+<ol>
+
+- 하이 레벨 프로그래밍 언어로 코드 작성
+- 컴파일러를 통해 코드를 기계어로 변환
+- 운영 체제를 통해 프로그램을 메모리에 로드
+- 운영 체제를 통해 자원을 프로그램에 분배  ======> Passive entity
+- 프로그램 실행 ===========> Process(An instance of a program, meaning program in execution)
+</ol>
+
+프로세스란 프로그램이 인스턴스화 되면서 실행된 것을 가리킨다. 
+쓰레드란 프로세스 내에서 실행되고 있는 작업들을 가리킨다. 
+
+<img src="./process-thread.png" width=320 height=240 />
+
+## 프로세스 상태(Process state)
+프로세스 상태는 프로세스의 현재 활동 단계에 따라 정해진다. 
+
+<ol>
+
+- New : 프로세스가 만들어지는 단계
+- Running : 프로그램이 로드되어 프로세스가 생성되고 실행됨
+- Waiting : 입출력과 같은 이벤트로 인해 잠시 실행을 중단함
+- Ready : 생성된 프로세스 또는 실행이 중단된 프로세스가 실행 준비를 마치고 대기함
+- Terminate : 프로세스가  실행을 종료함
+</ol>
+
+<img src="./process-state.png" width=580 height=430 />
+
+## 프로세스 컨트롤 블록(Process control block)
+프로세스 컨트롤 블록이란 프로세스에 대한 정보를 항목별로 나타내어주는 것을 의미한다.  
+
+- Process ID
+- Process state
+- Program counter
+- CPU register
+- CPU scheduling info
+- Memory management info
+- Accounting info
+- Input/ouput status info
+
+## 프로세스 스케쥴링
+프로세스 스케쥴링을 이해하기 위해서는 1) 멀티 프로그래밍과 2) time sharing 개념을 다시 한 번 짚을 필요가 있다. 
+
+1. 멀티 프로그래밍의 목적은 CPU를 최대한 활용하기 위해 항상 일정 수준의 프로세스를 작업하도록 유도하는 것이다. 
+2. time sharing은 유저가 상호작용을 느낄 수 있도록 CPU가 작업 중인 프로세스들을 빈번하게 교체하는 것을 의미한다.
+
+프로세스 스케쥴링이란 위의 두 가지를 만족시키기 위해 가용 가능한 프로세스들 중 적당한 프로세스를 골라 CPU에게 전달하는 것을 의미한다. 
+
+### 스케쥴링 큐(Scheduling queue)
+프로세스 스케쥴러는 상황에 따라 스케쥴링 큐에서 CPU에게 할당할 프로세스를 설정한다. 
+
+<img src="./process-schedule-queue.png" width=630 height=330 />
+
+<details>
+    <summary>프로세스 큐의 종류를 알아보자</summary>
+
+1. Job queue란 운영 체제 내 모든 프로세스를 모아놓은 공간을 의미한다. 운영 체제가 프로세스 관리를 시작하면 job queue에 프로세스를 등록한다. 
+2. Ready queue란 메인 메모리 내에서 실행을 기다리고 있는(CPU가 불러주기를 기다리고 있는) 프로세스를 모아놓은 공간을 의미한다. 
+3. Input/Output queue란 입출력에 관련된 프로세스들을 모아놓은 공간을 의미한다.
+</details>
+
+## 컨텍스트 스위칭(context switching)
+<p>
+CPU가 기존에 실행 중이던 작업을 interrupt에 의해 멈추고, 우선 순위가 더 높은 작업을 실행해야 할 경우가 생긴다. 이때, 기존 작업 A에 대한 문맥(context, process state를 의미)을 PCB(Process control block)에 기록하고, 요청된 작업을 끝낸 이후 문맥을 참고해 다시 기존 작업 A를 실행한다. <strong>프로세스 상태를 저장하고 다시 불러오는 이러한 일련의 과정을 컨텍스트 스위칭</strong>이라 부른다.
+</p>
+
+- 컨텍스트 스위칭에 걸리는 시간은 pure overhead.
+- 보통은 밀리 세컨드 단위로 걸리지만, 기기에 따라 걸리는 시간은 상이할 수 있음.
+
+
 # 레퍼런스
 - [Difference between Multiprogramming, multitasking, multithreading, and multiprocessing](https://www.geeksforgeeks.org/difference-between-multitasking-multithreading-and-multiprocessing/)
 
