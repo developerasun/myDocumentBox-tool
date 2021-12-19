@@ -1,0 +1,10 @@
+/* find p tag that has "test" class */
+p.test {
+    color: green;
+}
+
+/* find a p tag that has "test" and "experiment" class */
+p.test.experiment {
+    color: orange;
+}
+
