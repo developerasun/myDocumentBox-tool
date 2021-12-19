@@ -1,0 +1,13 @@
+/* Media Queries are a new technique introduced in 
+CSS3 that change the presentation of content based 
+on different viewport sizes. */
+
+p {
+    font-size: 20px;
+}
+
+@media (max-height: 800px) {
+    p {
+        font-size: 10px;
+    }
+}
