@@ -1,6 +1,6 @@
 "use strict";
-let greet;
-greet = (name) => {
+let greeting;
+greeting = (name) => {
     console.log(`I am ${name}'s function`);
 };
 // optional paramter : add question mark 
@@ -11,7 +11,7 @@ const add = (a, b, c = "hello jake") => {
     console.log(c);
 };
 add(5, 10);
-greet('Jake');
+greeting('Jake');
 // Typescript provides a way to clarify parameter types and 
 // even return types. 
 const minus = (a, b) => {
