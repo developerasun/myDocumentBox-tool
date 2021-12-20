@@ -111,3 +111,21 @@ function myVoid():void {
 }
 ```
 
+## Type casting
+```typescript
+
+const anchor = document.querySelector("a")! // ! let Typescript knows this value is not null
+
+if (anchor) { 
+    console.log(anchor.href)
+}
+
+// type casting in typescript : making sure an element has a specific type
+const form = document.querySelector('form') as HTMLFormElement
+// checks if the form variable exists
+if (form) {
+    console.log(form)
+} else { 
+    console.log("no form")
+}
+```
