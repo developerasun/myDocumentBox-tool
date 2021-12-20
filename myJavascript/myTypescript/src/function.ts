@@ -1,6 +1,6 @@
-let greet: Function
+let greeting: Function
 
-greet = (name:string) => { 
+greeting = (name:string) => { 
     console.log(`I am ${name}'s function`)
 }
 
@@ -14,7 +14,7 @@ const add = (a : number, b: number, c: number|string="hello jake") => {
 
 add(5,10)
 
-greet('Jake') 
+greeting('Jake') 
 
 // Typescript provides a way to clarify parameter types and 
 // even return types. 
