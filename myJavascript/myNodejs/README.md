@@ -256,6 +256,41 @@ Package.json file follows Semantic Versioing, which is a industry standard for s
 <img src="reference/commonjs-es6.png" width=600 height=170/>
 
 # Express
+Handling simple and few routes with Node.js can be done without Express. However, as application gets complicated, framework such as Express becomes handy to handle server side logics. 
+
+## View(Template) engine
+Instead of static assets, sometimes we want to add dynamic contents to HTML such as saved data from database. View/template engine is a great way to achieve this. 
+
+Types of view engines are : 
+- Express HandleBars
+- Pug.js
+- EJS
+
+### EJS
+Install EJS with below command 
+
+```javascript
+npm install ejs --save
+```
+
+#### Calling EJS
+```javascript
+app.set('view engine', 'ejs')
+app.get('/', (req, res)=>{
+    // res.send("<h1>Hello express</h1>") // Express automatically set http header
+    // use ejs engine to render dynamic contents. 
+    // give the second parameter(object) and call it in ejs file to render
+    res.render('index', { title: 'sweet' }) 
+})
+```
+
+#### Default Directory
+'views' is a default directory where Express and EJS engine will look for resources. If you want to rename it, follow below instruction
+
+```javascript
+app.set('views', 'myNewViews')
+```
+
 ## Middleware
 <p>
 Serving static webpages and assets could be simpler with express since it provides a middleware. 
