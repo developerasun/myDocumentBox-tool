@@ -96,6 +96,57 @@ server.listen(3000, 'localhost', ()=>{
 
 ```
 
+Once your server is up, you can check what request with http method has been made like below
+
+<img src="reference/server-req-url" width=458 height=227 />
+
+### Basic routing
+When user makes a request, Node.js as a backend will send a response that mathces the request using router. 
+
+```javascript
+const server = http.createServer((req, res)=>{
+    // addressing basic routes
+    let path = './views/'
+    switch (req.url) { 
+        case '/' : // endpoint
+            path += 'index.html' // corresponding page
+            res.StatusCode = 200
+            break; 
+        case '/about' : 
+            path += 'about.html'
+            res.StatusCode = 200
+            break;
+        default : 
+            path += 'page404.html' // non-existing endpoints
+            res.StatusCode = 404
+            break; 
+    }
+    
+    // set HTTP message header 
+    res.setHeader('Content-Type', 'text/html')
+    // reading file is asynchronous
+    fs.readFile(path, (err, data)=> {
+        if(err) {
+            res.end()
+            console.log(err)
+        }
+        res.end(data)
+    })
+})
+
+// open up the server
+server.listen(8000, ()=>console.log("app listening at port 8000"))
+
+```
+
+Managing routes like above can be messy when there are too many routes to handle. Use express, which is a third party app, to tackle this problem. Understanding what is going on in behind scene is important before you start using and learning framework like express. 
+
+### Status codes
+Status codes describes the type of responses sent to the browser. 
+
+- range 200 : success code 
+- range 400 : client/user fail
+- range 500 : server fail 
 
 ## Stream and Buffer
 Reading, deleteing, creating file is usually asynchronously done since it takes long time to perform. To go furthermore with addressing large data/file, understanding streams and buffers is essential. 
