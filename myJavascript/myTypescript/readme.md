@@ -34,6 +34,35 @@ Install Typescript with below npm command
 npm install -g typescript
 ```
 
+## Typescript config
+Make a Typescript config file in your project root so that you can adjust setting. 
+
+```javascript
+tsc --init
+```
+
+<img src="reference/ts-config.png" width=355 height=160 />
+
+- target clarifies which JS version it targets to.
+- module clarifies what module is generated.
+- rootDir is a place where your whole typescript code will be contained. 
+- outDir is a place where the compiled typescript files(JS) will be contained
+
+<p>
+Note that if there is a ts file outside of the rootDir, ts config will fire an error. 'rootDir' is expected to contain all source files.
+</p>
+
+<p>
+Add include property to tsconfig if some ts files need to be outside the rootDir. 
+</p>
+
+```json
+  "include":["src"] // specify a directory where compiler will compile
+```
+
+Once all things set, you can just type 'tsc' to compile without specifying path and file names. Add -w flag to 'watch' your ts continued changes.
+
+
 # Basic Types
 Typescript does a type inference. Once a variable has a type, the language understands it will keep the type. For example, 
 
@@ -68,3 +97,17 @@ myMath('hello math') // can't compile, throwing error before compile
 let name : string
 let age : number
 ```
+
+## Function
+In Typescript, setting parameter/return types is possible. If a function does not return anything explicitly, it can be written as it returns 'void' 
+
+```typescript
+function myTypescript(name : string, age: number):string {
+    return `${name} is ${age}`
+}
+
+function myVoid():void { 
+    console.log("hello void")
+}
+```
+
