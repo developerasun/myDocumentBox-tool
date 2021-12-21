@@ -128,7 +128,7 @@ let CanadaBird : Bird[] = [] // CanadaBird is an array containing Bird object
 ```
 
 ## Function
-In Typescript, setting parameter/return types is possible. If a function does not return anything explicitly, it can be written as it returns 'void' 
+In Typescript, setting parameter/return types is possible. If a function does not return anything explicitly, it can be written as it returns 'void'. Typescript will infer what types of return will be returned even when you didn't clarify.
 
 ```typescript
 function myTypescript(name : string, age: number):string {
@@ -199,6 +199,83 @@ class Account {
         this.signedDate = signedDate
         this.status = status
     }
+}
+
+```
+
+## Interface
+Interface is an extended feature available Typescript. The abstract class(interface) enforces concrete class to follow a certain form(variables, methods). 
+
+
+```typescript
+// Create an abstract class : parent class 
+interface Animal { 
+    age : number, 
+    walkOn(road: string):string
+}
+
+// Create a concrete class : child class
+// Jake_human is an instance of the Animal class
+const Jake_human : Animal = {
+    age : 27, 
+    walkOn(road = "London"):string {
+        return `Jake is walking on ${road}`
+    } 
+}
+
+console.log(Jake_human.walkOn("Tokyo"))
+
+const Roads = (entity : Animal):string => {
+    return entity.walkOn("Seoul")
+}
+
+console.log(Roads(Jake_human))
+
+```
+
+Compare above Typescript interface usage with below Go interface one. 
+
+```Go
+package main
+
+import "fmt"
+
+type magicStore struct {
+	value interface{}
+	name  string
+}
+
+func (ms *magicStore) SetValue(v interface{}) {
+	ms.value = v
+}
+
+func (ms *magicStore) GetValue() interface{} {
+	return ms.value
+}
+
+func NewMagicStore(nm string) *magicStore {
+	return &magicStore{name: nm}
+}
+
+func main() {
+	IntStore := NewMagicStore("Integer Store")
+	IntStore.SetValue(4.2)
+	if v, ok := IntStore.GetValue().(float64); ok {
+		v += 100
+		fmt.Println(v)
+	} else {
+		fmt.Println("not correct type assertion")
+	}
+
+	StringStore := NewMagicStore("String Store")
+	StringStore.SetValue("my string: ")
+	if v, ok := StringStore.GetValue().(string); ok {
+		v += "yes, this is mine"
+		fmt.Println(v)
+	} else {
+		fmt.Println("not correct type assertion")
+	}
+
 }
 
 ```
