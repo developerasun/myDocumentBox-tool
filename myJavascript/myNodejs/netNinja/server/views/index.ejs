@@ -1,37 +1,20 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title><%= title %> Home </title>
-</head>
+<%- include('./partial/head.ejs') %>
 <body>
 
     <% const name = 'jake' %>
-
+    <%- include('./partial/nav.ejs') %>
+    <%- include('./partial/banner.ejs') %>
     <h1>Home</h1>
     <p>Hello this is home with EJS</p>
-    <nav>
-        <a href="/">home</a>
-        <a href="/about">about</a>
-    </nav>
+
     <main>
-        <p><%= name %></p>
-
-
-        <div class="blogs">
-            <h2>All blogs</h2>
-            <% if (blogs.length>0) { %>
-                <% blogs.map((item)=>{ %>
-                    <h3><%= item.title %></h3>
-                    <p><%= item.blog %></p>
-                <% }) %>   
-            <% } else  { %>
-                <h3>No blog posts yet</h3>
-            <% } %>
-        </div>
+        <p><%= name %>'s blog</p>
+        <h1>Welcome visitors</h1>
     </main>
 
+    <%- include('./partial/footer.ejs') %>
+    <script src="script.js"></script>
 </body>
 </html>
