@@ -81,12 +81,17 @@ const myMath = (diameter) => {
 
 myMath('hello math') // do not throw error before runtime
 
-// typescript
+// In typescript, this is incorrect
 const myMath = (diameter) => { 
     console.log(Math.PI * diameter)
 }
 
 myMath('hello math') // can't compile, throwing error before compile
+
+// do this instead
+const myMath = (diameter: number):number => {
+    return diameter * Math.PI
+}
 
 ```
 
@@ -96,6 +101,30 @@ myMath('hello math') // can't compile, throwing error before compile
 ```typescript
 let name : string
 let age : number
+```
+
+You can also take class as variable type. 
+
+```typescript 
+class Bird {
+    name : string
+    canFly : boolean
+    wing : number
+    
+    constructor(name:string, canFly:boolean, wing:number) {
+        this.name = name
+        this.canFly = canFly
+        this.wing = wing
+    }
+    fly(){
+        console.log(`${this.name} has ${this.wing} wings and can fly : ${this.canFly}`)
+    }
+}
+
+const birdOne = new Bird("jake", true, 3)
+const birdTwo = new Bird("elly", false, 2)
+let CanadaBird : Bird[] = [] // CanadaBird is an array containing Bird object
+
 ```
 
 ## Function
@@ -128,4 +157,48 @@ if (form) {
 } else { 
     console.log("no form")
 }
+```
+
+## ES6 with Typescript
+- spread operator
+```typescript
+// spread operator in typescript
+let bowl: [number, number, number] = [1,2,3]
+let newBowl = [...bowl]
+console.log(newBowl)
+```
+
+## Access modifier
+Access modifier sets a boundary how user can apporach to properties and class. Understanding access modifier provides a great way for encapsulation. 
+
+- public : can access, can change value
+- readonly : can access, can't change value
+- private : can't access, can't change value
+
+```typescript
+// way 1 : shorter
+class Account {
+    constructor(
+        readonly name : string
+        readonly amount : number
+        public signedDate : string
+        private status : string
+    ){} // this way only works with access modifier
+}
+
+// way 2 : more descriptive
+class Account { 
+    readonly name : string
+    readonly amount : number
+    public signedDate : string
+    private status : string
+
+    constructor(name: string, amount: number, signedDate:string, status :string) {
+        this.name = name
+        this.amount = amount
+        this.signedDate = signedDate
+        this.status = status
+    }
+}
+
 ```
