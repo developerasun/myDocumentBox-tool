@@ -1,3 +1,17 @@
+import Invoice from "./modules/invoice.js"
+
+const invOne = new Invoice("Jake", "drink", 8)
+const invTwo = new Invoice("Elly", "house", 100)
+
+// variable : variable type = initial value
+let invoices:Invoice[]= []
+
+invoices.push(invOne, invTwo)
+
+invoices.forEach((item)=>{
+    console.log(item.client, item.amount, item.details, item.format())
+})
+
 // type casting in typescript
 const newForm = document.querySelector('.newForm') as HTMLFormElement
 console.log(newForm.children)
