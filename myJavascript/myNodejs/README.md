@@ -13,6 +13,14 @@
 - [Node Package Manager]()
 - [Node Package Manager]()
 
+## MongoDB
+- [Node Package Manager]()
+- [Node Package Manager]()
+- [Node Package Manager]()
+- [Node Package Manager]()
+- [Node Package Manager]()
+
+
 # Understanding how Node.js is invented
 Javascript had been used client side mostly but nowadays it can be used server side language as well. But why was it not possible then but now is good to go? 
 
@@ -267,6 +275,13 @@ Types of view engines are :
 - EJS
 
 ### EJS
+EJS helps us to render dynamic data in HTML. EJS templates are addressed on server by EJS view engine.
+
+<span>EJS + HTML ===(EJS view engine)====> Browser</span> <br/>
+<img src="reference/ejs-ssr.png" width=720 height=220 />
+
+Above process is called server side rendering. 
+
 Install EJS with below command 
 
 ```javascript
@@ -291,12 +306,35 @@ app.get('/', (req, res)=>{
 app.set('views', 'myNewViews')
 ```
 
-## Middleware
+## Understanding middleware
 <p>
-Serving static webpages and assets could be simpler with express since it provides a middleware. 
+Middleware is a function that takes route handlers and adds information. To simply put, middle is just codes between request and response.
 </p>
+
 <p>
-Middleware is a function that takes route handlers and adds information. Express provdies the middleware to manage static assets. Without this middleware, all the static assets would require corresponding routes. 
+Middleware function takes three arguments : 1) request object 2) response object 3) next function. 
+
+- add information to request/response object
+- end cycle by sending a response or start next function in stack, calling the next. 
+
+<img src="reference/what-is-middleware.png" width=596 height=367 />
+
+Express evaluates functions in the order they appear in the code. Middleware should also be placed before all the routes depending on it.
+
+</p>
+
+```javascript
+function (req, res, next) { 
+    console.log("I am a middle ware")
+    next()
+}
+```
+
+If a middleware is not properly located between server codes, your browser will get stucked. Call the next method like above to avoid that.
+
+### Express middleware for static asset
+<p>
+Serving static webpages and assets could be simpler with express since it provides a middleware to manage static assets. Without this middleware, all the static assets would require corresponding routes. 
 </p>
 
 ```javascript
@@ -307,23 +345,9 @@ app.use(express.static(__dirname + "/public")) // directory 'public' is a conven
 // Assets at public dir
 app.use('/public', express.static(__dirname + "/public"))
 ```
-
 <p>
-Middleware function takes three arguments : 1) request object 2) response object 3) next function. 
-
-- add information to request/response object
-- end cycle by sending a response or start next function in stack, calling the next. 
-
-Express evaluates functions in the order they appear in the code. Middleware shoule also be created before all the routes depending on it.
-
+Basically, server automatically protects assets/files from browser. You have to specify which assets the browser can access and acquire, meaning public assets.
 </p>
-
-```javascript
-function (req, res, next) { 
-    console.log("I am a middle ware")
-    next()
-}
-```
 
 ### Middleware chaining
 Middleware can be chained inside route definition. Chaining middleware is useful to divide server operaions into more smaller units, increasing code reusuability.
@@ -453,7 +477,6 @@ app.post('/name', function(req, res){
 app.use(bodyParser.json())
 
 ```
-
 
 # Reference
 - [NetNinja Node js crash course](https://www.youtube.com/watch?v=zb3Qk8SG5Ms&list=PL4cUxeGkcC9jsz4LDYc6kv3ymONOKxwBU&index=1&t=1s)
