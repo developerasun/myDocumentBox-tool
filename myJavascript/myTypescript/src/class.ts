@@ -1,5 +1,8 @@
-// class 
-class Invoice {
+import  { HasFormatter } from './interfaces/hasFormatter.js' // import interface
+
+// class example
+// Invoice class implements HasFormatter interface, meaning its method 
+class Invoice implements HasFormatter{
     constructor(
         readonly client : string,
         readonly details : string,
