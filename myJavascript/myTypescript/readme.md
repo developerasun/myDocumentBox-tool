@@ -279,3 +279,35 @@ func main() {
 }
 
 ```
+
+## Generic
+Generic allows us to change types flexibly or follow a certain form so that we can re-use some codes. 
+
+### Generic in function
+Flexible type casting with generic
+```typescript
+const Dog = <T>(name : string, age: T): void => { 
+    console.log(`dog ${name} is ${age} this year`)
+}
+
+const myDog = Dog("butter", "two") // generic <T> enables to decide types later, flexibly
+const yourDog = Dog("fly", 2)
+
+```
+
+Followable type casting with generic
+```typescript
+const Cow = <T extends { id : number, origin : string }>(identity : T, age : number):void => {
+    console.log(`Cow id : ${identity.id}, from ${identity.origin}, ${age} years old`)
+}
+```
+
+### Generic in interface
+```typescript
+interface Cat<T> {
+    name : string
+    age : T
+}
+const myCat = Cat( { name : "butter", age : 5 })
+const yourCat = Cat( { name : "fly", age : ["five years old"] })
+```
