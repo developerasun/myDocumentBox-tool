@@ -21,7 +21,7 @@ HTML is constantly updated, which latest one is HTML5. Declare HTML version like
 ```
 
 # Basic HTML and HTML5
-As a convention, all HTML tags are lowercases. 
+As a convention, all HTML tags are lowercases. Creating a logical document with sematic tags should be done before creative and nice web design. 
 
 ## Headings
 Heading elements let browser know your website's structure. This means that they must have a semantic meaning and relate to each other. Choosing headings based on only size is a big mistake. Use CSS for resizing your elements. 
@@ -144,7 +144,8 @@ Figure and figcaption improves data visualization accessiblity like chart.
 </section>
 ```
 
-## Form field
+## Form controls
+### Fieldset
 The fieldset tag surrounds a group inputs(checkboxes, radios ...) to provide a better accessibility. For example, 
 
 ```html
@@ -160,3 +161,61 @@ The fieldset tag surrounds a group inputs(checkboxes, radios ...) to provide a b
 ```
 
 The legend tag describes the inputs, as title.
+
+### Date and datetime 
+HTML5 provides a date attributem, which shows a date format. It will be 'text' by default in old browser.
+
+```html 
+<label for="date">Date tag in HTML5</label>
+<input type="date" id="date" name="date" />
+```
+
+<img src="reference/input-date.png" width=255 height=350 alt="input date tag screenshot" />
+
+Time can be represented with time tag and datetime attribute. For example, 
+
+```html
+<p> Today is <time datetime="2021-12-23">Thursday</time></p>
+```
+
+This value is read by assistive devices, helping to clarify a standardized time.
+
+## CSS for accessibility
+CSS can be used to improve accessibility by moving screen-reader-only elements far outside browser viewport. For example, 
+
+```css
+.screenReaderOnly {
+    position : absolute;
+    left : -10000px; 
+    width : 1px;
+    height : 1px; 
+    top : auto;
+    overflow : hidden;
+}
+```
+
+### High contrast ratio
+Recommended contrast ratio for your text is at least 4.5 to 1. Let's take a look at contrast range and its readability below. 
+
+- 1 : 1 => no contrast, low readability
+- 4.5 : 1 => recommended minimum contrast by WCAG(Web Content Accessibility Guidelines)
+- 21 : 1 => full contrast, black and white.
+
+<img src="reference/low-contrast.png" width=678 height=245 alt="low contrast text screenshot" />
+<img src="reference/high-contrast.png" width=678 height=245 alt="high contrast text screenshot" />
+
+## Color
+Color standalone should not be an important matter to deliver information since it can't be seen by screen reader user. Also, background and foreground should have a high contrast color combination for colorblind user.
+
+### Avoid colorblindness
+Colorblindness ranges from a decreased awareness to a certain wavelength of light to can't see color at all. The most common example of colorblindness is to less be sensitive about color green. 
+
+```css
+/* avoid these */
+.item1 { 
+    color : green;
+}
+.item1-background {
+    color: lightgreen;  
+}
+```
