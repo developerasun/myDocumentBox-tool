@@ -4,7 +4,9 @@ const morgan = require('morgan')
 const app = express() // Creates an Express application. The app is an instance of Express
 const MONGO_URI = process.env.MONGO_URI
 const mongoose = require('mongoose')
-const Blog = require('./model/blog')
+
+// routes for blog section
+const blogRouter = require('./routes/blogRoutes')
 
 // connect with db
 mongoose.connect(MONGO_URI, {})
@@ -21,6 +23,9 @@ app.set('view engine', 'ejs')
 // static asset middleware
 app.use(express.static('public'))
 
+// request url parsing middleware
+app.use(express.urlencoded( { extended: false }))
+
 // logger middleware
 app.use(morgan('dev'))
 
@@ -34,7 +39,7 @@ app.use((req, res, next)=>{
 })
 
 app.get('/', (req, res)=>{
-    res.render('index', { title: 'Home' }) 
+    res.render('home', { title: 'Home'}) 
 })
 
 app.use((req, res, next)=> {
@@ -42,13 +47,7 @@ app.use((req, res, next)=> {
     next()
 })
 
-app.get('/blogs', (req, res)=>{
-    Blog.find().sort( { createdAt : -1} )
-        .then((result)=>{
-            res.render('blogs', { title : 'Jake\'s blog', blogs: result } )
-        })
-        .catch((err)=>console.log(err))
-})
+app.use('/blogs', blogRouter)
 
 app.get('/about', (req, res)=>{
     // res.sendFile('./views/about.html', {root : __dirname})
@@ -60,7 +59,7 @@ app.get('/about-us', (req, res)=>{
     res.redirect('/about') // same with res.setHeader('Location', '/about') in Node js
 })
 
-app.get('/blogs/create', (req, res)=>{
+app.get('/create', (req, res)=>{
     res.render('create', { title : 'create' })
 })
 
