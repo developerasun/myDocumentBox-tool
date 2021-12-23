@@ -1,5 +1,7 @@
+import { HasFormatter } from "../interfaces/hasFormatter"
+
 // class 
-class Invoice {
+class Invoice implements HasFormatter{
     constructor(
         readonly client : string,
         private details : string, // private property is only accessible within class
