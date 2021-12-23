@@ -31,15 +31,19 @@ const newForm = document.querySelector('.newForm') as HTMLFormElement
 newForm.addEventListener("submit", (e:Event)=> {
     e.preventDefault()
 
+    // declare a tuple
+    let inputs: [string, string, number]
+    inputs = [toFrom.value, details.value, parseInt(amounts.value)]
+
     if (Validate(amounts)) {
         switch (type.value) {
             case "Invoice" : 
-                const newInv = new Invoice(toFrom.value, details.value, parseInt(amounts.value))
+                const newInv = new Invoice(...inputs) // spread operator
                 const ul_invoice = new ListTemplate(result)
                 ul_invoice.render(newInv, type)
                 break
             case "Payment" : 
-                const newPay = new Payment(toFrom.value, details.value, parseInt(amounts.value))
+                const newPay = new Payment(...inputs)
                 const ul_payment = new ListTemplate(result)
                 ul_payment.render(newPay, type)
                 break
