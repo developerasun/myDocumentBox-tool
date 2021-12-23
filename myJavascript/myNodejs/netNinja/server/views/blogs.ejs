@@ -9,15 +9,7 @@
 
     <div class="blogs">
         <h2>All blogs</h2>
-        <% if (blogs.length>0) { %>
-            <% blogs.map((item)=>{ %>
-                <h3><%= item.title %></h3>
-                <p><%= item.snippets %></p>
-                <p><%= item.body %></p>
-            <% }) %>   
-        <% } else  { %>
-            <h3>No blog posts yet</h3>
-        <% } %>
+    <%- include('./partial/blogList.ejs') %>
     </div>
 
     <%- include('./partial/footer.ejs') %>
