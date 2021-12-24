@@ -4,18 +4,23 @@ const Blog = require('../model/blog')
 const blog_index = (req, res)=>{
     Blog.find().sort( { createdAt : -1} )
     .then((result)=>{
-        res.render('blogs', { title : 'Jake\'s blog', blogs: result } )
+        res.render('blogs/blogs', { title : 'Jake\'s blog', blogs: result } )
     })
-    .catch((err)=>console.log(err))
+    .catch((err)=>{
+        console.log(err)
+    })
 }
 
 const blog_post = (req,res)=>{
     const id = req.params.id
     Blog.findById(id)
         .then((result)=>{
-            res.render('details', { title : "my post", blog : result })
+            res.render('blogs/details', { title : "my post", blog : result })
         })
-        .catch((err)=>console.log(err))
+        .catch((err)=>{
+            res.status(404).render('404')
+            console.log(err)
+        })
 }
 
 const blog_create_post = (req, res)=>{
@@ -24,7 +29,7 @@ const blog_create_post = (req, res)=>{
     newBlog.save()
            .then((result)=>{
                res.redirect('/blogs')})
-           .catch((err)=> console.log(err))
+           .catch((err)=> {console.log(err)})
 }
 
 const blog_delete_post = (req, res)=>{
