@@ -20,7 +20,7 @@ HTML is constantly updated, which latest one is HTML5. Declare HTML version like
 </html>
 ```
 
-# Basic HTML and HTML5
+## Basic HTML and HTML5
 As a convention, all HTML tags are lowercases. Creating a logical document with sematic tags should be done before creative and nice web design. 
 
 ## Headings
@@ -56,6 +56,13 @@ HTML5 adopts more SEO-friendly and developer-friendldy tags for website. Tags su
 - section : grouping thematically related contents. Use div element if there is no relationship between groups of content. 
 
 These tags are similiar to div tag but they are differentiated by the fact that it cnan indicate information it contains. 
+
+<deails>
+    <summary>What are screen readers?</summary>
+<p>
+Screen reader is a software program that helps blind/visually impaired web users to read web contents, using speech synthesizer or braille display.
+</p>
+</details>
 
 ## Img and alt
 All img elements in HTML5 must have an alt attribute. The alt attribute is used in screen reader and is displayed even when the image is not loaded. 
@@ -219,3 +226,36 @@ Colorblindness ranges from a decreased awareness to a certain wavelength of ligh
     color: lightgreen;  
 }
 ```
+
+## Accesskey
+accesskey in HTML5 allows us to add a shortcut key to an element. This can be useful for interactions with link, button, and form control. 
+
+```html
+<a href="https://www.google.com" accesskey="b">Move to Google</a>
+```
+
+Activating the attribute can be different based on OS and browser. Take a look at below image. Use Alt+key in Chrome/Window. 
+
+<img src="reference/firefox-chrome.png" width=1000 height=800 alt="low contrast text screenshot" />
+
+## Tabindex
+Use tabindex to add keyboard focus to an element. It has a three status as follows :
+
+1. Negative value(-1, usually) : focusable with Javascript but not reachable by keyboard. Used in Javascript widget or window pop-up. 
+2. 0 : Make element keyboard focusable. For example, make div tag focusable.
+3. Positive value(1, 2, ... ) ~ : tab order defined by the number. 
+
+Setting tabindex overrides default HTML focus order. Thus should be applied in care. 
+
+Note that some browsers already have tab orders defined so that you need add your own buffer to make sure your tab order start right. For example, 
+
+```html
+<div class="buffer" taborder="1"></div>
+<input type="email" taborder="1"/>
+<input type="password" taborder="2"/>
+```
+
+# Reference
+- [Free code camp : Basic HTML and HTML5](https://www.freecodecamp.org/learn/responsive-web-design/#basic-html-and-html5)
+- [Free code camp : Applied accessibility](https://www.freecodecamp.org/learn/responsive-web-design/#applied-visual-design)
+- [What are screen readers?](https://equalizedigital.com/what-are-screen-readers/)
