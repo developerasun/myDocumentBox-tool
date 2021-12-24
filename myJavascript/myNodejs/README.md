@@ -13,14 +13,6 @@
 - [Node Package Manager]()
 - [Node Package Manager]()
 
-## MongoDB
-- [Node Package Manager]()
-- [Node Package Manager]()
-- [Node Package Manager]()
-- [Node Package Manager]()
-- [Node Package Manager]()
-
-
 # Understanding how Node.js is invented
 Javascript had been used client side mostly but nowadays it can be used server side language as well. But why was it not possible then but now is good to go? 
 
@@ -478,7 +470,94 @@ app.use(bodyParser.json())
 
 ```
 
+## Request Types
+Types of request are as follows : 
+
+- GET : get resources from ( A = database/web page )
+- POST : create a new data to A
+- DELETE : delete the data in A
+- PUT : update the data in A
+
+You can use the same route for different requests. Server deals with it. For example, 
+
+- localhost:8080/dog => GET request
+- localhost:8080/dog => POST request
+- localhost:8080/dog/:id => GET request
+- localhost:8080/dog/:id => DELETE request
+- localhost:8080/dog/:id => PUT request
+
+### Workflow
+1. User fills out a form at webpage
+2. User submits the form
+3. Front end sends a POST request to server
+4. Backend handles the request, creating an instance corresponding to the form and saving the instance to database.
+
+First of all, let's see HTML form. 
+```html
+<!-- the form sends a POST request to the action(server route)  -->
+<form action="/blogs" method="POST">
+    <!-- add name attribute to let server know what form element it is -->
+    <input type="text" name="title" />
+</form>
+```
+
+Note that the input tag's name will be used in request body object property in backend. Let's take a look at server.
+```javascript
+// saving the request in database
+app.post('/blogs', (req, res)=> {
+    const newBlog = new Blog(req.body)
+    newBlog.save()
+           .then((result)=> {
+               res.redirect('/blogs')})
+           .catch((err)=> console.log(err))
+})
+
+// delivering the data to front end
+app.get('/blogs', (req, res)=>{
+    Blog.find()
+        .sort(-1)
+        .then((result)=> {
+            // do something with the result to display the data
+            // varies depending front end 
+        })
+})
+```
+
+## Express router
+As routings gets more added, your codes might get become fat and messier. Use Express router, which is a built-in, to make the routes tight and handy. 
+
+```javascript 
+// In your router.js file, 
+const express = require('express')
+const myRouter = express.Router()
+
+myRouter.get('/', (req, res)=>{
+    // do something here
+})
+
+// Once done with routing, export your router. 
+module.exports = myRouter
+
+// In your main server javascript file, like app.js, import the module and use it as a middleware.
+app.use("your_basic_route_for_router", myRouter)
+```
+
+## MVC pattern
+MVC model stands for model, view, and controller.
+
+- Model : database
+- View : front end
+- Controller : connecting the Model and View. server. 
+
+Below you can check how a project directory is constructured by MVC pattern.
+
+<img src="reference/mvc-pattern.png" width=180 height=220 />
+
+Let's spread those source folders to see more details.
+
+<img src="reference/project-source-tree.png" width=220 height=580 />
+
 # Reference
-- [NetNinja Node js crash course](https://www.youtube.com/watch?v=zb3Qk8SG5Ms&list=PL4cUxeGkcC9jsz4LDYc6kv3ymONOKxwBU&index=1&t=1s)
+- [NetNinja Node,js crash course](https://www.youtube.com/watch?v=zb3Qk8SG5Ms&list=PL4cUxeGkcC9jsz4LDYc6kv3ymONOKxwBU&index=1&t=1s)
 - [Free code campe - ENG](https://www.freecodecamp.org/learn/back-end-development-and-apis/)
 - [Inflearn - KOR](https://www.inflearn.com/course/node-js-%EC%9B%B9%EA%B0%9C%EB%B0%9C#)
