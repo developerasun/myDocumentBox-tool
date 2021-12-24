@@ -11,17 +11,26 @@
         .delete:hover { 
             background-color: beige;
         }
+        .deleteIcon {
+            width: 100%;
+            width: 20px;
+        }
+        button { 
+            width: 50px;
+            height: 50px;
+        }
     </style>
     <title><%= title %></title>
 </head>
 <body>
-    <%- include('./partial/nav.ejs') %>
+    <%- include('../partial/nav.ejs') %>
         <h1>Post detail with EJS</h1>
         <h3><%= blog.title %></h3>
         <p><%= blog.snippets %></p>
         <p><%= blog.body %></p>
-        <button class="delete" data-id="<%= blog._id%>">Delete</button>
-    <%- include('./partial/footer.ejs') %>
+        <button class="delete" data-id="<%= blog._id%>"><img src="/delete.png" class="deleteIcon" alt="trashcan icon"></button>
+        
+    <%- include('../partial/footer.ejs') %>
 
     <script>
         const deleteBtn = document.querySelector(".delete")
