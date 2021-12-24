@@ -60,7 +60,7 @@ app.get('/about-us', (req, res)=>{
 })
 
 app.get('/create', (req, res)=>{
-    res.render('create', { title : 'create' })
+    res.render('blogs/create', { title : 'create' })
 })
 
 // page 404 should be at the bottom in Express
@@ -69,5 +69,4 @@ app.get('/create', (req, res)=>{
 app.use((req,res)=>{
     res.status(404)
        .render('404', { title : 'not found' })
-    //    .sendFile('./views/404.html', {root : __dirname})
 })
