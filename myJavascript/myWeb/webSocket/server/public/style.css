@@ -20,6 +20,7 @@ header {
     color: black;
     font-size: 1.5rem;
     font-weight: bold;
+    height: auto;
 }  
 
 #logo { 
@@ -33,7 +34,6 @@ nav {
     flex-flow: row nowrap;
     justify-content: space-between;
     align-items: center;
-    gap: 1rem;
     padding: 1rem;
 }
 
@@ -42,11 +42,55 @@ nav {
 }
 
 .dropdown {
-    display: block;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-flow: column nowrap;
+    background-color: white;
+}
+
+.dropdown-item { 
+    position: absolute;
+    left: 0;
+    width: 100%;
+    transform: translateY(100%);
+}
+
+.item { 
+    transform: translateX(1.2rem);
+    text-align: center;
+}
+
+main {
+    display: flex;
+    flex-flow: column nowrap;
+    justify-content: center;
+    align-items: center;
+    padding: 2rem;
+}
+
+section { 
+    width: 80%;
+    margin-bottom: 2rem;
+}
+
+.sendMsg { 
+    display: flex;
+    flex-flow: column nowrap;
+    justify-content: center;
+    align-items: center;
+    width: 300px;
+    background-color: rgb(209, 209, 209);
+    padding: 1rem;
+}
+
+.form-item { 
+    margin-top: 1rem;
 }
 
 .sendBtn {
     cursor: pointer;
+    width: 100px;
 }
 
 footer { 
@@ -63,4 +107,6 @@ footer {
     background-color: rgb(49, 49, 49);
     border-bottom: 1px solid whitesmoke;
     border-top: 1px solid whitesmoke;
+    padding: 1rem;
+    font-size: 1.5rem;
 }

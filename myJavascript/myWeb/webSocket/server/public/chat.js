@@ -19,5 +19,5 @@ sendBtn.addEventListener("click", (e)=>{
 
 // Listen for event in socket
 socket.on('chat', (data)=>{
-    readMsg.innerHTML += `${data.nickname} : <p>${data.message}</p>`
+    readMsg.innerHTML += `<p>${data.nickname} : ${data.message}</p>`
 })

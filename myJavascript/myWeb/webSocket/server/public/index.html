@@ -12,9 +12,12 @@
         <a href="#" tabindex="-1"><img src="logo.png" alt="logo" id="logo" ></a>
         <nav>
             <li>Main</li>
-            <ul>
-                <li>Chat</li>
-                <li class="dropdown-item hidden">Enter</li>
+            <ul class="dropdown">
+                <li ><a href="#" tabindex="-1">Chat</a></li>
+                <ul class="dropdown-item hidden">
+                    <li class="item">Enter</li>
+                    <li class="item">Find</li>
+                </ul>
             </ul>
             <li>About</li>
         </nav>
@@ -23,14 +26,15 @@
         <h1>Jake's chat app</h1>
         <p>Hello websocket</p>
 
-        <div class="readMsg">
+        <section>
+            <div class="readMsg"></div>
+        </section>
 
-        </div>
-
-        <form action="" class="sendMsg" tabindex="1">
-            <input class="nickname" type="text" name="nickname" placeholder="Enter your nickname" />
-            <input class="msg" type="text" name="message" placeholder="Enter your message" />
-            <button class="sendBtn">Send</button>
+        <form class="sendMsg" tabindex="1">
+            <h2 class="form-item">User Info</h2>
+            <input class="nickname form-item" type="text" name="nickname" placeholder="Enter your nickname" /><br>
+            <input class="msg form-item" type="text" name="message" placeholder="Enter your message" /><br>
+            <button class="sendBtn form-item">Send</button>
         </form>
     </main>
     <footer>
