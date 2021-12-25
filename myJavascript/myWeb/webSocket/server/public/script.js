@@ -10,5 +10,3 @@ header.addEventListener("mouseleave", ()=>{
     dropDownItem.classList.remove("dropdown")
     dropDownItem.classList.add("hidden")
 })
-
-const socket = io.connect('http://localhost:3000/')

@@ -4,6 +4,7 @@
     box-sizing: border-box;
     list-style: none;
     text-decoration: none;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
 html { 
@@ -17,6 +18,8 @@ header {
     justify-content: center;
     background-color: white;
     color: black;
+    font-size: 1.5rem;
+    font-weight: bold;
 }  
 
 #logo { 
@@ -42,6 +45,10 @@ nav {
     display: block;
 }
 
+.sendBtn {
+    cursor: pointer;
+}
+
 footer { 
     position: absolute;
     bottom: 0;
@@ -49,4 +56,11 @@ footer {
     text-align: center;
     background-color: white;
     color: black;
+}
+
+.readMsg { 
+    color: white;
+    background-color: rgb(49, 49, 49);
+    border-bottom: 1px solid whitesmoke;
+    border-top: 1px solid whitesmoke;
 }
