@@ -1,0 +1,52 @@
+* { 
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    list-style: none;
+    text-decoration: none;
+}
+
+html { 
+    background-color: black;
+    color: white;
+}
+
+header { 
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: center;
+    background-color: white;
+    color: black;
+}  
+
+#logo { 
+    transform: translateX(-50%);
+    width: 50px;
+}
+
+nav {
+    width: 80%;
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1rem;
+    padding: 1rem;
+}
+
+.hidden { 
+    display: none;
+}
+
+.dropdown {
+    display: block;
+}
+
+footer { 
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    text-align: center;
+    background-color: white;
+    color: black;
+}
