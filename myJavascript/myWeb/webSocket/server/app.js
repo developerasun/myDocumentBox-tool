@@ -8,8 +8,10 @@ const router = require('./routes/router')
 
 const server = app.listen(PORT, ()=> console.log("app listening at 3000"))
 
+// Express static files middleware
 app.use(express.static('public'))
 
+// Home
 app.get('/', (req, res)=> {
     console.log(req.method, req.url)
     res.sendFile('/public/index.html')
@@ -24,7 +26,13 @@ const io = socket(server)
 
 // add event listener for socket.io
 io.on('connection', (socket)=>{
-    console.log("socket connected")
+    console.log("socket connected", socket.id)
+
+    socket.on('disconnect', ()=> console.log("disconnected"))
+
+    socket.on('chat', (data)=>{
+        io.sockets.emit('chat', data)
+    })
 })
 
 // page 404 redirect
