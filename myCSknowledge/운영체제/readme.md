@@ -533,10 +533,91 @@ CPU가 기존에 실행 중이던 작업을 interrupt에 의해 멈추고, 우�
 - 컨텍스트 스위칭에 걸리는 시간은 pure overhead.
 - 보통은 밀리 세컨드 단위로 걸리지만, 기기에 따라 걸리는 시간은 상이할 수 있음.
 
+## 프로세스 운영
+### 프로세스 생성(Process creation)
+하나의 프로세스는 실행 과정 중에서 시스템 콜을 통해 여러 개의 새로운 서브 프로세스를 생성할 수 있다. 
 
-# 레퍼런스
+- 프로세스 트리 : 부모 프로세스(parent process) ===(시스템 콜)===> 자식 프로세스(child process) ===> 자식 프로세스 ====> 자식 프로세스 ... 
+
+<img src="./process-tree.png" width=513 height=473 alt="process tree screeshot"/>
+
+<p>
+pid 는 process id를 의미한다. 자식 프로세스는 1) 부모 프로세스와 동시에 실행되거나 2) 부모 프로세스의 실행을 멈추고 기다리게 하는 2가지의 경우로 나뉘어진다. 또한, 자식 프로세스는 1) 부모 프로세스와 완전 동일하거나 2) 새로운 프로그램으로 실행될 수 있다. 
+</p>
+
+### 프로세스 종료(Process termination)
+<p>
+프로세스 종료는 프로그램의 마지막 구문이 실행된 뒤 운영체제에게 프로세스 종료를(즉, 메모리에서 unload 하기를) 요청하는 것을 의미한다. Exit system call로 프로세스 종료를 요청한다. 
+</p>
+<p>
+프로세스 종료시, 정수 단위의 status value를 부모 프로세스에게 리턴한다. 프로세스의 물리/가상 메모리, 파일, 입출력 버퍼 등의 자원이 운영체제에 의해 할당 해제된다. 할당된 자원은 다른 프로세스에게 배분되어 다른 프로세스를 실행할 수 있게 한다. 
+</p>
+<p>
+부모 프로세스의 경우 시스템 콜을 통해 자식 프로세스에게 할당된 자원의 사용량이 한계치를 넘어섰거나 자식 프로세스의 태스크가 끝났을 경우 자식 프로세스를 종료시킬 수 있다. 부모 프로세스는 이를 위해 자식 프로세스의 자원 상태를 파악할 수 있어야 한다. 
+</p>
+<p>
+운영체제는 부모 프로세스의 종료시 자식 프로세스도 함께 종료시킨다. 
+</p>
+
+## 인터프로세스 커뮤니케이션(Interprocess communication)
+운영체제 내에서 실행되는 동시 실행되는 프로세스의 종류는 아래와 같다. 
+
+- Independent process : 다른 프로세스들에 의해 영향을 받지 않음
+- Cooperating process : 다른 프로세스들과 상호 작용함(데이터를 공유함)
+
+프로세스들이 서로 상호작용하는 것에는 아래와 같은 이유들이 존재한다. 
+
+- 데이터 교환
+- 연산 속도 향상(태스크 분할 => 서로 다른 프로세스에게 할당 => 연산)
+- 모듈화
+
+이러한 프로세스 상호 작용을 이루기 위해서는 아래와 같은 대표적 2가지 인터프로세스 커뮤니케이션(IPC) 메커니즘이 필요하다. 
+
+1. Shared memory : 특정 메모리 영역이 프로세스들에게 공유되고, 프로세스들은 이 영역에 데이터 입/출력을 실행한다. 
+2. Message passing : 프로세스들은 서로 메세지를 주고 받음으로써 상호작용한다. 
+
+<img src="./shared-momery-msg-pass.png" width=730 height=450 alt="Inter process communication screeshot"/>
+
+### Shared memory 시스템
+IPC상에서 shared memory는 shared memory 섹션을 만드는 프로세스의 <bold>주소 공간</bold>에 존재한다.  
+
+<details>
+    <summary>컴퓨터의 주소 공간이란 무엇인가?</summary>
+<p>
+운영체제는 프로세스와 주소 공간간 일대일로 대응한다. 즉, 프로세스 하나당 하나의 주소 공간을 배정받는다. 그렇다면 주소 공간이란 무엇인가? 
+</p>
+<p>
+주소 공간이란 메모리에 대응되는 주소 범위를 정의한 것을 의미한다. 즉, 프로그램이 실행된 후 메모리에 적재되고, 적재된 프로세스가 메모리에 할당되는 범위를 의미한다. 
+</p>
+</details>
+
+<p>
+따라서 상호작용, 즉 데이터 교환을 위해 the shared memory에 접근하고자 하는 다른 프로세스들을 해당 프로세스의 주소 공간(shared memory가 저장되어 있는 곳)에 자신의 주소 공간을 제공해야 한다.  
+</p>
+
+<p>
+대부분의 상황에서 운영체제는 프로세스 간 메모리 접근을 금지한다. Shared memory model이 적용되어야 하는 경우 프로세스간 동의를 받아 접근 금지를 해제한다. 
+</p>
+
+#### 생산자/소비자 프로세스
+
+생산자 프로세스는 소비자 프로세스가 사용할 자원을 생성한다. 예를 들면, 
+- 컴파일러 ====(어셈블리어)===> 어셈블러 ===(오브젝트 모듈)===> 로더
+
+<img src="./assembly-code-eg.png" width=760 height=330 alt="assembly language code example" />
+
+소비자 프로세스는 생산자 프로세스가 생산한 자원만을 사용해야 하는 것이 원칙이다(프로듀서/컨슈머 문제). 생산자/소비자 프로세스가 동시 실행되기 위해서 버퍼 아이템들(a buffer of items)이 생성되어져야 한다. 버퍼 아이템들은 shared memory상에 존재하고, 생성된 아이템들만을 사용하기 위해 생산자와 소비자간 싱크가 맞춰져 전달된다.  
+
+- 생산자 프로세스 ===(a buffer of items in shared memory)===(synchronized)===> 소비자 프로세스
+
+#### 버퍼의 종류
+1. Unbounded buffer : 버퍼의 크기 제한이 없다. 생산자 프로세스는 항상 새로운 버퍼 아이템을 생산/추가할 수 있다. 
+2. Bounded buffer : 버퍼 크기 제한이 있다. 생산자 프로세스는 버퍼가 가득 차 있을 경우 기다려야 하며, 소비자 프로세스는 버퍼가 비어 있을 경우 기다려야 한다.
+
+
+## 레퍼런스
 - [Difference between Multiprogramming, multitasking, multithreading, and multiprocessing](https://www.geeksforgeeks.org/difference-between-multitasking-multithreading-and-multiprocessing/)
 
 - [Instantiation](https://en.wikipedia.org/wiki/Instantiation)
 
-
+- [An introduction to assembly language](https://medium.com/@jleveewhite/an-introduction-to-assembly-language-8144ce1dfb0e)
