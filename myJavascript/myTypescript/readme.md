@@ -311,3 +311,75 @@ interface Cat<T> {
 const myCat = Cat( { name : "butter", age : 5 })
 const yourCat = Cat( { name : "fly", age : ["five years old"] })
 ```
+
+## Enum(enumeration)
+A special type in Typescript, allowing to store a group of constants associated with numerical value. See a quote that explains why we use enum(site link on refererence)
+
+```
+Using enums increase the level of abstraction and lets the programmer think about what the values mean rather than worry about how they are stored and accessed. This reduces the occurrence of bugs.
+```
+
+Example of enum is as follows : 
+
+In Java, 
+```Java
+enum Volume {
+    LOW, 
+    MEDIUM, 
+    HIGH
+}
+Volume myVar = Volume.HIGH; 
+```
+
+In Go, 
+```Go
+const (
+    LOW = iota
+    MEDIUM
+    HIGH
+)
+fmt.Println(LOW) // 0 
+```
+
+In Typescript, 
+```Typescript
+enum CountryCode {
+    KOR, 
+    JPN,
+    CHN
+}
+
+const flags = <T extends CountryCode>(country: T) => {
+    console.log(country)
+}
+//Differentiate flag by country code
+flags(Resource.KOR)
+flags(Resource.JPN)
+flags(Resource.CHN)
+```
+
+# Webpack and Typescript setup
+Webpack helps developer's workflow by bundling stuff and making them distributable in web. For example, Webpack compiles 1) Typescript => Javascript 2) Sass => Css
+
+## table of contents 
+- Complie Typescript into Javascript using webpack
+- Bundle Typescript codes to one-single-optimized-for-web Javascript file
+- Access to webpack dev server
+- ES6 modules and source maps
+
+## Installation
+Install webpack, webpack cli, and typescript loader like below. 
+```
+npm install webpack webpack-cli ts-loader -D
+```
+ts-loader is a tool that allows webpack to compile Typescript into Javascript. Install Typescript as dev dependency as well so that webpack can execute normally. 
+
+<img src="reference/webpack-dependency.png" width=394 height=168 />
+
+(organize webpack config file below)
+
+
+# Reference
+- [What is an Enum in programming language](https://www.thoughtco.com/what-is-an-enum-958326)
+- [NetNinja - Typescript](https://www.youtube.com/watch?v=fPYbNXzXP6M&list=PL4cUxeGkcC9gUgr39Q_yD6v-bSyMwKPUI&index=21)
+- [NetNinja - Typescript with webpack](https://www.youtube.com/watch?v=sOUhEJeJ-kI&list=PL4cUxeGkcC9hOkGbwzgYFmaxB0WiduYJC&index=1)
