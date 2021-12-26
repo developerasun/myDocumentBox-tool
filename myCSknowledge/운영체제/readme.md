@@ -614,6 +614,32 @@ IPC상에서 shared memory는 shared memory 섹션을 만드는 프로세스의 
 1. Unbounded buffer : 버퍼의 크기 제한이 없다. 생산자 프로세스는 항상 새로운 버퍼 아이템을 생산/추가할 수 있다. 
 2. Bounded buffer : 버퍼 크기 제한이 있다. 생산자 프로세스는 버퍼가 가득 차 있을 경우 기다려야 하며, 소비자 프로세스는 버퍼가 비어 있을 경우 기다려야 한다.
 
+### Message passing 시스템
+<p>
+메세지 패싱 시스템은 대표적인 IPC 모델 중 하나이다. 네트워크 상에서 서로 다른 컴퓨터간 프로세스 커뮤니케이션이 이루어지는 분산 환경에서 유리하며(e.g 채팅) 프로세스간 주소 공간 공유 없이도 싱크를 맞춰준다. 
+</p>
+
+<p>
+Message-passing facility는 message send/receive 기능을 수행하며 the message는 크기에 따라 1) fixed 또는 2) variable로 구별된다. 
+</p>
+
+- fixed size message : 시스템 레벨에서의 태스크 수행이 쉬워짐, 프로그래밍 레벨에서의 태스크는 어려워짐(메세지 크기 제약이 있으므로)
+- variable size message : 프로그래밍 레벨에서의 태스크가 쉬워짐, 시스템 레벨 태스크는 어려워짐(커버해야하는 메세지 크기가 늘어나므로)
+
+<p>
+프로세스간 메세지를 주고 받기 위해서는 1) <bold>논리적/물리적 커뮤니케이션 링크</bold>가 존재해야 하며 2) send/receive와 같은 operation이 필요하다.
+</p>
+
+<img src="./processes-logical-link.png" width=244 height=172 alt="process link" />
+
+<p> 
+프로세스는 커뮤케이션을 위해 메세지를 주고/받을 다른 프로세스의 <bold>이름을 반드시 명명</bold>해야 한다. 예를 들어, 
+
+- Q sends (P.message) => 프로세스 Q가 프로세스 P에게 메세지를 보냄 
+- P receieves (Q.message) => 프로세스 Q가 프로세스 P에게 메세지를 보냄 
+
+이는 프로세스 간 링크는 오직 하나이며, 해당 링크는 P,Q만을 연결한다는 전제가 깔려있다. 이처럼 프로세스끼리 통신을 위해 서로의 아이덴티티를 이름으로 확인하는 특성을 <bold>symmetry in addressing</bold>이라 부른다.  
+</p>
 
 ## 레퍼런스
 - [Difference between Multiprogramming, multitasking, multithreading, and multiprocessing](https://www.geeksforgeeks.org/difference-between-multitasking-multithreading-and-multiprocessing/)
