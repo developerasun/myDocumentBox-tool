@@ -626,6 +626,7 @@ Message-passing facility는 message send/receive 기능을 수행하며 the mess
 - fixed size message : 시스템 레벨에서의 태스크 수행이 쉬워짐, 프로그래밍 레벨에서의 태스크는 어려워짐(메세지 크기 제약이 있으므로)
 - variable size message : 프로그래밍 레벨에서의 태스크가 쉬워짐, 시스템 레벨 태스크는 어려워짐(커버해야하는 메세지 크기가 늘어나므로)
 
+#### Direct communication
 <p>
 프로세스간 메세지를 주고 받기 위해서는 1) <bold>논리적/물리적 커뮤니케이션 링크</bold>가 존재해야 하며 2) send/receive와 같은 operation이 필요하다.
 </p>
@@ -633,13 +634,82 @@ Message-passing facility는 message send/receive 기능을 수행하며 the mess
 <img src="./processes-logical-link.png" width=244 height=172 alt="process link" />
 
 <p> 
-프로세스는 커뮤케이션을 위해 메세지를 주고/받을 다른 프로세스의 <bold>이름을 반드시 명명</bold>해야 한다. 예를 들어, 
+프로세스는 커뮤케이션을 위해 메세지를 주고/받을 다른 프로세스의 <bold>이름을 반드시 명명(naming)</bold>하는 것이 원칙이다. 예를 들어, 
 
 - Q sends (P.message) => 프로세스 Q가 프로세스 P에게 메세지를 보냄 
-- P receieves (Q.message) => 프로세스 Q가 프로세스 P에게 메세지를 보냄 
+- P receieves (Q.message) => 프로세스 P가 프로세스 Q에게 메세지를 받음 
 
 이는 프로세스 간 링크는 오직 하나이며, 해당 링크는 P,Q만을 연결한다는 전제가 깔려있다. 이처럼 프로세스끼리 통신을 위해 서로의 아이덴티티를 이름으로 확인하는 특성을 <bold>symmetry in addressing</bold>이라 부른다.  
 </p>
+
+<p>
+메시지 송신 프로세스에게만 네이밍이 요구될 경우를 asymmetry in addressing이라 부른다. 예를 들어,  
+
+- Q sends (P.message) 
+- P receives (id.message)
+</p>
+
+<p>
+asymmestry와 symmetry 모두 프로세스 이름(아이덴티티)이 변경될 경우 기존 통신이 불가능해지므로 모듈화에 불리하다는 단점이 존재한다. 
+</p>
+
+#### Indirect communication
+<p>
+간접 방식 커뮤니케이션에서는 메일 박스/포트 개념이 활용된다. 메일 박스란 추상화된 객체로, 프로세스들이 주고 받을 메세지들이 저장되는 곳이다. 각각의 메일 박스는 유니크한 아이덴티티를 가지고 있으며, 각각 프로세스들은 공유된 메일 박스가 있을 경우만 커뮤니케이션이 가능하다.  
+</p>
+
+<img src="./mailbox.png" width=470 height=170 alt="mailbox model screenshot" />
+
+<p>
+이 경우 직접 방식 커뮤니케이션에서 하나의 링크는 두 개의 프로세스에만 연결되어 있던 것과는 달리, 링크 하나가 여러 프로세스 쌍을 연결할 수 있다. 단, P1이 메세지를 보냈을 경우 P2, P3 모두가 수신하는 것이 아니라 상황에 따라 하나의 프로세스만이 메세지를 수신한다. 
+</p>
+
+<p>
+메일 박스는 하나의 프로세스 또는 운영체제에 의해서 소유된다. 프로세스가 메일박스를 컨트롤 할 경우, 해당 프로세스가 종료될 때 메일 박스도 사라진다는 단점이 존재한다. 운영체제가 메일 박스를 가질 경우, 특정 프로세스 종료 이후에도 다른 프로세들에게 메일 박스를 공급할 수 있다. 
+</p>
+
+### Synchronous/Asynchronous communication
+프로세스가 메세지를 주고(send) 받을 때(receive) 이를 동기(block, synchronous) 또는 비동기(non-block, asynchronous) 방식으로 처리할 수 있다. 
+
+- 프로세스 A ====(send/asynchronously)===> 프로세스 B(receive/synchronous)
+
+프로세스 간 주고 받는 메세지는 buffer라고 불리는 임시 큐에 존재에 존재한다.
+
+- 프로세스 A ====(send/asynchronously)===><===(messages in buffer)===> 프로세스 B(receive/synchronous)
+
+버퍼는 아래와 같은 3가지 타입이 있다. 
+
+1. Zero capacity : 버퍼 공간의 최대 수용량이 0인 경우. 프로세스 A => B로 한 번에 하나의 메세지만 보낼 수 있으므로, 송신자 프로세스 A는 블록되어 기다려야 한다(수신자 프로세스 B가 메세지를 받을 때까지)
+2. Bounded capacity : 버퍼 공간의 최대 수용량이 n인 경우. 최대 수용량까지는 비동기로 메세지를 보낼 수 있으나 버퍼가 꽉 찼을 경우 송신자 프로세스는 A는 블록되고 기다려야함. 
+3. Unbounded capacity : 버퍼 공간의 최대 수용량이 potentially infinite한 경우. 송신자 프로세스 A는 블록되지 않고 계속해서 메세지를 보냄.
+
+## Sockets
+소켓은 클라이언트-서버 모델의 커뮤니케이션을 위해 사용된다. 프로세스 하나당 하나의 소켓을 가지며, 포트 번호와 결합된 아이피 주소(Internet Protocol address)로 구분된다. 예를 들어
+
+```javascript
+// socket format : (IP:port number)
+146.86.5.20:1625
+
+// server
+const express = require('express')
+cosnt app = express()
+
+app.listen(3000, ()=>console.log("listening at port 3000"))
+app.get('/', (req, res)=> {
+    res.send("Hello Jake")
+})
+
+// client(browser)
+// http://127.0.0.1:3000 => "Hello Jake" in screen
+```
+
+- Process A(endpoint) <========> (endpoint)Process B  
+
+- Client===//socket//====(request, packet)===>//socket//===server(listening at port)
+- Client===//socket//<====(response, packet)===//socket//===server(listening at port)
+
+<img src="./client-server-socket.png" alt="sockets in server and client" height=450 width=760 />
+
 
 ## 레퍼런스
 - [Difference between Multiprogramming, multitasking, multithreading, and multiprocessing](https://www.geeksforgeeks.org/difference-between-multitasking-multithreading-and-multiprocessing/)
