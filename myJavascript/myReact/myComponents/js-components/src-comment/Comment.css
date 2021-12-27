@@ -1,0 +1,43 @@
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.comment {
+    display: flex;
+    flex-flow: column nowrap;
+    justify-content: center;
+    align-items: center;
+    margin: 2rem;
+    text-align: left;
+}
+
+.entity {
+    display: flex;
+    flex-flow: row nowrap;
+    width: 500px;
+}
+
+#avatar {
+    width: 60px;
+    height: 60px;
+}
+
+.text-group {
+    height: 60px;
+    width: 100%;
+    background-color: rgb(222, 247, 255);
+    padding-left: 1rem;
+}
+
+.username {
+    font-size: 1.5rem;
+    margin-bottom: 0.2rem;
+    height: 50%;
+}
+
+.content {
+    font-size: 1rem;
+}
