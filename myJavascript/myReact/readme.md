@@ -12,7 +12,12 @@ Check your React version with below command
 npm view react version
 ```
 
-# Table of Contents
+## Directory configuration
+- myComponents : exercise my own React codes (JS/TS)
+- myFreeCodeCamp : basic React and Redux
+- net-ninja : React tutorials (Query, Material UI, Testing, Context)
+
+## Table of Contents
 - [Create a React app]()
 - [Components and Props]()
 - [State and Lifecycle]()
