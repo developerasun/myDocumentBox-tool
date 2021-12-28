@@ -31,6 +31,14 @@ JWT also can be combinated with OAuth2, which is a favored authorization of big 
 ## Hash and password
 Password should not be stored in database in a form of what user just had typed. If the database gets hacked, the passwords would be compromised easily. 
 
+## Process
+1. Attach a salt to a plain text(user password)
+2. Hash algorithm creates a hashed password with result of 1
+3. When use re-logins, it will compare the combination(user password + salt => hashed password).
+4. If correct, user logs in.
+
+<img src="reference/hash-salt-pw.png" width=750 height=380 alt="hashing password" />
+
 
 ## Reference
 - [App Security: Why is it worth it to implement JWT based authentication in your app?](https://espeo.eu/blog/app-security-jwt-based-authentication/)
