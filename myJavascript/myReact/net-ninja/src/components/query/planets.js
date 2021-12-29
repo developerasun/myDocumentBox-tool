@@ -3,6 +3,7 @@ import { useQuery, QueryClient, QueryClientProvider } from 'react-query' // impo
 import { ReactQueryDevtools } from 'react-query/devtools'
 import nameContainer from "./stateNames/nameContainer"
 import Planet from "./planet"
+import '../../sass/css/planets.css'
 
 const queryClient = new QueryClient()
 const btnStyle = {
@@ -30,6 +31,7 @@ const Planets = () => {
 
         // Query options
         {
+        keepPreviousData:true,
         // data is in fresh status for 2000ms(2 sec)
         staleTime: 2000, 
         cacheTime: 500000, // data cached for 5 mins
@@ -49,11 +51,15 @@ const Planets = () => {
                         "justifyContent":"center",
                         "marginTop":"1rem", 
                     }}>
-                        <button style={btnStyle} onClick={()=>setPage(1)}>1</button>
-                        <button style={btnStyle} onClick={()=>setPage(2)}>2</button>
-                        <button style={btnStyle} onClick={()=>setPage(3)}>3</button>
-                        <button style={btnStyle} onClick={()=>setPage(4)}>4</button>
-                        <button style={btnStyle} onClick={()=>setPage(5)}>5</button>
+                        <button style={btnStyle} 
+                        onClick={()=>setPage(num => Math.max(num - 1, 1))}
+                        disabled={page===1}
+                        >Prev</button>
+                        <div style={btnStyle} disabled>{page}</div>
+                        <button style={btnStyle} 
+                        onClick={()=>setPage(num => Math.max(num + 1, 1))}
+                        disabled={!data || !data.next}
+                        >Next</button>
                     </div>
                     {data.results.map((item)=> {
                         return <Planet key={item.name} planet={item} />
