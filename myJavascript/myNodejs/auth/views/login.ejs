@@ -1,4 +1,42 @@
-<%- include('partials/header'); -%>
-<h1>Login</h1>
+<%- include('partials/header') -%>
+
+<!-- name attribute in input element is displayed in 
+backend as one of the request value. 
+And it also be accessed through form.(name) in front end. 
+-->
+<form>
+    <h1>Login</h1>
+    <label for="email">Email
+        <input id="email" 
+               type="email" 
+
+               name="email" 
+               placeholder="Enter your email" 
+               required/>
+    </label>
+    <div class="email error"></div>
+
+    <label for="password">Password
+        <input id="password" 
+               type="password" 
+               name="password" 
+               placeholder="Enter your password"
+               required/>
+    </label>
+    <div class="password error"></div>
+    <!-- Button inside form submits the form whenever clicked. -->
+    <button>Submit</button>
+</form>
 
 <%- include('partials/footer'); -%>
+
+<script>
+    const form = document.querySelector("form")
+
+    form.addEventListener("submit", (e)=>{
+        e.preventDefault()
+        const email = form.email.value // if a form element is named, it can be accessed with the name. 
+        const password = form.password.value
+        console.log(email, password)
+    })
+</script>
