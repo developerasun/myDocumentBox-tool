@@ -10,7 +10,14 @@ This is a open code box of developerasun, containing the sum of his blood, sweat
 ## React
 - useQuery
 
-https://user-images.githubusercontent.com/83855174/147536061-a448902b-8a55-47e3-a77b-a36c11dddc4e.mp4
+https://user-images.githubusercontent.com/83855174/147634315-666ef3ca-0da4-48b6-872d-b1eb65c58849.mp4
+
+- useInfiniteQuery
+
+https://user-images.githubusercontent.com/83855174/147634099-17cb1699-6546-4ebe-9cc8-114ebce124e6.mp4
+
+
+
 
 ## Node js 
 (will be added)
