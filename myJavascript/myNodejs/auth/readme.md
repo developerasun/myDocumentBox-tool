@@ -64,8 +64,14 @@ Read below article to find out more.
 
 - [Cross site request forgery](https://owasp.org/www-community/attacks/csrf)
 
+## Understanding cookie
+Let's take a look what Wikipedia has defined about cookie. 
 
+```
+HTTP cookies (also called web cookies, Internet cookies, browser cookies, or simply cookies) are small blocks of data created by a web server while a user is browsing a website and placed on the user's computer or other device by the user’s web browser. Cookies are placed on the device used to access a website, and more than one cookie may be placed on a user’s device during a session.
+```
 
+So, basically cookie is a data stored in web browser/user device. It is created in server and stored in browser. It is also a place where above JSON web token is stored. 
 
 
 ## Reference
