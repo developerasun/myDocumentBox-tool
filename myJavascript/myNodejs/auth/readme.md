@@ -21,23 +21,51 @@ types of authentification methods
 <p>
 JSON format has been popular in transferring data format since it is easy to use and to contain many infos in it. Besides,  many programming language provides JSON parsers. It means that the data can be easily converted to object. 
 </p>
+<p>
+JWT also can be combinated with OAuth2, which is a favored authorization of big IT companies such as Microsoft, Facebook, and Google.
+</p>
 
 <img src="reference/jwt-example.png" width=700 height=500 alt="JSON web token example" />
 
-<p>
-JWT also can be combinated with OAuth2, which is a favored authorization of big IT companies such as Microsoft, Facebook, and Google. 
-</p>
+JWT consists of three parts : 1) headers 2) payload 3) signature
 
-## Hash and password
+- <img src="reference/jwt-header.png" width=720 height=200 alt="JSON web token header" />
+
+- <img src="reference/jwt-payload.png" width=720 height=200 alt="JSON web token payload" />
+
+- <img src="reference/jwt-signature.png" width=720 height=200 alt="JSON web token signature" />
+
+The header and payload in JSON web token is hashed together with a secret string in the server side. The result, which is the three things combined header, payload, and secret string, is called JSON web token signature. 
+
+- The created JSON web token looks like this : header.payload.signature, and is sent to browser to store in cookie. When a wrong header/payload is delivered(when user type them wrong in login form, for example) a newly created signature will be different from an originally hashed signature. Thus, authtication fails. 
+
+## Understanding hasing password Process
 Password should not be stored in database in a form of what user just had typed. If the database gets hacked, the passwords would be compromised easily. 
 
-## Process
 1. Attach a salt to a plain text(user password)
 2. Hash algorithm creates a hashed password with result of 1
 3. When use re-logins, it will compare the combination(user password + salt => hashed password).
 4. If correct, user logs in.
 
 <img src="reference/hash-salt-pw.png" width=750 height=380 alt="hashing password" />
+
+## Understanding login process
+1. User enters info(email/password) in web browser through login form.
+2. Server check the info. If correct, server creates JSON web token for the user.
+3. Server sends the token to browser and browser stores it in a cookie.
+4. The cookie is sent to server per every request a browser sends. 
+5. Sever gets takes JSON web token out of the cookie and identify user. 
+6. If identified, server sends a user info to browser. If not, sends an error.
+
+### JWT security caution
+When using JWT for authentication, you have to be aware of Cross Site Request Forgery(CSRF). The attack is target state changes on server by taking advantage of the fact that when user is in an authenticated status, there is no way to distinguish forged request by attacker and a normal request by user. 
+
+Read below article to find out more. 
+
+- [Cross site request forgery](https://owasp.org/www-community/attacks/csrf)
+
+
+
 
 
 ## Reference
