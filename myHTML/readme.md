@@ -255,7 +255,53 @@ Note that some browsers already have tab orders defined so that you need add you
 <input type="password" taborder="2"/>
 ```
 
-# Reference
+## HTML and SEO
+Required SEO data for a typical website is as follows :
+- Title
+- Description
+- Keywords
+- Alt 
+- Heading
+- Canonical : html element that solve duplicated content issues. For example, 
+
+```html
+<link rel="canonical" href="a_preferred_version_of_your_page_url" />
+```
+
+Setting a canonical tag is simliar to redirecting many your urls, which are not a canonical version of your web pages, to the canonical one.  
+
+- OpeanGraph : a protocol created by Facebook, used to standardize meta data usage within a webpage. The four basic og tags(open graphic tags) are required for each page.
+
+<ul>
+
+- og:title => a title of your page
+- og:type => a type of your website. Typically "website"
+- og:image => a link to an image
+- og:url => a current page url
+</ul>
+
+When og tags not applied, 
+
+- <img src="reference/og-twitter-preview.png" width=550 height=300 alt="twitter card preview not showing" />
+
+when og tags applied, 
+
+- <img src="reference/og-twitter-preview-with.png" width=550 height=500 alt="twitter card preview showing" />
+
+OpenGraph tags should be head section in HTML. For example, 
+
+```HTML
+<head>
+    <meta property="og:title" content="Learning HTML5 essentials" />
+    <meta property="og:description" content="HTML5 is a markup language that structures a document." />
+    <meta property="og:type" content="website" />
+    <meta property="og:image" content="reference/dummy-image.jpg" />
+    <meta property="og:url" content="https://github.com/developerasun/mySideProject/tree/master/myHTML" />
+</head>
+```
+
+## Reference
 - [Free code camp : Basic HTML and HTML5](https://www.freecodecamp.org/learn/responsive-web-design/#basic-html-and-html5)
 - [Free code camp : Applied accessibility](https://www.freecodecamp.org/learn/responsive-web-design/#applied-visual-design)
 - [What are screen readers?](https://equalizedigital.com/what-are-screen-readers/)
+- [What is Open Graph and how can I use it for my website?](https://www.freecodecamp.org/news/what-is-open-graph-and-how-can-i-use-it-for-my-website/)
