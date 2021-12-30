@@ -280,6 +280,39 @@ func main() {
 
 ```
 
+How is interface different from type? The interface can be used to extend something and most of time used to set an object. And type is used when primitive types are combined. For example, 
+
+```typescript
+// Interface
+interface Person { 
+    name : string
+    age : number
+}
+
+// declaration extended
+interface Jake extends Person { 
+    gender : string
+}
+
+// instance created
+const jake : Jake = { 
+    name: "Jake", 
+    age: 27, 
+    gender: "male" // gender property also required
+}
+
+```
+
+```typescript
+type stringOrNumber = string | number // string and number is primitive
+type myFunc = (name: string) => string // type is used to define a function  
+```
+
+Thus, main difference between interface and type can be as follows : 
+
+- interface : object, call by reference, declaration extension
+- type : primitive, call by value, function
+
 ## Generic
 Generic allows us to change types flexibly or follow a certain form so that we can re-use some codes. 
 
