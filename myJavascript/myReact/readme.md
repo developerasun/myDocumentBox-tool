@@ -837,12 +837,26 @@ useEffect(()=>{
 
 ```
 
-# Reference
-[React.org](https://reactjs.org/docs/hooks-effect.html)
+## SEO for React
+React has its weakness at SEO(search engine optimization) and tackles the issue in its own way. 
 
-[Free code camp - Front End Development Libraries](https://www.freecodecamp.org/learn/front-end-development-libraries/)
+Required SEO data for a typical website is as follows :
+- Title
+- Description
+- Keywords
+- Alt 
+- Heading
+- Canonical : html element that solve duplicated content issues. For example, 
+- OpeanGraph : a protocol created by Facebook, used to standardize meta data usage within a webpage. Refer HTML lectures to find out more.  
 
-[Goorm Edu - my first React (KOR)](https://edu.goorm.io/learn/lecture/12976/%EC%B2%98%EC%9D%8C-%EB%A7%8C%EB%82%9C-react-%EB%A6%AC%EC%95%A1%ED%8A%B8)
+You can try below to improve SEO in React is : 
+- Server side rendering : mainly used but might be challenging to migrate. Use framework like Next.js for the migration, which helps SEO in React.
 
-
-[LogRocket - understanding React useEffect cleanup](https://blog.logrocket.com/understanding-react-useeffect-cleanup-function/)
+## Reference
+- [React.org](https://reactjs.org/docs/hooks-effect.html)
+- [Free code camp - Front End Development Libraries](https://www.freecodecamp.org/learn/front-end-development-libraries/)
+- [Goorm Edu - my first React (KOR)](https://edu.goorm.io/learn/lecture/12976/%EC%B2%98%EC%9D%8C-%EB%A7%8C%EB%82%9C-react-%EB%A6%AC%EC%95%A1%ED%8A%B8)
+- [LogRocket - understanding React useEffect cleanup](https://blog.logrocket.com/understanding-react-useeffect-cleanup-function/)
+- [NetNinja - Full modern React](https://youtube.com/playlist?list=PL4cUxeGkcC9gZD-Tvwfod2gaISzfRiP9d)
+- [Codedamn - SEO For React Developers](https://youtu.be/j8OUmE4Vj3M)
+- [Free code campe : What is Open Graph and how can I use it for my website?](https://www.freecodecamp.org/news/what-is-open-graph-and-how-can-i-use-it-for-my-website/)
