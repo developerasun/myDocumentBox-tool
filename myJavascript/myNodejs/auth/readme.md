@@ -73,6 +73,17 @@ HTTP cookies (also called web cookies, Internet cookies, browser cookies, or sim
 
 So, basically cookie is a data stored in web browser/user device. It is created in server and stored in browser. It is also a place where above JSON web token is stored. 
 
+## Implement JSON web token
+Install JWT like below. 
+
+```javascript
+npm install jsonwebtoken // and then require it. 
+
+const myToken = require('jsonwebtoken')
+
+// jsonwebtoken.sign(db id, secret for hashing, token options)
+myToken.sign(db_ID, SECRET, TOKEN_OPTION)
+```
 
 ## Reference
 - [App Security: Why is it worth it to implement JWT based authentication in your app?](https://espeo.eu/blog/app-security-jwt-based-authentication/)
