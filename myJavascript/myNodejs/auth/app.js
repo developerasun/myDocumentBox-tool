@@ -2,7 +2,8 @@ require('dotenv').config()
 const express = require('express');
 const mongoose = require('mongoose');
 const router = require('./routes/routes');
-const cookieParser = require('cookie-parser')
+const cookieParser = require('cookie-parser');
+const { requireAuth, checkUser } = require('./middleware/authMiddleware');
 
 const MONGO_URI = process.env.MONGO_URI
 const app = express();
@@ -15,17 +16,23 @@ app.use(express.static('public')); // for static assets
 app.use(express.json()) // JSON parser(JSON => JS obj)
 app.use(router) // Router
 app.use(cookieParser()) // Cookie setting
+// app.use(checkUser)
 
 // database connection
 mongoose.connect(MONGO_URI, {  })
   .then((result) => {
-    console.log("connected")
-    app.listen(3000)})
+    console.log("db connected")
+    app.listen(3000, ()=>console.log("listening at port 3000"))})
   .catch((err) => console.log(err));
 
 // routes
+app.get('*', checkUser) // asterisk enpoint will be applied to every request
 app.get('/', (req, res) => res.render('home'));
-app.get('/smoothies', (req, res) => res.render('smoothies'));
+
+// By adding requireAuth middleware, routes are protected since it 
+// can be only accessed by a loggined user.
+// requireAuth requires user to login first before visiting /smoothies
+app.get('/smoothies', requireAuth, (req, res) => res.render('smoothies'));
 
 // create a cookie with cookie parser middleware
 app.get('/set-cookies', (req, res)=>{
