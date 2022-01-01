@@ -710,6 +710,73 @@ app.get('/', (req, res)=> {
 
 <img src="./client-server-socket.png" alt="sockets in server and client" height=450 width=760 />
 
+## Remote Procedure Call(RPC)
+IPC 모델(shared memory, message passing)은 로컬 프로세스간의 커뮤니케이션, 즉 같은 시스템/네트워크 안의 커뮤케이션을 의미힌다. 서로 다른 네트워크 안의 프로세스들이 커뮤니케이션이 필요한 경우 RPC 프로토콜을 사용한다.  
+
+- 프로세스 A in 네트워크 a <=====(메세지, RPC daemon waiting for upcoming requests)=====> 프로세스 B in 네트워크 b
+
+이떄 각각의 프로그램은 각자의 네트워크에 대한 디테일을 알지 못해도 소통이 가능하다. RPC는 서로 다른 네트워크 간의 프로세스 통신을 처리해야 하므로 shared memory 모델은 사용할 수 없으며 반드시 message-based 커뮤니케이션(message passing)을 사용해야 한다.  
+
+<img src="./rpc.png" alt="프로세스 커뮤니케이션 모델" height=450 width=780 />
+
+프로세스간 주고 받는 메세지는 RPC daemon이 처리하며, 각각의 메세지는 실행할 함수의 identifier(function name)와 그 함수에 전달할 parameter를 가지고 있다.
+
+<details>
+    <summary>stub이란 무엇인가? (펼쳐보기)</summary>
+RPC에서의 stub은 원격 procedure call이 실행될 동안 클라이언트와 서버간 전달된 파라미터들을 전환하는 코드를 의미한다. 
+</details>
+
+- parameter marshalling : packaging parameters in message into an appropriate form for network transmission
+- client ====(invokes a remote procedure)===> (stub in RPC doing parameter marshalling, transmitting a message to server) ====> server
+- server ====> (stub in RPC returning values to client) ===> client
+
+### RPC 한계점
+1. 클라이언트와 서버 호스트 간 데이터 표시 방법이 다를 수 있다. 예를 들어, 클라이언트 측은 big-endian 표기를, 서버 측은 little-endian 표기를 사용하는 경우 발생할 수 있다.
+
+2. 원격으로 이루어지므로 로컬보다 네트워크 통신이 실패할 가능성이 높다. 
+
+3. 클라이언트 측에서 원격으로 실행할 procedure의 이름은 알고 있지만 해당 procedure의 서버 포트 번호 또는 주소를 알 수 없다. 
+
+#### 극복 방안
+1. 서로 다른 데이터 표기 방법을 통일하기 위해 RPC 시스템은 XDR(External Data Representation)을 이용한다. 
+
+- 클라이언트 ===(invokes a remote procedure, data A)==>(parameter marshalling converts the data A into XDR, which is machine-independent)===> 서버(the XDR data are unmarshalled and converted to an appropriate data for server)
+
+2. 네트워크 통신 실패를 막기 위해 운영체제는 전달되는 메세지들이 정확하게 한 번만 실행되도록 관리해야 한다. 
+
+- 클라이언트 ====(request)===> 서버
+- 서버 ====(acknowledge, meaning the request has been fulfilled)===> 클라이언트
+- 클라이언트는 해당 request가 정상적으로 수행되었음을 acknowledgement를 받음으로써 확인하고 더 이상 request를 보내지 않음(메세지가 정확하게 한 번만 실행됨)
+
+3. 방법 1) 포트 번호가 미리 정해지고, 컴파일 시 RPC는 해당 포트 번호를 사용한다. 컴파일 이후에는 서버가 해당 포트 번호를 바꿀 수 없게 된다. 방법 2) 랑데부 메커니즘 또는 매치메이커 활용(클라이언트가 request를 보내면 해당 request를 실행하는 포트 번호를 서버에서 찾고, 클라이언트에게 확인시켜줌.)
+
+### RPC 구조
+
+<img src="./rpc-execution.png" alt="rpc 실행 구조" height=480 width=680 />
+<img src="./rpc-execution2.png" alt="rpc 실행 구조" height=430 width=680 />
+
+## 쓰레드
+쓰레드는 메모리에 적재되어 실행되고 있는 프로그램, 즉 프로세스 내에서 실행되는 단위이다. 쓰레드는 다음과 같은 4가지 요소로 이루어진다. 
+
+- thread ID
+- program counter
+- register set
+- stack
+
+동일 프로세스에 속해있는 쓰레드끼리는 아래와 같은 자원을 공유한다. 
+
+- code section
+- data section
+- files and signals
+
+<img src="./single-multi-thread.png" alt="rpc 실행 구조" height=340 width=790 />
+
+멀티 쓰레드 프로그래밍의 장점은 다음과 같다. 
+
+- 서로 다른 쓰레드가 서로 다른 태스크를 수행하고, 이를 통해 유저 상호작용을 높인다. 
+- 같은 주소 공간 내에서 하나의 어플리케이션이 여러 개의 쓰레드를 통해 여러 작업을 수행할 수 있게 된다.
+- 프로세스의 자원을 공유함으로써 프로세스 추가 생성에 들어가야했을 메모리와 자원을 절약할 수 있다.  
+- 멀티 프로세서 아키텍처를 활용할 수 있다. 
 
 ## 레퍼런스
 - [Difference between Multiprogramming, multitasking, multithreading, and multiprocessing](https://www.geeksforgeeks.org/difference-between-multitasking-multithreading-and-multiprocessing/)
