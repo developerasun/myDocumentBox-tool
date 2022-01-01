@@ -36,7 +36,6 @@ userSchema.pre('save', async function(next){
     catch(err){
         console.log(err)
     }
-
 })
 
 // schema.post : Defines a post hook for the model.
@@ -47,6 +46,21 @@ userSchema.post('save', function(doc, next){
     console.log("new user created and saved", doc)
     next()
 })
+
+// static method to login user
+// schema.statics : Adds static "class" methods to Models compiled from this schema.
+userSchema.statics.login = async function(email, password) { 
+    const user = await this.findOne( { email })
+    if (user) { 
+        // compare an entered password(what user typed) and a password in database(hashed password) 
+        const auth = await bcrypt.compare(password, user.password)
+        if (auth) { 
+            return user
+        }
+        throw Error('incorrect password')
+    }
+    throw Error('incorrect email')
+}
 
 const User = mongoose.model('User', userSchema)
 
