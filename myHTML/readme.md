@@ -1,4 +1,4 @@
-# Table of cotents
+## Table of cotents
 - [Headings]()
 - [Headings]()
 - [Headings]()
@@ -22,6 +22,53 @@ HTML is constantly updated, which latest one is HTML5. Declare HTML version like
 
 ## Basic HTML and HTML5
 As a convention, all HTML tags are lowercases. Creating a logical document with sematic tags should be done before creative and nice web design. 
+
+<p>
+Web standard should be adhered for improving several types of platforms and devices. HTML matters in terms of SEO since web browser bots are collecting HTML documents when searching.
+</p>
+
+- Markup(HTML) 
+- Style(CSS) 
+- Script(Javascript) 
+
+```html
+<!DOCTYPE html>
+ <!-- html tag covers all the sub-tags lang attribute is for web accessibility, which automatically pops translation interface in browser -->
+<html lang="en">
+    <!-- Head section is about the meta tags and title of the document. 
+    this section is not for users but for browsers. -->
+    <head></head>
+</html>
+```
+
+All html tags are either block tag or in-line tag. 
+
+- block tag : always take a whole width 
+- in-line tag : always take a self-width width
+
+HTML5 supports many types of tags.
+
+```html
+<p class="b-and-string">
+        <b>b tag is only to highlight visual display</b> <br/><br/>
+        <strong>strong tag let browser know that this text is important in this document</strong>
+    </p>
+
+    <p class="i-and-em">
+        <i>i tag is only to highlight visual display </i> <br/><br/>
+        <em>em tag let browser know that this text is important in this document</em>
+    </p>
+
+    <p class="ins-and-del">
+        <ins>ins tag draws a line below text</ins> <br/> <br/>
+        <del>del tag shows a cancel line in text</del>
+    </p>
+
+    <p class="q-and-blockquote">
+        <q>q tag is for a short quote</q>
+        <blockquote>blockquote is for a long quote. Lorem ipsum dolor sit amet consectetur adipisicing elit. Distinctio dolores incidunt qui! Qui in consequatur voluptate! Quos facere saepe hic quam pariatur voluptatem consequatur possimus molestiae ipsam? Recusandae, quas pariatur.</blockquote>
+    </p>
+```
 
 ## Headings
 Heading elements let browser know your website's structure. This means that they must have a semantic meaning and relate to each other. Choosing headings based on only size is a big mistake. Use CSS for resizing your elements. 
@@ -299,6 +346,13 @@ OpenGraph tags should be head section in HTML. For example,
     <meta property="og:url" content="https://github.com/developerasun/mySideProject/tree/master/myHTML" />
 </head>
 ```
+
+## Web performance
+will be added
+- lazy loading : 
+- image resize : 
+
+
 
 ## Reference
 - [Free code camp : Basic HTML and HTML5](https://www.freecodecamp.org/learn/responsive-web-design/#basic-html-and-html5)
