@@ -392,7 +392,7 @@ flags(Resource.CHN)
 ```
 
 # Webpack and Typescript setup
-Webpack helps developer's workflow by bundling stuff and making them distributable in web. For example, Webpack compiles 1) Typescript => Javascript 2) Sass => Css
+Webpack helps developer's workflow by bundling stuff and making them distributable in web. For example, Webpack compiles 1) Typescript => Javascript 2) Sass => Css. It decreases a number of network requests by bundling all the needed files into one file thus increasing performances.
 
 ## table of contents 
 - Complie Typescript into Javascript using webpack
@@ -409,8 +409,66 @@ ts-loader is a tool that allows webpack to compile Typescript into Javascript. I
 
 <img src="reference/webpack-dependency.png" width=394 height=168 />
 
-(organize webpack config file below)
+Install webpack dev server so that webpack will automatically re-run whenever changes made. It is similar to nodemon package in Node.js
 
+```
+ npm i webpack-dev-server -D
+```
+
+## Understanding webpack configuration
+Webpack files will be read by Node js. Types of configuration for webpack are as follows : 
+
+- mode : 
+    1. development (for local) 
+    2. production (publicsh your project) 
+    3. none Opts out of any default optimization options
+- entry : where webpack compiles your typescript codes. set by relative path
+- module : webpack rules such as
+    1. test : finding file names
+    2. use : setting typescript compiler
+    3. include : where webpack compiles your typescript codes. Absolute path here. 
+- output : 
+    1. publicPath : relative path letting webpack-dev-server know where to serve(build) codes. Set to use live re-loading.
+    2. filename : your bundled js code file name
+    3. path : output is an absolute path
+- resolve : leaving off .extension in file name for webpack. 
+
+```typescript
+// 
+// set input/output directory in webpack config.
+// 1) entry dir 2) output dir 
+const path = require('path')
+
+module.exports = {
+    mode: 'development',
+    entry : './src/webpack/index.ts',
+    devtool: 'eval-source-map', // use 'eval-source-map' for local dev debugging, use 'source-map' for production
+    module : {
+        rules : [
+            {
+                test : /\.ts$/, 
+                use : 'ts-loader', 
+                include : [path.resolve(__dirname, 'src/webpack')]
+            },
+        ]
+    },
+    output: {
+        publicPath : '/public/webpack/', 
+        filename : 'dist.js',
+        path: path.resolve(__dirname, 'public/webpack') 
+    },
+    resolve : {
+        extensions: ['.ts', '.js', '...']
+    }
+}
+
+```
+
+## Implementation
+1. Develop a project in local environment mode with webpack-dev-server : npm run (your_webpack_dev_server_script_here)
+2. Once done, publish the project in production mode : npm run (your_webpack_build_script_here) 
+
+<img src="reference/package-script.png" width=486 height=116 alt="package.json screenshot"/>
 
 # Reference
 - [What is an Enum in programming language](https://www.thoughtco.com/what-is-an-enum-958326)
