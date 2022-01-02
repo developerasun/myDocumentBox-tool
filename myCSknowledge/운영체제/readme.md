@@ -119,9 +119,9 @@ DMA의 경우 데이터 블록을 기준으로 device driver에게 1번의 inter
 <details>
     <summary>Advantages of Multiprocessor system</summary>
 
-    - Higher throughput(measuring performance)
-    - Economy of scale
-    - Highr reliability => if one of the processors fails, other will function still. 
+- Higher throughput(measuring performance)
+- Economy of scale
+- Highr reliability => if one of the processors fails, other will function still. 
 </details>
 
 Types of multiprocessors is as follows : 1) symmetric multiprocessor 2) asymmetric multiprocessor
@@ -148,7 +148,7 @@ Types of multiprocessors is as follows : 1) symmetric multiprocessor 2) asymmetr
 <p>
 멀티 프로그래밍이 아닌 경우 CPU는 수행하던 job이 끝날 때까지 대기하고(CPU being idle), job이 끝난 것을 확인한 후에야 다음 job으로 넘어갈 수 있다.
 <br> 
-멀티 프로그래밍에서는 CPU는 항상 수행해야 할 job을 가지고 있으며, 수행하던 job이 끝날 때까지 대기하지 않고(CPU released) 다음 job을 수행한다(CPU not being idle). 
+멀티 프로그래밍에서는 <bold>CPU는 항상 수행해야 할 job을 가지고 있으며</bold>, 수행하던 job이 끝날 때까지 대기하지 않고(CPU released) 다음 job을 수행한다(CPU not being idle). 
 </p>
 
 <p>
@@ -777,6 +777,91 @@ RPC에서의 stub은 원격 procedure call이 실행될 동안 클라이언트�
 - 같은 주소 공간 내에서 하나의 어플리케이션이 여러 개의 쓰레드를 통해 여러 작업을 수행할 수 있게 된다.
 - 프로세스의 자원을 공유함으로써 프로세스 추가 생성에 들어가야했을 메모리와 자원을 절약할 수 있다.  
 - 멀티 프로세서 아키텍처를 활용할 수 있다. 
+
+## 멀티 스레딩 모델과 하이퍼 스레딩
+### 멀티 스레딩 모델
+쓰레드는 크게 2가지 종류로 나뉜다. 
+
+- 유저 쓰레드 : 유저 수준에서 관리되는 스레드
+- 커널 쓰레드 : 운영체제에 의해 관리되는 스레드 
+
+프로그램이 정상적으로 동작하기 위해서는 유저 쓰레드와 커널 쓰레드간 소통이 필요하다. 이는 1) many : one 2) one : one 3) many : many 와 같은 방법으로 이루어진다. 
+
+- many(user threads) : one(kernal thread) => 유저 수준에서 쓰레드 관리가 용이하나, 쓰레드 중 하나가 blocking system call을 보낼 경우 전체 프로세스가 멈춘다는 단점이 존재. 
+<img src="./model1.png" alt="멀티 스레딩 모델 1" height=371 width=362 />
+
+- one(user thread) : one(kenrnal thread) => 멀티 프로세서를 활용한 동시성 프로그래밍이 유리함. 하나의 쓰레드가 blockin system call을 보내도 전체 프로세스는 멈추지 않음. 하나의 유저 쓰레드가 반드시 하나의 커널 쓰레드를 요구하기 때문에 간접비용이 발생해 어플리케이션의 성능이 저하될 수 있다. 이 모델을 사용할 경우 시스템에 의해 제공되는 쓰레드 수는 제한되는 경우가 많다. 
+<img src="./model2.png" alt="멀티 스레딩 모델 2" height=336 width=404 />
+
+- many : many => 유저 쓰레드보다 적거나 같은 수의 커널 쓰레드가 유저 쓰레드와 짝지어지는 형태. 멀티 프로세서에 의해 커널 쓰레드가 병렬적으로 실행되고, 대부분의 멀티 쓰레딩 시스템에서는 적용되는 모델. 
+<img src="./model3.png" alt="멀티 스레딩 모델 2" height=369 width=350 />
+
+### 하이퍼스레딩
+하이퍼스레딩(Hyperthreading) 또는 동시 멀티 스레딩(Simultaneous multithreading)을 이해하기 위해서 아래 코어 시스템 이론 예시를 살펴보자. 
+
+- 싱글 코어 시스템 => 1 processor => 1 processing => 1 thread runs at a time
+- 듀얼 코어 시스템 => 2 processor => 2 processing => 2 threads run at a time
+- 쿼드 코어 시스템 => 4 processor => 4 processing => 4 threads run at a time
+
+위 코어 시스템에서 물리적인 프로세서 개수는 각각 1개, 2개, 4개이다. 하이퍼스레딩이란 <bold>물리적인 프로세서를 논리적으로 추가 등분시켜</bold> 더 많은 프로세서를 돌리는 듯한 효과를 만드는 기법을 의미한다. 
+
+- 하이퍼 스레딩 적용 싱글 코어 시스템 => 1 pysical processor => 2 logical processors => 2 processing => 2 thread runs at a time
+- 하이퍼 스레딩 적용 듀얼 코어 시스템 => 2 pysical processor => 4 logical processors => 4 processing => 4 thread runs at a time
+- 하이퍼 스레딩 적용 쿼드 코어 시스템 => 4 pysical processor => 8 logical processors => 8 processing => 8 thread runs at a time
+
+터미널/파워쉘을 통해 실제 예시를 살펴보자. 터미널 접속 후 아래와 같은 명령어를 입력한다. 
+
+```
+wmic
+```
+
+WMIC란 Window Management Instrumentation Console의 약자로 컴퓨터 시스템에 대한 접근을 가능하게 해주는 콘솔창이다. 아래 명령어를 통해 자신의 컴퓨터의 CPU 코어 숫자를 확인해본다. 
+
+```
+CPU Get NumberOfCores
+```
+<img src="./cpu-core-number.png" alt="CPU 코어 개수" height=90 width=330 />
+
+해당 노트북은 6개의 코어를 가지고 있으므로 6개의 물리적 프로세서를 가지고 있고, 6개의 쓰레드를 처리할 수 있다는 것을 확인할 수 있다. 하이퍼쓰레딩 여부를 확인하기 위해(논리적 프로세서 개수를 확인하기 위해) 아래 명령어를 입력해본다. 
+
+```
+CPU Get NumberOfCores, NumberOfLogicalProcessors
+```
+
+<img src="./cpu-logical-core.png" alt="CPU 논리적 코어 개수" height=100 width=590 />
+
+하이퍼쓰레딩이 적용된 컴퓨터임을 확인할 수 있다. 
+
+<details>
+    <summary>Instrumentation이란 무엇인가?(펼쳐보기)</summary>
+컴퓨터 프로그래밍에서 인스트루먼테이션(instrumentation)은 오류를 진단하거나 추적 정보를 쓰기 위해 제품의 성능 정도를 모니터하거나 측정하는 기능을 가리킨다. 
+
+- [위키피디아 - 인스트루먼테이션](https://ko.wikipedia.org/wiki/%EC%9D%B8%EC%8A%A4%ED%8A%B8%EB%A3%A8%EB%A8%BC%ED%85%8C%EC%9D%B4%EC%85%98)
+</details>
+
+## 시스템 콜의 종류 : fork and exec 
+- fork : fork 시스템 콜은 기존 프로세스를 복사하여 새롭게 생성하는 역할을 한다. 새롭게 생성된 프로세스는 child prcoess가 되며, 새로운 프로세스 아이디가 생성된다.
+fork 명령어로 통해 생성된 프로세스의 수는 2의 n제곱이며, n은 fork 시스템 콜이 실행된 횟수를 의미한다. 
+
+```c
+#include <stdio.h>
+#include <sys/types.h>
+#include <unistd.h>
+
+int main() 
+{
+    fork(); // fork system call not availabe on Window
+    fork();
+    fork();
+    printf("Hello Jake PID = %d\n", getpid());
+    return 0;
+}
+```
+
+- exec : exec 시스템 콜은 기존에 실행되던 프로세스를 대체하여 exec 시스템 콜을 사용한 프로세스를 실행시킨다. 
+
+<img src="./check-pid.png" alt="윈도우 작업관리자 창 프로세스 아이디 확인" height=300 width=500 />
+
 
 ## 레퍼런스
 - [Difference between Multiprogramming, multitasking, multithreading, and multiprocessing](https://www.geeksforgeeks.org/difference-between-multitasking-multithreading-and-multiprocessing/)
