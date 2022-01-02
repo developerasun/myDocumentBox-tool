@@ -6,6 +6,7 @@ const path = require('path')
 
 module.exports = {
     // entry is a relative path
+    mode: 'development',
     entry : './src/webpack/index.ts',
     module : {
         rules : [
@@ -17,9 +18,12 @@ module.exports = {
         ]
     },
     output: {
+        publicPath : '/public/webpack/', // relative path letting webpack-dev-server know where to serve(build) codes
         filename : 'dist.js',
-        // output is an absolute path
-        path: path.resolve(__dirname, 'public/webpack')
+        path: path.resolve(__dirname, 'public/webpack') // output is an absolute path
+    },
+    resolve : {
+        extensions: ['.ts', '.js', '...']
     }
 }
 
