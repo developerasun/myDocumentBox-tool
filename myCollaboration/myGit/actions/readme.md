@@ -1,9 +1,12 @@
 # Learning Github Actions
 
-Took below course and summarized.
+Took below courses and summarized.
 
-- [GitHub Actions Tutorial - Basic Concepts and CI/CD Pipeline with Docker](https://youtu.be/R8_veQiYBjI)
+- [GitHub Actions Tutorial - Basic Concepts and CI/CD Pipeline with Docker (ENG)](https://youtu.be/R8_veQiYBjI)
+- [GitHub Actions for development cycle automation (KOR)](https://youtu.be/MhGpFunlmMQ)
 
+
+## Basic Concepts and CI/CD Pipeline with Docker
 <p>
 Github Actions is a platform helping developer to automate workflows. Ususally workflow means a types of work that is time-consuming or tedius. For example, CI/CD is one of the supported functions(workflows) in Github Actions.
 </p>
@@ -11,7 +14,7 @@ Github Actions is a platform helping developer to automate workflows. Ususally w
 - CI : continuous integration 
 - CD : continuous development 
 
-## Understanding workflows
+### Understanding workflows
 Let's take a look at how a project is created and maintained in Github.
 
 1. New repository is created
@@ -30,7 +33,7 @@ Let's take a look at how a project is created and maintained in Github.
 
 Github Actions is created to automate some of the parts in above process as much as possible so that developer can focus on more important task. Then how the platform is able to automate such process? 
 
-## How Github Actions automation is done
+### How Github Actions automation is done
 When somehting happens in the repository, whether by you or the third party, this unit is called event. 
 
 - Pull request created/merged
@@ -46,7 +49,7 @@ When somehting happens in the repository, whether by you or the third party, thi
 Choosing Github Actions over other CI/CD tools has an advantage that it is easier to set up. You can just adopt the same tool(Github) for workflow automation rather than having to learn/install all the different platforms and tool combination. 
 </p>
 
-## Example with repository
+### Example with repository
 1. Go to your github repository and click action tab. 
 2. Choose workflow template based on your needs
 3. The template will automatically create related configs in yaml format. 
@@ -93,3 +96,45 @@ jobs:
 5. Check action status in your repository action tab like below. 
 
 <img src="../reference/github-workflow.png" alt="github action result screenshot" width=530 height=560 />
+
+## GitHub Actions for development cycle automation
+Topics covered by this tutorial are as follows : 
+
+- Selecting OS/Node js version for github actions
+- Test automation
+- Approach to build artifact
+
+- Node version changes and maintenance
+<img src="../reference/node-version.png" alt="github action result screenshot" width=527 height=272 />
+
+- matrix build(build several versions at the same time)
+<img src="../reference/matrix-build.png" alt="github action result screenshot" width=412 height=288 />
+
+```yml
+jobs : 
+    build : # job 1 : build
+      runs-on : ubuntu-latest
+      strategy : 
+          maxtrix : 
+              os : [ubuntu-latest, window-2020]
+              node-version : [12.x, 14.x] # two nodes will be built
+      steps : 
+        - uses : actions/checkout@v2
+        - name : npm install and build
+          run : | 
+              npm install
+              npm run build
+    test : # job 2 : test 
+      runs-on : ubuntu-latest
+      strategy : 
+          maxtrix : 
+              os : [ubuntu-latest, window-2020]
+              node-version : [12.x, 14.x]
+      steps : 
+        - uses : actions/checkout@v2
+        - name : npm install and test
+          run : | 
+              npm install
+              npm test
+
+```
