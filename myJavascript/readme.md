@@ -12,3 +12,15 @@ This repository is a place where I have written a bunch codes to be familiar wit
 - Three.js
 - regular expression 
 - this : global object, class instance, function.bind
+
+## Table of Contents
+1. basics 
+2. Javascript for frontend : myReact
+3. Javascript for backend : myNodeJs
+4. Javascript for database : myMongoDB
+5. Javascript and Typescript
+6. Javascript approaches : 1) functional 2) object-oriented
+7. my codes
+
+## Understanding Javascript
+content will be added. 
