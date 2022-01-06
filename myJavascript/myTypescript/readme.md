@@ -1,4 +1,3 @@
-
 # Learning Typescript Essentials
 Took below courses and summarized essentials. 
 
