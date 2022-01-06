@@ -16,6 +16,10 @@ https://user-images.githubusercontent.com/83855174/147634315-666ef3ca-0da4-48b6-
 
 https://user-images.githubusercontent.com/83855174/147634099-17cb1699-6546-4ebe-9cc8-114ebce124e6.mp4
 
+- Netlify serverless
+
+https://user-images.githubusercontent.com/83855174/148397581-6bd6ccef-3d55-4e3a-abc2-9485c9a1eff2.mp4
+
 ## Node js 
 
 - blog app
