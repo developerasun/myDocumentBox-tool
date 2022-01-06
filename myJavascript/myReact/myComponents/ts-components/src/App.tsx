@@ -17,6 +17,12 @@ import { UserContextUser } from './components/context/userContext'
 import { ClassCounter } from './components/class/counter'
 import { Private } from './components/componentProp/private'
 import { Profile } from './components/componentProp/profile';
+import { List } from './components/generic/list'
+import { RandomNumber } from './components/restriction/randomNumber'
+import { ElementPosition } from './components/templateLiteral/position'
+import { CustomButton } from './components/wrappingHTML/customButton'
+import { Text } from './components/polymorphic/text'
+
 
 function App() {
   return (
@@ -69,6 +75,40 @@ function App() {
 
       <section>
         <Private isLoggedIn={true} component={Profile} />
+      </section>
+
+      <section>
+        {/* string array */}
+        <List items={["jake", "elly", "brian"]} onClick={(item)=>console.log(item)}/>
+
+        {/* number array */}
+        <List items={[1, 2, 3]} onClick={(item)=>console.log(item)}/>
+
+        {/* object array : note that React won't render below even if typescript compile is completed since 
+        the list item is not primitive type. Refer object property or use JSON.stringify to render the item*/}
+        {/* <List items={[{ name : "jake", id: 5 }, { name : "elly ", id: 4}, { name : "brian", id: 9}]} onClick={(item)=>console.log(item)}/> */}
+      </section>
+
+      <section>
+        <RandomNumber value={50} isPositive />
+      </section>
+
+      <section>
+        <ElementPosition position='left-top'/>
+      </section>
+
+      <section>
+        <CustomButton variant='primary'>button wow
+        hellllo
+        </CustomButton>
+      </section>
+
+      <section>
+        <Text as='h2' size='sm' color='primary'>Heading2</Text>
+        <Text as='p' size='sm' color='primary'>Paragraph</Text>
+        <Text as='label' htmlFor='label' size='sm' color='primary'>Label</Text>
+        <Text size='lg' color='secondary'>Div</Text>
+        <Text as='button' size='lg' color='secondary'>button</Text>
       </section>
     </div>
   );
