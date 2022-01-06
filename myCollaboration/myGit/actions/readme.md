@@ -11,8 +11,18 @@ Took below courses and summarized.
 Github Actions is a platform helping developer to automate workflows. Ususally workflow means a types of work that is time-consuming or tedius. For example, CI/CD is one of the supported functions(workflows) in Github Actions.
 </p>
 
-- CI : continuous integration 
-- CD : continuous development 
+- CI : continuous integration => the process of integrating code into a mainline code base. In almost all scenarios today, CI is done using platforms designed specifically for the purpose.
+
+<ul>
+
+  - CD :  continuous delivery / continuous development
+  <ul>
+  - continuous delivery => automation coverage : development/local envivornment
+  - continuous development => automation coverage : operation envivornment
+  </ul>
+</ul>
+
+<img src="../reference/cd.png" width=598 height=396 alt="continuous delivery" />
 
 ### Understanding workflows
 Let's take a look at how a project is created and maintained in Github.
@@ -28,6 +38,7 @@ Let's take a look at how a project is created and maintained in Github.
 6. Write test codes towards the merged codes
 7. Build the project and set the details(release notes, version number, etc)
 8. Deploy the project
+9. Return to 6 and start again. This is why CI/CD is needed to automate process 6 ~ 9. 
 
 <img src="../reference/github-workflow.png" width=840 height=470 alt="github workflow screenshot" />
 
@@ -67,9 +78,9 @@ name: CI
 
 on:
   push:
-    branches: [ master ]
+    branches: [ main ]
   pull_request:
-    branches: [ master ]
+    branches: [ main ]
 
   workflow_dispatch:
 
@@ -111,20 +122,28 @@ Topics covered by this tutorial are as follows :
 <img src="../reference/matrix-build.png" alt="github action result screenshot" width=412 height=288 />
 
 ```yml
+name : My workflow
+
+on : 
+    push : 
+        branches : [main]
+    pull_reques : 
+        branches : [main]
+
 jobs : 
-    build : # job 1 : build
-      runs-on : ubuntu-latest
+    build : # job 1 : build => host machine A
+      runs-on : ubuntu-latest # virutal machine 
       strategy : 
           maxtrix : 
               os : [ubuntu-latest, window-2020]
               node-version : [12.x, 14.x] # two nodes will be built
       steps : 
-        - uses : actions/checkout@v2
+        - uses : actions/checkout@v2 # copy your codes and paste to the virtual machine
         - name : npm install and build
-          run : | 
+        - run : | 
               npm install
               npm run build
-    test : # job 2 : test 
+    test : # job 2 : test => host machine B
       runs-on : ubuntu-latest
       strategy : 
           maxtrix : 
@@ -133,8 +152,48 @@ jobs :
       steps : 
         - uses : actions/checkout@v2
         - name : npm install and test
-          run : | 
+        - run : | 
               npm install
               npm test
 
 ```
+
+### Understanding basic terms
+The main terms of Github actions are as follows.
+
+1. Workflows : Workflow consists of a few actions.
+2. Job : a task to do
+3. Step : a process to do the task
+4. Action : copy your codes and paste to a virtual machine
+
+<img src="../reference/github-actions.png" alt="github action result screenshot" width=540 height=255 />
+
+### Tackle three issues
+- managing main branch ====> setting a branch policy
+- merging pull request at a proper timing ====> forcing pull request reviews
+- managing issues and pull requests ====> labeling them with custom actions
+
+#### Setting a branch policy
+1. Go to your repository and click settings. 
+2. Select Branches tab and click add rule in Branch protection rule. Check these rules 
+
+- Require a pull request before merging ====> setting a number of reviewers
+- Require status checks to pass before merging
+- Include administrators ====> even administarators should follow the branch policy 
+
+<img src="../reference/branch-policy.png" alt="branch policy" width=1000 height=600 />
+
+<img src="../reference/branch-policy-set1.png" alt="require pull request and status check" width=1000 height=600 />
+
+<img src="../reference/branch-policy-set2.png" alt="include administrator" width=1000 height=600 />
+
+You can check direct commit to main branch is blocked now. 
+
+<img src="../reference/direct-commit-blocked.png" alt="include administrator" width=1000 height=530 />
+
+#### Managing issues and pull requests
+1. Go to Github marketplace to use customized actions created by users. 
+
+2. Search and find what you feel like. In this tutorial, we will use 'Label approved pull requests'.
+
+<img src="../reference/label-pull.png" alt="github marketplace" width=1000 height=600 />
