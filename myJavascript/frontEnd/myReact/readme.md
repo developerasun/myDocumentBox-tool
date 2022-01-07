@@ -790,6 +790,113 @@ Required SEO data for a typical website is as follows :
 You can try below to improve SEO in React is : 
 - Server side rendering : mainly used but might be challenging to migrate. Use framework like Next.js for the migration, which helps SEO in React.
 
+
+---------------------------------------------------
+## Get familiar with React apis/hooks
+Took below courses and summarized essentials. 
+
+- [NetNinja - React Query](https://www.youtube.com/watch?v=x1rQ61otgtU)
+- [NetNinja - Context and Hooks](https://www.youtube.com/watch?v=6RhOzQciVwI&list=PL4cUxeGkcC9hNokByJilPg5g9m2APUePI&index=1&t=1s)
+
+### React Query
+React query is a React library that provides state management for asynchronous data. Required to be familiar with React Hooks before this tutorial. 
+
+<p>Install React query like below through npm and install React simple snippiets in extension. </p>
+
+```javascript
+npm install react-query
+```
+
+content will be added
+
+### React Context and Hooks
+- Context API : sharing state between components/within component tree. As application gets bigger, sharing state becomes more difficult. Context API puts every state in a central place to store them thus not having to pass props between components. This is a Redux-like approach.
+
+<img src="reference/context-and-component-tree.png" width=600 height=417 />
+
+In the above component tree, all the components can access to the theme context, meaning having a shared state. Then when should you use the context? Think through if the state should be global so that other components can access. The example of context by React offical homepage is : 1) current authenticated user 2) theme 3) preferred language. 
+
+- Hooks : adding state in functional component with easier management
+
+<img src="reference/context-and-hooks.png" width=547 height=382 />
+
+#### Understanding context proivder
+1. Create context and context provider like below
+```jsx
+import React, { createContext } from 'react';
+
+// create a context
+export const ThemeContext = createContext()
+
+// create a context provider
+class ThemeContextProvider extends React.Component {
+    // global state that will be shared
+    state = {
+        isLightTheme : true,
+        light : { syntax : '#555', ui : "#ddd", bg : "#eee" }, 
+        dark : { syntax : "#ddd", ui : "#333", bg: "#555"}
+    }
+    render() { 
+        return (
+         <ThemeContext.Provider value={{...this.state}}>
+            {this.props.children}  // wrapped components here : Navbar 
+         </ThemeContext.Provider>   
+        );
+    }
+}
+```
+
+2. Then make the global state accessible from children component like below, using static contextType property(method 1) or Context.Consumer(method 2)
+
+```jsx
+import React from 'react';
+import { ThemeContext } from './context/themeContext'
+
+// Way 1
+class Navbar extends React.Component { 
+    // If set, this.context will be set at runtime to the current value of the given Context.
+    // now Navbar context type is set to the ThemeConext, meaning that
+    // this component can access to ThemeContextProvider's state.
+    static contextType = ThemeContext 
+    render() {
+        console.log(this.context) // will log the global state in browser
+        const { isLightTheme, light, dark } = this.context
+        return( 
+            <ul>
+                <li>Home</li>
+                <li>About</li>
+                <li>Contact</li>
+            </ul>
+        )
+    }
+}
+
+// Way 2 : can be used in functional component, too.
+class BookList extends React.Component { 
+    render() {
+        return( 
+            // You can use Context.Consumer instead of the static contextType.
+            // The Context.Consumer takes a function with a context parameter, which is 
+            // a global state from its context provider.
+            <ThemeContext.Consumer>{(context)=>{
+                const { isLightTheme, light, dark } = context
+                const theme = isLightTheme ? light : dark
+                return (
+                    <ul style={{"backgroundColor" : theme.bg, "color" : theme.syntax, "padding": "1rem"}}>
+                        <li style={{"backgroundColor" : theme.ui}}>my book</li>
+                        <li style={{"backgroundColor" : theme.ui}}>your book</li>
+                        <li style={{"backgroundColor" : theme.ui}}>his book</li>
+                    </ul>
+                )
+            }}</ThemeContext.Consumer>
+        )
+    }
+}
+
+```
+
+
+
 ## Reference
 - [React.org](https://reactjs.org/docs/hooks-effect.html)
 - [Free code camp - Front End Development Libraries](https://www.freecodecamp.org/learn/front-end-development-libraries/)
