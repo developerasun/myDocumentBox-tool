@@ -1,26 +1,25 @@
-# Table of Contents
-## Node Js
+# Learning Backend Development With Javascript
+## Node JS basics
 - [Understanding how Node.js is invented]()
 - [Node Package Manager]()
 - [Node Package Manager]()
 - [Node Package Manager]()
 - [Node Package Manager]()
 
-## Express
+## Express JS basics
 - [Node Package Manager]()
 - [Node Package Manager]()
 - [Node Package Manager]()
 - [Node Package Manager]()
 - [Node Package Manager]()
 
-# Understanding how Node.js is invented
+## Node JS basics
+### Understanding how Node.js is invented
 Javascript had been used client side mostly but nowadays it can be used server side language as well. But why was it not possible then but now is good to go? 
 
 <img src="reference/javascript-in-browser.png" width=690 height=360 />
 
-<p>
 V8 engine compiles Javascript into machine code, which is the only language computer understands. The engine was only inside browser, making the Javascript available only in browser. 
-</p>
 
 <img src="reference/nodejs-wrapper.png" width=660 height=330 />
 
@@ -33,29 +32,18 @@ V8 engine compiles Javascript into machine code, which is the only language comp
 </details>
 
 <p>
-Node js solves this problem by wrapping the engine, which was written in C++, making Javascript availiabe in server with more features. 
+Node js solves this problem by wrapping the engine, which was written in C++, making Javascript available in server with more features. You can tackle both front end and backend with only one language. Node js has a big community and third party packages as well. 
 </p>
 
 - Read and write files
 - Connect to a database 
 - Act as a server
 
-<p>
-You can tackle both front end and backend with only one language. Node js has a big community and third party packages as well.  
-</p>
-
-## Client and Server 
-<p>
-At the end of the day, what we are trying to achieve with Node.js is to create a website run by Node.js.
-</p>
-<p>
-Server, Node js in this case, sends whatever browser requests to send : JSON, html pages ... 
-</p>
+### Client and Server 
+At the end of the day, what we are trying to achieve with Node.js is to create a website run by Node.js. Server, Node js in this case, sends whatever browser requests : JSON, html pages ... 
 
 1. When a user requests something in webpage, a browser tries to look up a host having an associated IP address with the webpage. 
-
 2. And then, the browser connects with a server/host using the IP address.
-
 3. Server responds with the resources requested(html pages in picture)
 
 <img src="reference/client-server-ip.png" width=730 height=430 />
@@ -65,17 +53,14 @@ Server, Node js in this case, sends whatever browser requests to send : JSON, ht
 |:-------:|:-------:|:-------:|
 |event, DOM, template, routing|HTTP, Ajax, JSON, RESTful|Web server, template, routing, database, APIs|
 
-There a few tech combinations for Node JS, which is MERN stack.
+There a few tech combinations for Node JS, MERN stack for example.
 - MongoDB : database
-- Express : framework
-- React : UI library
+- Express : server framework
+- React : view library
 - Node JS : server
 
-### Createing a server
-In Node.js, we create a server manually. And the server lives in a backend of website, listening to browser requests and sending resources to it.
-
 ### Localhost and port number
-Localhost is a domain name for a IP address : 127.0.0.1, meaning one's own computer. If Localhost used, browser points to directly back to your own computer as a host.
+Localhost is <bold>a domain name</bold> for a IP address : 127.0.0.1, meaning one's own computer. If Localhost used, browser points to directly back to your own computer as a host.
 
 - Request coming out of my computer => Listening the request in my own computer(localhost)
 
@@ -83,28 +68,18 @@ Then what about port number? Port is a way for information/program can be plugge
 
 - localhost:3000 ===> 1) one's own computer 2) route to communicate
 
-```javascript
-const http = require('http')
-const server = http.createServer((req, res)=>{
-    console.log(req.url) // check request endpoint 
-    console.log(req.method) // check request http method
-})
+### Createing a server
+In Node.js, we create a server manually. And the server lives in a backend of website, listening to browser requests and sending resources to it.
 
-server.listen(3000, 'localhost', ()=>{
-    console.log("app is listening")
-})
-
-```
-
-Once your server is up, you can check what request with http method has been made like below
-
-<img src="reference/server-req-url" width=458 height=227 />
-
-### Basic routing
+#### Basic routing without framework
 When user makes a request, Node.js as a backend will send a response that mathces the request using router. 
 
 ```javascript
 const server = http.createServer((req, res)=>{
+
+    console.log(req.url) // check request endpoint 
+    console.log(req.method) // check request http method
+
     // addressing basic routes
     let path = './views/'
     switch (req.url) { 
@@ -118,7 +93,7 @@ const server = http.createServer((req, res)=>{
             break;
         default : 
             path += 'page404.html' // non-existing endpoints
-            res.StatusCode = 404
+            res.StatusCode = 404  // bad request 
             break; 
     }
     
@@ -139,7 +114,11 @@ server.listen(8000, ()=>console.log("app listening at port 8000"))
 
 ```
 
-Managing routes like above can be messy when there are too many routes to handle. Use express, which is a third party app, to tackle this problem. Understanding what is going on in behind scene is important before you start using and learning framework like express. 
+Once your server is up, you can check what request with http method has been made like below
+
+<img src="reference/server-req-url" width=458 height=227 />
+
+Managing routes like above can be messy when there are <bold>too many routes to handle</bold>. Use express, which is a third party app, to tackle this problem. <bold>Understanding what is going on in behind scene is important </bold> before you start using and learning framework like express. 
 
 ### Status codes
 Status codes describes the type of responses sent to the browser. 
@@ -148,10 +127,10 @@ Status codes describes the type of responses sent to the browser.
 - range 400 : client/user fail
 - range 500 : server fail 
 
-## Stream and Buffer
-Reading, deleteing, creating file is usually asynchronously done since it takes long time to perform. To go furthermore with addressing large data/file, understanding streams and buffers is essential. 
+### Stream and Buffer
+<bold>Reading, deleteing, creating file is usually asynchronously done</bold> since it might take long time to perform. To go furthermore with addressing large data/file, understanding streams and buffers is essential. 
 
-- Streams : starting using data before fully read
+- Streams : starting using data <bold>before</bold> fully read
 - Buffer : delivering a small chunk of data package
 
 <img src="reference/stream-buffer.png" width=700 height=350 />
@@ -168,45 +147,40 @@ readStream.on('data', (smallData)=>{
     writeStream.write(smallData)
 } )
 
-// way 2 : pipe : passing passing data from readable stream to writable stream eright away
+// way 2 : pipe : passing data from readable stream to writable stream right away
 readStream.pipe(writeStream) 
 ```
 
-## Node Package Manager
-<p>
-One of the advantages to use npm is dependency control. Through package.json file, npm automatically install everything you need. 
-</p>
-
-<p>
-Since node modules are usually massive, installing dependency through package.json is recommended.
+### Node Package Manager
+One of the advantages to use npm is dependency control. Through package.json file, npm automatically install everything you need. Since node modules are usually massive, installing dependency through package.json is recommended.
 
 - npm install => project dependency installed based on package.json
 - sharing node_modules => not recommended
-
-</p>
 
 ```
 npm install A -g : install A package globally, works in PC anywhere
 npm install A --save : install A package and save its info in package.json for future reuse.
 ```
 
-## Package.json
-A center of any Node JS project, storing the project information in a single JSON object. The information displayed is as follows
+* update : as of npm 5.0.0, packages installed are added to package.json without the flag --save.
+
+### Package.json
+Package.json file is placed in a center of any Node JS project, storing the project information in a single JSON object. The information displayed is as follows
 
 - dependency
 - author
 - version
-- license 
+- license, and many more.
 
 <details>
     <summary>Note</summary>
-    all field names and values in JSON should be in double quotes("") and separated by comma(,). Number and boolean are okay to be not in double quotes. 
+    all field names and values in JSON <bold>should be in double quotes("")</bold> and separated by comma(,). Number and boolean are okay to be not in double quotes. 
 
 ```json
 {
     "name":"Jake", 
     "age" : "27", 
-    "handsome" :"true"
+    "handsome" :true
 }
 ```
 
@@ -216,7 +190,7 @@ A center of any Node JS project, storing the project information in a single JSO
 
 Beside package.json file, there is also a package-lock.json. This file is to track every package version so that anyone can reproduce the project in future.
 
-## .env file
+### .env file
 .env is a hidden file that you can store data that needs to be hidden such as API keys and database URI. Only you can access to this file with below syntax.
 
 ```javascript
@@ -228,9 +202,9 @@ processs.env is a global Node object that defines environment variables.
 - No white space in .env file
 - Variable name is in uppercase(convention)
 - Put each variable on a seperate line
-- .env is a shell file, requiring no qutoes in variables and values.
+- .env is a shell file, <bold>requiring no quotes</bold> in variables and values.
 
-Install dotenv package through npm to use .env file. The dotenv package loads your .env files to Node process.env global object.
+Install dotenv package through npm to use .env file. The dotenv package <bold>loads your .env files to Node process.env global object</bold>.
 
 ```javascript
 // npm install dotenv --save
@@ -238,33 +212,33 @@ require('dotenv').config() // dotenv.config methods loads your .env to global No
 
 ```
 
-## Semantic Vesioning
-Package.json file follows Semantic Versioing, which is a industry standard for software versioing. Libraries and frameworks published through npm should follow below standard.
+### Semantic Vesioning
+Package.json file follows Semantic Versioning, which is a industry standard for software versioning. Libraries and frameworks published through npm should follow below standard.
 
 ```Javascript
 "package":"MAJOR.MINOR.PATCH"
 ```
 
 - MAJOR : new features added, incompatible with previous features
-- MINOR : new features added, compatible with previous features. Use caret character to get latest MINOR & PATCH => e.g. "^1.3.8"
-- PATCH : bug fixes. Use tilde character to get latest PATCH => e.g. "~1.3.8"
+- MINOR : new features added, compatible with previous features. Use <bold>caret character</bold> to get latest MINOR & PATCH => e.g. "^1.3.8"
+- PATCH : bug fixes. Use <bold>tilde character</bold> to get latest PATCH => e.g. "~1.3.8"
 
-# Require and Import
+### Require and Import
 - require : synchronous, selective
 - import : asynchronous, nonselective
 
 <img src="reference/commonjs-es6.png" width=600 height=170/>
 
-# Express
-Handling simple and few routes with Node.js can be done without Express. However, as application gets complicated, framework such as Express becomes handy to handle server side logics. 
+## Learning Express basics
+Handling simple and few routes with Node.js can be done without Express. However, as <bold>application gets complicated</bold> framework such as Express becomes handy to handle server side logics since Express automatically does jobs like <bold>setting http header</bold> and such. 
 
-## View(Template) engine
-Instead of static assets, sometimes we want to add dynamic contents to HTML such as saved data from database. View/template engine is a great way to achieve this. 
+### View(Template) engine
+Instead of static assets, sometimes we want to add <bold>dynamic contents to HTML</bold> such as saved data from database. View/template engine is a great way to achieve this. 
 
 Types of view engines are : 
+- EJS
 - Express HandleBars
 - Pug.js
-- EJS
 
 ### EJS
 EJS helps us to render dynamic data in HTML. EJS templates are addressed on server by EJS view engine.
@@ -272,39 +246,30 @@ EJS helps us to render dynamic data in HTML. EJS templates are addressed on serv
 <span>EJS + HTML ===(EJS view engine)====> Browser</span> <br/>
 <img src="reference/ejs-ssr.png" width=720 height=220 />
 
-Above process is called server side rendering. 
-
-Install EJS with below command 
+Above process is called server side rendering. Install EJS with below command 
 
 ```javascript
-npm install ejs --save
+npm install ejs 
 ```
 
-#### Calling EJS
+and then use it as a middleware in Express like below. You can give the second parameter(object) and call it in ejs file to render HTML dynamically. 
+
 ```javascript
 app.set('view engine', 'ejs')
 app.get('/', (req, res)=>{
-    // res.send("<h1>Hello express</h1>") // Express automatically set http header
-    // use ejs engine to render dynamic contents. 
-    // give the second parameter(object) and call it in ejs file to render
     res.render('index', { title: 'sweet' }) 
 })
 ```
 
-#### Default Directory
+#### Default Directory in Express & EJS
 'views' is a default directory where Express and EJS engine will look for resources. If you want to rename it, follow below instruction
 
 ```javascript
 app.set('views', 'myNewViews')
 ```
 
-## Understanding middleware
-<p>
-Middleware is a function that takes route handlers and adds information. To simply put, middle is just codes between request and response.
-</p>
-
-<p>
-Middleware function takes three arguments : 1) request object 2) response object 3) next function. 
+### Understanding middleware
+Middleware is a function that takes route handlers and adds information. To simply put, middle is just codes between request and response. Middleware function takes three arguments : 1) request object 2) response object 3) next function, addressing the tasks like below. 
 
 - add information to request/response object
 - end cycle by sending a response or start next function in stack, calling the next. 
@@ -313,8 +278,6 @@ Middleware function takes three arguments : 1) request object 2) response object
 
 Express evaluates functions in the order they appear in the code. Middleware should also be placed before all the routes depending on it.
 
-</p>
-
 ```javascript
 function (req, res, next) { 
     console.log("I am a middle ware")
@@ -322,12 +285,10 @@ function (req, res, next) {
 }
 ```
 
-If a middleware is not properly located between server codes, your browser will get stucked. Call the next method like above to avoid that.
+If the next function is not properly called in middleware, your browser will get stucked.
 
-### Express middleware for static asset
-<p>
+#### Express middleware for static asset
 Serving static webpages and assets could be simpler with express since it provides a middleware to manage static assets. Without this middleware, all the static assets would require corresponding routes. 
-</p>
 
 ```javascript
 // syntax : express.static(root + endpoint)
@@ -337,12 +298,11 @@ app.use(express.static(__dirname + "/public")) // directory 'public' is a conven
 // Assets at public dir
 app.use('/public', express.static(__dirname + "/public"))
 ```
-<p>
-Basically, server automatically protects assets/files from browser. You have to specify which assets the browser can access and acquire, meaning public assets.
-</p>
 
-### Middleware chaining
-Middleware can be chained inside route definition. Chaining middleware is useful to divide server operaions into more smaller units, increasing code reusuability.
+Basically, <bold>server automatically protects assets/files from browser</bikd>. You have to specify which assets the browser can access and acquire, meaning public assets.
+
+#### Middleware chaining
+Middleware can be chained inside route definition. Chaining middleware is useful to <bold>divide server operaions</bold> into more smaller units, increasing code reusuability.
 
 For example, 
 ```javascript
@@ -356,26 +316,21 @@ app.get('/user', function(req, res, next) {
 
 ```
 
-# Writing basic routing
+### Basic server development with Express
+### Express router
+As routings gets more added, your codes might get become fat and messier. Use Express router, which is a built-in, to make the routes tight and handy. 
+
+- route in Express : app.method(path, handler)
+- app : Express object(conventionally)
+- path : relatvie path on the server
+- handler : function(req, res). A function called when the route is matched
+
+Without router, 
 
 ```javascript
-// route in Express : app.method(path, handler)
-// app : Express object
-// path : relatvie path on the server
-// handler : function(req, res). A function called when the route is matched
 app.get('/', function(req, res){
     res.sendFile(__dirname + '/views/index.html'); 
 });
-
-```
-
-<details>
-    <summary>What is __dirname?(tab to unfold)</summary>
-__dirname is your project root path, provided by Node.js. It is a string that can be concatenated with other directory resources. 
-</details>
-
-
-```javascript
 app.get('/json', function(req, res) {
     res.json( { "message" : "Hello json" } ) // This method closes the request-response loop, returning the data. 
     // then sets the appropriate headers to tell your browser that you are serving JSON, and sends the data back.
@@ -383,27 +338,56 @@ app.get('/json', function(req, res) {
 })
 ```
 
-## Route parameter
-Getting route parameter is one way to get inputs from user. Route paramters are named segments of the URL, differentiated by slash. Each segment holds an actual value of the URL. For example, 
+With router, 
 
+```javascript 
+// In your router.js file, 
+const express = require('express')
+const myRouter = express.Router()
+
+myRouter.get('/', (req, res)=>{
+    // do something here
+})
+
+// Once done with routing, export your router. 
+module.exports = myRouter
+
+// In your main server javascript file, like app.js, import the module and use it as a middleware.
+app.use("your_basic_route_for_router", myRouter)
 ```
-route_path: '/user/:userId/book/:bookId'
+
+<details>
+    <summary>What is __dirname?(tab to unfold)</summary>
+__dirname is your <bold>project root path</bold>, provided by Node.js. It is a string that can be concatenated with other directory resources. 
+</details>
+
+### Getting inputs from user in Express
+There are several ways to get inputs from user in Express. 
+
+1. Router parameter => request.params
+2. Query paramter => request.query
+
+#### Route parameter
+Getting route parameter is one way to <bold>get inputs from user</bold>. Route paramters are named segments of the URL, differentiated by slash. Each segment holds an actual value of the URL. For example, 
+
+```md
+> route_path: '/user/:userId/book/:bookId'
 actual_request_URL: '/user/546/book/6754'
 req.params: {userId: '546', bookId: '6754'}
 ```
 
-Approach route parameter with request.params.
+Approach route parameter for user input with <bold>request.params</bold>
 ```javascript
 app.get('/:userId/location', function(req, res){
     const { userId } = req.params
-    res.json( {location : userId} )
+    res.json( { location : userId } )
 })
 ```
 
-## Query parameter
+#### Query parameter
 Encoding data with query string is also a way to get inputs from user. Query string is differentiated with question mark in the format of field and value.
 
-```
+``` md
 route_path: '/library'
 actual_request_URL: '/library?userId=546&bookId=6754'
 query string : '?userId=546&bookId=6754'
@@ -422,42 +406,36 @@ app.get('/library', function(req, res){
 })
 ```
 
-## Body Parser For Post Request
-HTTP Post method is a default method used to send client data with HTML form. It is conventioinally used to create a new record in database. 
+### Understanding Body Parser for post request
+HTTP Post method is a default method used to send client data with HTML form. It is conventioinally used <bold>to create a new record in database</bold>. 
 
 - Front End ===(send a encoded data with HTTP POST method) ==>
 - ====> Backend ===(decoding the data in request body with body parser)===>
 - ========> Database(saving the data)
 
-<p>
-These types of request, sending information to the database, the information is not presented in URL since it can contain user password or such things. Instead, the data is hidden in HTTP request body, which is a called payload, also.
-</p>
+These types of request, sending information to the database, the information should not be presented in URL since it can contain user password or such things. Instead, the data is hidden in HTTP request body, which is a called payload, also.
 
 <details>
     <summary>What is a payload?</summary>
 
 Quoted from [Wikipedia - payload](https://en.wikipedia.org/wiki/Payload_(computing))
 
-```
-In computing and telecommunications, the payload is the part of transmitted data that is the actual intended message. Headers and metadata are sent only to enable payload delivery.
-
-In the context of a computer virus or worm, the payload is the portion of the malware which performs malicious action.
-
-The term is borrowed from transportation, where payload refers to the part of the load that pays for transportation.
+```md
+> In computing and telecommunications, the <bold>payload is the part of transmitted data</bold> that is the actual intended message. Headers and metadata are sent only to enable payload delivery. In the context of a computer virus or worm, the payload is the portion of the malware which performs malicious action. The term is borrowed from transportation, where payload refers to the part of the load that pays for transportation.
 ```
 </details>
 
-Http request body by default is encoded with urlencoded, which looks like the above query string. You can also implement this with Ajax in JSON format.  <br/>
+Http <bold>request body by default is encoded with urlencoded</bold>, which looks like the above query string. You can also implement this with Ajax in JSON format.  <br/>
 
 <img src="reference/http-request-body.png" width=650 height=270 />
 
-To parse the data from HTTP request body, install body parser with npm package. It allows to use middleware to decode the data in many formats. 
+<bold>To parse the data from HTTP request body, install body parser</bold> with npm package. It allows to use middleware to decode the data in many formats. 
 
 ```javascript
 const bodyParser = require('body-parser')
 
 // case 1 : parse urlencoded data sent by POST request
-app.use(bodyParser.urlencoded({extended : false})) // configuration option. If false, use querystring library by default, when true, use qs library for pasring.
+app.use(bodyParser.urlencoded({ extended : false })) // configuration option. If false, use querystring library by default, when true, use qs library for parsing.
 
 app.post('/name', function(req, res){
     const firstName = req.body.first // find the 'first' in HTTP POST request body 
@@ -470,7 +448,7 @@ app.use(bodyParser.json())
 
 ```
 
-## Request Types
+### Request Types
 Types of request are as follows : 
 
 - GET : get resources from ( A = database/web page )
@@ -523,26 +501,7 @@ app.get('/blogs', (req, res)=>{
 })
 ```
 
-## Express router
-As routings gets more added, your codes might get become fat and messier. Use Express router, which is a built-in, to make the routes tight and handy. 
-
-```javascript 
-// In your router.js file, 
-const express = require('express')
-const myRouter = express.Router()
-
-myRouter.get('/', (req, res)=>{
-    // do something here
-})
-
-// Once done with routing, export your router. 
-module.exports = myRouter
-
-// In your main server javascript file, like app.js, import the module and use it as a middleware.
-app.use("your_basic_route_for_router", myRouter)
-```
-
-## MVC pattern
+### MVC pattern
 MVC model stands for model, view, and controller.
 
 - Model : database
@@ -557,7 +516,7 @@ Let's spread those source folders to see more details.
 
 <img src="reference/project-source-tree.png" width=220 height=580 />
 
-# Reference
+## Reference
 - [NetNinja Node,js crash course](https://www.youtube.com/watch?v=zb3Qk8SG5Ms&list=PL4cUxeGkcC9jsz4LDYc6kv3ymONOKxwBU&index=1&t=1s)
 - [Free code campe - ENG](https://www.freecodecamp.org/learn/back-end-development-and-apis/)
 - [Inflearn - KOR](https://www.inflearn.com/course/node-js-%EC%9B%B9%EA%B0%9C%EB%B0%9C#)
