@@ -189,7 +189,7 @@ import PropTypes from 'prop-types'
 
 ### State and Lifecycle
 #### State
-State is a very important concept in React. State is the state of React component, meaning the component's data(the object in Javascript). It is defined by developer and should only include the data related to rendering. When state is defined in a class component, it is <strong>fully encapsulated and local.</strong> No other components are aware of the state. 
+State is a very important concept in React. State is the state of React component, meaning the component's data(the object in Javascript). It is <strong>defined by developer</strong> and should only include the data related to rendering. When state is defined in a class component, it is <strong>fully encapsulated and local.</strong> No other components are aware of the state. 
 
 <details>
     <summary>setState method in React(tab to unfold)</summary>
@@ -341,11 +341,6 @@ function Greeting(props) {
     }
 }
 
-ReactDOM.render(
-    <Greeting  isLoggedIn={true} />, 
-    document.getElementById('root')
-);
-
 ```
 
 ### Element variable
@@ -363,26 +358,22 @@ Assign element to a variable like below.
     
 ```
 
-# Array and key
+### Array and key
 <p>
-Array is a variable that contains a bunch of object in Javascript. Using array and provided array methods, reproducing a component can be easily done.
-</p>
-<p>
-Indices in array can distinguish each item in the array but recommend to use an unique and not-easily-changable value as key. Be aware of assigning key value to array items to avoid errors like below
+Array is a variable that contains a bunch of object in Javascript. Using array and provided array methods, reproducing a component can be easily done.Indices in array can distinguish each item in the array but recommend to use an unique and not-easily-changable value as key in React. Be aware of assigning key value to array items to avoid errors like below
 </p>
 
 <img src="reference/react-list-key.png" width=520 height=75 />
-
 
 <details>
     <summary>One more thing about the Key(tap to unfold)</summary>
     Key is not deliverable as props. Meaning, this.props.key does not exist and developer should manage this key property separately. 
 </details>
 
-# Composition
+### Composition
 Composition means that a lot of components are gathered together to make a new component. Types of composition techinques is as follows :  
 
-- containment : children props used in a component when sub-components are not decided yet. Props in a top component are delivered to a bottom component and children props in the bottom component are delivered to the top component.  
+- containment : children props used in a component when sub-components are not decided yet. Props in a top component are delivered to a bottom component as children prop in the bottom component.  
 
 For example, 
 
@@ -390,6 +381,7 @@ For example,
 // Bottom component
 function FancyBorder(props) {
     // props.children => MyBox component
+    // In React with Typescript, the children is typed as : React.ReactNode
     return (
         <div className="myFancyBorder">
             {props.children} 
@@ -399,7 +391,7 @@ function FancyBorder(props) {
 
 // Top component
 function MyBox() { 
-    // JSX(h1, p) => FancyBorder component 
+    // JSX(h1, p) => FancyBorder component's props.children
     return (
         <FancyBorder>
             <h1>Hello Box</h1> 
@@ -435,7 +427,7 @@ print(myDog.bark())
 In React, specialization is implemented with composition. Facebook engineers recommend to not use inheritance in React but should be done in a composition manner.
 </p>
 
-# Unidirectional data flow in React
+### Unidirectional data flow in React
 <p>
 React has a unidirectional data flow, meaning that data only flows from parent component to child one. The chilld component only receives the state data they need. State management is done in one part of codes and UI rendering is done in another part(separation)
 </p>
@@ -451,7 +443,7 @@ class MyApp extends React.Component {
     // class component must have a render method
     render() { 
         return (
-            <Person name={this.state.name} />
+            <Person name={this.state} />
         )
     }
 }
@@ -470,6 +462,7 @@ class Person extends React.Component {
 
 <p>
 You can also pass function, method. This is React way of communicating between parent component and child component. The passed state/function can be accessed like below.
+</p>
 
 ```
 this.props.(its name)
@@ -480,9 +473,7 @@ this.props.(its name)
 <GetInput input={this.state.inputValue} handleChange={this.handleChange}/>
 ```
 
-</p>
-
-# Styling in React
+### Styling in React
 Inline styles is very common in React development. Set property and value in Javascript object form with camel case naming. Any hyphenated style properties should be converted to camel case in JSX.
 
 ```JSX
@@ -501,7 +492,7 @@ class Colorful extends React.Component {
 
 ```
 
-For a larget set of styles, create a style object in a global constant variable to manage that.
+For a large set of styles, create a style object in a global constant variable to manage that.
 
 ```JSX
 const styles = {
@@ -511,7 +502,7 @@ const styles = {
 }
 ```
 
-# React with Redux
+### React with Redux
 Connecting React with Redux is done like below. 
 
 - 1. Creates a React component 
@@ -521,11 +512,11 @@ Connecting React with Redux is done like below.
 - React : Javascript view library
 - Redux : State management framework. developed by React developers
 - Redux => creates a single Redux store, managing application state
-- React => subscribes to some of the store's data. If action dispatched, the React component gets updated
-- When application gets bigger and complicated, using Redux is recommended
+- React => subscribes to some of the store's data. If <bold>action dispatched, the React component gets updated</bold>
+- When application gets <bold>bigger and complicated, using Redux is recommended</bold>
 - Use react-redux package and pass Redux state/dispatch to React as props
 
-## Provider
+#### Provider
 Provider is essential for React-Redux app. Provider is a wrapper component wrapping React app, accessing Redux store.
 
 ```JSX
@@ -534,7 +525,7 @@ Provider is essential for React-Redux app. Provider is a wrapper component wrapp
 </Provider>
 ```
 
-## Connect
+#### Connect
 Connect is a method that connects React component with Redux, taking two optional arguments like below. It allows you to provide state and dispatch. Clarify what state and action you need so that component only approaches to the state it needs.
 
 ```javascript
@@ -546,32 +537,31 @@ connect(mapStateToProps, mapDispatchToProps)(MyComponent) // replace argument wi
 
 State and dispatch passed by mapStateToProps and mapDispatchToProps can be accessed as props in the MyComponent. 
 
-# React Hooks
+### React Hooks
 Hooks are added in React 16.08. Hooks API are useful to 
 
 - make stateless components with function
 - do easier state management without Redux/Mobx 
 
-Hooks do not work inside class, meaning hook and class is incompatiable. You either use hook or class. 
-
-<br>
+<bold>Hooks do not work inside class</bold>, meaning hook and class is incompatiable. You either use hook or class. 
 
 <p>
 Before the hook is introduced, if you want to add some state but you were working on function component, you had to re-write class component to add the state. Once hook is introduced, adding state in functional component becomes available. <strong>Hook names always start with "use"</strong> and embraces clousure in Javascript.
 </p>
 
-## Types of Hooks
+#### Types of Hooks
 - useState(initial state) : declare a state variable with initial state. Returns a current state and a function to update.
 - useEffect(effect function)
 - useContext
-- useReducer
+- useReducer : similar to Redux usage, used when states get complicated.
 - useCallback .. and many more
 
-## useState and useEffect
-### useState
+#### useState and useEffect
+##### useState
 Let's see how useState hook is defined in React offical homepage. 
-```
-~ useState is a new way to use the exact same capabilities that this.state provides in a class. Normally, variables “disappear” when the function exits but state variables are preserved by React. ... React will remember its current value between re-renders, and provide the most recent one to our function.
+
+``` markdown
+> useState is a new way to use <bold>the exact same capabilities that this.state</bold> provides in a class. Normally, variables “disappear” when the function exits but <bold>state variables are preserved by React</bold>. ... React will remember its current value between re-renders, and provide the most recent one to our function.
 ```
 
 ```javascript
@@ -587,7 +577,7 @@ class MyComonent extends React.Component {
 }
 
 // function component with 'hook' : B 
-import { useState, useEffect } from "react"
+import { useState } from "react"
 const MyComponent = () => {
     const [count, setCount] = useState(0) // declare a state variable. 
 }
@@ -595,24 +585,25 @@ const MyComponent = () => {
 // Component A and B is the same. 
 ```
 
-### useEffect 
-useEffect lets you perform side effects(listed below) in function components. By default, it runs both after the first render and after every update. It is similar to componentDidMount and componentDidUpdate. 
+##### useEffect 
+useEffect lets you perform side effects(listed below) in function components. By default, <bold>it runs both after the first render and after every update</bold>. It is similar to componentDidMount and componentDidUpdate. 
 
 ```
 React updates DOM => React calls useEffect
 ```
 
-- data fetching or other API
+- data <bold>fetching</bold> or other API
+- <bold>changing DOM</bold>
 - setting up a subscription
-- changing DOM
 
-By using useEffect hook, your components will do something else additionally after render. Every time we re-render, we schedule a different effect, replacing the previous one.
+By using useEffect hook, your components will <bold>do something else additionally after render</bold>. Every time we re-render, we schedule a different effect replacing the previous one.
 
 ```javascript
 import { useState, useEffect } from "react"
 const MyComponent = () => {
     const [count, setCount] = useState(0)
 
+    // useEffect by default runs on first render and every update.
     useEffect(()=>{ // pass a function to useEffect
         document.title = `You clicked ${count} times` // in useEffect, you can access to the count in useState.
     })
@@ -620,7 +611,7 @@ const MyComponent = () => {
 
 ```
 
-#### Dependency
+###### useEffect dependency
 Dependency of useEffect decides when the useEffect hook runs based on the depenedency.
 
 ```javascript
@@ -641,8 +632,36 @@ const MyComponent = () => {
 }
 ```
 
-## Custom hooks
-To increase code reusability, you can create your own hook and import the hook in different components. Consider custom hook nothing more than importing a new module in Javascript. You write a function, export it, and import it in another file. Remember that hook's name should start with 'use'.
+###### useEffect Cleanup Function
+As the name implies, cleanup function is a function inside the useEffect hook. Cleanup function prevents application from unintended results such as <bold>memory leaks, improving the application's performance</bold> by removing what is not necessary before the component unmounts. 
+
+<img src="reference/why-use-cleanup.png" width=700 height=120 />
+
+Without the cleanup function, an error like the above one could happen. As the error log suggests, 1) cancel subscriptions 2) cancel asynchronous tasks not to update React state on components unmounted. 
+
+```javascript
+
+// useEffect hook takes two argument : 1. callback 2. dependency(array)
+useEffect(()=>{
+    // Create a AbortController instance
+    const abortCtrl = new AbortController()
+
+    // Connect the AbortController with fetch
+    fetch(myUrl, { signal : abortCtrl.signal }) { 
+        // do some operation
+    } 
+
+    // Create a cleanup function to prevent side effect once fetch is finished
+    // When abort() is called, the fetch() promise rejects with a DOMException named AbortError.
+    return () => { abortCtrl.abort() }
+
+}, [myUrl])
+
+```
+
+
+#### Custom hooks
+To increase code reusability, you can create your own hook and import the hook in different components. Consider <bold>custom hook</bold> nothing more than importing <bold>a new module</bold> in Javascript. You write a function, export it, and import it in another file. Remember that <bold>hook's name should start with 'use'</bold>.
 
 ```javascript 
 // useMyHook.js
@@ -661,15 +680,15 @@ function MyComponent() {
 }
 ```
 
-# How website works
-## Non-React Website
+### How website works
+#### Non-React Website
 1. Web browser sends an initial request to server
 2. Server responds with index.html 
 3. The browser sends a new request based on what user did
 4. Server responds with it.
 5. Continues over and over
 
-## React Website(Single Page Application)
+#### React Website(Single Page Application)
 The website built with React do not act like the above websites. React application delegates all the routings and resources to browser only.
 
 1. Web browser sends an initial request to server
@@ -681,14 +700,14 @@ The website built with React do not act like the above websites. React applicati
 
 4. React fills the empty HTML with components we created. 
 5. If user did something thus a request is generated, React prevents to deliver the request to server and lock it.
-6. React instead <strong>dynamically fills the content </strong> the user wanted into the HTML. 
-7. This React work flow leads to less requests to a server, making the website faster. 
+6. React instead <strong>dynamically fills the content</strong> the user wanted into the HTML. 
+7. This React work flow leads to <bold>less requests to a server, making the website faster</bold>. 
 
-## React Router
+### React Router
 Install React router with npm to control routing.
 
 ```javascript
-npm install react-router-dom --save
+npm install react-router-dom
 ```
 
 React router package consists of : 1) Router 2) Switch 3) Route
@@ -697,27 +716,63 @@ React router package consists of : 1) Router 2) Switch 3) Route
 - Switch : contains multiple route components, making sure only one route component is shown in browser at one time. Find the route and render a component that is inside the route component.
 - Route : a single route component. Takes exact path or path parameter.
 
-<span>React routing</span><br/>
-<img src="reference/router-switch-route.png" width=670 height=700 />
+* update : React router has been updated from v5 to v6 with major changes. Check below code first and find out difference in offical github repo.
 
-### React Route Parameters
+- https://github.com/remix-run/react-router/blob/main/docs/upgrading/v5.md
+
+```jsx
+import {
+  BrowserRouter,
+  Routes,
+  Route,
+  Link,
+  Outlet
+} from "react-router-dom";
+
+function App() {
+  return (
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" element={<Home />} />
+
+        // Route nesting feature adopted in v6
+        <Route path="users" element={<Users />}>
+          <Route path="me" element={<OwnUserProfile />} />
+          <Route path=":id" element={<UserProfile />} />
+        </Route>
+
+      </Routes>
+    </BrowserRouter>
+  );
+}
+
+```
+
+#### React Route Parameters
 We really can't hard-code route parameters since user request changes. For example, asking blog posts by posting number could be 
 
 - /blogs/123
 - /blogs/456 <===== Can't hard-code this
 - /blogs/789
 
-So we can set a dynamic route paramter with colon in React like below
+So we can set a <bold>dynamic route paramter</bold> with colon in React like below
 
-```javascript 
+```jsx
+
+import { useParams } from "react-router-dom";
+import { useState } from "react";
+
+const Details = () => {
+    // Import route parameter hook for dynamic routing
+    const { title } = useParams() // the endpoint is set in Route component path parameter 
+
 // Set a route parameter and devlier it as props in Link component. 
 <Route path="/blogs/:postingNumber">
-
 <Link to={`/blogs/${props.postingNumber}`}>Check the post</Link>
 
 ```
 
-## React Router Link
+#### React Router Link
 To avoid React application sends a request to server when link clicked, React router link should be used instead of html a tag. 
 
 ```javascript
@@ -745,37 +800,7 @@ const Navigation = () => {
 
 ```
 
-## useEffect Cleanup Function
-As the name implies, it is a function inside the useEffect.
-<br>
-<p>
-Cleanup function prevents application from unintended results such as memory leaks, improving the application's performance by removing what is not necessary before the component unmounts. 
-</p>
-
-<img src="reference/why-use-cleanup.png" width=700 height=120 />
-
-<p>
-Without the cleanup function, an error like the above one could happen. As the error log suggests, 1) cancel subscriptions 2) cancel asynchronous tasks not to update React state on components unmounted. 
-</p>
-
-```javascript
-// Create a AbortController instance
-const abortCtrl = new AbortController()
-
-useEffect(()=>{
-    // Connect the AbortController with fetch
-    fetch(myUrl, { signal : abortCtrl.signal }) { 
-        // do some operation
-    } 
-    // Cleanup the useEffect with the AbortController
-    // When abort() is called, the fetch() promise rejects with a DOMException named AbortError.
-    return () => { abortCtrl.abort() }
-
-},[myUrl])
-
-```
-
-## SEO for React
+### SEO for React
 React has its weakness at SEO(search engine optimization) and tackles the issue in its own way. 
 
 Required SEO data for a typical website is as follows :
@@ -792,7 +817,8 @@ You can try below to improve SEO in React is :
 
 
 ---------------------------------------------------
-## Get familiar with React apis/hooks
+### Get familiar with React apis/hooks
+
 Took below courses and summarized essentials. 
 
 - [NetNinja - React Query](https://www.youtube.com/watch?v=x1rQ61otgtU)
