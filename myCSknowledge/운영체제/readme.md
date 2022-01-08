@@ -909,9 +909,41 @@ CPU/IO 버스트 주기에서 마지막 CPU 버스트는 시스템의 종료 요
 
 <img src="./burst-cycle-example.png" alt="버스트 주기 예시" height=391 width=273 />
 
+### CPU 스케쥴러에 대한 이해 
+멀티 프로그래밍 환경에서 CPU는 being idle하지 않아야 한다. 이를 위해 CPU 스케쥴러는 새롭게 배정할 프로세스를 찾고 CPU에게 할당하는 역할을 한다. 
 
+- CPU가 프로세스 A를 처리 중 ====(시스템 콜)====> CPU 스케쥴러가 새롭게 배정할 프로세스 B를 선정 ===> 디스패처(dispatcher)는 CPU 스케쥴러가 선택한 프로세스 B에게 CPU 컨트롤을 넘겨주고 실행시킴(dispatch latency 발생) ===> CPU는 프로세스 B를 처리 중 
 
+<details>
+    <summary>디스패치 레이턴시란? (펼쳐보기)</summary>
+Dispatch latency란 dispatcher가 하나의 프로세스를 멈추고 다른 프로세스를 실행시키는데 걸리는 시간을 의미한다. 디스패처는 시스템 콜에 의해 발생한 context switching을 실현해야하므로 속도가 빨라야한다, 즉 레이턴시가 짧아야 한다.
+</details>
 
+#### 선점형/비선점형 스케쥴링
+CPU 스케쥴링은 다음과 같은 4가지 상황에서 발생한다. 
+
+1. process running state => waiting state
+2. process running state => ready state 
+3. process waiting state => ready state 
+4. process terminating
+
+1번과 4번의 경우(프로세스가 대기 또는 종료된 경우) <bold>새로운 프로세스가 반드시 선택되어야 한다.</bold> 2,3번의 경우 CPU가 기존 실행되던 프로세스에게 다시 배정될 것인지, 새로운 프로세스를 선택할 것인지 정할 수 있다. 
+
+- 1번, 4번 : 비선점형 스케쥴링(프로세스 대기/종료 이후 CPU가 다른 프로세스들에게 배정되는 경우)
+- 2번, 3번 : 선점형 스케쥴링(프로세스 실행 중에도 CPU가 다른 프로세스들에게 배정될 수 있는 경우)
+
+상황과 우선 순위에 따라 비선점형/선점형 스케쥴링을 취사 선택해야 한다. 
+
+### 스케쥴링 평가 요소(scheduling criteria)
+1. CPU utiliazation : The intensity of CPU business. A typical range is from 40 percent for a light loaded system to 90% for a heavier one. 
+
+2. Throughput : The number of processes completed by CPU per time unit.
+
+3. Turnaround time : The interval time between process submition and process completion. It contains 1) time to get into to memory 2) time to be in ready queue 3) time to execute in CPU 4) time to execute I/O. Turnaround time is usually limited to output device's speed.
+
+4. <bold>Waiting time</bold> : The total time a process spends to be in ready queue. CPU 스케쥴링 알고리즘에 의해 영향을 받고, 효율적인 CPU 스케쥴링을 평가하는데 중요 요소가 됨. 
+
+5. Response time : The interval time between request submission and and response production(time to start responding, not the time to take output response)
 
 ## 레퍼런스
 - [Difference between Multiprogramming, multitasking, multithreading, and multiprocessing](https://www.geeksforgeeks.org/difference-between-multitasking-multithreading-and-multiprocessing/)
