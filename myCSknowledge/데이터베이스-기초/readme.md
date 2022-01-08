@@ -185,7 +185,13 @@ Entity-Relationship 모델에 기반한 데이터베이스 ER 다이어그램을
 ## ER 모델과 Relationship의 이해
 ER 모델은 Entity-Relationship 모델의 줄임말이다. 
 
-- Entity : an independent existence in a real world. an objec
+- Entity : an independent existence in a real world. an object.
+1. strong entity : not dependent on other entities in schema, always having a primary key. represented by a single rectangle.
+2. weak entity : dependent on string entity, having a partial discriminator key. represented by a doulbe rectangle. 
+3. relationship between strong entity and weak one is represented with doulbe diamond.
+
+<img src="./entities.png" width=635 height=390 alt="강한 개체와 약한 개체" />
+
 - Relationship : association between enitities. For example, User ===(typing[relationship])===> keyboard.
 
 ### Degree of Relationship
@@ -204,9 +210,15 @@ ER 모델은 Entity-Relationship 모델의 줄임말이다.
 
 <img src="./book-chapter-er-diagram.png" width=630 height=370 alt="책 개체와 챕터 개체의 ER 다이어그램" />
 
+ER 다이어그램은 min-max 표기법을 통해 참가 제약을 표시할 수도 있다. 
+
+<img src="./min-max-notation.png" width=600 height=240 alt="책 min-max ER 다이어그램 예시" />
+
 ## 레퍼런스 
 - [위키피디아 - 추상화](https://ko.wikipedia.org/wiki/%EC%B6%94%EC%83%81%ED%99%94_(%EC%BB%B4%ED%93%A8%ED%84%B0_%EA%B3%BC%ED%95%99))
 - [데이터베이스 시스템의 구성 - 3단계 데이터베이스 구조](https://m.blog.naver.com/PostView.naver?isHttpsRedirect=true&blogId=k97b1114&logNo=140153781324)
 - [Describing access path for database files](https://www.ibm.com/docs/en/i/7.2?topic=files-describing-access-paths-database)
 - [Encyclopedia of Database Systems - Access Path](https://link.springer.com/referenceworkentry/10.1007%2F978-0-387-39940-9_866)
 - [Incremental backup and recovery](https://www.ibm.com/docs/en/db2/11.5?topic=recover-incremental-backup-recovery)
+- [Chen ERD notation](https://vertabelo.com/blog/chen-erd-notation/)
+- [Good database design](https://www.dbdesigner.net/what-you-need-to-know-about-good-database-design/)
