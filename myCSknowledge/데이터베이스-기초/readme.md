@@ -108,7 +108,7 @@ DBMS를 활용하기 이전에는 데이터를 저장하기 위해서 파일 시
 |구분|내용|추상화 수준|
 |:--:|:--:|:---------:|
 |외부 스키마(External schema)|개개인의 유저가 직접 접근하며(view), 사용자에 관련된 개체만이 포함된다. 전체 데이터베이스의 일부분을 표시함.|최상|
-|개념 스키마(Conceptual schema)|모든 응용 시스템/사용자들이 필요하는 전체 데이터를 종합하여 표현함. 외부 스키마는 개념 스키마로부터 생성되며, 개체, 개체간 관, 규칙 명세등도 포함된다.|중간|
+|개념 스키마(Conceptual schema)|모든 응용 시스템/사용자들이 필요하는 전체 데이터를 종합하여 표현함. 외부 스키마는 개념 스키마로부터 생성되며, 개체, 개체간 관계, 규칙 명세등도 포함된다.|중간|
 |내부 스키마(Internal schema)|개념 스키마에 대한 저장 구조를 실제로 정의함. 자료 구조의 형식, 인덱싱 등을 포함함. 물리적 데이터베이스보다 상위 단계.|최하| 
 
 <img src="./3단계-데이터베이스.png" width=716 height=666 alt="데이터베이스 3단계 구조" />
@@ -164,6 +164,45 @@ Incremental backup이란 이전 백업이 이루어진 이후, 새롭게 발생�
 클라이언트-서버 아키텍처는 아래와 같은 두 가지 타입으로 나뉜다. 
 1. Two-Tier Client-Server 아키텍처 => 클라이언트 사이드에서 ODBC(Open Database Connectivity)에서 제공하는 API를 통해 직접적으로 DBMS를 요청할 수 있음. 
 2. Three-Tier Client-Server 아키텍처 : 현재 대부분의 웹 어플리케이션에 적용됨. 클라이언트와 서버 사이에 웹 서버가 추가된 구조.
+
+## 데이터베이스 디자인의 이해
+데이터베이스 디자인은 아래와 같은 프로세스로 이루어진다. 
+
+1. 요구 조건 수집 및 분석 : 데이터베이스 디자이너가 데이터베이스 유저의 요구 조건(data requirement, functional requirement을 이해하고 기록한다. 
+
+2. 개념 스키마(conceptual schema) 작성 : 개체와 개체간 관계, 제약 조건을 작성한다. 
+
+3. 논리적/물리적 디자인 작성 : DBMS를 활용해 실제 데이터베이스의 1) 논리적 디자인을 구성하고, 디스크 서칭을 위한 인덱싱, 데이터를 불러오는 access path 등을 결정하는 2) 물리적 디자인을 구성함.   
+
+Entity-Relationship 모델에 기반한 데이터베이스 ER 다이어그램을 살펴보자. 
+
+<img src="./er-diagram-example.png" width=800 height=620 alt="ER 다이어그램" />
+
+편의를 위해 아래와 같은 ER 다이어그램 웹사이트 툴을 사용할 것을 권장함. 
+
+- [Lucidchard](https://www.lucidchart.com/pages/)
+
+## ER 모델과 Relationship의 이해
+ER 모델은 Entity-Relationship 모델의 줄임말이다. 
+
+- Entity : an independent existence in a real world. an objec
+- Relationship : association between enitities. For example, User ===(typing[relationship])===> keyboard.
+
+### Degree of Relationship
+1. Unary : one entity => e.g) PERSON => name
+2. Binary : two entities => e.g) USER => typing => KEYBOARD
+3. Tenary : three entities => USER => turning on => KEYBOARD, MONITOR
+
+### Relationship constraint
+서로 다른 개체들은 일정 제약 조건 아래에서 관계를 맞게 된다. 예륻 들어, 
+
+- 카디널리티 제약 : 카디널리티 제약 조건은 1:1, N:1. M:M 등으로 개체 간 서로 맺을 수 있는 관계의 수를 지정하는 것을 의미한다.  
+
+<img src="./relationship-constraint.png" width=670 height=380 alt="개체간 관계 제한 다이어그램" />
+
+- 참가 제약 : 개체는 관계에 전체 참여 또는 일부 참여할 수 있다. 예를 들어 PERSON 개체와 APARTMENT 개체는 LIVES 관계로 정의된다고 하면, PERSON 개체는 LIVES 관계에 일부 참여하지만(모든 사람이 아파트에 살지는 않으므로) APARTMENT 개체는 LIVES 관계에 전체 참여하게 된다.
+
+<img src="./book-chapter-er-diagram.png" width=630 height=370 alt="책 개체와 챕터 개체의 ER 다이어그램" />
 
 ## 레퍼런스 
 - [위키피디아 - 추상화](https://ko.wikipedia.org/wiki/%EC%B6%94%EC%83%81%ED%99%94_(%EC%BB%B4%ED%93%A8%ED%84%B0_%EA%B3%BC%ED%95%99))
