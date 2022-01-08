@@ -4,13 +4,7 @@
 nellow1102@gmail.com
 ```
 
-# 목차
-- [컴퓨터 사이언스](#cs-학습-리스트)
-- [자료구조와 알고리즘](#자료구조와-알고리즘)
-- [기타 추가 토픽](#기타-추가-토픽)
-- [학습 플랫폼](#온라인-학습-플랫폼)
-
-# CS 학습 리스트
+## CS 학습 리스트
 - [X] [유데미 - 반드시 알고 넘어가야 하는 웹 기술 기초(HTTP)](https://www.udemy.com/course/web-technology-fundamentals/)
 - [X] [유데미 - 네트워크 기초(영문)](https://www.udemy.com/course/networking-concepts-for-beginners/learn/lecture/6060530?start=15#overview)
 - [X] [인프런 - 컴알못이 보는 컴퓨터 하드웨어 기초상식](https://www.inflearn.com/course/%EC%BB%B4%ED%93%A8%ED%84%B0-%ED%95%98%EB%93%9C%EC%9B%A8%EC%96%B4-%EA%B8%B0%EC%B4%88%EC%83%81%EC%8B%9D/dashboard) 
@@ -29,7 +23,7 @@ nellow1102@gmail.com
 - [ ] [부스트코스 - 모두를 위한 선형 대수](https://www.boostcourse.org/ai151)
 - [ ] [부스트코스 - 확률론 기초](https://www.boostcourse.org/ai152)
 
-# 온라인 학습 플랫폼
+## 온라인 학습 플랫폼
 - [인프런](https://www.inflearn.com/)
 - [Free Code Camp](https://www.freecodecamp.org/learn)
 - [Udemy](https://www.udemy.com/)
@@ -39,7 +33,7 @@ nellow1102@gmail.com
 - [구름 에듀](https://edu.goorm.io/) 
 - [부스트코스 - 네이버](https://www.boostcourse.org/opencourse)
 
-# 참여자
+## 참여자
 <a href="https://github.com/developerasun">
 <img src="https://github.com/developerasun.png?size=50" alt="Jake Sung"/>
 </a>
@@ -51,3 +45,6 @@ nellow1102@gmail.com
 <a href="https://github.com/omago123">
 <img src="https://github.com/omago123.png" width=50px height=50px alt="김정기"/>
 </a>
+
+## 기타 레퍼런스
+- [물 흐르듯 읽어보는 TCP/IP](https://velog.io/@haero_kim/%EB%AC%BC-%ED%9D%90%EB%A5%B4%EB%93%AF-%EC%9D%BD%EC%96%B4%EB%B3%B4%EB%8A%94-TCPIP)
