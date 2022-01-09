@@ -16,6 +16,7 @@ public class PlayerMovement : MonoBehaviour
     // variable with public access modifier can be accessed in other scripts
     // use it with caution
     public int accessThisVariable = 55;
+    public string TAG_ENEMYHEAD = "enemyHead"; 
 
     bool IsGrounded()
     {
@@ -32,7 +33,21 @@ public class PlayerMovement : MonoBehaviour
 
         if (Input.GetButtonDown("Jump") && IsGrounded())
         {
-            rb.velocity = new Vector3(rb.velocity.x, UNIT_SPEED, rb.velocity.z);
+            Jump();
+        }
+    }
+
+    void Jump() 
+    {
+        rb.velocity = new Vector3(rb.velocity.x, UNIT_SPEED, rb.velocity.z);
+    }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.CompareTag(TAG_ENEMYHEAD))
+        {
+            Destroy(collision.transform.parent.gameObject);
+            Jump();
         }
     }
 
@@ -42,6 +57,7 @@ public class PlayerMovement : MonoBehaviour
         // declare a variable for Rigidbody component
         // instatiation
         rb = GetComponent<Rigidbody>();
+        UnityEngine.Debug.Log(transform.position); // check out an initial point of GameObject
         
     }
 
