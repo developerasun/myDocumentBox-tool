@@ -929,7 +929,7 @@ CPU 스케쥴링은 다음과 같은 4가지 상황에서 발생한다.
 
 1번과 4번의 경우(프로세스가 대기 또는 종료된 경우) <bold>새로운 프로세스가 반드시 선택되어야 한다.</bold> 2,3번의 경우 CPU가 기존 실행되던 프로세스에게 다시 배정될 것인지, 새로운 프로세스를 선택할 것인지 정할 수 있다. 
 
-- 1번, 4번 : 비선점형 스케쥴링(프로세스 대기/종료 이후 CPU가 다른 프로세스들에게 배정되는 경우)
+- 1번, 4번 : 비선점형 스케쥴링(프로세스 대기/종료 이후에 CPU가 다른 프로세스들에게 배정될 수 있는 경우)
 - 2번, 3번 : 선점형 스케쥴링(프로세스 실행 중에도 CPU가 다른 프로세스들에게 배정될 수 있는 경우)
 
 상황과 우선 순위에 따라 비선점형/선점형 스케쥴링을 취사 선택해야 한다. 
@@ -943,7 +943,114 @@ CPU 스케쥴링은 다음과 같은 4가지 상황에서 발생한다.
 
 4. <bold>Waiting time</bold> : The total time a process spends to be in ready queue. CPU 스케쥴링 알고리즘에 의해 영향을 받고, 효율적인 CPU 스케쥴링을 평가하는데 중요 요소가 됨. 
 
+<img src="./turnaround-waiting-calculate.png" alt="턴어라운드 및 대기 시간 계산" height=394 width=766 />
+
 5. Response time : The interval time between request submission and and response production(time to start responding, not the time to take output response)
+
+### 스케쥴링 알고리즘
+#### First Come, First Served 알고리즘
+First-come, first-served 알고리즘(FCFS)은 먼저 CPU 자원을 요청하는 프로세스에게 CPU가 우선 할당되는 알고리즘이다. 
+
+- FCFS는 큐 형태로 실현된다. 
+
+<img src="./fifo-queue.png" alt="fisrt in first out queue" height=616 width=392 />
+
+- 프로세스가 ready queue에서 대기할 때 프로세스 컨트롤 블록이 FCFS 큐의 tail에 기록된다.
+
+- CPU가 다른 프로세스 작업을 마치면 FCFS의 큐 head에서 대기하고 있던 프로세스에게 할당된다(CPU가 할당된 프로세스는 queue에서는 사라진다). 
+
+FCFS 알고리즘은 평균 처리 시간이 길다는 단점이 존재한다. 아래와 그림과 같은 프로세스들이 존재할 경우 P1의 CPU 버스트가 끝날 때까지 P2, P3는 계속 대기해야 하기 때문이다. 
+
+<img src="./fifo-queue.png" alt="fisrt in first out queue" height=616 width=392 />
+
+|Process ID|도착 순서|버스트 타임(초)|대기 시간| 
+|:--------:|:-------:|:-------------:|:-------:|
+|P1        |1        |30             |0        |
+|P2        |2        |3              |30       |
+|P3        |3        |13             |33       |
+
+전체 프로세스의 평균 대기 시간은 (0+30+33)/3 = 21초가 걸린다. 프로세스 도착 순서를 재배열해 아래의 경우와 비교해보면,
+
+|Process ID|도착 순서|버스트 타임(초)|대기 시간| 
+|:--------:|:-------:|:-------------:|:-------:|
+|P1        |3        |30             |16       |
+|P2        |1        |3              |0        |
+|P3        |2        |13             |3        |
+
+(16+0+3)/3 = 6.3초, 즉 3배 정도의 속도 차이가 나는 것을 확인할 수 있다. 이와 같이 하나의 프로세스가 다른 프로세스보다 비교적 큰 버스트 타임을 가져 병목 현상을 가지고 오는 것을 <bold>Convoy effect</bold>라 부른다.  또한 FCFS 알고리즘의 경우 비선점형 알고리즘, 즉 CPU는 프로세스 종료 이후에야 다른 프로세스에게 배정될 수 있으므로 유저 상호작용 측면에서 효율이 떨어진다. 
+
+- 만약 복수의 프로세스가 동일한 시점에 ready queue에 들어왔을 경우 프로세스 아이디가 작은 순으로 먼저 실행된다. 즉, 아래의 경우 P2가 먼저 실행된다. 
+
+<img src="./same-process-arrival.png" alt="프로세스 도착 시점 비교" height=423 width=715 />
+
+##### 스케쥴링 상 오버헤드(δ, delta)가 존재하는 경우
+아래와 같은 예제에서 CPU 스케쥴링을 행하는 경우 1 유닛당 δ(delta)만큼의 오버헤드가 발생한다고 가정해보자. 
+
+|Process ID|도착 시간|버스트 타임(초)| 
+|:--------:|:-------:|:-------------:|
+|P1        |0        |3              |
+|P2        |1        |2              |
+|P3        |2        |1              |
+|P4        |3        |4              |
+|P5        |4        |5              |
+|P6        |5        |2              |
+
+오버헤드를 포함한 전체 스케쥴링은 아래 간트 차트와 같다.
+
+<img src="./gantt-chart.png" alt="오버헤드 포함 간트 차트" height=176 width=290 />
+
+<details>
+    <summary>간트 차트란?(gantt chart) 펼쳐보기</summary>
+a chart in which a series of horizontal lines <bold>shows the amount of work done</bold> or production completed in certain periods of time <bold>in relation to the amount planned</bold> for those periods.
+</details>
+
+전체 알고리즘의 효율성은 아래와 같이 계산된다. 
+
+- 낭비된 시간 : δ * 6 units
+- 전체 소요 시간 : 23 units
+- 실 소요 시간 : 17 units
+- 효율성(efficiency) : 실 소요 시간 / 전체 소요 시간 => 17 units / 23 units = 73.91%
+
+#### Shortest Job First 알고리즘
+SJF 스케쥴링 알고리즘은 CPU 소요 시간이 가장 짧은 프로세스부터 처리되는 방식을 의미한다.
+
+- 해당 프로세스의 <bold>다음 CPU 버스트 타임</bold>을 평가함
+- CPU는 다음 CPU 버스트 타임이 가장 짧은 프로세스에게 배정됨
+- 버스트 타임이 동일할 경우 먼저 도착한 프로세스에게 CPU가 배정됨(First come, first served)
+- 선점형/비선점형 모두 적용 가능
+
+아래 예시를 통해 좀 더 알아보자. 
+
+|Process ID|버스트 타임(초)| 
+|:--------:|:-------------:|
+|P1        |6              |
+|P2        |8              |
+|P3        |7              |
+|P4        |3              |
+
+<p>
+전체 프로세스 실행 순서는 P4 => P1 => P3 => P2로 이루어지며, 평균 대기 시간은 ( 0 + 3 + 9 + 16 ) / 4 => <bold>7초가 걸림</bold>을 확인할 수 있다. 
+</p>
+
+<p>
+만약 이를 First come, first served 알고리즘을 적용했을 경우 프로세스 실행 순서는 P1 => P2 => P3 => P4로 이루어지며, 평균 대기 시간은 ( 0 + 6 + 14 + 21 )/4 = <bold>10.25초</bold>가 걸림을 확인할 수 있다. 즉, SJF 알고리즘과 FCFS 알고리즘 중 SJF 알고리즘을 선택하는 것이 유리함을 알 수 있다. 
+</p>
+
+<p>
+SJF 알고리즘의 경우 FCFS와 달리 선점형 스케쥴링이 가능하고, 선점형이 적용되었을 경우 Shortest-Remaining-Time-First Scheduling으로 불린다.
+</p>
+
+<details>
+    <summary>Shortest-Remaining-Time-First Scheduling의 특성(펼쳐보기)</summary>
+
+1. 프로세스 A는 ready queue 도착 이후 즉시 버스트 타임이 줄어들고
+2. 처리 도중 프로세스 B에게 (버스트 타임이 더 짧은)에게 CPU가 선점되어 B를 우선 처리하면
+3. 프로세스 A에게 다시 CPU가 배정되었을 때 <bold>줄어든 버스트 타임부터 이어서 계산한다</bold>.  
+</details>
+
+##### SJF 알고리즘의 한계와 극복
+- 정확한 다음 CPU 버스트 타임을 알기 어려움 => 버스트 타임 근사치를 예측하여 예측 값이 가장 작은 프로세스부터 선택함.
+- 단기 CPU 스케쥴링에 불리함 => 근사치 스케쥴링을 예측
 
 ## 레퍼런스
 - [Difference between Multiprogramming, multitasking, multithreading, and multiprocessing](https://www.geeksforgeeks.org/difference-between-multitasking-multithreading-and-multiprocessing/)
