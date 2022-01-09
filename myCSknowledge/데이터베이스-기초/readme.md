@@ -214,6 +214,146 @@ ER 다이어그램은 min-max 표기법을 통해 참가 제약을 표시할 수
 
 <img src="./min-max-notation.png" width=600 height=240 alt="책 min-max ER 다이어그램 예시" />
 
+### ER 다이어그램 Exercise 
+#### Exercise 1
+Exercise 1 CONDITIONS : 
+- Every customer must have at least one account
+- Every customer must have at best two loans
+- Bank branch cannot have more than 1000 loans
+
+Execise 1 REQUIREMENTS :
+1. Answer with your min-max constraint
+
+<details>
+    <summary>solution 1(펼쳐보기)</summary> 
+
+- CUSTOMER (1, N) ===== OWNS ===== ACCOUNT (1, N)
+- LOAN (1, N) ===== OWNS ===== CUSTOMER (0, 2) 
+- LOAN (1, 1) ===== OWNS ===== BANK-BRANCH(0, 1000)
+</details>
+
+#### Exercise 2
+Exercise 2 CONDITIONS : 
+- An employee may work in upto two departments or not assigned to any.  
+- Each department must have one and may have up to three phone numbers. 
+
+Execise 2 REQUIREMENTS : 
+1. Answer with your own min-max constraint with assumption
+2. Under what conditions would the relationship HAS_PHONE be redundant? 
+
+<img src="./exercise-diagram.png" width=746 height=379 alt="ER 다이어그램 예제" />
+
+requirement 1 
+1. DEPARTMENT must have one and may have up to five employees.
+- EMPLOYEE (0, 2) ===== WORKS-IN ===== DEPARTMENT (1, 5)
+
+2. PHONE may have up to one DEPARTMENT.
+- DEPARTMENT (1, 3) ===== CONTAINS ===== PHONE (0, 1)
+
+3. EMPLOYEE must have one and may have up to 2 phones. PHONE may have up to one EMPLOYEE 
+- EMPLOYEE (1, 2) ===== HAS_PHONE ===== PHONE (0, 1)
+
+requirement 2 : 
+Relationship between EMPLOYEE and PHONE will be unnecessary if 
+1. each employee in department must have phone and all of the phones should be given to employee. 
+2. employee only have phones from inside the department
+
+#### Exercise 3
+Exercise 3 CONDITIONS :
+- COURSE may or may not use a textbook. 
+- COURSE may use up to five books.
+- TEXT is a book used in some course.
+- INSTRUCTOR teaches at least two and up to four courses
+
+Exercise 3 REQUIREMENTS : 
+1. Answer with your own min-max constraints. Clarify your assumptions. 
+2. If relationship ADOPTS between INSTRUCTOR and TEXT, how would you make min-max contstraints? 
+
+<img src="./exercise-diagram-instructor.png" width=713 height=395 alt="ER 다이어그램 예제" />
+
+requirement 1 
+1. COURSE must have one INSTRUCTOR. 
+- INSTRUCTOR (1, 4) ===== TEACHES ===== COURSE (1, N)
+2. TEXT may be used or not used in COURSE.
+- COURSE (0, 5) ===== USES ===== TEXT (0, N)
+
+requirement 2 
+1. INSTRUCTOR may or may not adopt TEXT
+- INSTRUCTOR (0, N) ===== ADOPTS ===== TEXT (0, N)
+
+## 관계형 데이터 모델의 이해
+- 관계형 데이터 모델은 1970년대 Ted Codd에 의해 처음 도입되었다. 
+- 모든 데이터를 행과 열로 분리해 테이블로 표시하는 것이 주된 특징이다. 테이블은 relation으로 불리기도 한다. 
+
+<img src="./table-relation-name.png" width=738 height=336 alt="관계형 데이터 테이블" />
+
+- SQL은 관계형 데이터베이스 매니지먼트 시스템의 표준이 되었다. 
+
+### RDB 테이블(relation)의 이해
+
+- 테이블은 순서가 상관없는 튜플의 모임이다. 예를 들어, 아래의 테이블 PEOPLE은
+
+|ID    |이름|나이| 
+|:----:|:--:|:--:|
+|11    |Jake|28  |
+|22    |Elly|29  |
+|33    |Paul|30  |
+
+아래의 테이블 PEOPLE_2와 동일하다. 
+
+|ID    |이름|나이| 
+|:----:|:--:|:--:|
+|22    |Elly|29  |
+|33    |Paul|30  |
+|11    |Jake|28  |
+
+그러나, 튜플 내에서의 순서는 중요하다. 예를 들어, 아래의 PERSON 테이블과 
+
+|ID    |이름|나이| 
+|:----:|:--:|:--:|
+|22    |Elly|29  |
+
+아래의 테이블 PERSON_2는 동일하지 않다.
+
+|ID    |이름|나이| 
+|:----:|:--:|:--:|
+|Elly  |29  |22  |
+
+- 튜플 내의 값들은 atomic 해야 한다. 예를 들어, 아래의 테이블 STUDENT는
+
+<img src="./table-not-atomic.png" width=674 height=163 alt="테이블의 원자성" />
+
+아래의 STUDENT_ATOMIC 으로 변경되어야 한다. 
+
+<img src="./table-atomic.png" width=752 height=155 alt="테이블의 원자성" />
+
+### 관계형 모델 제약 조건
+Domain constraints
+- relation 내 값들은 atomic 해야 한다. 
+- relation 내 값들은 미리 정해진 데이터 형이 지켜져야 한다. 
+
+#### Understanding keys in relation
+RDB에서 사용되는 키를 이해하는 것은 중요하다. 아래 내용을 참조할 것.
+
+- [Various Types of Key in Relational DBMS](https://medium.com/swlh/various-types-of-key-in-relational-dbms-f413e0b13b6)
+
+```md 
+>Why we need Key?
+
+KEYS in DBMS is an attribute or set of attributes that help you to identify a row(tuple) in a relation(table).
+
+- First, we need to know why we need RDBMS over traditional file system, the answer is simple that we need a database which is consistent and non-redundant. This can be achieved by normalization of the database. 
+
+- Normalization is a technique through which we make our database more consistent by removing the redundancy and data anomalies (deletion and insertion).
+
+- Normalization is used for mainly two purposes,
+1. Eliminating redundant(useless) data.
+2. Ensuring data dependencies make sense i.e. data is logically stored.
+
+We achieve this normalization by using “keys”.
+
+```
+
 ## 레퍼런스 
 - [위키피디아 - 추상화](https://ko.wikipedia.org/wiki/%EC%B6%94%EC%83%81%ED%99%94_(%EC%BB%B4%ED%93%A8%ED%84%B0_%EA%B3%BC%ED%95%99))
 - [데이터베이스 시스템의 구성 - 3단계 데이터베이스 구조](https://m.blog.naver.com/PostView.naver?isHttpsRedirect=true&blogId=k97b1114&logNo=140153781324)
@@ -222,3 +362,5 @@ ER 다이어그램은 min-max 표기법을 통해 참가 제약을 표시할 수
 - [Incremental backup and recovery](https://www.ibm.com/docs/en/db2/11.5?topic=recover-incremental-backup-recovery)
 - [Chen ERD notation](https://vertabelo.com/blog/chen-erd-notation/)
 - [Good database design](https://www.dbdesigner.net/what-you-need-to-know-about-good-database-design/)
+- [Difference between SQL Keys :Primary Key, Super Key, Candidate Key, Foreign Key](https://www.analyticsvidhya.com/blog/2020/07/difference-between-sql-keys-primary-key-super-key-candidate-key-foreign-key/)
+- [Various Types of Key in Relational DBMS](https://medium.com/swlh/various-types-of-key-in-relational-dbms-f413e0b13b6)
