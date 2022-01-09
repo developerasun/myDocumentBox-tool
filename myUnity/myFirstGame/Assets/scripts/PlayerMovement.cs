@@ -9,10 +9,19 @@ public class PlayerMovement : MonoBehaviour
     // SerializeField: Force Unity to serialize a private field. You can directly
     // adjust this variable in Unity editor.
     [SerializeField]float UNIT_SPEED = 5f;
+    
+    [SerializeField]Transform groundCheck;
+    [SerializeField]LayerMask ground;
+
     // variable with public access modifier can be accessed in other scripts
     // use it with caution
     public int accessThisVariable = 55;
+    public string TAG_ENEMYHEAD = "enemyHead"; 
 
+    bool IsGrounded()
+    {
+        return Physics.CheckSphere(groundCheck.position, .1f, ground);
+    }
 
     // prefab : template for object
     void MoveCharcter() { 
@@ -22,19 +31,33 @@ public class PlayerMovement : MonoBehaviour
 
         rb.velocity = new Vector3(horizontalInput * UNIT_SPEED, rb.velocity.y, verticalInput * UNIT_SPEED);
 
-        if (Input.GetButtonDown("Jump"))
+        if (Input.GetButtonDown("Jump") && IsGrounded())
         {
-            rb.velocity = new Vector3(rb.velocity.x, UNIT_SPEED, rb.velocity.z);
+            Jump();
         }
-
-        
     }
+
+    void Jump() 
+    {
+        rb.velocity = new Vector3(rb.velocity.x, UNIT_SPEED, rb.velocity.z);
+    }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.CompareTag(TAG_ENEMYHEAD))
+        {
+            Destroy(collision.transform.parent.gameObject);
+            Jump();
+        }
+    }
+
     // Start is called before the first frame update
     void Start()
     {
         // declare a variable for Rigidbody component
         // instatiation
         rb = GetComponent<Rigidbody>();
+        UnityEngine.Debug.Log(transform.position); // check out an initial point of GameObject
         
     }
 
@@ -43,4 +66,5 @@ public class PlayerMovement : MonoBehaviour
     {
         MoveCharcter();
     }
+
 }
