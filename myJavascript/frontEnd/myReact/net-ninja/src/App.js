@@ -3,6 +3,10 @@ import { useState } from "react";
 import Navbar from './components/contextHooks/navbar'
 import BookList from './components/contextHooks/bookList'
 import ThemeContextProvider from './components/contextHooks/context/themeContext'
+import AuthContextProvider from './components/contextHooks/context/authContext'
+import ToggleTheme from './components/contextHooks/toggle'
+import SongList from './components/contextHooks/songlist'
+
 
 function App() {
   
@@ -12,11 +16,17 @@ function App() {
         {/***************** React Context API and Hooks ****************/}
 
         <ThemeContextProvider>
-          <Navbar />
-          <BookList />
+        <AuthContextProvider>
+            <Navbar />
+            {/* BookList component consumes two states, each of which comes from
+            ThemeContextProvider and AuthContextProvider.
+            */}
+            <BookList />
+            <ToggleTheme />  
+        </AuthContextProvider>
         </ThemeContextProvider>
-
-
+        
+        <SongList />
       
 
 
