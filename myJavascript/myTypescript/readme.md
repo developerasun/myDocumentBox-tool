@@ -478,6 +478,269 @@ module.exports = {
 
 <img src="reference/package-script.png" width=486 height=116 alt="package.json screenshot"/>
 
+## GroomEdu - Typescript at a glance
+Typescript si a open source library with ![Apache license](https://en.wikipedia.org/wiki/Apache_License#:~:text=The%20Apache%20License%20is%20a,license%2C%20without%20concern%20for%20royalties.) developed by Miscrosoft. Advantages of using Typescript are as follows : 
+
+- easier bug fixes : not in runtime but in compile time
+- high code readability : with types
+- object-oriented : comes with extra features such as interface
+- editor-friendly : VScode and Webstorm supported, only need to install typescript compiler
+
+You can combine Typescript with any project using Javascript. For example, React with Typescript and Node.js with Typescript.
+
+### Configuration 
+```json
+{
+   // included for compile
+  "include": [
+    "src/**/*.ts"
+  ],
+  // not included for compile
+  "exclude": [
+    "node_modules"
+  ]
+}
+```
+
+### Type setting
+variables, parameter, property and others can set a type for themseleves in a form of : TYPE.  
+
+```
+Variable : TYPE
+Paramter : TYPE
+```
+
+For example,
+
+```typescript
+const myFunc = (myParam : number) => console.log(myParam)
+const myVar : string = "hello"
+const notFixed : any[] = [5, {}, [], "bye"]
+const readThis : readonly string[] = ["for read", "only"]
+const readThat : ReadonlyArray<number> = [1,2,3]
+```
+
+### Reverse mapping in Enum
+Enum is a type that attaches a name for a set. 
+
+```typescript
+enum Times {
+    "morning", // 0
+    "afternoon" = 10, // 1
+    "evening" // 2
+}
+```
+
+Enum in typescript supports a reverse mapping when value are in number. For example, 
+```typescript
+Times.morning // 0
+Times[10] // afternoon
+```
+
+### Any and Unknown in typescript
+Any and Unknown can be useful when external resources have not defined exact types. 
+
+#### Any
+Type 'any' means all types. When type assertion can't be decided for some reason, you can use any. 
+
+```typescript
+let cantDecide : any = 555
+cantDecide = "to string!"
+```
+
+Restirct to the any type in compiler option if storng type restriction is needed.
+```json
+{ 
+    "noImplicitAny": true
+}
+```
+
+#### Unknown
+Unknown type is the uppermost type for all types just like 'any'. You can set all types. 
+
+```typescript
+let yetUnknown : unknown = 555
+yetUnknown = "now known"
+```
+
+### Null and Undefined
+Null and Undefined is the lowermost type for all types, which can be set to all types. 
+
+```typescript
+let num: number = undefined;
+let str: string = null;
+let obj: { a: 1, b: false } = undefined;
+let arr: any[] = null;
+let und: undefined = null;
+let nul: null = undefined;
+let voi: void = null;
+// ...
+```
+
+Set complier option like below so that null and undefined can't be set to other types.
+
+```json
+{ 
+    "strictNullchecks": true
+}
+```
+
+### Void
+Type void is used as function return type, when the functions returns nothing. 
+
+```typescript
+const myFunc = ():void => console.log("hello")
+```
+
+When the function explicitly returns nothing, actually it returns undefined type. 
+
+### Understanding Never
+Never is a value that will never exist. None of types applied to this type.
+
+```js
+function error(message: string): never {
+  throw new Error(message);
+}
+```
+
+### Union and Intersection
+Union(|) allows more than two types and intersection(&) cobines existing types to create a new type. 
+
+#### Union
+```ts
+type goodOrBad = {
+    status :'good' | 'bad'
+}
+```
+
+#### Intersection
+```ts
+type goodOrBad = {
+    status :'good' | 'bad'
+}
+type newOrOld = {
+    fresh : 'new' | 'old' 
+}
+const myItem : goodOrBad & newOrOld = {
+    status : 'good', 
+    fresh : 'new'
+}
+```
+
+### Understanding type inference and assertion
+#### Interference
+Typescript infers a type automatically in followin circumstances. 
+
+1. initiazlied variable
+2. function paramter
+3. function return value
+
+```ts
+let num = 12;
+function add(a: number, b: number = 2): number {
+    return a + b;
+}
+```
+#### Interference
+Programmar sets a type by oneself rather than typescript does. 
+
+```ts
+function someFunc(val: string | number, isNumber: boolean) {
+    if (isNumber) {
+        (val as number).toFixed(2); // assertion
+  }
+}
+```
+
+Also, non-null operator ! can be useful to manipulate DOM, which can be tricky to check in compile time. 
+
+```ts
+// Error - TS2531: Object is possibly 'null'.
+document.querySelector('.menu-item').innerHTML;
+
+// Type assertion method 1
+(document.querySelector('.menu-item') as HTMLDivElement).innerHTML;
+
+// Type assertion method 2
+(<HTMLDivElement>document.querySelector('.menu-item')).innerHTML;
+
+// Type assertion method 3 : non-null operator
+document.querySelector('.menu-item')!.innerHTML;
+
+```
+
+### Understanding type guards
+Type guard is used to ensure that a certain value is a certain type in a scope. Use type guard to avoid duplicated type assertions. Types of type guards are as follows : 
+
+1. Predicate : NAME is TYPE
+2. typeof 
+3. in 
+4. instanceof
+
+<details>
+    <summary>What is a Predicate?(tab to unfold)</summary>
+A predicate is a function of a set of parameters <bold>that returns a boolean</bold> as an answer.
+
+```java
+// Predicate
+boolean checkTemperature(int temperature) {
+    return temperature > 25;
+}
+```
+</details>
+
+
+```ts
+// duplicated type assertions
+(val as string).split('');
+(val as string).toUpperCase();
+(val as string).length;
+
+// Type guard : Predicate
+function isNumber(val: string | number): val is number {
+    return typeof val === 'number'; // returns bool value
+}
+
+// Type guard : typeof
+function someFuncTypeof(val: string | number) {
+    if (typeof val === 'number') {
+        val.toFixed(2);
+    isNaN(val);
+  } else {
+      val.split('');
+    val.toUpperCase();
+    val.length;
+  }
+}
+
+// Type guard : in
+function someFuncIn(val: any) {
+    if ('toFixed' in val) {
+        val.toFixed(2);
+    isNaN(val);
+  } else if ('split' in val) {
+      val.split('');
+    val.toUpperCase();
+    val.length;
+  }
+}
+
+// Type guard : instanceof
+class Cat {
+  meow() {}
+}
+class Dog {
+  woof() {}
+}
+function sounds(ani: Cat | Dog) {
+  if (ani instanceof Cat) {
+    ani.meow();
+  } else {
+    ani.woof();
+  }
+}
+```
+
 ## Reference
 - [What is an Enum in programming language](https://www.thoughtco.com/what-is-an-enum-958326)
 - [Webpack Offical - Entry](https://webpack.js.org/concepts/#entry)
