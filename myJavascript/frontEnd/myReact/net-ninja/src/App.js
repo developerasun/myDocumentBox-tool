@@ -6,7 +6,11 @@ import ThemeContextProvider from './components/contextHooks/context/themeContext
 import AuthContextProvider from './components/contextHooks/context/authContext'
 import ToggleTheme from './components/contextHooks/toggle'
 import SongList from './components/contextHooks/songlist'
-
+import UseContextBookList from './components/contextHooks/useContextBookList'
+import MultipleUseContextBookList from './components/contextHooks/multipleUseContextBookList'
+import UseContextToggle from './components/contextHooks/useConetxtToggle'
+import ListDataContextProvider from './components/contextHooks/context/listDataContext'
+import DummyList from './components/contextHooks/dummyList'
 
 function App() {
   
@@ -23,13 +27,17 @@ function App() {
             */}
             <BookList />
             <ToggleTheme />  
+            <UseContextBookList />
+            <MultipleUseContextBookList />
+            <UseContextToggle />
         </AuthContextProvider>
         </ThemeContextProvider>
-        
+
         <SongList />
-      
 
-
+        <ListDataContextProvider>
+            <DummyList />
+        </ListDataContextProvider>
 
         {/***************** React Query ****************/}
         {/* // import Navbar from "./components/query/navbar";
