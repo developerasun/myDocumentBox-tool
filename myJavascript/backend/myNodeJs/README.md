@@ -268,6 +268,17 @@ app.get('/', (req, res)=>{
 app.set('views', 'myNewViews')
 ```
 
+You can send data from front end to server(backend) using http post method.
+Sensitive info like password might get displayed if the data sent by http protocol, not https protocol. 
+
+```js
+
+app.post('/email_post', function(req, res) {
+    console.log(req.body.email) // check form data in email format
+    res.render('email.ejs', { email : req.body.email })
+})
+```
+
 ### Understanding middleware
 Middleware is a function that takes route handlers and adds information. To simply put, middle is just codes between request and response. Middleware function takes three arguments : 1) request object 2) response object 3) next function, addressing the tasks like below. 
 
@@ -448,6 +459,11 @@ app.use(bodyParser.json())
 ```
 
 - ** update ** : bodyParse has been moved to Express built-in, which can be called with : Express.json(). No need to install and require it.
+
+```js
+// Parse incoming request bodies in a middleware before your handlers, available under the req.body property.
+app.use(express.json())  
+```
 
 ### Request Types
 Types of request are as follows : 
