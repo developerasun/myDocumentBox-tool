@@ -11,10 +11,11 @@ Check your React version with below command
 npm view react version
 ```
 
-## Directory configuration
+## Contents included
 - myComponents : exercise my own React codes (JS/TS)
 - myFreeCodeCamp : basic React and Redux
 - net-ninja : React tutorials (Query, Material UI, Testing, Context)
+- React docs summarization
 
 ## Table of Contents
 - [Create a React app]()
@@ -919,6 +920,167 @@ class BookList extends React.Component {
     }
 }
 
+```
+
+
+-------------------------------------------------
+
+### React docs summarization
+React elements are recommended to create with JSX. JSX is a syntactic sugar to omit calling following methods. 
+
+- React.createElement()
+- React.createFactory()
+
+#### Handling events
+You cannot return false to prevent brower default behavior in React like below. 
+
+```html
+<!-- preventDefault -->
+<form onsubmit="return false"> 
+    <input type="text">
+    <button type="submit">Submit</button>
+</form>
+```
+
+Instead, you have to explicitly say it. 
+
+```jsx
+const MyForm = () => { 
+    const handleSubmit = (event) => event.preventDefault()
+    return (
+        <form onSubmit={handleSubmit}>
+            <button type="submit">Submit</button>
+        </form>
+    )
+}
+```
+
+The above event parameter in React handles cross-browser compatibility. Let's take a look at below short quote. 
+
+```md
+>Your event handlers will be passed instances of SyntheticEvent, a cross-browser wrapper around the browser’s native event. It has the same interface as the browser’s native event, including stopPropagation() and preventDefault(), except the events work identically across all browsers.
+```
+
+Adding eventListener in React is done in useEffect hook(function component) or componentDidMount(class component). 
+
+```md 
+> When using React, you generally don’t need to call addEventListener to add listeners to a DOM element after it is created. Instead, <bold>just provide a listener when the element is initially rendered</bold>.
+```
+
+```jsx
+const MyFunc = () => {
+    const handleClick = () => { } // do something  
+    useEffect(()=>{ 
+        window.addEventListener("click", handleClick)
+        
+        // cleanup
+        return () => { 
+            window.removeEventListener("click", handleClick)
+        }
+    }, [])
+}
+
+class MyClass extends React.Component { 
+  // stuff here
+  componentDidMount() {
+    window.addEventListener('resize', this.handleResize);
+  },
+} 
+```
+
+#### React API reference
+'React' is a global object that contains top-level APIs, which can be called like below. 
+
+```jsx
+import React from 'react' // ES6 
+const React = require('react') // ES5
+```
+
+types of top-level APIs are as follows : 
+- Fragment
+- Component
+- Transforming Elements
+- Refs
+- Suspense
+- Hooks
+
+<details>
+    <summary>React.Component and React.PureComponent</summary>
+
+- React.Component : a base class for a component. used with ES6 class. 
+- React.PureComponent : similar to React.Component but implements shouldComponentUpdate metho with shallow prop/state comparison.
+
+```md
+>If your React component’s render() function renders the same result given the same props and state, you can <bold>use React.PureComponent for a performance boost</bold> in some cases. Only extend PureComponent when you expect to have simple props and state.
+```
+</details> 
+
+<details>
+    <summary>React.memo</summary>
+
+React.memo is a higher order component for improving performance, only checking props changes. If used, React skips rendering component and reuse the lastly rendered one.
+</details>
+
+<details>
+    <summary>React.Fragment</summary>
+React.Fragment is a first-class component. 
+
+```md
+> The React.Fragment component lets you return multiple elements in a render() method without creating an additional DOM element.
+> Using a pair of empty tags for shorthand is meant to represent the idea it won’t add an actual element to the DOM.
+```
+
+```jsx
+render() {
+    return ( 
+        <React.Fragment>
+            <p>shorthand for this : <>, </>
+            no need to create more DOMs.
+        </React.Fragment>
+    )
+}
+```
+
+</details>
+<details>
+    <summary>React.memo</summary>
+</details>
+<details>
+    <summary>React.memo</summary>
+</details>
+
+
+##### ReactDOM
+content will be added
+
+
+##### DOM element in React
+HTML DOM and React DOM is different. React engineers refines some of the browser DOM's aspect for performanc purpose. 
+
+```md 
+> React implements a browser-independent DOM system for performance and cross-browser compatibility.
+```
+
+###### onChange
+Fired whenever a form field is changed, taking user input. 
+
+```md
+>  We intentionally do <bold>not use the existing browser behavior</bold> because onChange is a misnomer for its behavior and React relies on this event to <bold>handle user input in real time.</bold>
+```
+
+##### Style
+```md
+ using the style attribute as the primary means of styling elements is generally not recommended. In most cases, <bold>className should be used</bold> to reference classes defined <bold>in an external CSS stylesheet</bold>. 
+```
+
+
+### Advanced guide
+#### Refs and the DOM
+React is an uni-directional data flow, meaning that sharing props is only done from parent component to child one. Refs provide a way to escape that for some cases. 
+
+```md
+> Refs provide a way to access DOM nodes or React elements created in the render method.
+>Your first inclination may be to use refs to “make things happen” in your app. If this is the case, take a moment and think more critically about where state should be owned in the component hierarchy.
 ```
 
 
