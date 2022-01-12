@@ -68,7 +68,7 @@ Then what about port number? Port is a way for information/program can be plugge
 
 - localhost:3000 ===> 1) one's own computer 2) route to communicate
 
-### Createing a server
+### Creating a server
 In Node.js, we create a server manually. And the server lives in a backend of website, listening to browser requests and sending resources to it.
 
 #### Basic routing without framework
@@ -116,7 +116,7 @@ server.listen(8000, ()=>console.log("app listening at port 8000"))
 
 Once your server is up, you can check what request with http method has been made like below
 
-<img src="reference/server-req-url" width=458 height=227 />
+<img src="reference/server-req-url.png" width=458 height=227 />
 
 Managing routes like above can be messy when there are <bold>too many routes to handle</bold>. Use express, which is a third party app, to tackle this problem. <bold>Understanding what is going on in behind scene is important </bold> before you start using and learning framework like express. 
 
@@ -420,9 +420,8 @@ These types of request, sending information to the database, the information sho
 
 Quoted from [Wikipedia - payload](https://en.wikipedia.org/wiki/Payload_(computing))
 
-```md
 > In computing and telecommunications, the <bold>payload is the part of transmitted data</bold> that is the actual intended message. Headers and metadata are sent only to enable payload delivery. In the context of a computer virus or worm, the payload is the portion of the malware which performs malicious action. The term is borrowed from transportation, where payload refers to the part of the load that pays for transportation.
-```
+
 </details>
 
 Http <bold>request body by default is encoded with urlencoded</bold>, which looks like the above query string. You can also implement this with Ajax in JSON format.  <br/>
@@ -447,6 +446,8 @@ app.post('/name', function(req, res){
 app.use(bodyParser.json())
 
 ```
+
+- ** update ** : bodyParse has been moved to Express built-in, which can be called with : Express.json(). No need to install and require it.
 
 ### Request Types
 Types of request are as follows : 
@@ -510,7 +511,7 @@ MVC model stands for model, view, and controller.
 
 Below you can check how a project directory is constructured by MVC pattern.
 
-<img src="reference/mvc-pattern.png" width=180 height=220 />
+<img src="reference/mvc-pattern.png" width=800 height=600 />
 
 Let's spread those source folders to see more details.
 
