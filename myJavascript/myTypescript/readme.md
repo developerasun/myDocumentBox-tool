@@ -1011,7 +1011,348 @@ class Dog {
 console.log(Dog.getLegs()); // 4, call it right away without creating an instance
 ```
 
+## Typescript offical
+<p>
+Javascript has become a cross-platform language, which can be used in both front end and backend. Programs written in Javascript get more complicated requiring more delicated functionality to the launguage. This is where typescript comes into play. 
+</p>
 
+Let's take a loook at how typescript is defined in their offical website.
+
+```md
+> TypeScript is JavaScript with <bold>syntax for types</bold>. ... which runs anywhere JavaScript runs: In a <bold>browser, on Node.js or Deno</bold> and in your apps. ... type inference to give you great tooling without additional code.
+```
+
+Based on 2020 Stack Overflow survey, it had become 2nd the most loved programming language. 
+
+<details>
+<summary>Programming preference in 2020</summary>
+
+- Most loved in 2020
+1. Rust
+2. Typescript 
+3. Python
+4. Kotlin
+5. Go
+
+- Most dreaded in 2020
+1. VBA
+2. Objective-C
+3. Perl
+4. Assembly
+5. C 
+
+- Most wanted in 2020
+1. Python
+2. Javascript
+3. Go
+4. Typescript
+5. Rust
+
+- [Most loved, dreaded, and wanted languages](https://insights.stackoverflow.com/survey/2020#most-loved-dreaded-and-wanted)
+</details>
+
+### Typescript for Javascript programmers
+Typescript understands Javascript and <bold>use JS value as its type</bold>, making types explicit without adding extra codes. For example,
+
+```ts
+let helloWorld = 'hello world' // type inferred as string type
+```
+
+In typescript offical docs, it says
+
+```md
+>You may have written JavaScript in Visual Studio Code, and had editor auto-completion. <bold>Visual Studio Code uses TypeScript under the hood</bold> to make it easier to work with JavaScript.
+
+>It’s best not to add annotations when the type system would end up inferring the same type anyway.
+
+>  Most TypeScript-specific code gets erased away, and likewise, here our type annotations were completely erased.
+
+Remember: Type annotations never change the runtime behavior of your program.
+```
+
+Not always the type inference can be done automatically though. Dynamic programming pattern needs to be covered by defining types.
+
+```ts
+interface User {
+  name: string;
+  id: number;
+}
+
+// explicit type declaration
+const user: User = {
+  name: "Hayes",
+  id: 0,
+};
+```
+
+Interface and type are the two ways to build types. The interface is preferred naturally, whereas type can be used to set specific features. 
+
+<details>
+<summary>What is dynamic programming?</summary>
+
+```md
+also known as dynamic optimization, a technique used for solving complex operations by dividing them into various smaller problems, and solving each of them only once
+```
+Read below for more.
+
+- [Dynamic programming: Javascript how to](https://medium.com/@hernang87/simple-dynamic-programming-example-91a0074f55fc)
+</details>
+
+#### Structural type system
+Sometimes called duck typing, the structural type system is one of the most essential typescript principals. <bold>The shape of a value matter.</bold> It means that object/class needs to have <bold>required properties</bold> to be considered the same type. 
+
+```ts
+interface Point { 
+    x: number
+    y: number
+}
+
+const logPoint = ( {x, y} : Point) => console.log(x,y)
+const myPoint = { x : 22, y : 33 } // not explicitly declared as the Point type 
+logPoint(myPoint)
+```
+
+### Typescript handbook
+When JS code run, Javascript runtime executes what to do based on the type of the value in the code. If it is a string, performs a string-based operation. If number, performs a number-based one. 
+
+```js
+function fn(x) {
+    return x.toLowerCase();
+  }
+
+console.log(fn("WOW")) // good
+console.log(fn(55)) // bad, but only can figure out during runtime.  
+
+```
+
+Problems occur in like above circumstances. There is no way for us to figure out what the codes were wrong before execution since Javascript provides dynamic typing only. Typescript will throw an error <bold>before execution</bold> based on static type system. 
+
+- find bugs before our code runs with static type-checker 
+- check arguments before runtime => Expected 2 arguments, but got 1.
+- suggesting which properties you might want to use.
+- Contextual typing => Property 'toUppercase' does not exist on type 'string'. Did you mean 'toUpperCase'?
+ 
+#### Typescript compiler
+There are a few compiler options you can adjust. 
+
+- noImplicitAny : 'any' is the most lenient type in Javascript and it can be found often in the language. However, using 'any' too often offsets the advantages of using Typescript. Turning on the noImplicitAny flag will issue an error on any variables whose type is implicitly inferred as any.
+
+- strictNullChecks : handling null and undefined matters since if not, it causes a lot of bugs(null and undefined can be assigned to any other type by default). The strictNullChecks flag makes handling null and undefined more explicit, reminding us that they should be handled. 
+
+- noEmitOnError: not emitting compiler output files(JavaScript source code, source-maps or declarations) if any errors were reported. Default is false. 
+
+#### Downleveling
+By default, Typescript targets ES3. This provides a more flexibility when it comes to dealing with somewhat outdated browsers. Downleveling is a process to move from newer ECMA version to older one.  
+
+```md
+> While the default target is ES3, the great majority of current browsers support ES2015. Most developers can therefore safely specify ES2015 or above as a target, unless compatibility with certain ancient browsers is important.
+```
+
+For example, template string is a feature of ES6(ECMA2015). It will be downleveld like below 
+
+```js
+`Hello ${person}, today is ${date.toDateString()}!`; // template string
+"Hello " + person + ", today is " + date.toDateString() + "!"; // concat
+```
+
+#### Understanding everyday types
+##### any
+Type any disables all the further type checking, assuming programmers know better than Typescript about the variable. 
+
+```ts
+const myAny : any = { message : "assignable to anything' }
+```
+
+```md
+>The any type is useful when you don’t want to write out a long type just to convince TypeScript that a particular line of code is okay.
+```
+
+##### type annotation
+Usually type annotaion is extra since typescript already supports type inference whenever possible. For example,
+
+```ts 
+// No type annotation needed -- 'myName' inferred as type 'string'
+let myName = "Alice";
+```
+
+For the most part, explicit type annoation is unneeded.
+
+```md
+> If you’re starting out, try using fewer type annotations than you think - you might be surprised how few you need for TypeScript to fully understand what’s going on.
+```
+
+
+===============
+<<<<<<< typescriptOffical
+## Typescript offical
+<p>
+Javascript has become a cross-platform language, which can be used in both front end and backend. Programs written in Javascript get more complicated requiring more delicated functionality to the launguage. This is where typescript comes into play. 
+</p>
+
+Let's take a loook at how typescript is defined in their offical website.
+
+```md
+> TypeScript is JavaScript with <bold>syntax for types</bold>. ... which runs anywhere JavaScript runs: In a <bold>browser, on Node.js or Deno</bold> and in your apps. ... type inference to give you great tooling without additional code.
+```
+
+Based on 2020 Stack Overflow survey, it had become 2nd the most loved programming language. 
+
+<details>
+<summary>Programming preference in 2020</summary>
+
+- Most loved in 2020
+1. Rust
+2. Typescript 
+3. Python
+4. Kotlin
+5. Go
+
+- Most dreaded in 2020
+1. VBA
+2. Objective-C
+3. Perl
+4. Assembly
+5. C 
+
+- Most wanted in 2020
+1. Python
+2. Javascript
+3. Go
+4. Typescript
+5. Rust
+
+- [Most loved, dreaded, and wanted languages](https://insights.stackoverflow.com/survey/2020#most-loved-dreaded-and-wanted)
+</details>
+
+### Typescript for Javascript programmers
+Typescript understands Javascript and <bold>use JS value as its type</bold>, making types explicit without adding extra codes. For example,
+
+```ts
+let helloWorld = 'hello world' // type inferred as string type
+```
+
+In typescript offical docs, it says
+
+```md
+>You may have written JavaScript in Visual Studio Code, and had editor auto-completion. <bold>Visual Studio Code uses TypeScript under the hood</bold> to make it easier to work with JavaScript.
+
+>It’s best not to add annotations when the type system would end up inferring the same type anyway.
+
+>  Most TypeScript-specific code gets erased away, and likewise, here our type annotations were completely erased.
+
+Remember: Type annotations never change the runtime behavior of your program.
+```
+
+Not always the type inference can be done automatically though. Dynamic programming pattern needs to be covered by defining types.
+
+```ts
+interface User {
+  name: string;
+  id: number;
+}
+
+// explicit type declaration
+const user: User = {
+  name: "Hayes",
+  id: 0,
+};
+```
+
+Interface and type are the two ways to build types. The interface is preferred naturally, whereas type can be used to set specific features. 
+
+<details>
+<summary>What is dynamic programming?</summary>
+
+```md
+also known as dynamic optimization, a technique used for solving complex operations by dividing them into various smaller problems, and solving each of them only once
+```
+Read below for more.
+
+- [Dynamic programming: Javascript how to](https://medium.com/@hernang87/simple-dynamic-programming-example-91a0074f55fc)
+</details>
+
+#### Structural type system
+Sometimes called duck typing, the structural type system is one of the most essential typescript principals. <bold>The shape of a value matter.</bold> It means that object/class needs to have <bold>required properties</bold> to be considered the same type. 
+
+```ts
+interface Point { 
+    x: number
+    y: number
+}
+
+const logPoint = ( {x, y} : Point) => console.log(x,y)
+const myPoint = { x : 22, y : 33 } // not explicitly declared as the Point type 
+logPoint(myPoint)
+```
+
+### Typescript handbook
+When JS code run, Javascript runtime executes what to do based on the type of the value in the code. If it is a string, performs a string-based operation. If number, performs a number-based one. 
+
+```js
+function fn(x) {
+    return x.toLowerCase();
+  }
+
+console.log(fn("WOW")) // good
+console.log(fn(55)) // bad, but only can figure out during runtime.  
+
+```
+
+Problems occur in like above circumstances. There is no way for us to figure out what the codes were wrong before execution since Javascript provides dynamic typing only. Typescript will throw an error <bold>before execution</bold> based on static type system. 
+
+- find bugs before our code runs with static type-checker 
+- check arguments before runtime => Expected 2 arguments, but got 1.
+- suggesting which properties you might want to use.
+- Contextual typing => Property 'toUppercase' does not exist on type 'string'. Did you mean 'toUpperCase'?
+ 
+#### Typescript compiler
+There are a few compiler options you can adjust. 
+
+- noImplicitAny : 'any' is the most lenient type in Javascript and it can be found often in the language. However, using 'any' too often offsets the advantages of using Typescript. Turning on the noImplicitAny flag will issue an error on any variables whose type is implicitly inferred as any.
+
+- strictNullChecks : handling null and undefined matters since if not, it causes a lot of bugs(null and undefined can be assigned to any other type by default). The strictNullChecks flag makes handling null and undefined more explicit, reminding us that they should be handled. 
+
+- noEmitOnError: not emitting compiler output files(JavaScript source code, source-maps or declarations) if any errors were reported. Default is false. 
+
+#### Downleveling
+By default, Typescript targets ES3. This provides a more flexibility when it comes to dealing with somewhat outdated browsers. Downleveling is a process to move from newer ECMA version to older one.  
+
+```md
+> While the default target is ES3, the great majority of current browsers support ES2015. Most developers can therefore safely specify ES2015 or above as a target, unless compatibility with certain ancient browsers is important.
+```
+
+For example, template string is a feature of ES6(ECMA2015). It will be downleveld like below 
+
+```js
+`Hello ${person}, today is ${date.toDateString()}!`; // template string
+"Hello " + person + ", today is " + date.toDateString() + "!"; // concat
+```
+
+#### Understanding everyday types
+##### any
+Type any disables all the further type checking, assuming programmers know better than Typescript about the variable. 
+
+```ts
+const myAny : any = { message : "assignable to anything' }
+```
+
+```md
+>The any type is useful when you don’t want to write out a long type just to convince TypeScript that a particular line of code is okay.
+```
+
+##### type annotation
+Usually type annotaion is extra since typescript already supports type inference whenever possible. For example,
+
+```ts 
+// No type annotation needed -- 'myName' inferred as type 'string'
+let myName = "Alice";
+```
+
+For the most part, explicit type annoation is unneeded.
+
+```md
+> If you’re starting out, try using fewer type annotations than you think - you might be surprised how few you need for TypeScript to fully understand what’s going on.
+```
 
 ## Reference
 - [What is an Enum in programming language](https://www.thoughtco.com/what-is-an-enum-958326)
