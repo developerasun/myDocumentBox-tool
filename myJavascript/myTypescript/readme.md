@@ -628,7 +628,7 @@ const myItem : goodOrBad & newOrOld = {
 ```
 
 ### Understanding type inference and assertion
-#### Interference
+#### Inference
 Typescript infers a type automatically in followin circumstances. 
 
 1. initiazlied variable
@@ -641,7 +641,7 @@ function add(a: number, b: number = 2): number {
     return a + b;
 }
 ```
-#### Interference
+#### Assertion
 Programmar sets a type by oneself rather than typescript does. 
 
 ```ts
@@ -651,6 +651,8 @@ function someFunc(val: string | number, isNumber: boolean) {
   }
 }
 ```
+
+> Reminder: Because type assertions are removed at compile-time, there is no runtime checking associated with a type assertion. There won’t be an exception or null generated if the type assertion is wrong.
 
 Also, non-null operator ! can be useful to manipulate DOM, which can be tricky to check in compile time. 
 
@@ -1109,8 +1111,10 @@ interface Point {
 
 const logPoint = ( {x, y} : Point) => console.log(x,y)
 const myPoint = { x : 22, y : 33 } // not explicitly declared as the Point type 
-logPoint(myPoint)
+logPoint(myPoint) // still works
 ```
+
+> it only cares that it has the expected properties
 
 ### Typescript handbook
 When JS code run, Javascript runtime executes what to do based on the type of the value in the code. If it is a string, performs a string-based operation. If number, performs a number-based one. 
@@ -1177,10 +1181,194 @@ let myName = "Alice";
 
 For the most part, explicit type annoation is unneeded.
 
-```md
 > If you’re starting out, try using fewer type annotations than you think - you might be surprised how few you need for TypeScript to fully understand what’s going on.
+
+##### optional properties
+Javascript will return an undefined when you try to access a object property that does not exist. Becuase of this, it had to be checked like below. 
+
+```js
+// undefined check in JS
+if (person.name !== undefined) {
+    console.log(person.name.toUpperCase()) 
+}
 ```
+
+Use optional property instead. 
+```js
+// A safe alternative using modern JavaScript syntax
+console.log(person.name?.toUpperCase())
+```
+
+##### union types
+Narrow your uniton types to execute correspondingly their types. For example,
+
+```ts
+function NumOrString(param : number | string) {
+    if (typeof param === 'number') {
+        console.log(param)
+    } else { 
+        return param.split()
+    }
+}
+```
+
+##### type alias
+Give a type a name. 
+
+```ts
+type myType = number | string
+const helloWorld : myType = 5 
+```
+
+##### interface and type
+In many cases, interface and type is interchangeable and it is up to you what to choose. One of the main differences between them is that type works like a tuple but interface does not. For example, 
+
+```ts
+interface Bear {
+    fur : string
+}
+
+interface Bear {
+    claw : string
+}
+
+// you can re-open interface
+const myBear : Bear = { 
+    fur : "fluffy",
+    claw : "sharp"
+}
+
+// correct 
+type Claw = {
+    claw : string
+}
+type Bear = { 
+    fur : string
+} & Claw
+
+// incorrect
+type Bear = { 
+    fur : string
+}
+
+type Bear = { 
+    claw : string
+} // Error: Duplicate identifier 'Bear'.
+```
+
+Recommend to use interface, but it is up to personal preference for the most part.
+
+#### Type manipulation
+Typescript allows you to create a type in the form of other types and values.
+
+> The simplest form of this idea is generics. Generics are the types that take parameter. 
+
+Generics are the main tools in the langauges like C# and Java, enabling the languages to create resuable components. With Generics, the components can work with various types, rather than a fixed one. Generics can be used in functions, classes, and interfaces. Note that generics are not used in enums and namespaces.
+
+```ts
+// Create a generic function that has a type argument
+// <Type> : type argument
+function Identity<Type>(args : Type) : Type {
+    return args
+}
+
+// call the generic function with explicit type casting
+const result = Identity<string>("hello world")
+
+// call the generic function with type argument inferece, which means compiler will do its job. 
+const result = Identity("hello world")
+
+```
+
+> We want the compiler to set the value of Type for us automatically based on the type of the argument we pass in and most of time, it works. 
+
+> You may need to explicitly pass in the type arguments as we did in the previous example when the compiler fails to infer the type, as may happen in more complex examples. 
+
+```ts
+function loggingIdentity<Type>(arg: Array<Type>): Array<Type> {
+  console.log(arg.length); // Array has a .length, so no more error
+  return arg;
+```
+
+##### generic types
+###### generic function
+Generic function is a function with the type parameter, which is almost the same with just a non-generic function. 
+
+```ts 
+const genericFunc = function <T>(args : T) { return args }
+const myGenericFunc : <Type>(args : Type) => Type = genericFunc
+
+type stringArr = Array<string>
+type numberArr = Array<number>
+
+// generic function : Array type is T
+const firstGenericFunc = <T>(param : Array<T>) => { console.log(param[param.length -1]) }
+
+// same with above
+const firstGenericFunc = <T>(param : T[]) => { console.log(param[param.length -1]) }
+
+```
+
+###### generic interface
+> When a function is defined with interface, call signature is used, which set function parameter/return value type.
+
+The below identity function will take a generic type T and return value will be type T, which is just declared like interface's function call signature. 
+
+```ts 
+interface firstGenericInterface { 
+    // call signature : PARAMETER_TYPE : RETURN_TYPE
+    <T>(args : T) : T
+}
+
+function identity<T> (args : T) : T {
+    return args
+}
+
+let myIdentity : firstGenericInterface = identity
+```
+
+In below, the function identity will now take a number as an argument. 
+
+```ts 
+// now type argument of firstGenericInterface needs to be specified.
+interface firstGenericInterface<T> { 
+    // call signature : PARAMETER_TYPE : RETURN_TYPE
+    (args : T) : T
+}
+
+function identity<T> (args : T) : T {
+    return args
+}
+
+// type argument of firstGenericInterface : number
+let myIdentity : firstGenericInterface<number> = identity
+```
+
+###### generic class
+Types in class are in two different ways : 1) static 2) instance. 
+>  putting the type parameter on the class itself lets us make sure all of the properties of the class are working with the same type.
+
+<details>
+<summary>What is static in class?</summary>
+static is a class keyword that defines a characteristic of method or property. Static method and static property in class cannot be called on instances of the class. 
+
+- static methods : utility functions 
+- static property : caches, fixed configuration
+
+```js
+class MyClass {
+  static x = 5;
+  static printX() {
+    console.log(MyClass.x);
+  }
+}
+console.log(MyClass.x);
+MyClass.printX();
+```
+</details>
+
 
 ## Reference
 - [What is an Enum in programming language](https://www.thoughtco.com/what-is-an-enum-958326)
 - [Webpack Offical - Entry](https://webpack.js.org/concepts/#entry)
+- [Typescript Generics Tutorial](https://www.youtube.com/watch?v=nViEqpgwxHE)
