@@ -11,6 +11,9 @@ import MultipleUseContextBookList from './components/contextHooks/multipleUseCon
 import UseContextToggle from './components/contextHooks/useConetxtToggle'
 import ListDataContextProvider from './components/contextHooks/context/listDataContext'
 import DummyList from './components/contextHooks/dummyList'
+import ReducerContextProvider from "./components/contextHooks/context/reducerContext";
+import ReducerBookList from './components/contextHooks/reducerBookList'
+import ReducerBookForm from './components/contextHooks/reducerBookForm'
 
 function App() {
   
@@ -38,6 +41,12 @@ function App() {
         <ListDataContextProvider>
             <DummyList />
         </ListDataContextProvider>
+
+
+        <ReducerContextProvider>
+          <ReducerBookList />
+          <ReducerBookForm />
+        </ReducerContextProvider>
 
         {/***************** React Query ****************/}
         {/* // import Navbar from "./components/query/navbar";
