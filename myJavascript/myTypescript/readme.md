@@ -981,7 +981,7 @@ Static property in class can't be initialized in class body, thus have to be ini
 
 ```ts
 class Cat {
-    static legs: number;
+  static legs: number;
   constructor() {
       Cat.legs = 4; // Init static property.
   }
@@ -1013,6 +1013,164 @@ class Dog {
 console.log(Dog.getLegs()); // 4, call it right away without creating an instance
 ```
 
+#### nullish coalescing
+nullish coalescing operator(??) returns a right operand when left one is null. If not, returns the left one. 
+
+```ts
+const isNull = null ?? 'not null'
+console.log(isNull) // 'not null'
+```
+
+#### export and import
+In typescript, not only can function and class be imported but interface, types can be. 
+
+> ES6 export default allows to export one object from one module. Add below to your tsconfig.json to activate this feature. 
+
+```json
+"esModuleInterop" : true
+```
+
+#### module type declaration
+Typescript compiler requires you to declare module types so that it can understand when you imports something from outside. 
+
+For example, when installing npm package lodash, 
+
+```shell
+$npm install lodash
+```
+
+Then you have to create a module file for the lodash package with following format. 
+
+```ts
+// filename : lodash.d.ts
+// Ambient module declaration
+declare module 'lodash' {
+  interface ILodash {
+    // call signature
+    camelCase(str?: string): string
+  }
+
+  // variable declaration
+  const _: ILodash;
+
+  // export in CommonJS form
+  export = _;
+}
+```
+
+And the package now can be imported with reference tag. 
+
+```ts
+// reference tag : Triple-slash directive and path. path needs to be relative and including file extension. 
+/// <reference path="./lodash.d.ts" />
+
+import * as _ from 'lodash';
+
+console.log(_.camelCase('import lodash module'));
+
+```
+
+However, declaring types for every module that will be used is inefficient. You can simply install pre-declared modules like below. 
+
+```shell
+$npm i @types/lodash
+$npm info @types/lodash # check module info
+```
+
+<img src="reference/npm-info-type-lodash.png" width=800 height=450 />
+
+Now you can use the module's API without the ambient module declaration.
+
+##### understanding typeRoots
+Sometimes, we have to declare module types by ourselves. Use compiler option typeRoots to easily manage that. 
+
+1. default : "typeRoots" : ["./node_moduels/@types"]
+2. search 'index.d.ts' file first in the directory
+3.  if the index file does not exist, search what is declared in package.json's types/typings.
+
+<img src="reference/types-index-files.png" width=230 height=440 />
+
+### Utility types
+Basic idea of utility types is to construct a new type by combining types. 
+
+> some type + utility type(for transformation) = new type
+
+#### Partial
+> Constructs a type with all properties of Type set to optional. This utility will return a type that represents all subsets of a given type.
+
+```ts
+interface ToDo { 
+    title : string
+    description : string
+}
+const logTitleOnly = (title : Partial<ToDo>) => console.log(title)
+const whatToDo = {
+    title : "throw out trash" 
+}
+
+logTitleOnly(whatToDo)
+```
+
+#### Record
+> This utility can be used to map the properties of a type to another type.
+
+```ts
+interface CatInfo {
+  age: number;
+  breed: string;
+}
+ 
+type CatName = "miffy" | "boris" | "mordred";
+ 
+const cats: Record<CatName, CatInfo> = {
+  miffy: { age: 10, breed: "Persian" },
+  boris: { age: 5, breed: "Maine Coon" },
+  mordred: { age: 16, breed: "British Shorthair" },
+};
+ 
+cats.boris;
+```
+
+#### Pick and Omit
+> Constructs a type by picking the set of properties Keys (string literal or union of string literals) from Type.
+
+```ts 
+interface CatInfo {
+  name : string;
+  age: number;
+  breed: string;
+}
+
+type CatNameInfo = Pick<CatInfo, 'name'>
+```
+
+Or, you can achieve this with Omit utility type as well. 
+
+```ts
+interface CatInfo {
+  name : string;
+  age: number;
+  breed: string;
+}
+
+type CatNameInfo = Omit<CatInfo, 'age' | 'breed'>
+```
+
+#### Exclude
+> Constructs a type by excluding from UnionType all union members that are assignable to ExcludedMembers.
+```ts
+type whatToDo = 'washing dishes' | 'coding' | 'throwing trash'
+type didAlready = 'coding'
+type jobsLeft = Exclude<whatToDo, didAlready>
+
+const JakeToDoList : jobsLeft = 'throwing trash'
+console.log(JakeToDoList)
+```
+
+And for more utility types, refer to typescript docs below. 
+
+- [Typescript - utility types](https://www.typescriptlang.org/docs/handbook/utility-types.html)
+
 ## Typescript offical
 <p>
 Javascript has become a cross-platform language, which can be used in both front end and backend. Programs written in Javascript get more complicated requiring more delicated functionality to the launguage. This is where typescript comes into play. 
@@ -1020,9 +1178,7 @@ Javascript has become a cross-platform language, which can be used in both front
 
 Let's take a loook at how typescript is defined in their offical website.
 
-```md
 > TypeScript is JavaScript with <bold>syntax for types</bold>. ... which runs anywhere JavaScript runs: In a <bold>browser, on Node.js or Deno</bold> and in your apps. ... type inference to give you great tooling without additional code.
-```
 
 Based on 2020 Stack Overflow survey, it had become 2nd the most loved programming language. 
 
@@ -1062,7 +1218,6 @@ let helloWorld = 'hello world' // type inferred as string type
 
 In typescript offical docs, it says
 
-```md
 >You may have written JavaScript in Visual Studio Code, and had editor auto-completion. <bold>Visual Studio Code uses TypeScript under the hood</bold> to make it easier to work with JavaScript.
 
 >It’s best not to add annotations when the type system would end up inferring the same type anyway.
@@ -1070,7 +1225,6 @@ In typescript offical docs, it says
 >  Most TypeScript-specific code gets erased away, and likewise, here our type annotations were completely erased.
 
 Remember: Type annotations never change the runtime behavior of your program.
-```
 
 Not always the type inference can be done automatically though. Dynamic programming pattern needs to be covered by defining types.
 
@@ -1092,9 +1246,8 @@ Interface and type are the two ways to build types. The interface is preferred n
 <details>
 <summary>What is dynamic programming?</summary>
 
-```md
-also known as dynamic optimization, a technique used for solving complex operations by dividing them into various smaller problems, and solving each of them only once
-```
+>also known as dynamic optimization, a technique used for solving complex operations by dividing them into various smaller problems, and solving each of them only once
+
 Read below for more.
 
 - [Dynamic programming: Javascript how to](https://medium.com/@hernang87/simple-dynamic-programming-example-91a0074f55fc)
@@ -1148,9 +1301,7 @@ There are a few compiler options you can adjust.
 #### Downleveling
 By default, Typescript targets ES3. This provides a more flexibility when it comes to dealing with somewhat outdated browsers. Downleveling is a process to move from newer ECMA version to older one.  
 
-```md
 > While the default target is ES3, the great majority of current browsers support ES2015. Most developers can therefore safely specify ES2015 or above as a target, unless compatibility with certain ancient browsers is important.
-```
 
 For example, template string is a feature of ES6(ECMA2015). It will be downleveld like below 
 
@@ -1167,9 +1318,7 @@ Type any disables all the further type checking, assuming programmers know bette
 const myAny : any = { message : "assignable to anything' }
 ```
 
-```md
 >The any type is useful when you don’t want to write out a long type just to convince TypeScript that a particular line of code is okay.
-```
 
 ##### type annotation
 Usually type annotaion is extra since typescript already supports type inference whenever possible. For example,
@@ -1198,6 +1347,8 @@ Use optional property instead.
 // A safe alternative using modern JavaScript syntax
 console.log(person.name?.toUpperCase())
 ```
+
+Adding ? property is the same with adding | undefined. 
 
 ##### union types
 Narrow your uniton types to execute correspondingly their types. For example,
@@ -1372,3 +1523,4 @@ MyClass.printX();
 - [What is an Enum in programming language](https://www.thoughtco.com/what-is-an-enum-958326)
 - [Webpack Offical - Entry](https://webpack.js.org/concepts/#entry)
 - [Typescript Generics Tutorial](https://www.youtube.com/watch?v=nViEqpgwxHE)
+- [Untility types - advanced typescript](https://www.youtube.com/watch?v=Fgcu_iB2X04)
