@@ -14,7 +14,8 @@ import DummyList from './components/contextHooks/dummyList'
 import ReducerContextProvider from "./components/contextHooks/context/reducerContext";
 import ReducerBookList from './components/contextHooks/reducerBookList'
 import ReducerBookForm from './components/contextHooks/reducerBookForm'
-
+import TestingHeader from "./components/testingLibrary/testingHeader";
+import TestingTodoFooter from './components/testingLibrary/testingTodoFooter'
 function App() {
   
   return (
@@ -48,6 +49,8 @@ function App() {
           <ReducerBookForm />
         </ReducerContextProvider>
 
+        <TestingHeader title={"hello react testing library"} />
+        <TestingTodoFooter incompleTasks={5}/>
         {/***************** React Query ****************/}
         {/* // import Navbar from "./components/query/navbar";
         // import nameContainer from "./components/query/stateNames/nameContainer";
