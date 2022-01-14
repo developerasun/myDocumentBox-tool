@@ -16,12 +16,9 @@ const defaultState = {
         return {
           authenticated: false
         }
-  
       default:
         return state;
-  
     }
-  
   };
   
   const store = Redux.createStore(authReducer);
