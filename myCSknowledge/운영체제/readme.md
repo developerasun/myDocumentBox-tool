@@ -600,7 +600,6 @@ IPC상에서 shared memory는 shared memory 섹션을 만드는 프로세스의 
 </p>
 
 #### 생산자/소비자 프로세스
-
 생산자 프로세스는 소비자 프로세스가 사용할 자원을 생성한다. 예를 들면, 
 - 컴파일러 ====(어셈블리어)===> 어셈블러 ===(오브젝트 모듈)===> 로더
 
@@ -1052,9 +1051,133 @@ SJF 알고리즘의 경우 FCFS와 달리 선점형 스케쥴링이 가능하고
 - 정확한 다음 CPU 버스트 타임을 알기 어려움 => 버스트 타임 근사치를 예측하여 예측 값이 가장 작은 프로세스부터 선택함.
 - 단기 CPU 스케쥴링에 불리함 => 근사치 스케쥴링을 예측
 
+### 프로세스 동기화 
+Coopereating processes란 시스템 내에서 서로 영향을 주고 받는 프로세스들을 의미한다. 이 프로세스들은 
+
+- 직접적으로 논리적 주소 공간을 공유하거나, 
+- 파일 또는 메세지를 통해 데이터를 공유하는데, 
+
+저장된 데이터에 동시에 접근했을 경우 데이터가 변경될 수 있는 위험(causing data inconsistency)이 있다. 이러한 위험을 막기 위해 프로세스 동기화가 필요하다.
+
+- 프로세스 동기화 : <bold>the orderly execution of cooperating processes</bold> that shares a logical address space.
+
+프로레스 동기화는 앞서 설명한 생산자/소비자 프로세스의 동기화에서 활용된다. 아래와 같은 예제를 살펴보자.  
+
+1. 버퍼 내의 아이템을 세는 변수를 counter로 정의, 현재 counter 값은 5. 
+2. 생산자 프로세스와 소비자 프로세스가 동시적으로 counter++, counter--를 실행
+3. 실행 순서에 따라 counter의 값이 4~6으로 상이함.
+4. 정상적인 결과라면 1) 생산자 프로세스가 자원을 생성하고(counter++), 2) 이후 소비자 프로세스가 그 자원을 소비하면(counter--), counter의 값은 5로 유지되어야 함. 
+
+이를 기계어/레지스터 수준에서 분석하면 아래 도표와 같은 순서가 된다. counter++와 counter--는 동시적으로 실행된다고 가정한다(concurrently).
+
+- counter++의 경우, 
+1. register(a) = counter(5)
+2. register(a) = register(a) + 1 => register(a)의 값은 6
+3. counter = register(a) => counter의 값은 6
+
+- counter--의 경우 
+1. register(b) = counter(5)
+2. register(b) = register(b) - 1 => register(b)의 값은 4
+3. counter = register(b) => counter의 값은 4
+
+최종 도표는 아래와 같다. 
+
+<img src="./producer-consumer-register-sync.png" alt="생산자 소비자 프로세스 싱크 예제" height=272 width=800 />
+
+이와 같이 여러 개의 프로세스가 같은 데이터에 접근해서 값을 변경하고, 최종적인 값이 프로세스의 실행 순서에 따라 결정되는 것을 <bold>경쟁 조건(race condition)</bold>이라 부른다. 경쟁 조건이 일어나는 것을 막기위해 프로세스 동기화가 필요하다. 
+
+### 임계 영역(critical section)
+프로세스 간 공유 자원의 <bold>접근이 한 번에 하나의 프로세스로 제한</bold>되는 영역을 가리켜 임계 영역이라 부른다. 
+
+- 프로세스 A =====(O)=====> 임계 영역 <=====(X)===== 프로세스 B
+- 프로세스 A =====(X)=====> 임계 영역 <=====(O)===== 프로세스 B
+
+임계 영역으로 지정되는 영역은 아래와 같다.
+
+- 자료 구조
+- 주변 기기
+- 네트워크 연결
+- 파일 입력
+- 기타 동시적으로 접근이 불가한 영역
+
+임계 영역을 pseudo code로 나타내면 아래와 같다. 
+
+<img src="./entry-critical-exit.png" alt="임계영역 입출구" height=479 width=734 />
+
+```js
+    P1()
+    {  
+        while()
+        {    
+            initial section
+            Entry section
+            Critical section
+            Exit section
+            Remainder section
+        }
+    }
+```
+
+임계 영역에는 mutual exclusion, progress, bounded waiting 같은 세 가지 전제 조건이 따른다. 
+
+1. mutual exclusion : 하나의 프로세스가 임계 영역에서 실행 중일 경우, 나머지 프로세스들은 임계 영역에 접근할 수 없다.
+
+2. progress : 현재 임계 영역이 비어있고, 복수 개의 프로세스가 임계 영역에 접근하기를 요청할 경우 <bold>어떤 프로세스를 먼저 임계 영역에 배정할 것인지 결정</bold>해야 한다. 이때 현재 remainder 영역에서 실행되고 있지 않은 프로세스들이 배정을 결정한다.
+ 
+3. bounded waiting : 하나의 프로세스가 임계 영역 접근을 요청하고 permission을 기다리고 있는 경우, 나머지 프로세스들은 임계 영역에 출입할 수 있는 횟수가 제한된다. 
+
+### 피터슨의 풀이
+피터슨의 풀이는 임계 영역 문제 해결을 위해 알고리즘적 접근을 제공한 방법론 중 하나로, 1981년 수학자 게리 피터슨이 로체스터 대학에서 발표하였다. 임계 영역의 세 가지 전제 조건인 mutual exclusion, progress, bounded waiting을 다루고 복잡한 소프트웨어를 디자인 하는 좋은 전략을 제시했으나 현대 컴퓨터 아키텍처와는 잘 맞지 않을 수 있다는 단점도 가지고 있다. 
+
+#### 전제 조건
+1. 두 개의 프로세스에 한정 : P(i), P(j)
+2. 두 개의 pre-defined된 데이터를 전제
+3. 하나의 프로세스가 입장 준비가 완료되었으나 다른 프로세스 역시 입장을 원할 경우, 다른 프로세스에게 입장을 양보
+
+```java
+int turn // 임계 영역에 입장할 프로세스의 순서를 나타냄
+boolean flag[2] // 프로세스가 임계 영역에 입장할 준비가 되었는지를 나타냄
+
+// P(i)
+do { 
+    flag[i] = true // 프로세스 P(i) 입장 준비 완료
+    turn = j  // 다른 프로세스 P(j) 에게 턴을 양보
+    while ( flag[j] && turn == [j])
+    {
+        // critical section 
+    } 
+
+    flag[i] = false
+
+    // remainder section
+
+} while(true)
+
+// P(j)
+do { 
+    flag[j] = true // 프로세스 P(j) 입장 준비 완료
+    turn = i  // 다른 프로세스 P(i) 에게 턴을 양보
+
+    while ( flag[i] && turn == [i] ) {
+        // critical section 
+    }
+
+    flag[j] = false
+
+    // remainder section
+
+} while(true)
+```
+
+
+
+
+
+
 ## 레퍼런스
 - [Difference between Multiprogramming, multitasking, multithreading, and multiprocessing](https://www.geeksforgeeks.org/difference-between-multitasking-multithreading-and-multiprocessing/)
-
 - [Instantiation](https://en.wikipedia.org/wiki/Instantiation)
-
 - [An introduction to assembly language](https://medium.com/@jleveewhite/an-introduction-to-assembly-language-8144ce1dfb0e)
+- [Critical Section in Operating System](https://www.includehelp.com/operating-systems/critical-section.aspx#:~:text=When%20one%20process%20is%20allowed,section%20at%20the%20same%20time.&text=The%20execution%20before%20the%20critical,is%20called%20a%20remainder%20section.)
+- [피터슨의 알고리즘 - 위키피디아](https://ko.wikipedia.org/wiki/%ED%94%BC%ED%84%B0%EC%8A%A8%EC%9D%98_%EC%95%8C%EA%B3%A0%EB%A6%AC%EC%A6%98)
+
