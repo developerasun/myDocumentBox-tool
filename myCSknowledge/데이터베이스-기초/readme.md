@@ -337,22 +337,91 @@ RDB에서 사용되는 키를 이해하는 것은 중요하다. 아래 내용을
 
 - [Various Types of Key in Relational DBMS](https://medium.com/swlh/various-types-of-key-in-relational-dbms-f413e0b13b6)
 
-```md 
->Why we need Key?
+RDB에서 사용되는 key의 종류는 대략적으로 아래와 같다. 
 
-KEYS in DBMS is an attribute or set of attributes that help you to identify a row(tuple) in a relation(table).
+- super key : a set of attributes which can uniquely identify every row in a table. a super set of the candidate key. 
+- candiate key : uniquely identify every row in a table. could be multiples.
+- primary key : uniquely identify every row in a table. a sub set of candidate key, only one. 
+- foreign key : creates a relationship between two tables. acts as a cross-reference between two tables by referencing the primary key.
 
-- First, we need to know why we need RDBMS over traditional file system, the answer is simple that we need a database which is consistent and non-redundant. This can be achieved by normalization of the database. 
+대략적인 키간 포함 관계는 다음과 같다 : super key > candidate key > primary key + foreign key.
 
-- Normalization is a technique through which we make our database more consistent by removing the redundancy and data anomalies (deletion and insertion).
+foreign key의 primary key과 반드시 같은 칼럼이어야 하며, FK 값은 PK 값과 동일하거나 null 이어야 한다. 
 
-- Normalization is used for mainly two purposes,
-1. Eliminating redundant(useless) data.
-2. Ensuring data dependencies make sense i.e. data is logically stored.
+<img src="./pk-fk.png" width=456 height=581 alt="기본키와 외래키" />
 
-We achieve this normalization by using “keys”.
+### 업데이트 오퍼레이션
+RDB의 레코드를 업데이트 하는 활동은 크게 3가지로 나뉘어진다. 
 
+1. INSERT : relation에 새롭게 record를 삽입할 때, 기존 컬럼들에 대한 제약 조건이 지켜져야 한다. 예를 들어, 새롭게 삽입하는 record의 PK가 1) 중복되거나 2) null인 경우, FK값이 매칭되지 않는 경우 업데이트가 불가하다. 
+
+2. DELETE : 삭제하고자 하는 record의 PK가 다른 relation에서 PK 또는 super key의 일부로 사용되고 있을 경우 업데이트가 불가하다. 예를 들어, 아래의 이미지에서 Employee ID가 1330인 record를 Employee relation에서 삭제하고자 할 경우 DELETE 오퍼레이션은 거절되거나 (Employee ID, PNo는 WORKS_ON relation에서 PK로 활용 중), 해당 record는 레퍼런싱 되고 있는 relation에서도 사라진다. 
+
+<img src="./pk-fk-delete-example.png" width=484 height=530 alt="기본키와 외래키 삭제 예시" />
+
+3. UPDATE/MODIFY : 업데이트 하고자 하는 record의 FK값이 레퍼런싱하고 있는 relation의 PK값에서 벗어나는 경우 업데이트가 불가하다. 예를 들어, 아래의 이미지에서 Employee relation의 두 번째 record의 DNo를 1 => 9로 변경하는 업데이트 요청은 거절된다(Department relation에서 PK로 활용되는 DNo값에서 9가 존재하지 않으므로). 
+
+<img src="./pk-fk-update-example.png" width=599 height=424 alt="기본키와 외래키 업데이트 예시" />
+
+### 관계형 모델 Exercise 1
+1. <img src="./rm-exercise1.png" width=739 height=398 alt="관계형 모델 예제 1번" />
+
+<span>제시된 업데이트 목록과 해결 방안</span>
+
+- Insert (1004, 'Peter', 'Weston', 2) into STUDENT => 정상 업데이트 됨. 
+
+- Insert (004, 'Mark', 'Stevens', 28000, 5) into INSTRUCTOR => INSTRCUTOR의 DNo가 DEPARTMENT의 DNo의 범위를 벗어남. 따라서 1) 업데이트를 거절하거나 2) DEPARTMENT의 DNo에 5를 추가하거나, 3) DNo를 5가 아닌 1~4 값으로 변경해야 한다. 
+
+- Insert (4, 'EEE', B4) into DEPARMENT => PK 값이 중복되므로 1) 업데이트를 거절하거나 2) 1~4가 아닌 다른 값으로 변경한다. 
+
+- Insert (null, 'Anna', 'Smith', 7) into STUDENT => PK 값은 null이 될 수 없고, FK 값인 DNo가 1~4 의 범위여야 하므로 1) 업데이트를 거절하거나 2) PK값에 1001~1003이 아닌 다른 값을 삽입하고, STUDENT DNo을 1~4의 범위로 변경한다. 3) PK값에 1001~1003이 아닌 다른 값을 삽입하고, DEPARTMENT의 DNo에 7을 삽입한다. 
+
+- Delete the INSTRUCTOR tuples with TID = 002 => 정상 업데이트 됨.
+
+- Delete the DEPARTMENT tuple with DNo = 1 => INSTRUCTOR와 STUDENT relation에서 DNo를 FK로 참조하고 있기 때문에 1) 업데이트를 거절하거나 2) DNo = 1 를 참조하는 레코드를 모두 삭제한다.
+
+- Update the DNo of STUDENT tuple with RegNo = 1002 to 3 => 정상 업데이트 됨
+
+- Update the DNo attribute of the INSTRUCTOR tuple with TID = 003 to 8 => DEPARMENT의 PK인 DNo의 범위가 1~4이므로 1) 업데이트를 거절하거나 2) DNo 값을 8에서 1~4의 범위로 변경하거나 3) DEPARTMENT에 DNo = 8 인 record를 새롭게 삽입한다. 
+
+### 관계형 모델 Exercise 2
+2. <img src="./rm-exercise2.png" width=730 height=252 alt="관계형 모델 예제 2번" /> 
+
+<span>제시된 문제 목록과 답안</span>
+
+- Specify the foreign keys for this schema, stating any assumptions you make.
+1. ENROLL - SSN from STUDENT
+2. BOOK_ADOPTION - Course# from COURSE
+3. TEXT - Book_ISBN from BOOK_ADOPTION
+4. ENROLL - Course# from COURSE
+
+### 관계 대수 
+> Relational Algebra is procedural query language, which <bold>takes Relation as input and generate relation as output</bold>. Relational algebra mainly provides theoretical foundation for relational databases and SQL.
+
+<img src="./relation-algebra.png" width=671 height=191 alt="관계 대수 연산 예시" /> 
+
+- Unary relational operation : 단일 관계 연산, 즉 SELECT(δ)를 의미.
+
+```md
+<!-- δ === SELECTION operator -->
+<!-- Select the EMPLOYEE tuples whose DEPARTMENT number is 2. -->
+δ(DNo=2)(EMPLOYEE)
+
+<!-- Select the EMPLOYEE tuples whose DEPARTMENT number is 2 and Salary is greater than 30000 -->
+δ(DNo=2 AND Salary > 30000)(EMPLOYEE)
+
+<!-- Select the EMPLOYEE tuples whose DEPARTMENT number is 3 and Salary is greater than 35000 or is 2 and greater than 25000 -->
+δ(DNo=3 AND Salary > 35000) OR (DNo=2 AND Salary > 25000)(EMPLOYEE)
 ```
+
+- Project operation 
+> Projection is used to project required column data from a relation.
+
+```md 
+<!-- π : PROJECTION operator -->
+```
+
+
 
 ## 레퍼런스 
 - [위키피디아 - 추상화](https://ko.wikipedia.org/wiki/%EC%B6%94%EC%83%81%ED%99%94_(%EC%BB%B4%ED%93%A8%ED%84%B0_%EA%B3%BC%ED%95%99))
@@ -364,3 +433,4 @@ We achieve this normalization by using “keys”.
 - [Good database design](https://www.dbdesigner.net/what-you-need-to-know-about-good-database-design/)
 - [Difference between SQL Keys :Primary Key, Super Key, Candidate Key, Foreign Key](https://www.analyticsvidhya.com/blog/2020/07/difference-between-sql-keys-primary-key-super-key-candidate-key-foreign-key/)
 - [Various Types of Key in Relational DBMS](https://medium.com/swlh/various-types-of-key-in-relational-dbms-f413e0b13b6)
+- [Introduction of Relational Algebra in DBMS](https://www.geeksforgeeks.org/introduction-of-relational-algebra-in-dbms/)
