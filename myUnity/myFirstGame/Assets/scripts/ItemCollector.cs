@@ -1,14 +1,15 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
 using TMPro; // import TextMeshPro
 
 public class ItemCollector : MonoBehaviour
 {
     int coins = 0; 
     [SerializeField] string TAG_COIN = "coin";
-    [SerializeField] TextMeshProUGUI COIN_TEXTMESH ;
+    [SerializeField] TextMeshProUGUI COIN_TEXTMESH;
+    [SerializeField] AudioSource collectionSound;
+
     // Use OnTirggerEnter method instead of OnCollisionEnter when Is Trigger checked.
     // OnTirgger parameter type should be Collider.
     private void OnTriggerEnter(Collider coin)
@@ -20,6 +21,7 @@ public class ItemCollector : MonoBehaviour
             // Componet.gameObject : The game object this component is attached to. 
             // A component is always attached to a game object.
             Destroy(coin.gameObject);
+            collectionSound.Play();
             COIN_TEXTMESH.text = "Coins : " + coins;
             UnityEngine.Debug.Log(COIN_TEXTMESH.text);
         }
