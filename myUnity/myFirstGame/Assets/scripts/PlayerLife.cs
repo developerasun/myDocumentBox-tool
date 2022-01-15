@@ -8,6 +8,7 @@ public class PlayerLife : MonoBehaviour
     public string ENEMY_TAG = "enemyBody";
     public string TRAPGROUND_TAG = "trapGround";
     public float DROPLIMIT = 100f;
+    [SerializeField] AudioSource deathSound;
     private void OnCollisionEnter(Collision collision) 
     {
         if (collision.gameObject.CompareTag(ENEMY_TAG) | collision.gameObject.CompareTag(TRAPGROUND_TAG))
@@ -24,6 +25,9 @@ public class PlayerLife : MonoBehaviour
     void PlayerDead()
     {
         UnityEngine.Debug.Log("player dead");
+        if (!deathSound.isPlaying) { 
+            deathSound.Play();
+        }
         // Invoke : Invokes the method methodName in time seconds.
         Invoke(nameof(ReloadLevel), 1f);
         // ReloadLevel();

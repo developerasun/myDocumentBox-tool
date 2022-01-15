@@ -13,9 +13,11 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField]Transform groundCheck;
     [SerializeField]LayerMask ground;
 
+    // Add audio
+    [SerializeField]AudioSource jumpSound;
+
     // variable with public access modifier can be accessed in other scripts
     // use it with caution
-    public int accessThisVariable = 55;
     public string TAG_ENEMYHEAD = "enemyHead"; 
 
     bool IsGrounded()
@@ -40,6 +42,7 @@ public class PlayerMovement : MonoBehaviour
     void Jump() 
     {
         rb.velocity = new Vector3(rb.velocity.x, UNIT_SPEED, rb.velocity.z);
+        jumpSound.Play();
     }
 
     private void OnCollisionEnter(Collision collision)
