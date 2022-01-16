@@ -1057,9 +1057,9 @@ Coopereating processes란 시스템 내에서 서로 영향을 주고 받는 프
 - 직접적으로 논리적 주소 공간을 공유하거나, 
 - 파일 또는 메세지를 통해 데이터를 공유하는데, 
 
-저장된 데이터에 동시에 접근했을 경우 데이터가 변경될 수 있는 위험(causing data inconsistency)이 있다. 이러한 위험을 막기 위해 프로세스 동기화가 필요하다.
+저장된 데이터에 동시에 접근했을 경우 **데이터가 변경될 수 있는 위험(causing data inconsistency)**이 있다. 이러한 위험을 막기 위해 프로세스 동기화가 필요하다.
 
-- 프로세스 동기화 : <bold>the orderly execution of cooperating processes</bold> that shares a logical address space.
+- 프로세스 동기화 : **the orderly execution of cooperating processes** that shares a logical address space.
 
 프로레스 동기화는 앞서 설명한 생산자/소비자 프로세스의 동기화에서 활용된다. 아래와 같은 예제를 살펴보자.  
 
@@ -1087,7 +1087,7 @@ Coopereating processes란 시스템 내에서 서로 영향을 주고 받는 프
 이와 같이 여러 개의 프로세스가 같은 데이터에 접근해서 값을 변경하고, 최종적인 값이 프로세스의 실행 순서에 따라 결정되는 것을 <bold>경쟁 조건(race condition)</bold>이라 부른다. 경쟁 조건이 일어나는 것을 막기위해 프로세스 동기화가 필요하다. 
 
 ### 임계 영역(critical section)
-프로세스 간 공유 자원의 <bold>접근이 한 번에 하나의 프로세스로 제한</bold>되는 영역을 가리켜 임계 영역이라 부른다. 
+프로세스 간 공유 자원의 **접근이 한 번에 하나의 프로세스로 제한**되는 영역을 가리켜 임계 영역이라 부른다. 
 
 - 프로세스 A =====(O)=====> 임계 영역 <=====(X)===== 프로세스 B
 - 프로세스 A =====(X)=====> 임계 영역 <=====(O)===== 프로세스 B
@@ -1122,9 +1122,9 @@ Coopereating processes란 시스템 내에서 서로 영향을 주고 받는 프
 
 1. mutual exclusion : 하나의 프로세스가 임계 영역에서 실행 중일 경우, 나머지 프로세스들은 임계 영역에 접근할 수 없다.
 
-2. progress : 현재 임계 영역이 비어있고, 복수 개의 프로세스가 임계 영역에 접근하기를 요청할 경우 <bold>어떤 프로세스를 먼저 임계 영역에 배정할 것인지 결정</bold>해야 한다. 이때 현재 remainder 영역에서 실행되고 있지 않은 프로세스들이 배정을 결정한다.
+2. progress : 현재 임계 영역이 비어있고, 복수 개의 프로세스가 임계 영역에 접근하기를 요청할 경우 **어떤 프로세스를 먼저 임계 영역에 배정할 것인지 결정**해야 한다. 이때 현재 remainder 영역에서 실행되고 있지 않은 프로세스들이 배정을 결정한다.
  
-3. bounded waiting : 하나의 프로세스가 임계 영역 접근을 요청하고 permission을 기다리고 있는 경우, 나머지 프로세스들은 임계 영역에 출입할 수 있는 횟수가 제한된다. 
+3. bounded waiting : 하나의 프로세스가 임계 영역 접근을 요청하고 permission을 기다리고 있는 경우, 나머지 프로세스들은 **임계 영역에 출입할 수 있는 횟수가 제한**된다. 
 
 ### 피터슨의 풀이
 피터슨의 풀이는 임계 영역 문제 해결을 위해 알고리즘적 접근을 제공한 방법론 중 하나로, 1981년 수학자 게리 피터슨이 로체스터 대학에서 발표하였다. 임계 영역의 세 가지 전제 조건인 mutual exclusion, progress, bounded waiting을 다루고 복잡한 소프트웨어를 디자인 하는 좋은 전략을 제시했으나 현대 컴퓨터 아키텍처와는 잘 맞지 않을 수 있다는 단점도 가지고 있다. 
@@ -1142,10 +1142,9 @@ boolean flag[2] // 프로세스가 임계 영역에 입장할 준비가 되었�
 do { 
     flag[i] = true // 프로세스 P(i) 입장 준비 완료
     turn = j  // 다른 프로세스 P(j) 에게 턴을 양보
-    while ( flag[j] && turn == [j])
-    {
+    while ( flag[j] && turn == [j]);
+
         // critical section 
-    } 
 
     flag[i] = false
 
@@ -1158,9 +1157,8 @@ do {
     flag[j] = true // 프로세스 P(j) 입장 준비 완료
     turn = i  // 다른 프로세스 P(i) 에게 턴을 양보
 
-    while ( flag[i] && turn == [i] ) {
+    while ( flag[i] && turn == [i] );
         // critical section 
-    }
 
     flag[j] = false
 
@@ -1169,8 +1167,93 @@ do {
 } while(true)
 ```
 
+### 테스트와 세트 락
+피터슨의 풀이가 프로세스 동기화 문제를 알고리즘으로 접근한 반면, 테스트와 세트 락은 하드웨어를 통해 이를 해결하고자 하는 접근이다.
 
+- 0 : false, anything that is not 0 : true
+- shared lock varaible 는 0(unlock) 또는 1(lock)의 값을 가짐. 초기값은 0(열림). 
+- 임계 영역에 접근하기 전 프로세스는 lock 변수 값을 확인함.
+- 1의 경우(잠겨 있는 경우, 즉 이미 다른 프로세스가 임계 영역에서 실행 중임) 대기함.
+- 0의 경우(비어 있는 경우) 임계 영역에 접근하고 실행함.
 
+``` c# 
+// TestAndSet instruction 
+boolean TestAndSet(boolean *target) // target is the lock variable
+{
+    boolean rv = *target;
+    *target = true; // is locked now 
+    return rv // return 0(false)
+};
+
+// process 1 
+do { 
+    // initial shared lock variable value is set to 0, which is considered false in
+    // while condition.
+    while(TestAndSet(&lock)); 
+
+    // break from while and enters to critical section 
+    //////////////LOCKED/////////////
+    ///// critical section here /////
+    //////////////LOCKED/////////////
+
+    lock = false // unlock, now other processes approchable to critical section
+
+    /////////////////////////////////
+    // enters to remainder section //
+    /////////////////////////////////
+
+} while(true); 
+
+// process 2
+do { 
+    while(TestAndSet(&lock)); 
+    lock = false
+} while(true); 
+```
+
+테스트와 세트 락의 경우 프로세스 동기화 문제의 3가지 조건 중 1) mutual exclusion 을 만족하고 2) bounded-waiting을 불만족한다. 
+
+### 세마포어(semaphores)
+세마포어 변수는 쓰레드간 공유되는 정수 변수이며, 프로세스 동기화 문제 해결을 위해 에츠허르 다익스트라가 고안한 개념이다.
+
+> 세마포어(Semaphore)는 에츠허르 데이크스트라가 고안한, 두 개의 원자적 함수(wait, signal)로 조작되는 **정수 변수**로서, 멀티프로그래밍 환경에서 공유 자원에 대한 접근을 제한하는 방법으로 사용된다. 
+
+> 컴퓨터 과학에서, 데이크스트라 알고리즘(영어: Dijkstra algorithm) 또는 **다익스트라 알고리즘**은 도로 교통망 같은 곳에서 나타날 수 있는 그래프에서 **꼭짓점 간의 최단 경로**를 찾는 알고리즘이다. 이 알고리즘은 컴퓨터 과학자 에츠허르 데이크스트라가 1956년에 고안했으며 삼 년 뒤에 발표했다.
+
+#### 원자적 함수 wait, signal
+**전제** : wait 함수와 signal 함수가 가지고 있는 세마포어 변수는 서로 다른 프로세스에 의해 동시에 변경되지 않아야 한다. 
+
+1. wait 함수 : 심볼 P로 표기(네덜란드어 proberen 첫 글자) => 세마포어 변수 테스트
+2. signal 함수 : 심볼 V로 표기(네덜란드어 verhogen 첫 글자 )=> 세마포어 변수 증가
+3. 세마포어 : 심볼 S로 표기
+
+```C#
+// 전제 1 : Process Z wants to access to critical section
+// 전제 2 : Process in critical section will call Signal atomic function once it finishes its job there. 
+// Wait 함수
+P(Semaphore S) {
+    while( S <=0 ) // S <= 0 means that critical section is taken already by some processes. Z waits here for Semaphore to be greater than 0 by using below function V. 
+    ; // no operation
+
+    S--; // when S > 0, breaks while and decreases S. When function V called, Semaphore increases and greater than 0. Z enters in criticial section.
+}
+
+// Signal 함수
+V (Semaphore S) {
+    S++; // denoting that critical section is approachable
+}
+
+```
+
+세마포어의 종류는 아래와 같다. 
+
+1. Binary semaphore(known as mutex locks) : 세마포어 변수의 값의 범위가 0과 1로 제한됨. 
+2. Counting semaphore : 세마포어 변수의 값 범위의 제한이 없음. 여러 개의 인스턴스를 가지고 있는 리소스를 제어하기 위해 사용. 
+
+- 프로세스 3개와 (P1, P2, P3) 리소스 인스턴스 2개(R1, R2)를 가정.
+- 세마포어 S는 2로 세팅됨. 
+- P1, P2는 각각 임계 영역에 접근하고 세마포어 S를 1씩 감소시킴 
+- P3는 세마포어 S가 0의 값을 가지므로 while 조건문에서 loop 되고 대기함.  
 
 
 
@@ -1180,4 +1263,5 @@ do {
 - [An introduction to assembly language](https://medium.com/@jleveewhite/an-introduction-to-assembly-language-8144ce1dfb0e)
 - [Critical Section in Operating System](https://www.includehelp.com/operating-systems/critical-section.aspx#:~:text=When%20one%20process%20is%20allowed,section%20at%20the%20same%20time.&text=The%20execution%20before%20the%20critical,is%20called%20a%20remainder%20section.)
 - [피터슨의 알고리즘 - 위키피디아](https://ko.wikipedia.org/wiki/%ED%94%BC%ED%84%B0%EC%8A%A8%EC%9D%98_%EC%95%8C%EA%B3%A0%EB%A6%AC%EC%A6%98)
+- [세마포어 - 위키피디아](https://ko.wikipedia.org/wiki%EC%84%B8%EB%A7%88%ED%8F%AC%EC%96%B4)
 
