@@ -396,14 +396,13 @@ RDB의 레코드를 업데이트 하는 활동은 크게 3가지로 나뉘어진
 4. ENROLL - Course# from COURSE
 
 ### 관계 대수 
-> Relational Algebra is procedural query language, which <bold>takes Relation as input and generate relation as output</bold>. Relational algebra mainly provides theoretical foundation for relational databases and SQL.
+> Relational Algebra is procedural query language, which **takes Relation as input and generate relation as output**. Relational algebra mainly provides theoretical foundation for relational databases and SQL.
 
 <img src="./relation-algebra.png" width=671 height=191 alt="관계 대수 연산 예시" /> 
 
 - Unary relational operation : 단일 관계 연산, 즉 SELECT(δ)를 의미.
 
-```md
-<!-- δ === SELECTION operator -->
+<!-- δ === SELECTION operator : a horizontal partionting of relation -->
 <!-- Select the EMPLOYEE tuples whose DEPARTMENT number is 2. -->
 δ(DNo=2)(EMPLOYEE)
 
@@ -412,16 +411,15 @@ RDB의 레코드를 업데이트 하는 활동은 크게 3가지로 나뉘어진
 
 <!-- Select the EMPLOYEE tuples whose DEPARTMENT number is 3 and Salary is greater than 35000 or is 2 and greater than 25000 -->
 δ(DNo=3 AND Salary > 35000) OR (DNo=2 AND Salary > 25000)(EMPLOYEE)
-```
 
-- Project operation 
 > Projection is used to project required column data from a relation.
+<!-- π : PROJECTION operator : a vertical partionting of relation -->
+<!-- List the EMPLOYEE's First name, last name, and salary. -->
+π(Fname, LName, Salary)(EMPLOYEE)
 
-```md 
-<!-- π : PROJECTION operator -->
-```
-
-
+<!-- ρ(rho) : RENAME operator :  -->
+> The RENAME operation  returns an existing relation under a new name. ρA(B) is the relation B with its name changed to A.
+> The AS keyword in SQL is the equivalent of the rename operator in relational algebra. The following SQL example creates a relation with one tuple and one attribute, which is renamed PI: SELECT 3.14::real AS PI;
 
 ## 레퍼런스 
 - [위키피디아 - 추상화](https://ko.wikipedia.org/wiki/%EC%B6%94%EC%83%81%ED%99%94_(%EC%BB%B4%ED%93%A8%ED%84%B0_%EA%B3%BC%ED%95%99))
@@ -434,3 +432,5 @@ RDB의 레코드를 업데이트 하는 활동은 크게 3가지로 나뉘어진
 - [Difference between SQL Keys :Primary Key, Super Key, Candidate Key, Foreign Key](https://www.analyticsvidhya.com/blog/2020/07/difference-between-sql-keys-primary-key-super-key-candidate-key-foreign-key/)
 - [Various Types of Key in Relational DBMS](https://medium.com/swlh/various-types-of-key-in-relational-dbms-f413e0b13b6)
 - [Introduction of Relational Algebra in DBMS](https://www.geeksforgeeks.org/introduction-of-relational-algebra-in-dbms/)
+- [Relational Algebra - Example](https://db.grussell.org/section011.html)
+- [Learning PostgreSQL 10 - Second Edition by Salahaldin Juba, Andrey Volkov](https://www.oreilly.com/library/view/learning-postgresql-10/9781788392013/e5b4388d-f35d-45d8-9d1e-33c1f424d358.xhtml)
