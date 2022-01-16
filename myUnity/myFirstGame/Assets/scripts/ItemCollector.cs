@@ -18,12 +18,12 @@ public class ItemCollector : MonoBehaviour
         if (coin.gameObject.CompareTag(TAG_COIN)) {
 
             coins++;
+            // Component : Base class for everything attached to GameObjects.
             // Componet.gameObject : The game object this component is attached to. 
             // A component is always attached to a game object.
             Destroy(coin.gameObject);
             collectionSound.Play();
             COIN_TEXTMESH.text = "Coins : " + coins;
-            UnityEngine.Debug.Log(COIN_TEXTMESH.text);
         }
     }
 }

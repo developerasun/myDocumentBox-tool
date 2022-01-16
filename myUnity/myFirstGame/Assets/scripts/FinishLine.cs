@@ -10,8 +10,10 @@ public class FinishLine : MonoBehaviour
     {
         if (other.gameObject.CompareTag("Player")) 
         {
+            // SceneManager : Scene management at run-time.
             // SceneManager.LoadScene : Loads the Scene by its name or index in Build Settings.
             SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+            
         }
     }
 }
