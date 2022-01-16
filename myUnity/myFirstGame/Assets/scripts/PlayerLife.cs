@@ -5,40 +5,44 @@ using UnityEngine.SceneManagement;
 
 public class PlayerLife : MonoBehaviour
 {
-    public string ENEMY_TAG = "enemyBody";
-    public string TRAPGROUND_TAG = "trapGround";
+    public string TAG_ENEMY = "enemyBody";
+    public string TAG_TRAPGROUND = "trapGround";
+    public string OBJ_SPORTSCAR = "SportsCar";
     public float DROPLIMIT = 100f;
+    private int soundCount = 0;
+    private float INITIAL_X = 0.18f;
+    private float INITIAL_Y = 0.23f;
+    private float INITIAL_Z = -11.40f;
     [SerializeField] AudioSource deathSound;
     private void OnCollisionEnter(Collision collision) 
     {
-        if (collision.gameObject.CompareTag(ENEMY_TAG) | collision.gameObject.CompareTag(TRAPGROUND_TAG))
+        if (collision.gameObject.CompareTag(TAG_ENEMY) | collision.gameObject.CompareTag(TAG_TRAPGROUND))
         {
-            // try to find things to adjust when player considered dead
             // bool Rigidbody.isKinematic : Controls whether physics affects the rigidbody.
-            GameObject.Find("SportsCar").transform.position =  new Vector3(1.37f, 1.11f, -6.75f);
+            GameObject.Find(OBJ_SPORTSCAR).transform.position =  new Vector3( INITIAL_X, INITIAL_Y, INITIAL_Z );
             GetComponent<Rigidbody>().isKinematic = true;
             GetComponent<PlayerMovement>().enabled = false;
             PlayerDead();
         }
     }
 
-    void PlayerDead()
+    // In Unity, all methods by default is private. However clarifying it helps to improve readability.
+    private void PlayerDead()
     {
-        UnityEngine.Debug.Log("player dead");
-        if (!deathSound.isPlaying) { 
+        if (!deathSound.isPlaying && soundCount == 0) { 
             deathSound.Play();
+            soundCount++;
         }
-        // Invoke : Invokes the method methodName in time seconds.
+        // Invoke : Invokes the method methodName in time seconds(similar to JS setTimeout)
         Invoke(nameof(ReloadLevel), 1f);
-        // ReloadLevel();
     }
 
-    void ReloadLevel()
+    private void ReloadLevel()
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().name); // change scene name dynamically rather than hard coded
     }
 
-    void Update()
+    private void Update()
     {
         if (transform.position.y < -DROPLIMIT*3)
         {
