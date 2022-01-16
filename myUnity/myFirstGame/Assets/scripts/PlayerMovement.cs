@@ -4,36 +4,25 @@ using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
 {
- 
     Rigidbody rb; 
-    // SerializeField: Force Unity to serialize a private field. You can directly
-    // adjust this variable in Unity editor.
     [SerializeField]float UNIT_SPEED = 5f;
-    
-    [SerializeField]Transform groundCheck;
-    [SerializeField]LayerMask ground;
-
-    // Add audio
     [SerializeField]AudioSource jumpSound;
-
-    // variable with public access modifier can be accessed in other scripts
-    // use it with caution
     public string TAG_ENEMYHEAD = "enemyHead"; 
+    public string TAG_GROUND = "ground"; 
+    private string INPUT_HORIZONTAL = "Horizontal";
+    private string INPUT_VERTICAL = "Vertical";
+    private string INPUT_JUMP = "Jump";
+    private bool isGrounded = false;
 
-    bool IsGrounded()
-    {
-        return Physics.CheckSphere(groundCheck.position, .1f, ground);
-    }
-
-    // prefab : template for object
     void MoveCharcter() { 
 
-        float horizontalInput = Input.GetAxis("Horizontal");
-        float verticalInput = Input.GetAxis("Vertical");
+        // UnityEngine.input : Interface into the Input system.
+        float horizontalInput = Input.GetAxis(INPUT_HORIZONTAL);
+        float verticalInput = Input.GetAxis(INPUT_VERTICAL);
 
         rb.velocity = new Vector3(horizontalInput * UNIT_SPEED, rb.velocity.y, verticalInput * UNIT_SPEED);
 
-        if (Input.GetButtonDown("Jump") && IsGrounded())
+        if (Input.GetButtonDown(INPUT_JUMP) && isGrounded)
         {
             Jump();
         }
@@ -43,28 +32,32 @@ public class PlayerMovement : MonoBehaviour
     {
         rb.velocity = new Vector3(rb.velocity.x, UNIT_SPEED, rb.velocity.z);
         jumpSound.Play();
+        isGrounded = false;
     }
 
     private void OnCollisionEnter(Collision collision)
     {
+        // enemy collision
         if (collision.gameObject.CompareTag(TAG_ENEMYHEAD))
         {
             Destroy(collision.transform.parent.gameObject);
             Jump();
         }
+
+        // floor prefab collision
+        if (collision.gameObject.CompareTag(TAG_GROUND))
+        {
+            isGrounded = true;
+        }
     }
 
-    // Start is called before the first frame update
     void Start()
     {
-        // declare a variable for Rigidbody component
-        // instatiation
         rb = GetComponent<Rigidbody>();
+        UnityEngine.Debug.Log("chechking initial position");
         UnityEngine.Debug.Log(transform.position); // check out an initial point of GameObject
-        
     }
 
-    // Update is called once per frame
     void Update()
     {
         MoveCharcter();
