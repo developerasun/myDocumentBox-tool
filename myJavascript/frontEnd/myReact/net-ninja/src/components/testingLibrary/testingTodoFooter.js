@@ -1,6 +1,6 @@
 function TestingTodoFooter( {incompleTasks} ) {
     return ( 
-    <p>{incompleTasks} {incompleTasks===1 ? "task" : "tasks left" }</p>    
+    <p style={{"display":"none"}}>{incompleTasks} {incompleTasks===1 ? "task left" : "tasks left" }</p>    
      );
 }
 
