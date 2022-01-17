@@ -1152,7 +1152,22 @@ Typical directory convention for testing files as follows.
 
 <img src="reference/test-dir-convention.png" width=510 height=411 />
 
+#### Test code examples
+When writing tests, try to isolate each test so that responsibility of each test can be clear. And testing is done in isolated environment. For example, when react-router or other tools is used in development, a similar requirement should be done(mocking) in testing environment as well. 
 
+```js
+import { BrowserRouter } from 'react-router-dom'
+const MockRouterComponent = () => {
+    return (<BrowserRouter>
+                <ComponentHere>
+            </BroswerRouter>)
+}
+```
+
+#### Better way to manage test blocks
+Use describe block to group the same type of test blocks.
+
+<img src="reference/describe-block.png" width=400 height=510 />
 
 ## Reference
 - [React.org](https://reactjs.org/docs/hooks-effect.html)
