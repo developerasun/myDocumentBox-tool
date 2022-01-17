@@ -1,13 +1,37 @@
 # My Open Code Box
 This is a open code box of developerasun, containing the sum of his blood, sweat, and tears. The list is as follows :  
 
+## Inputs
 
-|Frontend|Backend|CS|Mini Project|Tutorials|
-|:------:|:------:|:-:|:------:|:--------:|
-|myCss, myFront <br> myHTML, myJavascript <br>myWebDesign, myBootstrap|myJavascript|myCsKnowledge|caffeine_checker <br> myDebugging| starport, smart-contract, <br> myCanvas, momentum|
+<details>
+  <summary>✅Front End</summary>
 
+- myCSS, myHTML, myJavascript, myWebDesign
+ 
+</details>
 
-## Projects
+<details>
+  <summary>✅Backend</summary>
+
+- myJavascript, myUnity
+ 
+</details>
+
+<details>
+  <summary>✅Deploy</summary>
+
+- myCloud, myDeploy
+ 
+</details>
+
+<details>
+  <summary>✅Teamwork</summary>
+
+- myCollaboration, myDebugging
+ 
+</details>
+
+## Outputs
 <details>
   <summary>✅React</summary>
 
