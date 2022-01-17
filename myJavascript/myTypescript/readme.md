@@ -1246,7 +1246,7 @@ Interface and type are the two ways to build types. The interface is preferred n
 <details>
 <summary>What is dynamic programming?</summary>
 
->also known as dynamic optimization, a technique used for solving complex operations by dividing them into various smaller problems, and solving each of them only once
+>also known as dynamic optimization, a technique used for solving complex operations **by dividing them into various smaller problems**, and solving each of them only once
 
 Read below for more.
 
@@ -1501,7 +1501,8 @@ Types in class are in two different ways : 1) static 2) instance.
 
 <details>
 <summary>What is static in class?</summary>
-static is a class keyword that defines a characteristic of method or property. Static method and static property in class cannot be called on instances of the class. 
+
+static is a class keyword that defines a characteristic of method or property. Static method and static property in class **cannot be called on instances of the class**. 
 
 - static methods : utility functions 
 - static property : caches, fixed configuration
@@ -1518,6 +1519,58 @@ MyClass.printX();
 ```
 </details>
 
+###### Keyof type operator
+> The keyof **operator** takes an object type and produces **a string or numeric** literal union of its keys
+
+```ts
+interface Person {
+    name : string
+    age : number
+}
+
+type PersonAttribute = keyof Person
+const NameAttribute : PersonAttribute = 'name'
+
+```
+> keyof types become especially useful when combined with mapped types, which we’ll learn more about later.
+> JavaScript object keys are always coerced to a string, so obj[0] is always the same as obj["0"].
+
+###### conditional type
+> Conditional types help describe the relation between the types of inputs and outputs.
+
+```ts
+interface Animal {
+  live(): void;
+}
+interface Dog extends Animal {
+  woof(): void;
+}
+ 
+// conditional type : SomeType extends OtherType ? TrueType : FalseType;
+type Example1 = Dog extends Animal ? number : string;
+
+type NameOrId<T extends number | string> = T extends number
+  ? IdLabel
+  : NameLabel;
+
+```
+
+> the true branch of a conditional type will further constrain generics by the type we check against.
+
+```ts
+type MessageOf<T> = T extends { message: unknown } ? T["message"] : never;
+ 
+interface Email {
+  message: string;
+}
+ 
+interface Dog {
+  bark(): void;
+}
+ 
+type EmailMessageContents = MessageOf<Email>; // string
+type DogMessageContents = MessageOf<Dog>; // never
+```
 
 ## Reference
 - [What is an Enum in programming language](https://www.thoughtco.com/what-is-an-enum-958326)
