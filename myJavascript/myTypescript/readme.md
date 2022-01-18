@@ -1572,6 +1572,81 @@ type EmailMessageContents = MessageOf<Email>; // string
 type DogMessageContents = MessageOf<Dog>; // never
 ```
 
+### DOM Manipulation
+> JavaScript has come a very long way. While in 2020, JavaScript can be used on servers, in data science, and even on IoT devices, it is important to remember its most popular use case: **web browsers**.
+
+> The DOM API can be used to change the document structure, style, and content. The API is so powerful that countless frontend frameworks (jQuery, React, Angular, etc.) have been developed around it in order to **make dynamic websites** even easier to develop.
+
+> Of the 20,000+ lines of definitions in lib.dom.d.ts, one stands out among the rest: **HTMLElement** . This type is **the backbone for DOM manipulation** with TypeScript.
+
+Utilize below two methods to create and fine HTMLElement. Note that the methods returns HTMLElement or null
+
+```ts
+getElementById(elementId: string): HTMLElement | null;
+
+createElement(tagName: string, options?: ElementCreationOptions): HTMLElement;
+
+createElement<K extends keyof HTMLElementTagNameMap>(tagName: K, options?: ElementCreationOptions): HTMLElementTagNameMap[K];
+```
+
+#### Node interface
+> The document.getElementById function returns an HTMLElement. **HTMLElement** interface extends the **Element** interface which extends the **Node** interface. This **prototypal extension** allows for all HTMLElements to utilize a subset of standard methods. 
+
+#### Children vs Children Node
+> the **children** prop will return a **HTMLCollection** list containing the HTMLParagraphElements. The **childNodes** property will return a similar **NodeList** list of nodes.
+
+```html
+<div>
+  <p>Hello, World</p>
+  <p>TypeScript!</p>
+</div>;
+
+<script>
+    const div = document.getElementsByTagName("div")[0];
+div.children; // HTMLCollection(2) [p, p]
+div.childNodes; // NodeList(2) [p, p]
+</script>
+
+```
+
+##### Understanding NodeList and NodeListOf
+> NodeList can contain additional HTML nodes that the HTMLCollection list cannot.
+
+```html
+<div>
+  <p>Hello, World</p>
+  TypeScript!
+</div>;
+
+<script>
+    const div = document.getElementsByTagName("div")[0];
+div.children; // HTMLCollection(1) [p]
+div.childNodes; // NodeList(2) [p, text]
+</script>
+```
+
+> The querySelectorAll definition is similar to getElementsByTagName, except it returns a new type: **NodeListOf**. This return type is essentially a **custom implementation** of the standard JavaScript list element. Arguably, replacing NodeListOf<E> with E[] would result in a very similar user experience. 
+
+```ts
+/**
+ * Returns the first element that is a descendant of node that matches selectors.
+ */
+querySelector<K extends keyof HTMLElementTagNameMap>(selectors: K): HTMLElementTagNameMap[K] | null;
+querySelector<K extends keyof SVGElementTagNameMap>(selectors: K): SVGElementTagNameMap[K] | null;
+querySelector<E extends Element = Element>(selectors: string): E | null;
+/**
+ * Returns all element descendants of node that match selectors.
+ */
+querySelectorAll<K extends keyof HTMLElementTagNameMap>(selectors: K): NodeListOf<HTMLElementTagNameMap[K]>;
+querySelectorAll<K extends keyof SVGElementTagNameMap>(selectors: K): NodeListOf<SVGElementTagNameMap[K]>;
+querySelectorAll<E extends Element = Element>(selectors: string): NodeListOf<E>;
+```
+
+> NodeListOf only implements the following properties and methods: **length , item(index), forEach((value, key, parent) => void) , and numeric indexing**. 
+
+### Decorator in Typescript
+> Decorators provide a way to add both annotations and a meta-programming syntax for class declarations and members. **Decorators** are a stage 2 proposal for JavaScript and are available as an **experimental feature** of TypeScript.
+
 ## Reference
 - [What is an Enum in programming language](https://www.thoughtco.com/what-is-an-enum-958326)
 - [Webpack Offical - Entry](https://webpack.js.org/concepts/#entry)
