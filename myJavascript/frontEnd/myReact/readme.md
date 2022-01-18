@@ -1104,6 +1104,17 @@ Types of common tests are as follows :
 
 Note that files in the form of (filename).test.js will be considered as test files by React testing library.
 
+##### Adding jest configuration
+Create a jsconfig.json file in project root with below codes so that text editor will recognize Jest for autocomplete.
+
+```json
+{
+    "typeAcquisition": {
+        "include": ["jest"]
+    }
+}
+```
+
 #### Understanding test block
 Test code block consist of like below. 
 
@@ -1168,6 +1179,24 @@ const MockRouterComponent = () => {
 Use describe block to group the same type of test blocks.
 
 <img src="reference/describe-block.png" width=400 height=510 />
+
+### Mocking request
+In real production-level application, testing your component with external API is not a great idea because, 
+
+- testing dependent on external sources
+- requests actually cost money in real world
+
+thus, mocking request with jest and create a dummy data is a better option.
+
+### Before, After hooks
+Sometimes, some tests should be run before/after than other test. Use below methods in your demands. 
+
+- beforeEach
+- beforeAll
+- afterEach
+- afterAll
+
+<img src="reference/before-after-hooks.png" width=581 height=519 />
 
 ## Reference
 - [React.org](https://reactjs.org/docs/hooks-effect.html)
