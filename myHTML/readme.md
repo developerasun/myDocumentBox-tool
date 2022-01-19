@@ -347,12 +347,12 @@ OpenGraph tags should be head section in HTML. For example,
 </head>
 ```
 
-## Web performance
-will be added
-- lazy loading : 
-- image resize : 
+## Learing by doing
+Summarized previous HTML codes in a blockquote format. 
 
+> Web browser : download 2.jpg file from web server and display it to user. Server : store and save 2.jpg file. Network tap in Chrome developer tools : checking if the image download fails or finishes. 
 
+> File upload using form tag : enctype="multipart/form-data" (consider it a convention). 
 
 ## Reference
 - [Free code camp : Basic HTML and HTML5](https://www.freecodecamp.org/learn/responsive-web-design/#basic-html-and-html5)
