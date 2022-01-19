@@ -1198,6 +1198,30 @@ Sometimes, some tests should be run before/after than other test. Use below meth
 
 <img src="reference/before-after-hooks.png" width=581 height=519 />
 
+### Shopping Cart With Redux
+> The Redux Toolkit package is intended to be the standard way to write Redux logic. It was originally created to help address three common concerns about Redux:
+
+>"Configuring a Redux store is too complicated"
+>"I have to add a lot of packages to get Redux to do anything useful"
+>"Redux requires too much boilerplate code"
+
+```shell
+$npm install @reduxjs/toolkit
+$yarn add @reduxjs/toolkit
+```
+
+#### Redux dev tools
+Install Redux dev tools in Chrome extension below for easier debugging. 
+
+- [Redux DevTools](https://chrome.google.com/webstore/detail/redux-devtools/lmhkpmbekcpmknklioeibfkpmmfibljd/related?hl=en)
+
+<img src="reference/redux-devtools.png" width=758 height=722 />
+
+You can check states written in Redux app are in JSON format with Redux Devtools.
+
+<img src="reference/redux-state-json.png" width=500 height=555 />
+
+
 ## Reference
 - [React.org](https://reactjs.org/docs/hooks-effect.html)
 - [Free code camp - Front End Development Libraries](https://www.freecodecamp.org/learn/front-end-development-libraries/)
