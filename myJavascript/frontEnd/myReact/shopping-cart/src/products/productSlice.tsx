@@ -11,9 +11,9 @@ export interface Product {
 } 
 
 export const initialProduct : Product[] = [
-    { title : "game 1", price : 1, id : v4() },
-    { title : "game 2", price : 3, id : v4() },
-    { title : "game 3", price : 222, id : v4() },
+    { title : "Fortnite", price : 1, id : 'Fortnite' },
+    { title : "Overwatch", price : 3, id : 'Overwatch' },
+    { title : "Minecraft", price : 222, id : 'Minecraft' },
 ]
 
 // fake api validation setting : enum classifies validation state by number
@@ -25,19 +25,18 @@ export enum ValidationState {
 
 // reducer(createSlice) setting
 interface ProductSliceState {
-    product : Product[]
     validationState? : ValidationState
     errorMessage? : string
 }
 
-const initialState : ProductSliceState = {
-    product : initialProduct,
-    validationState : undefined,
-    errorMessage : undefined
-}
+// Use createEntityAdpater for data CRUD operations.
+const productAdapter = createEntityAdapter<Product>()
+const initialState = productAdapter.getInitialState<ProductSliceState>({
+    errorMessage : undefined, 
+    validationState : undefined
+})
 
-// const productAdapter = createEntityAdapter<Product>()
-// const initalState = 
+const filledInitialState = productAdapter.upsertMany(initialState, initialProduct)
 
 // async request setting with the fake api
 export const addProductAsync = createAsyncThunk('products/addNewProduct', async (initialProduct : Product)=>{
@@ -48,24 +47,33 @@ export const addProductAsync = createAsyncThunk('products/addNewProduct', async 
 // createSlice : slice name, initial state, reducer's' object, extraReducer(for async request)
 const productSlice = createSlice({
     name: 'products',
-    initialState  : initialState, 
+    initialState  : filledInitialState, 
     reducers : {
         addProduct : (state, action: PayloadAction<Product>) => {
+            // way 1 : using createEntityAdapter(database-CRUD-like-approach in Redux)
+            productAdapter.upsertOne(state, action.payload)
+
+            // way 2 : traditional state update with a new state
             // return [action.payload, ...state]
-            state.product.push(action.payload) // immutable.js are being developed for simpler state management
+
+            // way 3 : immutable.js are being developed for simpler state management
+            // state.product.push(action.payload)
         }, 
-        removeProduct : (state, action: PayloadAction<string>) =>({
-            ...state, 
-            product : state.product.filter(product => product.id !== action.payload)
-        }), 
+        removeProduct : (state, action: PayloadAction<string>) =>{
+            // way 1
+            productAdapter.removeOne(state, action.payload)
+
+            // way 2
+            // ...state, 
+            // product : state.product.filter(product => product.id !== action.payload)
+        }, 
     }, 
     extraReducers : builder => {
-        builder.addCase(addProductAsync.fulfilled, (state, action) => ({
-            ...state, 
-            validationState : ValidationState.Fulfilled, 
-            errorMessage : undefined, 
-            product : [ ...state.product, action.payload ]
-        }))
+        builder.addCase(addProductAsync.fulfilled, (state, action) => {
+            productAdapter.upsertOne(state, action.payload) // update state
+            state.validationState = ValidationState.Fulfilled
+            state.errorMessage = undefined
+        })
         builder.addCase(addProductAsync.rejected, (state, action)=>({
             ...state, 
             validationState : ValidationState.Rejected, 
@@ -80,6 +88,17 @@ const productSlice = createSlice({
 })
 
 export const { addProduct, removeProduct } = productSlice.actions
-export const getProductSelector = ( state: RootState ) => state.product.product
+export const getProductSelector = ( state: RootState ) => state.product.entities
 export const getErrorMessage = ( state : RootState ) => state.product.errorMessage
+
+export const {
+    selectAll : selectAllProduct, 
+    selectById : selectProductById,
+    selectEntities : selectProductEntities,
+    selectIds : selectProductIds, 
+    selectTotal : selectTotalProduct 
+
+    // connect create.EntityAdapter with Root state so that it can know context
+} = productAdapter.getSelectors<RootState>(state => state.product)
+
 export default productSlice.reducer
