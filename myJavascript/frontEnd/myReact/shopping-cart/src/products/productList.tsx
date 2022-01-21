@@ -7,9 +7,6 @@ import { getProductSelector, Product, removeProduct } from './productSlice';
 
 export function ProductList () {
 
-    // A hook to access the redux store's state. 
-    // This hook takes a selector function as an argument. 
-    // The selector is called with the store state.
     const product = useSelector(getProductSelector)
     const dispatch = useAppDispatch()
     const removeFromStore = (id : string) => {
@@ -20,7 +17,6 @@ export function ProductList () {
     const addToCartHandler = (product:Product) => {
       dispatch(addToCart(product))
     }
-
 
   return (
     <div>
