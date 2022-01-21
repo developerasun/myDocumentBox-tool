@@ -1,5 +1,6 @@
 import { Product } from "./products/productSlice";
 
+// Product : interface
 const validateProduct = (product : Product):Promise<Product> => {
     return new Promise((resolve, reject) => 
     setTimeout(()=> {
