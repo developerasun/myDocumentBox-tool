@@ -3,11 +3,23 @@ import { useSelector } from 'react-redux';
 import { v4 } from 'uuid';
 import { addToCart } from '../cart/cart.slice';
 import { useAppDispatch } from '../hooks/store.hooks';
-import { getProductSelector, Product, removeProduct } from './productSlice';
+import { RootState } from '../store';
+import { getProductSelector, Product, removeProduct, selectAllProduct, selectProductById, selectProductEntities, selectProductIds } from './productSlice';
 
 export function ProductList () {
 
-    const product = useSelector(getProductSelector)
+    const product = useSelector(selectAllProduct)
+    const minecraft = useSelector<RootState>(state => selectProductById(state, 'Minecraft'))
+    const totalProducts = useSelector<RootState>(selectAllProduct)
+    const productIds = useSelector(selectProductIds)
+    const entities = useSelector(selectProductEntities)
+    console.log("selectAllProduct ", product)
+    console.log("selectProductById ", minecraft)
+    console.log("selectAllProduct ", totalProducts)
+    console.log("selectProductIds ", productIds)
+    console.log("selectProductEntities ", entities)
+    console.log("select Fornite in entities", entities['Fortnite'])
+
     const dispatch = useAppDispatch()
     const removeFromStore = (id : string) => {
       // Dispatches a synthetic event event to target
