@@ -1214,17 +1214,22 @@ do {
 테스트와 세트 락의 경우 프로세스 동기화 문제의 3가지 조건 중 1) mutual exclusion 을 만족하고 2) bounded-waiting을 불만족한다. 
 
 ### 세마포어(semaphores)
-세마포어 변수는 쓰레드간 공유되는 정수 변수이며, 프로세스 동기화 문제 해결을 위해 에츠허르 다익스트라가 고안한 개념이다.
+세마포어 변수는 **쓰레드간 공유되는 정수 변수**이며, 프로세스 동기화 문제 해결을 위해 에츠허르 다익스트라가 고안한 개념이다.
 
 > 세마포어(Semaphore)는 에츠허르 데이크스트라가 고안한, 두 개의 원자적 함수(wait, signal)로 조작되는 **정수 변수**로서, 멀티프로그래밍 환경에서 공유 자원에 대한 접근을 제한하는 방법으로 사용된다. 
 
-> 컴퓨터 과학에서, 데이크스트라 알고리즘(영어: Dijkstra algorithm) 또는 **다익스트라 알고리즘**은 도로 교통망 같은 곳에서 나타날 수 있는 그래프에서 **꼭짓점 간의 최단 경로**를 찾는 알고리즘이다. 이 알고리즘은 컴퓨터 과학자 에츠허르 데이크스트라가 1956년에 고안했으며 삼 년 뒤에 발표했다.
+> 컴퓨터 과학에서, 데이크스트라 알고리즘(영어: Dijkstra algorithm) 또는 **다익스트라 알고리즘**은 도로 교통망 같은 곳에서 나타날 수 있는 그래프에서 **꼭짓점 간의 최단 경로**를 찾는 알고리즘이다. 이 알고리즘은 컴퓨터 과학자 에츠허르 데이크스트라가 1956년에 고안했으며 삼년 뒤에 발표했다.
 
 #### 원자적 함수 wait, signal
-**전제** : wait 함수와 signal 함수가 가지고 있는 세마포어 변수는 서로 다른 프로세스에 의해 동시에 변경되지 않아야 한다. 
+**전제** : wait 함수와 signal 함수가 가지고 있는 세마포어 변수는 서로 다른 프로세스에 의해 **동시에 변경되지 않아야 한다**. 
 
 1. wait 함수 : 심볼 P로 표기(네덜란드어 proberen 첫 글자) => 세마포어 변수 테스트
+> wait: **Decrements the value of semaphore variable by 1**. If the new value of the semaphore variable **is negative**, the process executing wait **is blocked** (i.e., added to the semaphore's queue). Otherwise, the process continues execution, having used a unit of the resource.
+
 2. signal 함수 : 심볼 V로 표기(네덜란드어 verhogen 첫 글자 )=> 세마포어 변수 증가
+> signal: **Increments the value of semaphore variable by 1**. After the increment, if the pre-increment value **was negative** (meaning there are processes waiting for a resource), it **transfers** a blocked process from the semaphore's waiting queue to the ready queue.
+
+
 3. 세마포어 : 심볼 S로 표기
 
 ```C#
@@ -1312,9 +1317,63 @@ do {
 ```
 
 2. Reader Writer problem
+- reader : processes reading data from database
+- writer : processes reading/updating data from database
 
+<p>
+process synchronization problems may occur when either read or writer processes enter a shared database simultaneously (e.g. two processes updating one record at the same time). To prevent this, semaphore could be used.
+</p>
 
+Reader/writer 프로세스 동기화 문제를 해결하기 위해 세마포어를 적용하고, 아래 3가지 조건을 전제로 한다. 
 
+- mutex : a binary semaphore acquiring/releasing lock(initialized to 1). used when readcount is updated
+- write : a binary semaphore(initialized to 1) common to both reader/writer processes
+- **readcount** : an integer variable(**not semaphore**, initialized to 0) that keeps track of how many **processes are currently reading the object**. Acquiring mutex should be done in advance in order to change this value.
+
+```C#
+// Writer process
+do { 
+    wait(write) // decrease write by 1, if negative, blocked
+    // performs writing task // 
+    signal(write) // increase write by 1, if pre-value was negative, replace
+
+} while(true)
+
+// Reader process
+do {
+    wait(mutex) // reader process acquires mutex semaphore
+    readcount++
+    if (readcount == 1) { // one process trying to read from database
+        wait(write) // reader process acquires write semaphore, meaning writer process cannot acquire write semaphore(cannot perform writing task).
+        signal(mutex) // reader process releases mutex semaphore, meaning other reader processes now can enter. 
+    }
+
+    // current reader performs reading here
+    wait(mutex) // acquires mutex semaphore to change readcount value
+    readcount-- // reader proecess now done and left
+
+    if (readcount == 0)
+    {
+        signal(write) // now writer processes can enter
+        signal(mutex) // release reader mutex
+    }
+
+} while(true)
+```
+
+3. The dining-philosopher problem(식사하는 철학자 문제)
+아래의 테이블에서 **철학자는 프로세스**를, **포크와 스파게티는 CPU 공유 자원**을 의미한다. 
+
+<img src="./dining-philosophers.png" alt="식사하는 철학자 문제" height=534 width=522 />
+
+식사하는 철학자 문제는 아래와 같은 조건을 전제한다. 
+
+- 철학자들은 동시에 식사를 하려고 한다. 
+- 식사를 하기 위해서는 양쪽의 포크를 모두 잡아야 한다. 
+- 각각의 포크가 사용 가능해질 때까지 대기한다. 
+- 포크가 사용 중이면 다른 철학자는 사용할 수 없다. 
+
+> 이때 각각의 철학자가 왼쪽의 포크를 들고 그 다음 오른쪽의 포크를 들어서 스파게티를 먹는 알고리즘을 가지고 있으면, **다섯 철학자는 동시에 왼쪽의 포크를 들 수 있으나 오른쪽의 포크는 이미 가져가진 상태**이기 때문에 다섯 명 모두가 무한정 서로를 기다리는 교착 상태에 빠지게 될 수 있다.
 
 ## 레퍼런스
 - [Difference between Multiprogramming, multitasking, multithreading, and multiprocessing](https://www.geeksforgeeks.org/difference-between-multitasking-multithreading-and-multiprocessing/)
@@ -1324,4 +1383,6 @@ do {
 - [피터슨의 알고리즘 - 위키피디아](https://ko.wikipedia.org/wiki/%ED%94%BC%ED%84%B0%EC%8A%A8%EC%9D%98_%EC%95%8C%EA%B3%A0%EB%A6%AC%EC%A6%98)
 - [세마포어 - 위키피디아](https://ko.wikipedia.org/wiki%EC%84%B8%EB%A7%88%ED%8F%AC%EC%96%B4)
 - [Introduction of Deadlock in Operating System](https://www.geeksforgeeks.org/introduction-of-deadlock-in-operating-system/)
+- [Semaphore (programming)](https://en.wikipedia.org/wiki/Semaphore_(programming))
+- [식사하는 철학자들 문제](https://ko.wikipedia.org/wiki/%EC%8B%9D%EC%82%AC%ED%95%98%EB%8A%94_%EC%B2%A0%ED%95%99%EC%9E%90%EB%93%A4_%EB%AC%B8%EC%A0%9C)
 
