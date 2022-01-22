@@ -1255,6 +1255,65 @@ V (Semaphore S) {
 - P1, P2는 각각 임계 영역에 접근하고 세마포어 S를 1씩 감소시킴 
 - P3는 세마포어 S가 0의 값을 가지므로 while 조건문에서 loop 되고 대기함.  
 
+#### 세마포어의 한계와 극복 방안
+- 임계 영역에 접근하기 위해 대기하는 프로세스들은 **바쁜 대기(busy waiting)**가 요구된다(프로세스가 계속해서 while loop을 돌면서 대기해야 하므로 CPU 자원이 낭비되는 **spin lock** 현상이 발생함). 
+
+- 바쁜 대기가 아닌 **프로세스를 세마포어와 함께 waiting queue에 대기**시킴으로써(block operation)으로 극복. 이 경우 CPU가 spin lock에 걸리지 않고 다른 프로세스에게 배정이 가능함. 
+
+- block operation의 경우 deadlok 또는 startvation의 문제가 발생할 수 있음. 
+
+<img src="./semaphore-deadlock.png" alt="세마포어와 데드락" height=474 width=739 />
+
+<details>
+<summary>데드락이란? (펼쳐보기)</summary>
+
+> A process in operating system uses resources in the following way. 1) Requests a resource 2) Use the resource 3) Releases the resource 
+
+> Deadlock is a situation where a set of processes are **blocked because each process is holding a resource and waiting for another resource** acquired by some other process. 
+
+<img src="./deadlock.png" alt="프로세스와 데드락" height=385 width=555 />
+
+</details>
+
+### 동기화 문제 대표 케이스들
+앞서 살펴본 process synchronization 문제들을 semaphore로 해결할 수 있는지 살펴보자. 
+
+1. Bounded-buffer problem(생산자/소비자 프로세스 문제)
+생산자/소비자 프로세스 동기화 문제를 해결하기 위해 아래 3가지 세마포어 사용을 전제로 한다. 
+
+- m(mutex) : a binary semaphore acquiring/releasing lock
+- empty : a counting semaphore whose initial value is the number of empty buffer slots. 
+- full : a counting semaphore whose initial value is 0.  
+
+또한, 생산자 프로세스는 버퍼가 full인 경우 생산하지 않고, 소비자 프로세스는 버퍼가 empty인 경우 소비하지 않는 것을 전제로 한다. 
+
+```C#
+// Producer process
+do { 
+    wait(empty) // wait until empty > 0 and then decrement empty 
+
+    wait(mutex) // acquire lock
+    // add data to buffer
+    signal(mutex) // release lock
+
+    signal(full) // increment full 
+} while(true)
+
+// Consumer process
+do { 
+    wait(full) // wait until full > 0 and then decrement full 
+
+    wait(mutex) // acquire lock
+    // remove data to buffer
+    signal(mutex) // release lock
+
+    signal(empty) // increment empty 
+} while(true)
+```
+
+2. Reader Writer problem
+
+
 
 
 ## 레퍼런스
@@ -1264,4 +1323,5 @@ V (Semaphore S) {
 - [Critical Section in Operating System](https://www.includehelp.com/operating-systems/critical-section.aspx#:~:text=When%20one%20process%20is%20allowed,section%20at%20the%20same%20time.&text=The%20execution%20before%20the%20critical,is%20called%20a%20remainder%20section.)
 - [피터슨의 알고리즘 - 위키피디아](https://ko.wikipedia.org/wiki/%ED%94%BC%ED%84%B0%EC%8A%A8%EC%9D%98_%EC%95%8C%EA%B3%A0%EB%A6%AC%EC%A6%98)
 - [세마포어 - 위키피디아](https://ko.wikipedia.org/wiki%EC%84%B8%EB%A7%88%ED%8F%AC%EC%96%B4)
+- [Introduction of Deadlock in Operating System](https://www.geeksforgeeks.org/introduction-of-deadlock-in-operating-system/)
 
