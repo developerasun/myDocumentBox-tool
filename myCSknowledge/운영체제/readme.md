@@ -1437,6 +1437,65 @@ class SharedData {
 }
 ```
 
+#### 모니터를 활용한 식사하는 철학자 문제 해결
+아래 전제 조건을 추가한다.
+
+- 양쪽 포크가 모두 사용 가능해야 포크를 집을 수 있다.
+- enum { thinking, hungry, eating } state[5] 의 데이터 구조를 추가한다. enum은 철학자의 행동 단계를, state는 철학자의 수를 의미한다. 
+- condition self[5] 데이터 구조를 추가한다. condition은 철학자는 hungry의 상태지만 포크를 집을 수 없어 기다리는 상황을 의미한다.
+
+```csharp
+class monitor dp {
+    enum status{
+        thinking,
+        hungry, 
+        eating
+    };
+
+    int[] state = new int[5];
+    int[] self = new int[5];
+
+    void pickup(int i) 
+    {
+        state[i] = hungry;
+        test(i); 
+
+        if (state[i] != eating)
+        {
+            // 식사 가능한 상황이 아니라면(test 함수에서 eating status로 변환되지 않았을 경우) 철학자는 대기함
+            self[i].wait(); 
+        }
+    }
+
+    void putdown(int i)
+    {
+        // 기존에 식사 중인 철학자의 상태를 thinking으로 변경함
+        state[i] = thinking; 
+
+        // 양쪽 철학자들의 상태를 eating으로 변경하고 포크가 사용 가능함을 알림. 
+        test((i+4)%5); 
+        test((i+1)%5); 
+    }
+}
+
+void test(int i)
+{
+    // 양쪽 철학자들이 식사를 하고 있는지 체크함
+    if ((state[(i+4)%5)] != eating) && (state[i]==hungry) && state[(i+1)%5] != eating ) {
+        state[i] = eating;
+        self[i].signal();
+    }
+}
+
+void initCode()
+{
+    for (int i=0; i<5; i++)
+    {
+        state[i] = thinking;
+    }
+}
+
+```
 
 
 
