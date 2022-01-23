@@ -1214,7 +1214,7 @@ do {
 테스트와 세트 락의 경우 프로세스 동기화 문제의 3가지 조건 중 1) mutual exclusion 을 만족하고 2) bounded-waiting을 불만족한다. 
 
 ### 세마포어(semaphores)
-세마포어 변수는 **쓰레드간 공유되는 정수 변수**이며, 프로세스 동기화 문제 해결을 위해 에츠허르 다익스트라가 고안한 개념이다.
+세마포어 변수는 **쓰레드간 공유되는 정수 변수**이며, 프로세스 동기화 문제 해결을 위해 에츠허르 다익스트라가 고안한 개념이다. 세마포어의 값이 1인 경우 프로세스가 임계 영역에 접근 가능함을 의미하고, 0인 경우 이미 다른 프로세스가 임계 영역을 점유 중임을 의미한다. 
 
 > 세마포어(Semaphore)는 에츠허르 데이크스트라가 고안한, 두 개의 원자적 함수(wait, signal)로 조작되는 **정수 변수**로서, 멀티프로그래밍 환경에서 공유 자원에 대한 접근을 제한하는 방법으로 사용된다. 
 
@@ -1368,12 +1368,78 @@ do {
 
 식사하는 철학자 문제는 아래와 같은 조건을 전제한다. 
 
-- 철학자들은 동시에 식사를 하려고 한다. 
+- 철학자들은 일정 시간 생각을 하고 식사를 한다. 
 - 식사를 하기 위해서는 양쪽의 포크를 모두 잡아야 한다. 
 - 각각의 포크가 사용 가능해질 때까지 대기한다. 
 - 포크가 사용 중이면 다른 철학자는 사용할 수 없다. 
 
 > 이때 각각의 철학자가 왼쪽의 포크를 들고 그 다음 오른쪽의 포크를 들어서 스파게티를 먹는 알고리즘을 가지고 있으면, **다섯 철학자는 동시에 왼쪽의 포크를 들 수 있으나 오른쪽의 포크는 이미 가져가진 상태**이기 때문에 다섯 명 모두가 무한정 서로를 기다리는 교착 상태에 빠지게 될 수 있다.
+
+세마포어를 활용해 식사하는 철학자 문제를 해결하는 과정은 아래와 같다. 
+
+0. 다섯 개의 포크는 다섯 개의 binary semaphores로 나타내어진다(초기값은 1). 
+1. 철학자는 포크를 잡기 위해 세마포어를 활용해 wait 함수를 실행한다.
+2. 철학자는 식사를 한다. 
+3. 식사를 마친 후 포크를 되돌려 놓기 위해 세마포어를 활용해 signal 함수를 실행한다. 
+
+```c#
+do {
+// 철학자는 식사를 하기 위해 2개의 포크를 가져와야 한다. 
+wait(folk[i]) // 첫 번째 포크 획득
+wait(folk[ (i+1)%5 ]) // 두 번째 포크 획득
+
+// 식사 시작
+
+signal(folk[i]) // 첫 번째 포크 반납
+signal(folk[ (i+1)%5 ]) // 두 번째 포크 반납
+
+// 생각 시각
+
+} while(true)
+```
+
+단, 이 방법 역시 5명의 철학자가 동시에 식사를 하려고 하면 데드락이 발생한다는 단점이 존재한다. 데드락을 피하기 위해 아래와 같은 솔루션을 제시할 수 있다. 
+
+- 전체 포크의 수보다 철학자의 수를 적게 배치한다. 
+- 양쪽 포크가 모두 가용 가능할때만 포크를 집을 수 있도록 제한한다. 
+
+### 프로세스 동기화 모니터
+> 전산학에서 모니터(monitor)는 **프로세스 또는 스레드를 동기화**하는 방법 중 하나로서, 그 방법으로 활용하기 위해 구현된 **기능 또는 모듈**을 뜻하기도 한다. 주로 고급 언어에서 이 기능을 지원하며, 한번에 하나의 프로세스만 모니터에서 활동하도록 보장해준다. 예를 들어, 자바에서 스레드를 동기화하는 방법으로 모니터가 사용할 수 있다.
+
+> 세마포어는 동기화 함수의 제약 조건을 고려해야 하는 반면, 모니터는 **프로시져를 호출하여 간단히 해결**할 수 있다.
+
+모니터는 세마포어에 비해 프로세스 동기화 문제를 해결하는 비교적 모던한 접근이다. 모니터의 구조는 **한 번의 하나의 프로세스만 활성화되도록 형성**되어야 한다. 
+
+- 모니터 조건 형성 : 조건 변수 x, y에 대해서 실행할 수 있는 operation은 wait, signal 함수뿐이다. 
+- x.wait : wait 함수를 실행한 프로세스를 block 한다.
+- x.signal : signal 함수를 실행한 프로세스를 resume 한다.
+
+```C#
+abstract class Monitor {
+    // declare shared variables 
+    public int sharedVars = 5;
+
+    void Procedure1() { /* operation here */ }
+    void Procedure2() { /* operation here */ }
+    void Procedure3() { /* operation here */ }
+}
+
+```
+
+> Java에서 모니터를 활용할 때, 임계구역에 **synchronized** 키워드만 붙이면 상호배제가 보장된다. 아래 코드는 공유 자원 balance에 대한 임계구역인 balance++과 balance--에 뮤텍스 처리를 한 것이다.
+
+```java
+class SharedData {
+    int balance; // 공유 자원 변수
+    synchronized void add() { balance++; }
+    synchronized void sub() { balance--; }
+    int getBalance() { return balance; }
+}
+```
+
+
+
+
 
 ## 레퍼런스
 - [Difference between Multiprogramming, multitasking, multithreading, and multiprocessing](https://www.geeksforgeeks.org/difference-between-multitasking-multithreading-and-multiprocessing/)
@@ -1385,4 +1451,6 @@ do {
 - [Introduction of Deadlock in Operating System](https://www.geeksforgeeks.org/introduction-of-deadlock-in-operating-system/)
 - [Semaphore (programming)](https://en.wikipedia.org/wiki/Semaphore_(programming))
 - [식사하는 철학자들 문제](https://ko.wikipedia.org/wiki/%EC%8B%9D%EC%82%AC%ED%95%98%EB%8A%94_%EC%B2%A0%ED%95%99%EC%9E%90%EB%93%A4_%EB%AC%B8%EC%A0%9C)
+- [프로세스 동기화 - 모니터](https://ko.wikipedia.org/wiki/%EB%AA%A8%EB%8B%88%ED%84%B0_(%EB%8F%99%EA%B8%B0%ED%99%94))
+- [KOCW 운영체제 10: 모니터(Monitor)](https://m.blog.naver.com/hirit808/221793966623)
 
