@@ -11,8 +11,6 @@ const CakeContainer = ({ numberOfCakes, buyCake }) => {
      );
 }
 
-// selector also can be used instead of mapStateToProps, 
-// which returns redux state information
 // mapping Redux state to React(props) App
 const mapStateToProps = state => {
     return { 
