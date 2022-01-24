@@ -1,4 +1,5 @@
 import redux from 'redux'
+import logger from 'redux-logger'
 
 // Define an action
 const BUY_CAKE = 'BUY_CAKE'
@@ -90,22 +91,23 @@ const iceCreamReducer = (state = initialIceCreamState, action) => {
     }
 }
 
+// create a root reducer
 const rootReducer = redux.combineReducers({
     cake : cakeReducer, 
     iceCream : iceCreamReducer
 })
 
-const store = redux.createStore(rootReducer)
+// create a middleware
+const middlewares = redux.applyMiddleware(logger.createLogger())
+
+// create a redux store
+const store = redux.createStore(rootReducer, middlewares)
 console.log("initial state : ", store.getState())
 
 // store.subscribe calls a listener function that gets triggered every time the store is updated 
 const unsubscribe = store.subscribe(()=> console.log(store.getState()))
-store.subscribe(()=> {
-    const storeState = store.getState()
-    const cakeState = storeState.cake
-    const iceCreamState = storeState.iceCream
-    console.log("yummyy cake ",cakeState.numberOfCakes)
-})
+// To unsubscribe the change listener, invoke the function returned by subscribe.
+unsubscribe()
 
 // dispatch actions to update store
 store.dispatch(buyCake()) 
@@ -119,6 +121,3 @@ store.dispatch(buyIceCream())
 store.dispatch(buyIceCream())
 store.dispatch(refundCake())
 store.dispatch(refundIceCream())
-
-// To unsubscribe the change listener, invoke the function returned by subscribe.
-unsubscribe()
