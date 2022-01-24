@@ -50,13 +50,14 @@ Below, there are three core principals of Redux.
 - First Redux App
 
 ### Redux Store
-is a single state object **that manages a whole application's state**. The state must not be directly modified(immutable state, enabling time-travel debugging)
+is a single state object **that manages a whole application's state(state tree)**. The state must not be directly modified(immutable state, enabling time-travel debugging)
 
 - State update in the application should only be done with **Redux store**, which is the single object **created with createStore method**.
 - createStore methods takes a reducer function, which takes/returns a state.
-- All state update get triggered by action dispatch.
+- All state update get triggered by **dispatch method**.
+- Allow access to state via **getState method**.
 
-store.subscribe calls a listener function that gets triggered every time the store is updated. 
+store.subscribe **calls a listener function** that gets triggered **every time the store is updated**. 
 
 - Redux.createStore(*callback) => store.dispatch(state) => store updated => store.subscribe(**callback) 
 - *callback : reducer(state, *action) => state case specified with switch/case statement
@@ -80,7 +81,7 @@ const action = { type : "LOGIN" };
 
 A common practice in Redux is to **assign action types as read-only contant variables**, rather than string values. Oftentimes, action comes with data and Redux needs to handle it. 
 
-### Action creator
+#### Action creator
 Action is delivered to Redux store by action creator. Action creator in Redux is a simply Javascript **function that returns an action(object)**. 
 
 ```js
@@ -89,7 +90,7 @@ Action is delivered to Redux store by action creator. Action creator in Redux is
   }
 ```
 
-## Action dispatch
+#### Dispatch
 Action is sent to Redux.store by dispatch method like below. 
 
 ```js
@@ -97,8 +98,8 @@ Redux.store.dispatch(actionCreator()); // actionCreator returns an action(object
 Redux.store.dispatch({ type:"LOGIN" }); // same result with above
 ```
 
-## Asynchronous action
-<bold>Asynchronous actions</bold> are essential parts of web development. Redux provides a middleware called <bold>Redux Thunk.</bold> 
+#### Asynchronous action
+**Asynchronous actions** are essential parts of web development. Redux provides a middleware called **Redux Thunk.** 
 
 - Redux.applyMiddleware method provides a second parameter to Redux.createStore method. 
 
@@ -109,14 +110,15 @@ Redux.store.dispatch({ type:"LOGIN" }); // same result with above
 - Receiving data with dispatch
 </ol>
 
-## Reducer
+### Reducer
 Reducer is a function that is responsible for changing a state, corresponding delivered actions by dispatch method. 
-The only job of the reducer takes state and action as arguments and <bold>returns a new state</bold>. The new state <bold>must be a copy of the original state</bold> and the reducer should not touch it in any way. 
+The only job of the reducer takes state and action as arguments and **returns a new state**. The new state **must be a copy of the original state** and the reducer should not touch it in any way. 
 
 - when appliction is relatively simple : one reducer
 - when complicated : multiple reducers, combineReducer method provided by Redux.
 
 ```js
+// combineReducer takes an object as paramter
 const rootReducer = Redux.combineReducers({
   auth: authenticationReducer, 
   notes: notesReducer
@@ -160,13 +162,6 @@ const store = Redux.createStore(counterReducer); // Define the Redux store here,
 
 ## Reference
 - [Free code camp - Redux](https://www.freecodecamp.org/learn/front-end-development-libraries/#redux)
-
-
-
-
-
-
-
 
 ## React-Redux
 Redux is not directly implemented in React, rather it uses React-React library to connect with React. React-Redux is the official Redux UI binding library for React.
