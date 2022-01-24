@@ -1,8 +1,12 @@
+import redux from 'redux'
+
 // Define an action
 const BUY_CAKE = 'BUY_CAKE'
 const REFUND_CAKE = 'REFUND_CAKE'
+const BUY_ICECREAM = 'BUY_ICECREAM'
+const REFUND_ICECREAM = 'REFUND_ICECREAM'
 
-// Define an action creator
+// Define an action creator for cake
 function buyCake() {
     return {
         type : BUY_CAKE, 
@@ -18,13 +22,35 @@ function refundCake() {
     }
 }
 
-// Define an initial state
-const initialState = {
-    numberOfCakes : 10
+// Define an action creator for ice cream
+function buyIceCream() {
+    return {
+        type : BUY_ICECREAM, 
+        madeBy : "Jake"
+    }
 }
 
-// Define a reducer 
-const cakeReducer = (state = initialState, action) => {
+function refundIceCream() {
+    return {
+        type : REFUND_ICECREAM, 
+        cause : 'Simple remorse',
+        consumed : false
+    }
+}
+
+// Define an initial state for cake
+const initialCakeState = {
+    numberOfCakes : 10, 
+}
+
+// Define an initial state for ice cream
+const initialIceCreamState = {
+    numberOfIceCreams : 10, 
+    refund : false
+}
+
+// Define a cake reducer 
+const cakeReducer = (state = initialCakeState, action) => {
     switch (action.type) {
         case BUY_CAKE : 
         // Create a copied state object first
@@ -43,3 +69,56 @@ const cakeReducer = (state = initialState, action) => {
         default : return state
     }
 }
+
+// Define an iceCreamReducer
+const iceCreamReducer = (state = initialIceCreamState, action) => {
+    switch (action.type) {
+        case BUY_ICECREAM : 
+            return {
+                ...state,
+                numberOfIceCreams : state.numberOfIceCreams -1
+            }
+        case REFUND_ICECREAM : 
+            if (state.numberOfIceCreams < 10) {
+                return {
+                    ...state,
+                    numberOfIceCreams : state.numberOfIceCreams +1,
+                    refund : true
+                }
+            }
+        default : return state
+    }
+}
+
+const rootReducer = redux.combineReducers({
+    cake : cakeReducer, 
+    iceCream : iceCreamReducer
+})
+
+const store = redux.createStore(rootReducer)
+console.log("initial state : ", store.getState())
+
+// store.subscribe calls a listener function that gets triggered every time the store is updated 
+const unsubscribe = store.subscribe(()=> console.log(store.getState()))
+store.subscribe(()=> {
+    const storeState = store.getState()
+    const cakeState = storeState.cake
+    const iceCreamState = storeState.iceCream
+    console.log("yummyy cake ",cakeState.numberOfCakes)
+})
+
+// dispatch actions to update store
+store.dispatch(buyCake()) 
+store.dispatch(refundCake())
+store.dispatch(buyCake())
+store.dispatch(buyCake())
+store.dispatch(buyCake())
+store.dispatch(refundCake())
+store.dispatch(buyIceCream())
+store.dispatch(buyIceCream())
+store.dispatch(buyIceCream())
+store.dispatch(refundCake())
+store.dispatch(refundIceCream())
+
+// To unsubscribe the change listener, invoke the function returned by subscribe.
+unsubscribe()
