@@ -110,6 +110,23 @@ Redux.store.dispatch({ type:"LOGIN" }); // same result with above
 - Receiving data with dispatch
 </ol>
 
+### Asynchronous action with Redux
+In modern web application, fetching data asynchronoulsy is inevitable. Declare an initial state for API like below. 
+
+```js
+initialState = { 
+    loading : true, // display a loading spinner when loading
+    data : [ ], // list of data
+    errorMessage : '' // display error status to user
+}
+```
+
+Install below NPM packages for network requests.
+```shell
+$npm i axios
+$npm i redux-thunk
+```
+
 ### Reducer
 Reducer is a function that is responsible for changing a state, corresponding delivered actions by dispatch method. 
 The only job of the reducer takes state and action as arguments and **returns a new state**. The new state **must be a copy of the original state** and the reducer should not touch it in any way. 
@@ -160,13 +177,20 @@ const decAction = () => {
 const store = Redux.createStore(counterReducer); // Define the Redux store here, passing in your reducers
 ```
 
-## Reference
-- [Free code camp - Redux](https://www.freecodecamp.org/learn/front-end-development-libraries/#redux)
-
 ## React-Redux
-Redux is not directly implemented in React, rather it uses React-React library to connect with React. React-Redux is the official Redux UI binding library for React.
+Redux is not directly implemented in React, rather it uses React-React library to connect with React. **React-Redux is the official Redux UI binding library** for React.
 
-<img src="reference/react-redux-relation.png" width=726 height=169 alt="React and Redux">
+<img src="reference/react-redux-relation.png" width=726 height=169 alt="React and Redux" />
+
+<img src="reference/react-redux-app-structure.png" width=567 height=333 alt="React Redux app structure" />
+
+The Redux should provide its store to React app. 
+
+### Redux middleware logger
+Redux logger proivdes a useful information towards states. 
+
+<img src="reference/redux-logger.png" width=675 height=753 alt="react state by logger middleware" />
 
 ## Reference
 - [Redux vs Context API: When to use them](https://dev.to/ruppysuppy/redux-vs-context-api-when-to-use-them-4k3p)
+- [Free code camp - Redux](https://www.freecodecamp.org/learn/front-end-development-libraries/#redux)
