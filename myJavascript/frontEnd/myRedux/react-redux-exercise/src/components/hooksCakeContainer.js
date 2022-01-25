@@ -6,7 +6,7 @@ import { buyCake } from '../cake/cakeAction';
 // which returns redux state information
 const HooksCakeContainer = () => {
     // Access Redux store state by useSelector hook
-    const numberOfCakes = useSelector((state) => state.numberOfCakes) // takes an selector function
+    const numberOfCakes = useSelector((state) => state.cake.numberOfCakes) // takes an selector function
 
     // Access Redux store dispatch by useDispatch hook
     const dispatch = useDispatch()

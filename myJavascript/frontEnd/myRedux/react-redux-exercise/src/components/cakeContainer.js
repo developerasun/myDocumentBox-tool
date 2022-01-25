@@ -14,7 +14,7 @@ const CakeContainer = ({ numberOfCakes, buyCake }) => {
 // mapping Redux state to React(props) App
 const mapStateToProps = state => {
     return { 
-        numberOfCakes : state.numberOfCakes
+        numberOfCakes : state.cake.numberOfCakes
     }
 }
 
