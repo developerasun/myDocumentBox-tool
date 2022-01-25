@@ -111,13 +111,47 @@ Redux.store.dispatch({ type:"LOGIN" }); // same result with above
 </ol>
 
 ### Asynchronous action with Redux
-In modern web application, fetching data asynchronoulsy is inevitable. Declare an initial state for API like below. 
+There are two types of actions - synchronous action and asynchronous one. 
+
+1. synchronous action : once action gets dispatched, state immediately gets updated. 
+
+2. asynchronous action : wait for a certain for state to get updated after action dispatched. In modern web application, fetching data asynchronoulsy is inevitable. 
+
+For example, state, action, and reducer can be defined like below for asynchronously fetching data. 
 
 ```js
+// define state
 initialState = { 
-    loading : true, // display a loading spinner when loading
-    data : [ ], // list of data
-    errorMessage : '' // display error status to user
+    loading : true, // is data being fetched? 
+    data : [ ], // fetched data
+    errorMessage : '' // when fetching data fails for some reason
+}
+
+// define action
+const FETCH_DATA_REQUEST = 'FETCH_DATA_REQUEST'
+const FETCH_DATA_SUCCESS = 'FETCH_DATA_SUCCESS'
+const FETCH_DATA_FAILURE = 'FETCH_DATA_FAILURE'
+
+// define reducer
+const reducer = ( state = initialState, action) => {
+    switch (action.type) { 
+        case FETCH_DATA_REQUEST :
+            return { 
+                // do something
+            }
+            break; 
+        case FETCH_DATA_SUCESS :
+            return { 
+                // do something
+            }
+            break; 
+        case FETCH_DATA_FAILURE :
+            return { 
+                // do something
+            }
+            break; 
+        default : return state
+    }
 }
 ```
 
@@ -190,6 +224,23 @@ The Redux should provide its store to React app.
 Redux logger proivdes a useful information towards states. 
 
 <img src="reference/redux-logger.png" width=675 height=753 alt="react state by logger middleware" />
+
+## React and Redux typical interview question examples
+### React topics 
+- What do you like and dislike about React? 
+- What is the signifance of having the key prop when rendering a list of elements? => React uses it for re-rendering only changed elements.
+- What is a potential bug that you can introduce when using index as key? 
+- Lifecycle methods(purpose of maintaining legacy codes) => mounting/unmounting, update
+- Context API : prop drilling
+- Hooks  
+- Optimization : pure component, memo, useMemo, useCallback
+- component logics : higher order component, render props pattern, custom hook
+- third parties : styling, routing, form handling, state management, CRA(create react app), custom webpack config
+
+### Redux topics
+- What is Redux? => solution to prop drilling
+- Comparison with Context API
+- Basics : store, action, action creators, reducer, mapState(dispatch)ToProps
 
 ## Reference
 - [Redux vs Context API: When to use them](https://dev.to/ruppysuppy/redux-vs-context-api-when-to-use-them-4k3p)
