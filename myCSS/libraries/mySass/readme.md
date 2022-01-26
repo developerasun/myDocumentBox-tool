@@ -20,16 +20,14 @@ $npm install sass --save
 - Partial : importing modules
 - Extend
 
-## Variable
-In sass, you can declare and assign variable just like Javascipt.
-The variable is defined with '$'.
+### Variable
+In sass, you can declare and assign variable just like Javascipt. The variable is defined with '$'.
 
 ```scss
 $heading-color : lightblue;
 ```
 
-Use it like below. Using variable in sass gives us an advantage to improve
-code reusability.
+Use it like below. Using variable in sass gives us an advantage to improve code reusability.
 
 ```scss
 $text-color : red;
@@ -37,11 +35,10 @@ $text-color : red;
 h1, p, .content { 
     color : $text-color;
 }
-
 ```
 
-## Nesting
-As a project is getting bigger, CSS lines will be more larger. Sass helps this with enabling **nesting CSS rules**. For example, child style rules can be nested in parent element in Sass. 
+### Nesting
+As a project is getting bigger, CSS lines will be more larger. Sass helps this with enabling **nesting CSS rules**. For example, **child** style rules can be nested in **parent** element in Sass. 
 
 ```Scss
 $bg-color : beige;
@@ -60,7 +57,7 @@ body {
 }
 ```
 
-## Mixin
+### Mixin
 A mixin is a group of CSS declarations for reusability. Consider the mixin as a function in CSS. Useful to **remove repetition** when writing vendor prefix rules. 
 
 ```scss
@@ -77,7 +74,7 @@ A mixin is a group of CSS declarations for reusability. Consider the mixin as a 
 }
 ```
 
-## Contional statement
+### Contional statement
 If and else statement works in Sass just like they do in Javascript. **Do not add parenthesis** for conditions. For example, 
 
 ```scss
@@ -91,8 +88,8 @@ If and else statement works in Sass just like they do in Javascript. **Do not ad
     font-size : 1rem;
 }
 ```
-## For, Each, and While
-### For
+### For, Each, and While
+#### For
 Add styles in a loop through for directive in Sass. 
 
 ```scss
@@ -113,8 +110,8 @@ For loop in Sass has two ways :
 }
 ```
 
-### Each
-Sass also provides @each directive, which **iterates over each item** in a list or map. 
+#### Each
+Sass also provides **@each** directive, which **iterates over each item** in a list or map. 
 
 In the case of a list, 
 ```scss 
@@ -138,7 +135,7 @@ $colorList : (1: red, 2: blue, 3: green);
 } 
 ```
 
-### While
+#### While
 Creates CSS rules until a certain condition is met. 
 
 ```scss
@@ -166,8 +163,8 @@ Import above partial with @import. Once the partial is imported, all the mixins 
 @import 'myMixin'
 ```
 
-## Extend
-Extending in Scss enables easily scale a style to another element, **copying properties from source and add a new style** to scale the style.  
+### Extend
+Extending in Scss enables easily **scale a style** to another element, **copying properties from source and add a new style** to scale the style.  
 
 ```scss
 .info {
