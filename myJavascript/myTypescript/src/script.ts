@@ -23,7 +23,7 @@ recordTwo = new Payment("Paul", "netflix-streaming", 55)
 
 records.push(recordOne, recordTwo)
 records.map((item)=>console.log(item.format()))
-
+console.log(amounts.valueAsNumber) // NaN
 // type casting in typescript
 const newForm = document.querySelector('.newForm') as HTMLFormElement
 
