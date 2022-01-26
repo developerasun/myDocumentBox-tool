@@ -1,6 +1,70 @@
 # Modern Web At Glance
 Summarized what I learned about webs. 
 
+## Document Object Model
+**Document Object Model** is an **interface of a web page** with object model perspective so that programming language can manipulate the web page. 
+
+- Web page(document) <====== DOM <===== Javascript
+
+Note that DOM is not a programming language but rather **a web API** to create websites. **DOM is programming-language-independent**, meaning it can be built with any language. 
+
+```python 
+import xml.dom.minidom as myDOM
+doc = myDOM.parse(r"C:\Projects\Py\chap1.xml"))
+# do something else 
+```
+
+- document object : a web page itself
+- table object : implements HTMLTableElement DOM interface
+
+### Understanding DOM data types
+1. Document : any web page loaded in a browser. For example, HTML, XML, SVG, and more. APIs are available based on their document type.
+
+- HTML implements HTMLDocument interface.
+- XML/SVG implements XMLDocument interface. 
+
+A document is created with Document constructor. 
+- document = new Document()
+
+2. Node : Every object within a document is the one type of Node. 
+
+- Element Node
+- Text Node
+- Attribute Node
+
+3. Element is based on the Node. An element object implements DOM Element interface and the primitively, Node interface. 
+
+- element object <==== Element interface <====== Node interface <==== Document interface 
+
+4. NodeList : an array of elements. Nodelist has a single method called item. For example, list.item(1)
+
+5. Attr : a special interface for attributes. Commonly referred as an attribute. 
+
+### Understanding DOM interfaces
+Since the hierarchy of the DOM data types is inter-related, **meaning one object in DOM can implement several types of DOM interfaces**, there may have been confusions. For example, 
+
+- HTML **form** element implements **HTMLFormElement**, getting its **name** property 
+- HTML **form** element implements **HTMLElement**, gettting its **className** property.
+
+### DOM parser
+> The DOMParser interface provides the ability to parse XML or HTML **source code from a string into a DOM Document**. You can perform the opposite operation—converting a DOM tree into XML or HTML source—using the XMLSerializer interface.
+
+> In the case of an HTML document, you can also replace portions of the DOM with new DOM trees built from HTML by setting the value of the Element.innerHTML and outerHTML properties. **These properties can also be read to fetch HTML fragments corresponding to the corresponding DOM subtree**.
+
+## Web bundling
+Spliting big code lines into modules gives us convenience to manage but it trades off multiple requests for the files from browser.
+
+![multiple-request](https://user-images.githubusercontent.com/83855174/146930464-98382576-795d-435f-983f-e86107f5ca08.png)
+
+In addition, features such as module in ES6 is not fully supported old browser.
+
+![ts-module](https://user-images.githubusercontent.com/83855174/146930352-74b8fd5c-8a3d-48eb-a15c-1221137afaab.png)
+
+Web bundlers, such as webpack and parcel, combat this by bundling them into one file, making even old browser approachable.
+
+## reference
+- [NetNinja - typescript](https://www.youtube.com/watch?v=EpOPR03z4Vw&list=PL4cUxeGkcC9gUgr39Q_yD6v-bSyMwKPUI&index=14&t=1s)
+
 ## Web socket
 Took below course and summarized essentials. 
 - [NetNinja - ChatApp Ninja](https://www.youtube.com/watch?v=vQjiN8Qgs3c&list=PL-tV1f9Asb4giyEr2-LlLrsEHTkf0Geyr&index=1&t=11s)
@@ -130,3 +194,4 @@ Access-Control-Allow-Origin: null
 - [Access control allow origin](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Access-Control-Allow-Origin)
 - [Socket.IO](https://socket.io/)
 - [Wikipedia - WebSocket6](https://en.wikipedia.org/wiki/WebSocket)
+- [MDN Web Docs](https://developer.mozilla.org/en-US/docs/Web/API/Document_Object_Model)
