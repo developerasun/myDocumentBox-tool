@@ -16,11 +16,11 @@ Read MDN docs and summarzied essentials
 - Examples of web and XML development using the DOM
 
 ## Introduction to DOM
-Document Object Model is an interface of a web page with object model perspective so that programming language can manipulate the web page. 
+**Document Object Model** is an **interface of a web page** with object model perspective so that programming language can manipulate the web page. 
 
 - Web page(document) <====== DOM <===== Javascript
 
-Note that DOM is not a programming language but rather a web API to create websites. DOM is programming-language-independent, meaning it can be built with any language. 
+Note that DOM is not a programming language but rather **a web API** to create websites. **DOM is programming-language-independent**, meaning it can be built with any language. 
 
 ```python 
 import xml.dom.minidom as myDOM
@@ -55,7 +55,7 @@ A document is created with Document constructor.
 5. Attr : a special interface for attributes. Commonly referred as an attribute. 
 
 ### Understanding DOM interfaces
-Since the hierarchy of the DOM data types is inter-related, meaning one object in DOM can implement several types of DOM interfaces, there may have been confusions. For example, 
+Since the hierarchy of the DOM data types is inter-related, **meaning one object in DOM can implement several types of DOM interfaces**, there may have been confusions. For example, 
 
-- HTML form element implements HTMLFormElement, getting its name property 
-- HTML form element implements HTMLElement, gettting its className property.
+- HTML **form** element implements **HTMLFormElement**, getting its **name** property 
+- HTML **form** element implements **HTMLElement**, gettting its **className** property.
