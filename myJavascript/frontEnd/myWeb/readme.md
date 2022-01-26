@@ -62,8 +62,13 @@ In addition, features such as module in ES6 is not fully supported old browser.
 
 Web bundlers, such as webpack and parcel, combat this by bundling them into one file, making even old browser approachable.
 
-## reference
-- [NetNinja - typescript](https://www.youtube.com/watch?v=EpOPR03z4Vw&list=PL4cUxeGkcC9gUgr39Q_yD6v-bSyMwKPUI&index=14&t=1s)
+### HTML document life cycle
+Types of events involved in HTML document life cycle are as follows : 
+
+1. **DOMContentLoaded** : happens as soon as browser finishes reading HTML document. Javascript will manipulate DOM after this event happens. **Does not wait for img or style sheet resource**, meaning they still can be in the process of fetching.
+2. load : happens when all **resources including style sheets fetched**. Can take a while so not usually used. 
+3. beforeunload : when user about to leave a page. Browser will ask something like : "we have unsaved changes…"
+4. unload : when user leaves a page.
 
 ## Web socket
 Took below course and summarized essentials. 
@@ -195,3 +200,5 @@ Access-Control-Allow-Origin: null
 - [Socket.IO](https://socket.io/)
 - [Wikipedia - WebSocket6](https://en.wikipedia.org/wiki/WebSocket)
 - [MDN Web Docs](https://developer.mozilla.org/en-US/docs/Web/API/Document_Object_Model)
+- [NetNinja - typescript](https://www.youtube.com/watch?v=EpOPR03z4Vw&list=PL4cUxeGkcC9gUgr39Q_yD6v-bSyMwKPUI&index=14&t=1s)
+- [Javascript.info - DOMContentLoaded, load, beforeunload, unload](https://ko.javascript.info/onload-ondomcontentloaded)
