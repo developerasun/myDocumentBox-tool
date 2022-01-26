@@ -70,10 +70,40 @@ Types of events involved in HTML document life cycle are as follows :
 3. beforeunload : when user about to leave a page. Browser will ask something like : "we have unsaved changes…"
 4. unload : when user leaves a page.
 
-## Web socket
-Took below course and summarized essentials. 
-- [NetNinja - ChatApp Ninja](https://www.youtube.com/watch?v=vQjiN8Qgs3c&list=PL-tV1f9Asb4giyEr2-LlLrsEHTkf0Geyr&index=1&t=11s)
+## HTTP caching
+>  For a web site, web caching is a major component in achieving high performance. ... it's important to cache a resource only until it changes, not longer.
 
+> HTTP caching is optional but usually desirable. HTTP caches are **typically limited to** caching responses to the **request method GET**;
+
+> **The performance of web sites** and applications can be significantly improved by reusing previously fetched resources. **Web caches reduce latency and network traffic** and thus lessen the time needed to display resource representations. HTTP caching makes Web sites more responsive.
+
+> For the files in the application that will not change, you can normally **use aggressive caching**. This includes **static files such as images, CSS files, and JavaScript files**.
+
+> When a **web cache** has a requested resource in its store, it **intercepts the request** and returns a copy of the stored resource instead of redownloading the resource from the originating server. ... improves performance by being closer to the client.
+
+<img src="reference/cache-types.jpg"  width=870 height=540 alt="cache types"/> 
+
+- Private browser caches
+> **Dedicated to a single user**. 
+> A browser cache holds all documents the user downloads via HTTP. This cache is used to make visited documents available for back/forward navigation, saving, viewing-as-source, etc. **without requiring an additional trip to the server**.
+
+- Shared proxy caches : 
+> **Dedicated to more than one user**.
+> Example usage : a web proxy as part of its local network infrastructure to serve many users so that popular resources are reused a number of times, **reducing network traffic and latency**.
+
+### Controlling caching
+> The Cache-Control HTTP/1.1 general-header field is used to specify directives for caching mechanisms in both requests and responses. **Use this header to define your caching policies with the variety of directives it provides**.
+
+- Cache-Control: max-age=31536000 : the maximum amount of time in which a resource will be considered fresh. in seconds. 
+- Cache-Control: no-store
+- Cache-Control: no-cache : A cache will send the request to the origin server for validation before releasing a cached copy.
+
+<img src="reference/share-cache-proxy.jpg"  width=822 height=910 alt="client - cache - server"/> 
+
+> The freshness lifetime is calculated based on several headers. If a "Cache-Control: max-age=N" header is specified, the freshness lifetime is equal to N. If this header is not present, which is very often the case, the cache checks whether an Expires header is present. If an Expires header exists, its value minus the value of the Date header determines the freshness lifetime.
+
+
+## Web socket
 1. Websocket is a protocol between client(browser) and server, which is differentiated from HTTP protocol. **Both protocols are at OSI model layer 7 and rely on TCP at layer 4**. Since it is always open and bidirectional flow, it allows us to interact in real time. 
 
 > WebSocket was first referenced as **TCPConnection in the HTML5** specification, as a placeholder for a TCP-based socket API.[9] In June 2008, a series of discussions were led by Michael Carter that resulted in the first version of the protocol known as WebSocket.
@@ -201,4 +231,6 @@ Access-Control-Allow-Origin: null
 - [Wikipedia - WebSocket6](https://en.wikipedia.org/wiki/WebSocket)
 - [MDN Web Docs](https://developer.mozilla.org/en-US/docs/Web/API/Document_Object_Model)
 - [NetNinja - typescript](https://www.youtube.com/watch?v=EpOPR03z4Vw&list=PL4cUxeGkcC9gUgr39Q_yD6v-bSyMwKPUI&index=14&t=1s)
+- [NetNinja - ChatApp Ninja](https://www.youtube.com/watch?v=vQjiN8Qgs3c&list=PL-tV1f9Asb4giyEr2-LlLrsEHTkf0Geyr&index=1&t=11s)
 - [Javascript.info - DOMContentLoaded, load, beforeunload, unload](https://ko.javascript.info/onload-ondomcontentloaded)
+- [MDN web docs - HTTP caching](https://developer.mozilla.org/en-US/docs/Web/HTTP/Caching#targets_of_caching_operations)
