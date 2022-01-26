@@ -15,7 +15,7 @@
     "module": "es2015",                                /* Specify what module code is generated. */
     "rootDir": "./src",                                  /* Specify the root folder within your source files. */
     "outDir": "./public",                                   /* Specify an output folder for all emitted files. */
-    "sourceMap": true,                                /* Create source map files for emitted JavaScript files. */
+    "sourceMap": false,                                /* Create source map files for emitted JavaScript files. */
     // "lib": [],                                        /* Specify a set of bundled library declaration files that describe the target runtime environment. */
     // "jsx": "preserve",                                /* Specify what JSX code is generated. */
     // "experimentalDecorators": true,                   /* Enable experimental support for TC39 stage 2 draft decorators. */
