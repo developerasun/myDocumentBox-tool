@@ -6,14 +6,14 @@ This is a open code box of developerasun, containing the sum of his blood, sweat
 <details>
   <summary>✅Front End</summary>
 
-- myCSS, myHTML, myJavascript, myWebDesign
+- myCSS, myHTML, myJavascript
  
 </details>
 
 <details>
   <summary>✅Backend</summary>
 
-- myJavascript, myUnity
+- myJavascript
  
 </details>
 
@@ -27,7 +27,7 @@ This is a open code box of developerasun, containing the sum of his blood, sweat
 <details>
   <summary>✅Teamwork</summary>
 
-- myCollaboration, myDebugging
+- myCollaboration
  
 </details>
 
@@ -42,7 +42,11 @@ https://user-images.githubusercontent.com/83855174/147634315-666ef3ca-0da4-48b6-
 - useInfiniteQuery
 
 https://user-images.githubusercontent.com/83855174/147634099-17cb1699-6546-4ebe-9cc8-114ebce124e6.mp4
- 
+
+- redux-react 
+  
+https://user-images.githubusercontent.com/83855174/151017399-762dc0b3-4431-4a06-b06b-e621879632a8.mp4
+
 </details>
 
 <details>
@@ -73,7 +77,7 @@ https://user-images.githubusercontent.com/83855174/148397581-6bd6ccef-3d55-4e3a-
 <details>
   <summary>✅Unity</summary>
 
-- Jumping Car
+- [Jumping Car](https://simmer.io/@developerasun/jumpingcar2)
 
 https://user-images.githubusercontent.com/83855174/149626441-13895188-baf7-4561-8b6a-23fd59d67749.mp4
   
