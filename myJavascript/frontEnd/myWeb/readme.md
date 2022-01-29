@@ -102,6 +102,12 @@ Types of events involved in HTML document life cycle are as follows :
 
 > The freshness lifetime is calculated based on several headers. If a "Cache-Control: max-age=N" header is specified, the freshness lifetime is equal to N. If this header is not present, which is very often the case, the cache checks whether an Expires header is present. If an Expires header exists, its value minus the value of the Date header determines the freshness lifetime.
 
+## Stateful and Stateless
+**어플리케이션의 상태(state)는 현재를 기준으로 결정**되며, 상호 작용의 상태가 얼마 동안이나 기록되어져야 하는지에 따라 stateful과 stateless가 결정된다. Stateful과 Stateless 어플리케이션 모두 **클라이언트의 요청을 서버에 저장**하지만 
+
+- stateful - 이전 세션 정보들은 동일한 서버에 저장됨. 온라인 뱅킹과 같이 이전 거래 내역들을 그대로 보관하고 있어야 할 때 사용됨. **오늘날 대부분의 서비스는 stateful의 형태를 취하고 있으나** 최근 컨테이너 기술의 발달로 인해 stateless의 효율성이 증가되고 있는 듯. 서버의 부하가 높은 편. 예시 : TCP, FTP
+
+- stateless - 이전 세션 정보들을 서버에 저장하지 않고 데이터베이스에 저장함. 서버의 부하가 낮은 편.
 
 ## Web socket
 1. Websocket is a protocol between client(browser) and server, which is differentiated from HTTP protocol. **Both protocols are at OSI model layer 7 and rely on TCP at layer 4**. Since it is always open and bidirectional flow, it allows us to interact in real time. 
