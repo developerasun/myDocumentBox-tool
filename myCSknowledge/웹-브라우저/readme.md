@@ -46,9 +46,40 @@
 
 단, Renderer process를 무한정으로 늘릴 수 없으므로(메모리가 제한되어 있기 때문에) 생성할 수 있는 프로세스의 수가 제한되어 있다. 메모리가 한계치에 다다르면 여러 개의 프로세스를 통합하여 하나의 메모리에 재할당하는 작업을 시행하여 기존 아키텍처의 단점을 보완했다. 
 
+## 크롬 브라우저 URL 처리 과정
+Jake는 고양이를 좋아한다. 만약 Jake가 고양이 밈 사진을 찾기 위해 Google에 "cat meme" 검색어를 입력했을 경우, 크롬 브라우저는 이를 어떻게 처리하는지 알아보자. 
+
+### Handling inputs
+Browser process의 UI thread가 유저가 입력한 텍스트 "cat meme"이 1) search query인지 2) URL인지 판단한다. 
+
+- 1)의 경우 search engine으로 해당 쿼리를 전송하고, 
+- 2)의 경우 Network thread에게 URL 값을 전달한다. 
+
+### Start navigation
+1. UI thread가 네트워크 콜을 시작한 후, loading spinner를 탭 왼쪽에 생성한다. 
+2. Network thread가 DNS와 TLS에 연결하여 서버 호스트 서치 및 보안 체크를 실시한다. 
+3. HTTP 301 응답이 올 경우, UI thread에게 redirect 시그널을 전달하고 UI thread는 새로운 네트워크 콜을 전송한다. 
+4. Redirect 응답이 아닐 경우, 하단 Read response 단계로 넘어간다. 
+
+> The HyperText Transfer Protocol **(HTTP) 301 Moved Permanently** redirect status response code indicates that the **requested resource has been definitively moved** to the URL given by the Location headers. A browser redirects to the new URL and search engines update their links to the resource.
+
+### Read response
+1. Network thread는 **서버의 response에서 header 값을 확인**하여 일차적으로 **content-type을 체크**한다. 추가적으로, 좀 더 정확한 type 체크를 위해 **MIME type sniffing**을 실시한다. 
+
+이는 **content-type에 따라서 다음 스텝이 달라지기 때문**인데, 1) **HTML** 형식의 경우 safe browsing 및 CORB 체크를 거친 이후  **Renderer 프로세스**에게 파일을 전달하며 2) **HTML 형식이 아닐** 경우(.zip 또는다른 형식) **Download 매니저**에게 파일을 전달한다. 
+
+
+
+
+2. 
+3. 
+4. 
+5. 
+6. 
 ## 레퍼런스
 - [Inside look at modern web browser](https://developers.google.com/web/updates/2018/09/inside-browser-part1)
 - [프로세스와 쓰레드 : CS 기본기](https://youtu.be/T2WqQcqssoE)
 - [멀티 프로세스 브라우저의 아키텍처](https://youtu.be/Nzjnbr7krQM)
 - [크롬 브라우저 아키텍처의 이해](https://youtu.be/L5K5B7W50Iw)
 - [브라우저와 URL, 그리고 유저](https://youtu.be/ipwfEUslfQA)
+- [Mozilla Web Docs : HTTP response status code](https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/301)
