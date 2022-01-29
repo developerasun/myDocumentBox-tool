@@ -1,6 +1,21 @@
 # My Open Code Box
 This is a open code box of developerasun, containing the sum of his blood, sweat, and tears. The list is as follows :  
 
+## Convention
+<details>
+  <summary>✅Commit</summary>
+
+- feat: functionality added
+- fix: bug fixed, minor changes
+- chore: installing npms and other chores
+- refactor: refactoring existing codes
+- docs: readme and other markdowns
+</details>
+
+## Working on
+- Currently focusing on : React, Typescript, Redux
+- Should work on : regular expression
+
 ## Inputs
 
 <details>
@@ -28,6 +43,13 @@ This is a open code box of developerasun, containing the sum of his blood, sweat
   <summary>✅Teamwork</summary>
 
 - myCollaboration
+ 
+</details>
+
+<details>
+  <summary>✅Computer Science</summary>
+
+- myCSknowledge
  
 </details>
 
