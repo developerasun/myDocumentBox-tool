@@ -46,7 +46,7 @@ LAN에 참여하는 **네트워크 기기들의 통신 방법**을 정해놓은 
 <details>
     <summary>Ethernet 종류(펼쳐보기)</summary>
 
-<img src="./ethernet.jpg" width=1000px height=600px/>
+<img src="reference/ethernet.jpg" width=1000px height=600px/>
 
 - Fast Ethernet - **구리 재질** Ethernet 케이블(초당 100 메가 비트 데이터 전송 속도)
 - Gig Ethernet - **광섬유 재질** Ethernet 케이블 (초당 10억 비트 데이터 전송 속도. 엔터프라이즈용 네트워크에 주로 사용됨)
@@ -65,7 +65,7 @@ LAN에 참여하는 **네트워크 기기들의 통신 방법**을 정해놓은 
 ### WAN 프로토콜
 LAN보다 훨씬 큰 크기의 네트워크에서 기기들의 통신 방법을 정해놓은 규약. **광역 통신망 WAN은 서로 다른 지역의 근거리 통신망 유저들이 통신**하도록 도와주는 역할을 한다. LAN과 WAN의 상관 관계는 아래와 같다.
 
-<img src="./LAN-WAN.jpg" width=800px height=600px alt="LAN과 WAN" />
+<img src="reference/LAN-WAN.jpg" width=800px height=600px alt="LAN과 WAN" />
 
 <details>
     <summary>영역별 네트워크 종류(펼쳐보기)</summary>
@@ -97,12 +97,12 @@ WAN 프로토콜 종류에 대해서는 다루는 내용의 범위가 필요 이
 <details>
     <summary>라우터 작동 원리(펼쳐보기)</summary>
 
-<img src="./라우터.jpg" width=600px height=400px alt="라우터 최단 경로 설정" />
+<img src="reference/라우터.jpg" width=600px height=400px alt="라우터 최단 경로 설정" />
 </details>
 
 4. NIC - Network Interface Card. 컴퓨터 내에 **네트워크 통신을 위해 설치된 하드웨어 카드**. 네트워크 케이블과 연결할 **포트를 하나 이상 제공**하고, 컴퓨터 역시 네트워크 어댑터를 컨트롤 하기 위한 드라이버를 제공한다.
 
-<img src="./network-cart-interface.jpg" width=300 height=300 alt="네트워크 인터페이스 카드" />
+<img src="reference/network-cart-interface.jpg" width=300 height=300 alt="네트워크 인터페이스 카드" />
 
 ### 네트워크 토폴로지
 **토폴로지(망 구성 방식)란 컴퓨터 네트워크를 연결해놓은 방식**을 의미한다. LAN의 경우 물리적/논리적 토폴로지 둘 다 보여줄 수 있다. 
@@ -110,174 +110,153 @@ WAN 프로토콜 종류에 대해서는 다루는 내용의 범위가 필요 이
 - 물리적 토폴로지 : 링크와 노드들의 상관 관계
 - 논리적 토폴로지 : 노드끼리의 데이터 흐름
 
-<img src="./토폴로지.png" width=500px height=300px alt="토폴로지 종류" />
+<img src="reference/토폴로지.png" width=500px height=300px alt="토폴로지 종류" />
 
 ### 토폴로지 종류
-1. Bus - 모든 컴퓨터와 주변 기기가 하나의 케이블로 연결되고 2개의 엔드포인트를 가짐. 하나의 메인 케이블로 연결되어 있기 때문에 지점 A의 데이터를 지점 D에게 보내기 위해서는 B,C를 거쳐야 한다는 단점이 있음.
-2. Star - 중앙 집권적. 하나의 허브 노드(컴퓨터 또는 서버)가 존재하고 모든 컴퓨터와 주변 기기가 허브로 연결되는 구조. 버스 토폴로지와 다르게 데이터 전송 시 모든 워크스테이션을 거치지 않아도 된다는 장점이 존재.
-3. Ring - 닫힌 루프 구조. 각각의 컴퓨터는 정확히 2개의 이웃 기기와 연결됨.
-4. Mesh - 모든 네트워크 노드가 서로에게 연결되어 있음. Full mesh와 partial mesh 구조로 나뉠 수 있으며, full mesh에서 필요 없는 노드 연결을 끊을 경우 partial mesh 구조로 변함. 
-5. Tree - 하나의 루트 노드가 존재하고, 하위 노드들이 계층 구조를 이룸. 적어도 3개의 계층이 필요함. Star 토폴로지 + Bus 토폴로지
-6. Hybrid - 서로 다른 토폴로지가 합쳐서 새로운 토폴로지를 구성함. 새로운 컴포넌트를 추가해 네트워크의 크기를 키우는 데 유리하며, fault detection/trouble shooting이 용이하다는 장점이 있음.
+1. Bus - 모든 컴퓨터와 주변 기기가 하나의 케이블로 연결되고 2개의 엔드포인트를 가짐. **하나의 메인 케이블로 연결**되어 있기 때문에 지점 A의 데이터를 지점 D에게 보내기 위해서는 B,C를 거쳐야 한다는 단점이 있음.
 
-# IP(Internet Protocol)
-<p>
-인터넷상에서 컴퓨터의 위치를 특정하고 기기 간 데이터를 전송하는 방법을 명시한 통신 규약. 컴퓨터들의 우편 시스템. 주로 TCP 프로토콜과 함꼐 사용되며 인터넷 상 각각의 컴퓨터(호스트)는 적어도 하나의 IP주소를 할당 받게 됨.
-</p>
-<p>
-TCP/IP 프로토콜을 통해 기기 간 통신을 할 경우 IP 주소가 필요함. IP 주소는 4개의 숫자로 구성되고 숫자의 크기에 따라 IPv4/IPv6로 구별됨. IP 패킷을 주고 받는 기기를 IP host라고 부르며, IP 주소를 사람이 알아보기 쉽게 네이밍 하는 역할을 DNS(Domain Name System)가 맡아줌. 
-</p>
-<p>
-각각의 IP 주소가 가지는 의미는 필요 이상의 내용을 담고 있다고 판단, 생략한다. 
-e.g. 클래스 E 주소 : 240.0.0.0.0 ~ 255.255.255.254. 
-</p>
+2. Star - 중앙 집권적. 하나의 허브 노드(컴퓨터 또는 서버)가 존재하고 **모든 컴퓨터와 주변 기기가 허브로 연결**되는 구조. 버스 토폴로지와 다르게 데이터 전송 시 모든 워크스테이션을 거치지 않아도 된다는 장점이 존재.
+
+3. Ring - 닫힌 루프 구조. 각각의 컴퓨터는 정확히 2개의 이웃 기기와 연결됨.
+
+4. Mesh - 모든 네트워크 노드가 서로에게 연결되어 있음. Full mesh와 partial mesh 구조로 나뉠 수 있으며, full mesh에서 필요 없는 노드 연결을 끊을 경우 partial mesh 구조로 변함.
+
+5. Tree - 하나의 루트 노드가 존재하고, 하위 노드들이 계층 구조를 이룸. 적어도 3개의 계층이 필요함. Star 토폴로지 + Bus 토폴로지
+
+6. Hybrid - **서로 다른 토폴로지가 합쳐서 새로운 토폴로지를 구성**함. 새로운 컴포넌트를 추가해 네트워크의 크기를 키우는 데 유리하며, fault detection/trouble shooting이 용이하다는 장점이 있음.
+
+### IP(Internet Protocol)
+인터넷상에서 **컴퓨터의 위치를 특정**하고 **기기 간 데이터를 전송**하는 방법을 명시한 통신 규약. **컴퓨터들의 우편 시스템**. 주로 TCP 프로토콜과 함꼐 사용되며 인터넷 상 각각의 컴퓨터(호스트)는 적어도 하나의 IP주소를 할당 받게 됨.
+
+TCP/IP 프로토콜을 통해 기기 간 통신을 할 경우 IP 주소가 필요함. **IP 주소는 4개의 숫자로 구성되고 숫자의 크기에 따라 IPv4/IPv6로 구별**됨. IP 패킷을 주고 받는 기기를 **IP host**라고 부르며, IP 주소를 사람이 알아보기 쉽게 네이밍 하는 역할을 DNS(Domain Name System)가 맡아줌. 
+
+각각의 IP 주소가 가지는 의미는 기초 수준 이상의 내용을 담고 있다고 판단 이하 생략함. 
+- e.g. 클래스 E 주소 : 240.0.0.0.0 ~ 255.255.255.254. 
 
 <details>
     <summary>IP 주소란? (펼쳐보기)</summary>
-    네트워크 상에서 특정 컴퓨터 기기를 식별하기 위해 사용되는 주소로, 32비트 4개의 숫자로 이루어져 있다. 각 숫자들은 .(dot)으로 구별한다. 일반적으로 십진수를 사용하는 버전 4, 즉 IPv4가 보편화되어 있으며 0.0.0.0. ~ 255.255.255.255 범위 내에 IP 주소가 존재한다. 일부 번호들은 특정 목적을 위해 선 예약되어 있다. 예를 들어 127.0.0.1의 경우 localhost(로컬 호스트, 루프백(loopback))로 자기 자신을 가리킨다. 32 비트로 모든 단말기의 수를 지정하기 힘들어지자 IPv6에서는 주소 길이를 128비트로 늘리게 되었다. IPv6 예시 -  1050:0000:0000:0000:0005:0600:300c:326b
+
+네트워크 상에서 **특정 컴퓨터 기기를 식별하기 위해 사용되는 주소**로, 32비트 4개의 숫자로 이루어져 있다. 각 숫자들은 .(dot)으로 구별한다. 일반적으로 십진수를 사용하는 버전 4, 즉 **IPv4가 보편화**되어 있으며 0.0.0.0. ~ 255.255.255.255 범위 내에 IP 주소가 존재한다. 
+
+- 존재 가능한 IPv4 주소 개수 : 2^32 => 4,294,967,296개(43억개)
+
+일부 번호들은 특정 목적을 위해 선 예약되어 있다. 예를 들어 127.0.0.1의 경우 localhost(로컬 호스트, 루프백(loopback))로 자기 자신을 가리킨다. **32 비트로 모든 단말기의 수를 지정하기 힘들어지자 IPv6에서는 주소 길이를 128비트로 늘리게 되었다**. 
+
+- IPv6 예시 -  1050:0000:0000:0000:0005:0600:300c:326b
+> IPv6 uses 128-bit (2128) addresses, allowing 3.4 x 1038 unique IP addresses. This is equal to 2^128, 340 trillion trillion trillion IP addresses.
+
 </details>
 
-<span><b>터미널 명령어로 IP 주소 확인하기</b></span><br/>
-```
-ipconfig
-```
-<img src="./ip-확인.png" width=700px height=400px/>
+자기 자신의 PC IP 주소는 아래의 명령어로 확인할 수 있다(Windows 기준)
 
-# TCP/IP
-<p>
-TCP/IP 크게 1) HTTP 2) HTTPS 3) FTP 3가지로 구성되어 있다. HTTPS와 달리 HTTP는 보안상 검증된(secure) 데이터 전송을 지원하지 않는다. HTTPS의 경우 웹 사이트-웹서버간의 인증(authentication)을 지원해 HTTP에 security를 의미하는 s를 덧붙여 HTTPS 라고 명칭한다. 
-</p>
-<p>
-FTP(File Transfer Protocol)는 2개 이상의 컴퓨터 기기 사이에서 데이터를 주고 받는 방법을 명시한 프로토콜이다. 클라이언트<->서버 아키텍쳐를 차용하며, SSL/TLS와 같은 보안을 활용한다. 
-</p>
+```shell
+$ipconfig
+```
+
+<img src="reference/ip-확인.png" width=700px height=400px alt="윈도우 운영체제 IP 확인" />
+
+### TCP/IP
+TCP/IP 크게 1) HTTP 2) HTTPS 3) FTP 3가지로 구성되어 있다. HTTPS와 달리 HTTP는 보안상 검증된(secure) 데이터 전송을 지원하지 않는다. **HTTPS의 경우 웹 사이트-웹서버간의 인증(authentication)을 지원해 HTTP에 security를 의미하는 s를 덧붙여 HTTPS** 라고 명칭한다. 
+
+<img src="reference/website-ssl-tls-certificate.png" width=403 height=345 alt="웹사이트 SSL/TLS 확인" />
+
+FTP(File Transfer Protocol)는 2개 이상의 **컴퓨터 기기 사이에서 데이터를 주고 받는 방법**을 명시한 프로토콜이다. **클라이언트<=>서버 아키텍쳐**를 차용하며, **SSL/TLS**와 같은 보안을 활용한다.
 
 <details>
-    <summary>SSL/TLS란? (펼쳐보기)</summary>
-    SSL, 즉 Secure Socket Layer은 옛 명칭으로 현재는 TLS, Transport Layer Security로 정식 명칭이 바뀌었다. 웹 브라우저와 웹 서버 간의 암호화 통신을 위해 TCP/IP 계층에서 동작하는 프로토콜을 의미하며 아래와 같은 역할을 수행한다. 
+    <summary>SSL/TLS이란? (펼쳐보기)</summary>
 
-<li>인증</li>
-<li>암호화</li>
-<li>변조 방지</li>
+SSL, 즉 **Secure Socket Layer**은 옛 명칭으로 현재는 TLS, **Transport Layer Security**로 정식 명칭이 바뀌었다. **웹 브라우저와 웹 서버 간의 암호화 통신**을 위해 TCP/IP 계층에서 동작하는 프로토콜을 의미하며 아래와 같은 역할을 수행한다. 
+
+- 인증, 암호화, 변조 방지
 </details>
 
-## TCP와 UDP의 비교
-UDP(User Datagram Protocol)의 경우 패킷 전송 시 손실된 패킷을 무시하고 전송하므로 TCP보다 전송률이 좋다는 장점이 있다. 따라서 소량의 패킷 손실이 치명적이지 않은 스트리밍 서비스, 실시간 방송 등에 사용된다. 단순한 요청-응답 통신을 필요로 하는 곳에 적합하며 3 handshake 과정을 거치지 않는다.  
+### TCP와 UDP의 비교
+UDP(User Datagram Protocol)의 경우 패킷 전송 시 **손실된 패킷을 무시하고 전송하므로 TCP보다 전송률이 좋다**는 장점이 있다. 따라서 소량의 패킷 손실이 치명적이지 않은 **스트리밍 서비스, 실시간 방송** 등에 사용된다. 단순한 요청-응답 통신을 필요로 하는 곳에 적합하며 3 handshake 과정을 거치지 않는다.  
 
-## TCP dump
-네트워크와 이더넷의 이상 유무를 체크하기 위해 패킷 헤더를 체크하고 기준에 부합하는지 확인하는 오픈 소스 CLI 툴. 주로 유닉스 운영체제에서 호환되며 윈도우에서는 Windump로 대체 사용. 네트워크 상의 모든 기기는 유니크한 IP 주소를 가지고 있고 이 IP 주소를 통해 자원이 전달됨.  
+### TCP dump
+**네트워크와 이더넷의 이상 유무를 체크하기 위해 패킷 헤더를 체크**하고 기준에 부합하는지 확인하는 오픈 소스 CLI 툴. 주로 유닉스 운영체제에서 호환되며 윈도우에서는 Windump로 대체 사용. 네트워크 상의 모든 기기는 유니크한 IP 주소를 가지고 있고 **이 IP 주소를 통해 자원이 전달**됨.  
 
 <details>
     <summary>ICMP란? (펼쳐보기)</summary>
-    인터넷 제어 메세지 프로토콜(ICMP)이란 Internet Control Message Protocol의 줄임말으로 IP 상에서 통신이 비정상적으로 종료될 경우(호스트가 꺼져 있거나, 선이 끊겨 있거나), 출발지 호스트에게 오류/에러 메세지를 전송하는 데 주로 사용된다. 인터넷 프로토콜(IP)의 주요 구성원 중 하나로 IP에 의존하여 작업을 수행한다. 
 
-[좀 더 자세히 알아보기](http://www.deadfire.net/tcpip/tcpip16.html)
+인터넷 제어 메세지 프로토콜(ICMP)이란 Internet Control Message Protocol의 줄임말으로 **IP 상에서 통신이 비정상적으로 종료**될 경우(호스트가 꺼져 있거나, 선이 끊겨 있거나), 출발지 호스트에게 **오류/에러 메세지를 전송**하는 데 주로 사용된다. 인터넷 프로토콜(IP)의 주요 구성원 중 하나로 IP에 의존하여 작업을 수행한다. 
+
+- [좀 더 자세히 알아보기](http://www.deadfire.net/tcpip/tcpip16.html)
 </details>
 
-# 라우터
-라우터는 네트워크 기기로, 하나의 네트워크가 또 다른 네트워크를 만나는 지점에 위치하여 네트워크들을 연결하고 전달하려는 패킷을 보낼 최적의 루트를 찾으려 노력한다. 무선 라우터(와이파이)의 경우 모뎀에 선을 연결하지 않고도 기기를 네트워크에 연결시켜 준다. 해당 라우터에 설정한 비밀번호를 바르게 입력한 기기들은 모두 네트워크 이용이 가능하다. 흔히 가정에서 사용하는 공유기는 라우터의 기능 중 일부를 특화시켜 인터넷 사용이 가능하도록 만든 기기이다.
+### 라우터
+**라우터는 네트워크 기기**로, 하나의 네트워크가 또 다른 네트워크를 만나는 지점에 위치하여 **네트워크들을 연결하고 전달하려는 패킷을 보낼 최적의 루트를 찾으려 노력**한다. 무선 라우터(와이파이)의 경우 모뎀에 선을 연결하지 않고도 기기를 네트워크에 연결시켜 준다. 해당 라우터에 설정한 비밀번호를 바르게 입력한 기기들은 모두 네트워크 이용이 가능하다. 흔히 가정에서 사용하는 **공유기는 라우터의 기능 중 일부를 특화시켜 인터넷 사용이 가능하도록 만든 기기**이다.
 
-## 라우팅
-라우팅이란 네트워크 상에서 데이터 패킷을 출발지에서 도착지로 보내는 프로세스를 의미한다.
+#### 라우팅
+라우팅이란 네트워크 상에서 데이터 **패킷을 출발지에서 도착지로 보내는 프로세스**를 의미한다.
 
-<li>디폴트 라우팅 - 모든 라우터를 단일 라우터로 보내도록 구성</li>
-<li>정적 라우팅 - 라우팅 테이블의 경로를 수동으로 추가 </li>
-<li>동적 라우팅 - 라우팅 테이블의 경로를 자동으로 조정. 하나의 경로가 다운되면 네트워크 대상에 도달되도록 자동으로 조정됨. </li>
+- 디폴트 라우팅 : 모든 라우터를 단일 라우터로 보내도록 구성
+- 정적 라우팅 : 라우팅 테이블의 경로를 수동으로 추가
+- 동적 라우팅 : 라우팅 테이블의 경로를 자동으로 조정. 하나의 경로가 다운되면 네트워크 대상에 도달되도록 자동으로 조정됨. 
 
-<details>
-    <summary>라우터와 네트워크 (펼쳐보기)</summary>
-    <img src="./라우터-네트워크.jpg" width=400px height=400px/>
+<img src="reference/라우터-네트워크.jpg" width=400px height=400px/>
 
-[무선 라우터 검색 - 쿠팡](https://www.coupang.com/np/search?component=&q=%EB%AC%B4%EC%84%A0+%EB%9D%BC%EC%9A%B0%ED%84%B0&channel=user)
+### Access control 프로토콜
+라우터 업데이트, 트래픽 흐름 관리, 네트워크 접근 설정 관리 등을 정해놓은 규약. 네트워크 보안 유지를 위해 설정하며 **어떤 아이피, 즉 어떤 호스트에게 네트워크 접근을 허용할 것인지** 설정함.  
 
-[참고 기사 Modem vs Router(영문)](https://www.cnet.com/home/internet/modem-vs-router-whats-the-difference/)
-</details>
-
-## Access contrl 프로토콜
-라우터 업데이트, 트래픽 흐름 관리, 네트워크 접근 설정 관리 등을 정해놓은 규약. 네트워크 보안 유지를 위해 설정하며 어떤 아이피, 즉 어떤 호스트에게 네트워크 접근을 허용할 것인지 설정함.  
-
-# 물리적 보안(Pysical security)
+### 물리적 보안(Pysical security)
 도난, 화재, 침수 등을 방지하기 위한 기기 및 데이터 보안의 첫 번째 출발선. 
 
 <li>자연 발생적 위험 - 지진, 화재 등</li>
 <li>인위적 위험 - 도난, 부주의로 인한 손상 등 : CCTV, 지문 인식, 외부인 출입 금지 등으로 대응 </li>
 
-# 심층 방어(Defense in depth)
+### 심층 방어(Defense in depth)
 기업의 정보 자산을 보호하기 위한 다수의 보안 대책을 복합적으로 사용하는 것을 의미. 여러 보안 레이어를 섞어 사용함으로써 보안성을 높임. 
 
-## 계층 보안 (Layered security)
-다수의 보안 레이어(A, B, C ....)를 만들어 중요한 정보를 보호하는 방식. 각 레이어 간 상호 작용하며 보안성을 지키는데 기여함.  해커(공격자)의 경우 레이어 A,B,C ... 를 모두 돌파해야 정보를 탈취할 수 있음. 계층보안 전략은 정보 자산을 지키는 데 중요한 역할을 함. 
+### 계층 보안 (Layered security)
+다수의 보안 레이어(A, B, C ....)를 만들어 중요한 정보를 보호하는 방식. 각 레이어 간 상호 작용하며 보안성을 지키는데 기여함. **해커(공격자)의 경우 레이어 A,B,C ... 를 모두 돌파해야 정보를 탈취할 수 있음**. 계층보안 전략은 정보 자산을 지키는 데 중요한 역할을 함. 
 
-# 위험 모델(Risk model)
-보안상 위험 요소들을 그 위험 정도에 따라 분류하고, 해당 위험으로 인해 발생한 미래 결과(주로 경제적 수치로 표시)를 예상하는 작업.
+### 위험 모델(Risk model)
+보안상 위험 요소들을 그 위험 정도에 따라 분류하고, 해당 위험으로 인해 발생할 미래 결과(주로 경제적 수치로 표시)를 예상하는 작업.
 
-[위험 모델 더 알아보기(영문)](https://www.bitsight.com/blog/cyber-security-risk-modeling)
-
-
-# 인증(Authentification)과 권한 부여(Authorization)
+### 인증(Authentification)과 권한 부여(Authorization)
 유저 네임과 패스워드를 통해 유저를 식별하는 작업.
 
-<li> 인증 : Who are you?</li>
-<li> 권한 부여 : What can you do?</li>
+ - 인증 : Who are you?
+ - 권한 부여 : What can you do?
 
-# 암호화(Encryption)
+### 암호화(Encryption)
+- SSH(Secure Shell) : 암호학적 네트워크 프로토콜 중 하나이다. 주로 시스템 관리자가 보안화가 되지 않은 네트워크의 **호스트에게 안전하게 접속할 수단을 제공**하고, **원격으로 시스템/어플리케이션을 조작**할 수 있도록 도와준다. 클라이언트(세션 표시) - 서버(세션 실행) 모델을 사용한다.
 
-<details>
-    <summary>SSH란 무엇인가? (펼쳐보기)</summary>
-    SSH(Secure Shell)이란 암호학적 네트워크 프로토콜 중 하나이다. 주로 시스템 관리자가 보안화가 되지 않은 네트워크의 호스트에게 안전하게 접속할 수단을 제공하고, 원격으로 시스템/어플리케이션을 조작할 수 있도록 도와준다. 클라이언트(**세션** 표시) - 서버(세션 실행) 모델을 사용한다.
-<br/>
-<img src="./ssh.gif" width=640px height=250px/>
-</details>
+<img src="reference/ssh.gif" width=640px height=250px alt="ssh 프로토콜 클라이언트와 서버" />
 
-<details>
-    <summary>로그인 세션이란 무엇인가? (펼쳐보기)</summary>
-    세션이란 특정 시간 동안 벌어지는 일련의 작업들을 일컫는다. 로그인 세션은 유저 로그인 ~ 유저 로그아웃시 벌어지는 일련의 작업들을 지칭한다. 
+- 로그인 세션 : 세션이란 특정 시간 동안 벌어지는 일련의 작업들을 일컫는다. **로그인 세션은 유저 로그인 ~ 유저 로그아웃시 벌어지는 일련의 작업**들을 지칭한다. 
 
-    [로그인 세션](https://velog.io/@junhok82/%EB%A1%9C%EA%B7%B8%EC%9D%B8%EC%9D%80-%EC%96%B4%EB%96%BB%EA%B2%8C-%EC%9D%B4%EB%A3%A8%EC%96%B4%EC%A7%88%EA%B9%8CCookie-Session) 
-</details> 
-
-<details>
-    <summary>Stateful과 Stateless란 무엇인가? (펼쳐보기)</summary>
-    어플리케이션의 상태(state)는 현재를 기준으로 결정되며, 상호 작용의 상태가 얼마 동안이나 기록되어져야 하는지에 따라 stateful과 stateless가 결정된다. Stateful과 Stateless 어플리케이션 모두 클라이언트의 요청을 서버에 저장하지만 
-
-<li>stateful - 이전 세션 정보들은 동일한 서버에 저장됨. 온라인 뱅킹과 같이 이전 거래 내역들을 그대로 보관하고 있어야 할 때 사용됨. 오늘날 대부분의 서비스는 stateful의 형태를 취하고 있으나 최근 컨테이너 기술의 발달로 인해 stateless의 효율성이 증가되고 있는 듯. 서버의 부하가 높은 편. 예시 : TCP, FTP</li>
-<li>stateless - 이전 세션 정보들을 서버에 저장하지 않고 데이터베이스에 저장함. 서버의 부하가 낮은 편. </li>
-</details>
-
-<details>
-    <summary>데이터베이스와 서버는 어떻게 다른가? (펼쳐보기)</summary>
-    데이터베이스는 백엔드 데이터를 모아서 가공하는 소프트웨어이며 서버는 네트워크 상에서 자원을 관리하며 중앙화된 저장 공간을 제공하는 하드웨어이다. 
-
-<img src="./server-database.png" width=600px height=400px/> <br/>
-
-[참고 아티클 (영문)](https://anydifferencebetween.com/difference-between-database-and-server/)
-</details>
-
-# 컴퓨터 보안 정책
+### 컴퓨터 보안 정책
 네트워크 접속시 지켜야 할 정책들을 의미함.
 
-<li>유저 정책 : 비밀 번호 정책, 모뎀 사용 제한 등</li>
-<li>IT 정책 : IT 부서들이 지켜야할 일반 정책들을 의미함. e.g : 백업 정책, 유저 공지 정책, 방화벽 정책(사용 가능 포트 구분 및 제한)</li>
-<li>일반 정책</li>
+- 유저 정책 : 비밀 번호 정책, 모뎀 사용 제한 등
+- IT 정책 : IT 부서들이 지켜야할 일반 정책들을 의미함. e.g : 백업 정책, 유저 공지 정책, 방화벽 정책(사용 가능 포트 구분 및 제한)
+- 일반 정책
 
 <details>
     <summary>스코프란? (펼쳐보기)</summary>
-    Scope란 정책이 적용되는 범위를 의미하며, 적용되는 범위와 되지 않는 범위에 대한 불확실성을 제거해야 한다. e.g : acceptable use policy, disaster recovery policy
+
+Scope란 정책이 적용되는 범위를 의미하며, **적용되는 범위와 되지 않는 범위에 대한 불확실성을 제거**해야 한다. e.g : acceptable use policy, disaster recovery policy
 </details>
 
-# 비밀번호 관리
-비밀번호는 계층 보안의 시작점과도 같으므로 올바른 비밀번호 정책의 마련과 여러 개의 계정을 하나의 비밀번호로 통일하지 않는 등과 같은 조치가 필요하다. 비밀 번호 해킹은 매칭되는 결과가 있을 때까지 계속 시도하는 brutal force 방식 등이 이용된다. 
+### 비밀번호 관리
+**비밀번호는 계층 보안의 시작점**과도 같으므로 올바른 비밀번호 정책의 마련과 여러 개의 계정을 하나의 비밀번호로 통일하지 않는 등과 같은 조치가 필요하다. 비밀 번호 **해킹은 매칭되는 결과가 있을 때까지 계속 시도하는 brutal force** 방식 등이 이용된다. 
 
-## 인증 방식
-### 토큰 인증
-유저 네임과 비밀번호를 입력 => 일정 기간 후 사라지는 토큰 발급 => 토큰 사용 및 웹 사이트 접근 및 이용 
-### 신체 인증
-지문 인식이 가장 대표적. 
-### 홍체 인증
-망막의 혈관 패턴을 식별자로 삼고 패턴 매칭이 될 경우 인증이 성공함. 복제가 어렵다는 장점이 있으므로 핵 원자로, 군사 시설 등 높은 보안이 요구되는 곳에 사용됨. 
+#### 인증 방식
+1. 토큰 인증 : 유저 네임과 비밀번호를 입력 => 일정 기간 후 사라지는 토큰 발급 => 토큰 사용 및 웹 사이트 접근 및 이용 
+2. 신체 인증 : 지문 인식이 가장 대표적. 
+3. 홍채 인증 : 망막의 혈관 패턴을 식별자로 삼고 패턴 매칭이 될 경우 인증이 성공함. **복제가 어렵다는 장점**이 있으므로 **핵 원자로, 군사 시설** 등 높은 보안이 요구되는 곳에 사용됨. 
+4. 통합 인증 (Single sign-on, single log out) : **하나**의 아이디와 비밀 번호로 **여러 곳**의 어플리케이션에 로그인.로그아웃을 하는 방식.
 
-## 통합 인증 (Single sign-on, single log out)
-**하나**의 아이디와 비밀 번호로 **여러 곳**의 어플리케이션에 로그인.로그아웃을 하는 방식. e.g : 구글
+<details>
+    <summary>데이터베이스와 서버는 어떻게 다른가? (펼쳐보기)</summary>
 
+**데이터베이스는 백엔드 데이터를 모아서 가공하는 소프트웨어**이며 **서버는 네트워크 상에서 자원을 관리하며 중앙화된 저장 공간을 제공**하는 하드웨어이다. 
+
+<img src="reference/server-database.png" width=600px height=400px alt="client, server, and database"/>
+
+</details>
 
 ## Neso academy - 컴퓨터 네트워크 개론
 강좌 전체 내용은 아래 링크에서 찾아볼 수 있음. 
@@ -287,4 +266,7 @@ UDP(User Datagram Protocol)의 경우 패킷 전송 시 손실된 패킷을 무�
 
 ## 레퍼런스
 - [Wikipedia : Wi-Fi](https://en.wikipedia.org/wiki/Wi-Fi)
-- 
+- [Cnet : modem-vs-router-whats-the-difference (Eng)](https://www.cnet.com/home/internet/modem-vs-router-whats-the-difference/)
+- [위험 모델 더 알아보기(영문)](https://www.bitsight.com/blog/cyber-security-risk-modeling)
+- [로그인 세션](https://velog.io/@junhok82/%EB%A1%9C%EA%B7%B8%EC%9D%B8%EC%9D%80-%EC%96%B4%EB%96%BB%EA%B2%8C-%EC%9D%B4%EB%A3%A8%EC%96%B4%EC%A7%88%EA%B9%8CCookie-Session) 
+- [difference-between-database-and-server (Eng)](https://anydifferencebetween.com/difference-between-database-and-server/)
