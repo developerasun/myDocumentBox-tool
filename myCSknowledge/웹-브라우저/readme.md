@@ -66,18 +66,37 @@ Browser process의 UI thread가 유저가 입력한 텍스트 "cat meme"이 1) s
 ### Read response
 1. Network thread는 **서버의 response에서 header 값을 확인**하여 일차적으로 **content-type을 체크**한다. 추가적으로, 좀 더 정확한 type 체크를 위해 **MIME type sniffing**을 실시한다. 
 
-이는 **content-type에 따라서 다음 스텝이 달라지기 때문**인데, 1) **HTML** 형식의 경우 safe browsing 및 CORB 체크를 거친 이후  **Renderer 프로세스**에게 파일을 전달하며 2) **HTML 형식이 아닐** 경우(.zip 또는다른 형식) **Download 매니저**에게 파일을 전달한다. 
+이는 **content-type에 따라서 다음 스텝이 달라지기 때문**인데, 
 
+2. 1) **HTML** 형식의 경우 safe browsing 및 CORB 체크를 거친 이후  **Renderer 프로세스**에게 파일을 전달하며 2) **HTML 형식이 아닐** 경우(.zip 또는다른 형식) **Download 매니저**에게 파일을 전달한다. 
 
+> This is also where the SafeBrowsing check happens. If the domain and the response data seems to match a known malicious site, then the network thread alerts to display a warning page. Additionally, Cross Origin Read Blocking (CORB) check happens in order to make sure sensitive cross-site data does not make it to the renderer process.
 
+<details>
+<summary>Safe browing이란? (펼쳐보기)</summary>
 
-2. 
-3. 
-4. 
-5. 
-6. 
+> Google Safe Browsing **shows warnings** to users when they attempt to navigate **to dangerous sites or download dangerous files**. Safe Browsing also notifies webmasters when their websites are compromised by malicious actors and helps them diagnose and resolve the problem so that their visitors stay safer. **Safe Browsing protections work across Google products** and power safer browsing experiences across the Internet.
+</details>
+
+<details>
+<summary>CORB란? (펼쳐보기)</summary>
+
+> **Cross-Origin Read Blocking**, or CORB, is a new security feature that prevents the contents of balance.json from ever entering the memory of the renderer process memory based on its MIME type.
+</details>
+
+### Find Renderer Process
+> Once all of the checks are done and **Network thread is confident that browser should navigate to the requested site**, the Network thread tells UI thread that the data is ready. UI thread then finds a renderer process **to carry on rendering of the web page**.
+
+<img src="./network-thread-check-done.png" width=865 height=504 alt="네트워크 쓰레드와 UI 쓰레드">
+
+### Commit navigation
+> Now that the data and the renderer process is ready, **an IPC is sent from the browser process to the renderer process** to commit the navigation. It also passes on the data stream so the renderer process can keep receiving HTML data. Once the browser process hears confirmation that **the commit has happened in the renderer process, the navigation is complete** and the document loading phase begins.
+
+<img src="./IPC-browser-renderer-process.png" width=865 height=504 alt="브라우저와 렌더러 프로세스 간 통신" />
+
 ## 레퍼런스
-- [Inside look at modern web browser](https://developers.google.com/web/updates/2018/09/inside-browser-part1)
+- [Inside look at modern web browser - part 1](https://developers.google.com/web/updates/2018/09/inside-browser-part1)
+- [Inside look at modern web browser - part 2](https://developers.google.com/web/updates/2018/09/inside-browser-part2)
 - [프로세스와 쓰레드 : CS 기본기](https://youtu.be/T2WqQcqssoE)
 - [멀티 프로세스 브라우저의 아키텍처](https://youtu.be/Nzjnbr7krQM)
 - [크롬 브라우저 아키텍처의 이해](https://youtu.be/L5K5B7W50Iw)
