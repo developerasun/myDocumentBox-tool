@@ -263,6 +263,73 @@ Scope란 정책이 적용되는 범위를 의미하며, **적용되는 범위와
 
 - [Neso academy - Computer network (ENG)](https://www.udemy.com/course/networking-concepts-for-beginners/learn/lecture/6060530?start=15#overview)
 
+### 네트워크의 이해
+컴퓨터 네트워크란 **데이터를 주고 받는 것이 가능한 기기(Node)**들이 모종의 **연결(communication links or media)**을 통해 이루어진 **결합**을 말한다. 여기서 Node란 컴퓨터, 프린터 등 데이터 통신이 가능한 모든 기기를 의미한다. 
+
+노드 간의 연결은 1) 유선 또는 2) 무선으로 진행된다. 아래 그림에서 알 수 있듯, 네트워크 기기들은 데이터 유통 단계에 따라 intermidiary node, end device 등으로 구분할 수 있다. 
+
+<img src="reference/network-example.png" width=923 height=399 alt="network example" />
+
+|End devices|Intermediary nodes|
+|:---------:|:----------------:|
+|Desktop    |Switch            |
+|Smartphone |Wireless router,  |
+|Tablet     |Router, internet cloud |
+|Printer    |Modem             |
+|Web server |cell tower        |
+
+이와 같은 **네트워크는 자원의 공유를 목적**으로 만들어진다. 
+
+### 컴퓨터 네트워크의 특성
+모든 컴퓨터 네트워크는 다음과 같은 4가지의 기본 특성을 가져야 한다.
+
+- Fault tolerance : 네트워크 내에서 어떤 실패/오류가 발생하더라도 1) 네트워크 자체는 **지속해서 동작**해야 하며, 2) 서비스의 중단이 없어야 한다.  
+- Scalability : 네트워크는 1) 필요에 따라 **확장이 가능**해야 하며, 2) 확장 이후의 퍼포먼스가 보장되어야 한다. 
+- Quality of Service(QoS) : 네트워크는 데이터의 우선 순위를 설정해 **중요한 데이터를 선처리**할 수 있어야 한다. e.g => VoIP(리얼타임) 데이터 > 이메일 데이터 
+- Security : 네트워크는 비인가된 접근을 금지하고, 데이터 위조를 방지할 수 있어야 한다. 이를 위해 초기 전송된 데이터는 해커가 알아볼 수 없고, **송/수신자만이 이해할 수 있도록 전환되어 전송**되어야 한다. 
+
+<details>
+<summary>VoIP 휴대폰이란?(펼쳐보기)</summary>
+
+> A VoIP phone is a kind of **telephone that uses IP technology to transmit calls**. It can come either in the form of specialized digital hardware or a program (running on a computer or mobile device) that performs the same functions.
+
+> With its microphone and receiver, **a VoIP telephone takes the sound you generate and converts it into packets of data**, which it sends over the network and out through the internet. On the other end, the phone decompresses the data and plays it back for the other person to hear.
+</details>
+
+### 네트워크 기기의 연결
+**미디어(media)은 네트워크 노드들을 연결**하는 역할을 한다. 미디어의 종류는 1) 유선 2) 무선으로 나뉘어진다. 
+
+#### 유선 미디어(Wired meidum)
+- Ethernet straight-through cable : 서로 다른 네트워크 기기들을 연결
+- Ethernet crossover cable : 서로 같은 네트워크 기기들을 연결
+- Fiber optic cable : 데이터가 light waves의 형태로 전송됨. 유선 미디어 중 가장 빠름. 
+- Coaxial cable : 오디오/비디오 활용에 사용됨. 
+> Coaxial cable is a type of **electrical cable consisting of an inner conductor surrounded by a concentric conducting shield**, with the two separated by a dielectric (insulating material); many coaxial cables also have a protective outer sheath or jacket. The term coaxial refers to the **inner conductor and the outer shield sharing a geometric axis**.
+- USB cable : Universal serial bus. 컴퓨터와 다른 기기를 연결하기 위해 사용됨. 
+
+#### 무선 미디어(Wireless meidum)
+유선 미디어 상에서 네트워크 기기들은 유선 케이블을 통해 데이터를 전송하고 연결된다. 반면, 무선 미디어는 파장(wave)을 이용해 데이터를 전송하고 연결된다. 
+
+- infrared wave(적외선) : TV 리모콘
+- radio wave(전파) : 블루투스, 와이파이(근거리)
+- microwave (전자기파) : 셀룰러(celluar) 시스템(장거리)
+> denoting or relating to **a mobile telephone system** that uses a number of **short-range radio stations** to cover the area that it serves, the signal being automatically switched from one station to another as the **user travels around**.
+- satellite : GPS.
+
+아래 그림 상에서 사용된 케이블 연결은 아래와 같다. 
+- 파란색 사각형 : ethernet straight-through 케이블 (이종 기기 연결)
+- 빨간색 사각형 : ethernet crossover 케이블 (동종 기기 연결)
+- 하얀색 사각형 : radio wave, micro wave 연결. 
+
+<img src="reference/network-wired-wireless-structure.png" width=800 height=400 alt="wired medium and wireless meidum in network" />
+
+<details>
+<sumamry>Bring your own device(BYOD) 정책이란?(펼쳐보기)</summary>
+
+>There are two major contexts in which this term is used. One is in the mobile phone industry, where it refers to carriers allowing customers to activate their existing phone (or other cellular device) on the network, rather than being forced to buy a new device from the carrier.[2][3][4]
+
+> The other, and the main focus of this article, is in the workplace, where it refers to a policy of permitting employees to bring personally owned devices (laptops, tablets, smartphones, etc.) to work, and to use those devices to access privileged company information and applications.[5] This phenomenon is commonly referred to as IT consumerization.[6]
+</details>
 
 ## 레퍼런스
 - [Wikipedia : Wi-Fi](https://en.wikipedia.org/wiki/Wi-Fi)
@@ -270,3 +337,6 @@ Scope란 정책이 적용되는 범위를 의미하며, **적용되는 범위와
 - [위험 모델 더 알아보기(영문)](https://www.bitsight.com/blog/cyber-security-risk-modeling)
 - [로그인 세션](https://velog.io/@junhok82/%EB%A1%9C%EA%B7%B8%EC%9D%B8%EC%9D%80-%EC%96%B4%EB%96%BB%EA%B2%8C-%EC%9D%B4%EB%A3%A8%EC%96%B4%EC%A7%88%EA%B9%8CCookie-Session) 
 - [difference-between-database-and-server (Eng)](https://anydifferencebetween.com/difference-between-database-and-server/)
+- [What is a VoIP Phone and how it works?](https://www.ringcentral.com/what-is-a-voip-phone.html#ring-s-off)
+- [Wikipedia : Coaxial cable](https://en.wikipedia.org/wiki/Coaxial_cable)
+- [Wikipedia : Bring your own device](https://en.wikipedia.org/wiki/Bring_your_own_device)
