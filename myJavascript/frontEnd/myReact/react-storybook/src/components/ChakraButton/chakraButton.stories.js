@@ -16,7 +16,13 @@ Success.args = {
     backgroundColor : 'green',
     color : 'white',
     padding : '20',
-    children : 'Success'
+    children : 'Success', 
 }
 
-export const Danger = () => <Button backgroundColor={'red'} color={'white'} padding={'20'}>Danger</Button>
+export const Danger = Template.bind({})
+Danger.args = {
+    backgroundColor : 'red',
+    color : 'white',
+    padding : '20',
+    children : 'Danger'
+}

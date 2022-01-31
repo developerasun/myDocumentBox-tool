@@ -187,7 +187,6 @@ export const decorators = [
 ]
 ```
 
-
 ### Build Storybook Application
 Run below command to build Storybook.
 
