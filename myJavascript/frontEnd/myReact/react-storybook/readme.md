@@ -161,6 +161,7 @@ export default {
 Or, you can import addDecorator function in preview.js file.
 
 ```js : preview.js
+// version 5
 import { addDecorator } from '@storybook/react'
 import OtherComponentForExtraMarkup from 'some/path/here'
 
@@ -170,8 +171,33 @@ addDecorator((story) =>
 </OtherComponentForExtraMarkup>)
 ```
 
+In Storybook version 6, adding decorators is slightly changed. 
+
+```js
+// ver 6
+export const decorators = [
+  (Story) => (
+    <ThemeProvider theme={theme}>
+      <CSSReset/>
+      <Box m={'4'}>
+        <Story />
+      </Box>
+    </ThemeProvider>
+  )
+]
+```
 
 
+### Build Storybook Application
+Run below command to build Storybook.
+
+```shell
+$npm yarn build-storybook
+```
+
+And then, static website will be generated. 
+
+<img src="../reference/storybook-static.png" width=225 height=311 alt="storybook static web app" />
 
 ## Reference
 - [Storybook.js](https://storybook.js.org/docs/react/writing-stories/args)
