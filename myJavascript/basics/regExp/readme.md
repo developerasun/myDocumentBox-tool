@@ -11,7 +11,7 @@ const firstRegularExpression = /first/
 Or, you can invoke regular expression constructor.
 
 ```js
-const pattern_test_regExp = new RegExp('a'); // create a regular expressioninstance
+const pattern_test_regExp = new RegExp('a'); // create a regular expression instance
 ```
 
 ### Flags
@@ -65,7 +65,7 @@ const unionMatch2 = /human | Jake/
 
 ### Character classes
 > Character classes allow you to define a group of characters you wish to match by placing them inside square ([ and ]) brackets.
-> For example, you want to match bag, big, and bug but not bog. You can create the regex /b[aiu]g/ to do this. z**The [aiu] is the character class** that will only match the characters a, i, or u.
+> For example, you want to match bag, big, and bug but not bog. You can create the regex /b[aiu]g/ to do this. **The [aiu] is the character class** that will only match the characters a, i, or u.
 
 ```js
 const characterClass = /b[aiu]g/ // bag, big, bug
@@ -90,6 +90,50 @@ Then, you can combine both letter and number like below.
 const letterAndNumber = /[a-z0-9]/ // a to z, 0 to 9
 ```
 
+#### Shorthand character classes
+> The closest character class in JavaScript to match the alphabet is \w. This shortcut is equal to [A-Za-z0-9_]. This character class matches upper and lowercase letters plus numbers(alphanumerics). Note, this character class also includes the underscore character (_).
+
+```js
+const alphabet = /\w+$/ // shorthand for [A-Za-z0-9_]
+const sentence = "Pat the cute cat"
+sentence.match(alphabet) // cat
+```
+
+> A natural pattern you might want to search for is the opposite of alphanumerics. You can search for the opposite of the \w with \W. Note, the opposite pattern uses a capital letter. This shortcut is the same as [^A-Za-z0-9_].
+
+```js
+const notAlphabet = /\W+/
+const sentence = "Feed the cute cat!!"
+sentence.match(notAlphabet)
+```
+
+> The shortcut to look for digit characters is \d, with a lowercase d. This is equal to the character class [0-9], which looks for a single character of any number between zero and nine.
+
+```js
+const findDigit = /\d/g
+const sentence = "New year 2022 has come"
+setence.match(findDigit) // 2022
+```
+
+> You can also search for non-digits using a similar shortcut that uses an uppercase D instead. The shortcut to look for non-digit characters is \D. This is equal to the character class [^0-9], which looks for a single character that is not a number between zero and nine.
+
+```js 
+const findNonDigit = /\D/g
+const sentence = "Feb 2022"
+sentence.match(findNonDigit)
+```
+
+#### White space
+> You can search for whitespace using \s, which is a lowercase s. This pattern not only matches whitespace, but also carriage return, tab, form feed, and new line characters. You can think of it as similar to the character class [ \r\t\f\n\v].
+
+```js
+const whiteSpace = "Find blank here"
+const regExp = /\s/g
+whiteSpace.match(regExp)
+```
+
+> Search for non-whitespace using \S, which is an uppercase s. This pattern will not match whitespace, carriage return, tab, form feed, and new line characters. You can think of it being similar to the character class [^ \r\t\f\n\v].
+
 #### Negated character set
 > Place a caret character (^) after the opening bracket and before the characters you do not want to match. Note that characters like ., !, [, @, / and white space are matched - the negated vowel character set only excludes the vowel characters.
 
@@ -97,6 +141,25 @@ const letterAndNumber = /[a-z0-9]/ // a to z, 0 to 9
 let quoteSample = "3 blind mice.";
 let myRegex = /[^0-9^a^e^i^o^u]/gi; // Exclude number 0 to 9 and vowels a, e, i, o, u. 
 let result = quoteSample.match(myRegex); 
+```
+
+> Outside of a character set, the caret is used to search for patterns at the beginning of strings.
+
+```js 
+const happy = "Jake is happy"
+const regExp = /^Jake/ // is "Jake" at the beginning of sentence?
+console.log(regExp.test(happy)) // true
+
+const notHappy = "not happy Jake is"
+console.log(regExp.test(notHappy)) // false
+```
+
+> There is also a way to search for patterns at the end of strings. You can search the end of strings using the dollar sign character(or anchor character) $ at the end of the regex.
+
+```js 
+const sentence = "There is a cute cat"
+const regExp = /cat$/
+regExp.test(sentence) // true
 ```
 
 #### Repeated characters
@@ -123,6 +186,14 @@ gPhrase.match(goRegex); // occured once, ["g"]
 oPhrase.match(goRegex); // occured zero, null
 ```
 
+> Quantity specifiers are used with curly brackets ({ and }). You put two numbers between the curly brackets - for the lower and upper number of patterns.
+
+```js
+const sentence = "goooal" 
+const quantityRegExp = /o{1,3}a/
+sentence.match(quantityRegExp)
+```
+
 #### Greedy match and Lazy match
 > In regular expressions, a greedy match finds the longest possible part of a string that fits the regex pattern and returns it as a match. ... Regular expressions are by default greedy.
 > The alternative is called a lazy match, which finds the smallest possible part of the string that satisfies the regex pattern. ... You can use the ? character to change it to lazy matching.
@@ -135,7 +206,7 @@ const greedy = /t[a-z]*i/
 const TARGET.match(greedy) // ["titani"]
 
 // lazy match
-const lazy = /t[a-z]*?i/ // ["ti]
+const lazy = /t[a-z]*?i/ // ["ti"]
 ```
 
 For example,
