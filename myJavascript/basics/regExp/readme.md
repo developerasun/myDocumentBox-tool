@@ -63,6 +63,21 @@ const unionMatch1 = /human|Jake/
 const unionMatch2 = /human | Jake/
 ```
 
+### Lookahead
+> Lookaheads are patterns that tell JavaScript to look-ahead in your string to check for patterns further along.
+
+> A positive lookahead will look to make sure the element in the search pattern is there, but won't actually match it. A positive lookahead is used as (?=...) where the ... is the required part that is not matched.
+
+>On the other hand, a negative lookahead will look to make sure the element in the search pattern is not there. A negative lookahead is used as (?!...) where the ... is the pattern that you do not want to be there. The rest of the pattern is returned if the negative lookahead part is not present.
+
+```js
+let sampleWord = "astronaut55";
+let pwRegex = /(?=\w{6})(?=\w*\d{2})/; // check if a password greater than 5 characters and has consecutive two digits.
+let result = pwRegex.test(sampleWord);
+
+console.log(sampleWord.match(pwRegex))
+```
+
 ### Character classes
 > Character classes allow you to define a group of characters you wish to match by placing them inside square ([ and ]) brackets.
 > For example, you want to match bag, big, and bug but not bog. You can create the regex /b[aiu]g/ to do this. **The [aiu] is the character class** that will only match the characters a, i, or u.
@@ -215,6 +230,53 @@ For example,
 let text = "<h1>Winter is coming</h1>";
 let myRegex = /<.*?>/;
 let result = text.match(myRegex); // [<h1>]
+```
+
+### Grouping
+#### Mixed grouping
+> Sometimes we want to check for groups of characters using a Regular Expression and to achieve that we use parentheses (). If you want to find either Penguin or Pumpkin in a string, you can use the following Regular Expression: /P(engu|umpk)in/g. Then check whether the desired string groups are in the test string by using the test() method.
+
+```js
+const sentence = "cute cat"
+const regExp = /ca(t|p)/
+regExp.test(sentence)
+```
+
+#### Captured group
+> Capture groups are constructed by enclosing the regex pattern to be captured in parentheses. In this case, the goal is to capture a word consisting of alphanumeric characters so the capture group will be \w+ enclosed by parentheses: /(\w+)/
+
+> The substring matched by the group is saved to a temporary "variable", which can be accessed within the same regex using a backslash and the number of the capture group (e.g. \1). Capture groups are automatically numbered by the position of their opening parentheses (left to right), starting at 1.
+
+```js
+let repeatStr = "row row row your boat";
+let repeatRegex = /^(\w+) \1 \1$/; // will match to only "row row row"
+repeatRegex.test(repeatStr); // Returns true
+repeatStr.match(repeatRegex); // Returns ["row row row", "row"]
+```
+
+#### Search and replace with capture group
+> You can search and replace text in a string using .replace() on a string. The inputs for .replace() is first the regex pattern you want to search for. The second parameter is the string to replace the match or a function to do something.
+
+```js 
+let wrongText = "The sky is silver.";
+let silverRegex = /silver/;
+wrongText.replace(silverRegex, "blue");
+```
+
+> You can also access capture groups in the replacement string with dollar signs ($).
+
+```js
+"Code Camp".replace(/(\w+)\s(\w+)/, '$2 $1');
+```
+
+#### Remove white space
+> Sometimes whitespace characters around strings are not wanted but are there. Typical processing of strings is to remove the whitespace at the start and end of it.
+
+```js
+let hello = "   Hello, World!  "; // has five white spaces(prefix : 3, suffix : 2)
+let wsRegex = /^(\s+)|(\s+)$/g; // find white spaces at start and end.
+let result = hello.replace(wsRegex, ""); // string.replace returns a new string
+console.log(result.length) // 13(Hello, World!)
 ```
 
 ## Reference 
