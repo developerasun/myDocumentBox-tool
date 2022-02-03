@@ -60,3 +60,9 @@ console.log(whiteSpace.match(whiteSpaceRegExp))
 const quantitySentence = "gooooooal" 
 const quantityRegExp = /o{1,3}a/g
 console.log(quantitySentence.match(quantityRegExp))
+
+const mixedGroupSentence = "cute cat"
+const mixedRegExp = /ca(t|p)/
+console.log(mixedRegExp.test(mixedGroupSentence))
+
+console.log("42 42 42".match(/^(\d+) \1 \1$/))
