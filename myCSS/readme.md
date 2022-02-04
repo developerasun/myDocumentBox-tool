@@ -177,34 +177,126 @@ li  {
 > clear : ignoring the float effect.
 
 ## CSS flex box
-Flex is the one of the core functionalities in CSS for layout. Usually a container, items, and display(flex) are used to implement flex box. Note that **container property** and **item property** are divided.
+> Flexbox is a powerful, well-supported layout method that was introduced with the latest version of CSS, CSS3. With flexbox, it's easy to center elements on the page and create dynamic user interfaces that shrink and expand automatically. 
+
+> Adding display: flex to an element turns it into a flex container. This makes it possible to align any children of that element into rows or columns. You do this by adding the flex-direction property to the parent item and setting it to row or column. Creating a row will align the children horizontally, and creating a column will align the children vertically.
 
 ```css
-.item{
-    /* flex-basis property sets a flex-item's size depending on main axis
-    if main axis (row) -> set width size
-    if main axis(column) -> set height size */
-    flex-basis: 300px;
+.container {
+    display : flex;
+}
+```
 
-    /* flex-grow property tells the flex box items that how much left space 
-    they can additionally take */
-    flex-grow: 1;
+Note that **container property** and **item property** are divided.
 
-     /* flex-shrink property sets a limitation that how much space the flex box
-    items should keep. It adds a horizontal scroll bar when set 0. */
-    flex-shrink: 0;
+### Container property
+#### Justify-content
+> Sometimes the flex items within a flex container do not fill all the space in the container. It is common to want to tell CSS how to align and space out the flex items a certain way. Fortunately, the justify-content property has several options to do this. 
+
+> space-between: aligns items to the center of the main axis, with extra space placed between the items. **The first and last items are pushed to the very edge of the flex container**. For example, in a row the first item is against the left side of the container, the last item is against the right side of the container, **then the remaining space is distributed evenly among the other items**.
+
+> space-around: similar to space-between but the first and last items are not locked to the edges of the container, the space is distributed around all the items with a half space on either end of the flex container.
+
+> space-evenly: Distributes space evenly between the flex items with a full space at either end of the flex container
+
+#### Align-items
+> CSS offers the align-items property to align flex items along the cross axis. For a row, it tells CSS how to push the items in the entire row up or down within the container. And for a column, how to push all the items left or right within the container.
+
+> **stretch**: stretch the items to fill the flex container. For example, rows items are stretched to fill the flex container top-to-bottom. This is **the default value** if no align-items value is specified.
+
+> baseline: align items to their baselines. Baseline is a text concept, think of it as the line that the letters sit on.
+
+#### Flex-wrap
+> CSS flexbox has a feature **to split a flex item into multiple rows (or columns)**. By default, a flex container will fit all flex items together. For example, a row will all be on one line.
+
+> However, using the flex-wrap property tells CSS to wrap items. **This means extra items move into a new row or column**. The break point of where the wrapping happens depends on the size of the items and the size of the container.
+
+> 1 ) **nowrap**: this is the default setting, and does not wrap items. 2) **wrap**: wraps items onto multiple lines from top-to-bottom if they are in rows and left-to-right if they are in columns 3) **wrap-reverse**: wraps items onto multiple lines from bottom-to-top if they are in rows and right-to-left if they are in columns.
+
+### Item property
+#### Flex-shrink
+> When it's used, it allows an item to shrink if the flex container is too small. Items shrink **when the width of the parent container is smaller than the combined widths of all the flex items within it**.
+
+> The flex-shrink property takes numbers as values. The higher the number, the more it will shrink compared to the other items in the container. For example, if one item has a flex-shrink value of 1 and the other has a flex-shrink value of 3, the one with the value of 3 will shrink three times as much as the other.
+
+```css 
+.box1 { 
+    flex-shrink : 1;
+}
+.box2 { 
+    flex-shrink : 2;
+}
+```
+
+#### Flex-grow
+> The opposite of flex-shrink is the flex-grow property. Recall that flex-shrink controls the size of the items when the container shrinks. The **flex-grow property controls the size of items when the parent container expands**.
+
+```css 
+.box1 { 
+    flex-grow : 1;
+}
+.box2 { 
+    flex-grow : 2;
+}
+```
+
+#### Flex-basis
+> The flex-basis property **specifies the initial size of the item before CSS makes adjustments with flex-shrink or flex-grow**. The units used by the flex-basis property are the same as other size properties (px, em, %, etc.). The value auto sizes items based on the content.
+
+```css
+.box1 { 
+    flex-basis : 5rem;
+}
+.box2 { 
+    flex-basis : 10rem;
+}
+```
+
+#### Flex shorthand
+> There is a shortcut available to set several flex properties at once. The flex-grow, flex-shrink, and flex-basis properties can all be set together by using the flex property. For example, 
+
+```css
+.box1 {
+    /* flex-grow : 1, flex-shrink : 0, flex-basis : 10px */
+    flex: 1 0 10px;
+}
+```
+
+The default property settings are flex: 0 1 auto;. Be careful not to add white space between flex and semicolon. 
+
+```css
+.box1 { 
+    /* incorrect */
+    flex : 1 0 10px; 
+
+    /* correct */
+    flex: 1 0 10px;
+}
+```
+
+#### Order
+> The order property is used to tell CSS the order of how flex items appear in the flex container. By default, items will appear in the same order they come in the source HTML. The property takes numbers as values, and negative numbers can be used.
+
+```css
+.item1{
+    order: 1;
+} 
+.item2{
+    order: 2;
 } 
 ```
 
-```css
-#box1 {
-    /* align-self property sets the oneself's cross axis alignment */
-    align-self: flex-start;
+#### Align-self
+> The final property for flex items is align-self. This property allows you to adjust each item's alignment individually, instead of setting them all at once. This is useful since other common adjustment techniques using the CSS properties float, clear, and vertical-align do not work on flex items.
 
-    /* order property changes the items' order  */
-    order: 3;
+> align-self accepts the same values as align-items and **will override any value set by the align-items** property.
+
+```css
+.item1 { 
+    align-self : center; 
 }
 ```
+
 
 ## CSS grid
 ### What is CSS grid model? 
