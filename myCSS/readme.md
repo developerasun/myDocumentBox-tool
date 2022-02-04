@@ -297,7 +297,6 @@ The default property settings are flex: 0 1 auto;. Be careful not to add white s
 }
 ```
 
-
 ## CSS grid
 ### What is CSS grid model? 
 As flex box in CSS gets more universal and commonly used, more advanced form of flex box came out - CSS grid model for two-dimensional grid-based layout. It has been standardized by W3C(World Wide Web Consortium - global organization for web standard). 
@@ -306,5 +305,180 @@ As flex box in CSS gets more universal and commonly used, more advanced form of 
 
 > repeat(number of columns/rows, the column width we want);
 
-### How is it different from CSS flex box? 
+## How is it different from CSS flex box? 
 Flex box distributes its box items by main axis - when there is no more space to use in the axis, the container moves the next items based on cross axis. Compared to Flex box, **Grid allows developers to set each item location from the very first place** using grid-template-columns(rows) property. Developers can designate width, height, and etc when needed. Both layout can be applied and used altogether in one program - they are not exclusive. 
+
+## Grid units
+> fr: sets the column or row to a fraction of the available space
+> auto: sets the column or row to the width or height of its content automatically,
+> %: adjusts the column or row to the percent width of its container.
+
+### Grid container
+#### Grid-template columns/rows
+> The number of parameters given to the grid-template-columns/rows property indicates the number of columns/rows in the grid, and the value of each parameter indicates the width of each column/rows.
+
+```css
+.container {
+  display: grid;
+  grid-template-columns: 50px 50px;
+  grid-template-rows : 50px 50px;
+}
+```
+
+##### Repeat
+> Let's say you want a grid with 100 rows of the same height. It isn't very practical to insert 100 values individually. Fortunately, there's a better way - by using the repeat function to specify the number of times you want your column or row to be repeated, followed by a comma and the value you want to repeat.
+
+```css
+.container { 
+    grid-template-columns: repeat(2, 1fr 50px) 20px;
+    /* above equal to */
+    grid-template-columns : 1fr 50px 1fr 50px 20px;
+}
+```
+
+##### Minmax
+> There's another built-in function to use with grid-template-columns and grid-template-rows called minmax. It's **used to limit the size of items** when the grid container changes size. To do this you need to specify the acceptable size range for your item
+
+```css
+.conatiner { 
+    grid-template-columns : 1fr minmax(100px 200px);
+}
+```
+
+##### Auto-fill and auto-fit
+> The **repeat** function comes with an **option called auto-fill**. This allows you to automatically insert as many rows or columns of your desired size as possible depending on the size of the container. You can create flexible layouts when combining auto-fill with minmax. If your container can't fit all your items on one row, it will move them down to a new one.
+
+```css
+.container { 
+    grid-template-columns : repeat(auto-fill, minmax(100px 2fr))
+}
+```
+
+<img src="reference/grid-repeat-auto-fill.png" width="660" height="170" alt="grid repeat auto fill example" />
+
+> auto-fit works almost identically to auto-fill. The only difference is that when the container's size exceeds the size of all the items combined, **auto-fill keeps inserting empty rows or columns** and pushes your items to the side, while **auto-fit collapses those empty rows or columns and stretches your items** to fit the size of the container.
+
+```css
+.container { 
+    grid-template-columns : repeat(auto-fit, minmax(100px 2fr))
+}
+```
+
+<img src="reference/grid-repeat-auto-fit.png" width="660" height="170" alt="grid repeat auto fit example" />
+
+#### Grid-template-areas
+> You can group cells of your grid together into an area and give the area a custom name. Do this by using grid-template-areas on the container like this:
+
+```css
+.container {
+    grid-template-areas : 
+        "header header header"
+        "body body body"
+        "footer footer footer";
+}
+```
+
+> Every word represents a cell and every pair of quotation marks represent a row.
+
+> you can place an item in your custom area by referencing the name you gave it. To do this, you use the grid-area property on an item like this:
+
+```css 
+.item1 {
+  grid-area: header;
+}
+```
+
+> This lets the grid know that you want the item1 class to go in the area named header. 
+> If your grid doesn't have an areas template to reference, you can create an area on the fly for an item to be placed like this:
+
+```css
+.item1 { 
+    /* grid-area: horizontal line to start at / vertical line to start at / horizontal line to end at / vertical line to end at; */
+    grid-area : 1/1/3/4;
+}
+```
+
+#### Grid gap
+> Sometimes you want a gap in between the columns. To add a gap between the columns, use the grid-column-gap property like this:
+
+```css
+.container {
+    grid-column-gap : 10px;
+    grid-row-gap : 10px;
+}
+
+/* Or use shorthand grid-gap like below */
+.container { 
+    grid-gap : 10px 10px;
+}
+```
+
+#### Justify-items 
+> Sometimes you want all the items in your CSS Grid to share the same alignment. ...  you can align them all at once horizontally by using justify-items on your grid container.
+
+```css
+.container { 
+    /* center, end, start */
+    justify-items : center;
+}
+```
+
+#### Align-items
+> Using the align-items property on a grid container will set the vertical alignment for all the items in our grid.
+
+```css
+.container { 
+    /* center, end, start */
+    align-items : center;
+}
+```
+
+### Grid item
+#### Grid-column
+> **The hypothetical horizontal and vertical lines that create the grid** are referred to as lines. These lines are numbered starting with 1 at the top left corner of the grid and move right for columns and down for rows, counting upward.
+
+<img src="reference/grid-three-by-three.png" width="312" height="305" alt="3x3 grid" />
+
+> To control the number of columns an item will consume, you can use the **grid-column property in conjunction with the line numbers** you want the item to start and stop at.
+
+```css
+.item2 { 
+    /* assume 4x4 grid */
+    grid-column : 3/5;
+}
+```
+
+#### Grid-row
+> you can make items consume multiple rows just like you can with columns. You define the horizontal lines you want an item to start and stop at using the grid-row property on a grid item.
+
+```css
+.item2 { 
+    /* assume 4x4 grid */
+    grid-row : 3/5;
+}
+```
+
+#### Justify-self 
+> In CSS Grid, the content of each item is located in **a box which is referred to as a cell**. You can align the content's position within its cell horizontally using the justify-self property on a grid item. **By default**, this property has a value of **stretch**, which will make the content fill the whole width of the cell. This CSS Grid property accepts other values as well:
+> start: aligns the content at the left of the cell,
+> center: aligns the content in the center of the cell,
+> end: aligns the content at the right of the cell.
+
+```css
+.item1 { 
+    justify-self : center;
+}
+```
+
+#### Align-self
+> Just as you can align an item horizontally, there's a way to align an item vertically as well. To do this, you use the align-self property on an item. This property accepts all of the same values as justify-self from the last challenge.
+
+```css
+.item1 {
+    align-self : center;
+}
+```
+
+## Reference 
+- [Free code camp : CSS Flexbox](https://www.freecodecamp.org/learn/responsive-web-design/#css-flexbox) 
+- [Free code camp : CSS Grid](https://www.freecodecamp.org/learn/responsive-web-design/#css-grid) 
