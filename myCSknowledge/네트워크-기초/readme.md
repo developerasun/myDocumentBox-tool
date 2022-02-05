@@ -107,8 +107,8 @@ WAN 프로토콜 종류에 대해서는 다루는 내용의 범위가 필요 이
 ### 네트워크 토폴로지
 **토폴로지(망 구성 방식)란 컴퓨터 네트워크를 연결해놓은 방식**을 의미한다. LAN의 경우 물리적/논리적 토폴로지 둘 다 보여줄 수 있다. 
 
-- 물리적 토폴로지 : 링크와 노드들의 상관 관계
-- 논리적 토폴로지 : 노드끼리의 데이터 흐름
+- 물리적 토폴로지 : 노드들을 물리적으로 배치하는 것(e.g 노드 A, B는 건물 4층에 위치, 노드 C,D는 건물 입구에 배치)
+- 논리적 토폴로지 : 노드끼리의 데이터 흐름을 관리.
 
 <img src="reference/토폴로지.png" width=500px height=300px alt="토폴로지 종류" />
 
@@ -126,7 +126,7 @@ WAN 프로토콜 종류에 대해서는 다루는 내용의 범위가 필요 이
 6. Hybrid - **서로 다른 토폴로지가 합쳐서 새로운 토폴로지를 구성**함. 새로운 컴포넌트를 추가해 네트워크의 크기를 키우는 데 유리하며, fault detection/trouble shooting이 용이하다는 장점이 있음.
 
 ### IP(Internet Protocol)
-인터넷상에서 **컴퓨터의 위치를 특정**하고 **기기 간 데이터를 전송**하는 방법을 명시한 통신 규약. **컴퓨터들의 우편 시스템**. 주로 TCP 프로토콜과 함꼐 사용되며 인터넷 상 각각의 컴퓨터(호스트)는 적어도 하나의 IP주소를 할당 받게 됨.
+네트워크 상에서 **컴퓨터의 위치를 특정**하고 **기기 간 데이터를 전송**하는 방법을 명시한 통신 규약. **컴퓨터들의 우편 시스템**. 주로 TCP 프로토콜과 함꼐 사용되며 인터넷 상 각각의 컴퓨터(호스트)는 적어도 하나의 IP주소를 할당 받게 됨.
 
 TCP/IP 프로토콜을 통해 기기 간 통신을 할 경우 IP 주소가 필요함. **IP 주소는 4개의 숫자로 구성되고 숫자의 크기에 따라 IPv4/IPv6로 구별**됨. IP 패킷을 주고 받는 기기를 **IP host**라고 부르며, IP 주소를 사람이 알아보기 쉽게 네이밍 하는 역할을 DNS(Domain Name System)가 맡아줌. 
 
@@ -329,6 +329,72 @@ Scope란 정책이 적용되는 범위를 의미하며, **적용되는 범위와
 >There are two major contexts in which this term is used. One is in the mobile phone industry, where it refers to carriers allowing customers to activate their existing phone (or other cellular device) on the network, rather than being forced to buy a new device from the carrier.[2][3][4]
 
 > The other, and the main focus of this article, is in the workplace, where it refers to a policy of permitting employees to bring personally owned devices (laptops, tablets, smartphones, etc.) to work, and to use those devices to access privileged company information and applications.[5] This phenomenon is commonly referred to as IT consumerization.[6]
+</details>
+
+### MAC addressing
+LAN 상의 모든 노드는 MAC(Media Access Control) 주소로 구별된다. IP 주소가 노드의 위치를 식별한다면, MAC 주소는 노드의 이름을 식별하는 역할을 한다. 
+
+<img src="reference/ip-comparision-mac.png" width=656 height=287 alt="comparison of ip and mac" />
+
+- IP : highlight with blue rectangle, router-friendly, idenfity a node in network. a logical address that can be changed.
+
+- MAC : highlight with red rectangle, switch-friendly, identify a node in LAN(local area network). a physical address that can not be changed(manufacturer decides this). Example of MAC address => 70-20-84-00-ED-FC (48 bits).
+
+<img src="reference/node-swtich-router.png" width=641 height=295 alt="node, switch, and router in network" />
+
+아래 명령어로 자신의 MAC 주소를 확인할 수 있다. ipconfig 명령어 뒤 공백은 생략될 수 없다. 
+
+```shell
+$ipconfig /all
+```
+
+<img src="reference/find-mac-address-window.png" width=703 height=187 alt="윈도우 OS MAC 주소" />
+
+### Port addressing
+content will be added
+
+### OSI(Open Systems Interconnection model) 모델 
+OSI 모델은 서로 다른 시스템 간 하드웨어/소프트웨어의 규격(논리)을 바꾸지 않더라도 소통이 가능하도록 도와주는 이론적 모델을 의미한다. OSI 모델의 7개 레이어 구성은 **순서가 중요**하며, 아래와 같은 형태를 취한다. 
+
+<img src="reference/osi-model-layers.png" width=322 height=409 alt="OSI 모델 레이어 구성" />
+
+두문자 기억법(Please Do Not Throw Sausage Pizza Away)으로 OSI 레이어 순서를 기억하는 것도 좋은 trick이 된다. 
+
+<img src="reference/osi-layer-order.png" width=520 height=349 alt="OSI 모델 레이어 순서" />
+
+OSI 모델을 이용한 두 노드간의 데이터 송/수신 순서는 아래와 같이 이루어진다. 
+
+1. 노드 A의 데이터 송신 : 레이어 7(Application) => 6(Presentation) => 5(Session) => 4(Transport) => 3(Network) => 2(Data link) => 1(Physical)
+1. (노드 A, B간 중간자 노드들을 타고 데이터가 송신 중)
+1. 노드 B의 데이터 수신 : 레이어 1(Physical) => 2(Data link) ... => 7(Application)
+
+<details>
+<summary>Layering이란?(펼쳐보기)</summary>
+
+- Layering : 네트워크 구성 요소를 컨트롤 하기 쉬운 작은 단위(layer)로 분해하는 것
+</details> 
+
+#### OSI 모델 레이어별 역할 
+각각의 레이어는 다음과 같은 역할을 수행한다. 
+
+1. Application layer: 유저의 네트워크 자원 접근을 허용함 (e.g 파일 전송 및 접근, 메일, 디렉토리)
+1. Presentation layer: 시스템 간의 교환되는 정보의 문법과 시맨틱을 체크함(e.g 데이터 형 전환, 암호화, 압축)
+1. Session layer: 노드간 상호 작용을 관리함(e.g 단/양방향 소통, 동기화)
+1. Transport layer: 상호 작용을 위해 사용되는 프로세스들을 관리함(e.g 포트 관리, 대용량 데이터의 분할 및 재조합, 연결 컨트롤(connected or connectionless)end-to-end flow 컨트롤(노드 간 서로 다른 데이터 송/수신 속도를 싱크화), 에러 핸들링)
+1. Network layer: 네트워크 상에서 데이터 전달을 담당함(e.g, 논리 주소 부여, 라우팅)
+1. Data link layer: 노드 간 데이터 전달을 담당함(framing, 물리 주소 부여, 에러 핸들링, 접근 컨트롤)
+1. Physical layer: 전송 수단을 통해 비트를 전달함(e.g 전송 수단(유/무선)의 물리적 특성 관리, 인코딩, 초당 전송률, line configuration(point to point, point to multi-point), 물리적 토폴로지)
+
+<details>
+<summary>포트 번호란?(펼쳐보기)</summary>
+
+- 노드 A가 노드 B에게 프로그램 a를 요청 =====> IP 주소 ====(네트워크 상 PC를 식별)=====> Port 번호 =====(식별된 PC 상에서 응용 프로그램의 목적지를 식별) ====> 노드 B가 포트 번호 확인 후 응용 프로그램 활성화.
+
+> A port number is **the logical address of each application or process that uses** a network or the Internet to communicate. A port number uniquely identifies a network-based application on a computer. Each application/program is allocated **a 16-bit integer port number**. This number is **assigned automatically by the OS**, manually by the user or is set as a default for some popular applications.
+
+> A port number primarily aids in **the transmission of data between a network and an application**. Port numbers work in collaboration with networking protocols to achieve this. For example, in an incoming message/packet, **the IP address is used to identify the destination computer/node, whereas the port number further specifies the destination application/program in that computer**. Similarly, all outgoing network packets contain application port numbers in the packet header to enable the receiver to distinguish the specific application.
+
+> Port numbers are mainly used in TCP and UDP based networks, with an available range of 65,535 for assigning port numbers. Although an application can change its port number, some commonly used Internet/network services are allocated with global port numbers such as Port Number 80 for HTTP, 23 for Telnet and 25 for SMTP.
 </details>
 
 ## 레퍼런스
