@@ -296,6 +296,20 @@ Scope란 정책이 적용되는 범위를 의미하며, **적용되는 범위와
 > With its microphone and receiver, **a VoIP telephone takes the sound you generate and converts it into packets of data**, which it sends over the network and out through the internet. On the other end, the phone decompresses the data and plays it back for the other person to hear.
 </details>
 
+네트워크 상 모든 노드들은 데이터를 송신하기 이전 아래와 같은 절차를 거쳐야 한다. 
+
+1. Attach source/destination IP address - 네트워크 상 송/수신 노드 위치 논리적 식별
+1. Attach source/destination MAC address - 네트워크 상 송/수신 노드 이름 물리적 식별 
+1. Attach source/destination port number - 네트워크 상 송/수신 노드의 프로세스 논리적 식별(포트 번호 범위 : 0 ~ *65,535*)
+
+<details>
+<summary>65535 in computing</summary>
+
+> 65535 occurs frequently in the field of computing because it is {\displaystyle 2^{16}-1}{\displaystyle 2^{16}-1} (one less than 2 to the 16th power), which is the highest number that can be represented by an unsigned 16-bit binary number. Some computer programming environments may have predefined constant values representing 65535, with names like MAX_UNSIGNED_SHORT.
+
+> In Internet protocols, 65535 is also the number of TCP and UDP ports available for use, since port 0 is reserved.
+</details>
+
 ### 네트워크 기기의 연결
 **미디어(media)은 네트워크 노드들을 연결**하는 역할을 한다. 미디어의 종류는 1) 유선 2) 무선으로 나뉘어진다. 
 
@@ -351,7 +365,60 @@ $ipconfig /all
 <img src="reference/find-mac-address-window.png" width=703 height=187 alt="윈도우 OS MAC 주소" />
 
 ### Port addressing
-content will be added
+포트는 커뮤니케이션 엔드 포인트(communication endpoint)라고도 불리우며 하나의 노드에서 생성되는 여러 개의 **프로세스를 식별하는 라벨링** 역할을 한다. 
+
+- 포트 번호의 범위 : 0 ~ 65,535 
+
+IP, MAC, port의 역할은 아래와 같이 나눌 수 있다. 
+
+- IP : 네트워크 상에서 기기의 위치를 논리적으로 식별함
+- MAC : 네트워크 상에서 기기의 이름을 물리적으로 식별함 
+- Port : 기기의 프로세스/프로그램을 논리적으로 식별함
+
+IP, MAC, port의 역할 흐름은 아래와 같이 진행된다. 
+
+- 노드 A가 노드 B에게 프로그램 a를 요청 =====> IP & MAC 주소 ====(네트워크 상 노드의 위치와 이름을 식별)=====> Port 번호 =====(식별된 PC 상에서 응용 프로그램의 목적지를 식별) ====> 노드 B가 포트 번호 확인 후 응용 프로그램 a를 활성화.
+
+포트는 네트워크 상에서 노드 간 데이터를 주고 받을 때 올바른 프로세스를 식별할 수 있게 도와준다.
+
+> A port number is **the logical address of each application or process that uses** a network or the Internet to communicate. A port number uniquely **identifies a network-based application on a computer**. Each application/program is allocated **a 16-bit integer port number**. This number is **assigned automatically by the OS**, manually by the user or is set as a default for some popular applications.
+
+> A port number primarily aids in **the transmission of data between a network and an application**. Port numbers work in collaboration with networking protocols to achieve this. For example, in an incoming message/packet, **the IP address is used to identify the destination computer/node, whereas the port number further specifies the destination application/program in that computer**. Similarly, all outgoing network packets contain application port numbers in the packet header to enable the receiver to distinguish the specific application.
+
+> Port numbers are **mainly used in TCP and UDP based networks**, with an available range of 65,535 for assigning port numbers. Although an application can change its port number, some commonly used Internet/network services are allocated with global port numbers such as Port Number **80 for HTTP**, 23 for Telnet and 25 for SMTP.
+
+#### 포트 번호 확인하기
+현재 기기에서 할당된 포트 번호를 확인하기 위해서 터미널에서 아래 커맨드를 입력한다. 
+
+```shell
+# resmon : short for resource monitor 
+$resmon
+```
+
+크롬 브라우저의 확인된 포트 번호는 아래와 같다.
+
+<img src="reference/resource-monitor-port-number.png" width=703 height=752 alt="리소스 매니저 포트 번호 확인" />
+
+### 스위칭 기법
+네트워크 상에서 스위칭이란 데이터 전송을 위해 최적의 경로를 찾는 것을 의미한다. 
+
+1. circuit switching : 송/수신자 사이 전용 경로(dedicated path)가 요구됨. 데이터 전송 이전에 전용 경로를 통해 연결이 확립됨. 
+
+<img src="reference/circuit-switch-dedicated-path.png" width=723 height=281 alt="서킷 스위칭 전용 경로" />
+
+1. message switching : message is transferred as a complete unit and forwarded using store and forward mechanism at the intermediary node. 메시지는 여러 조각으로 분할되어 중간자 노드에 전달됨. 스트리밍 또는 실시간 프로그램에는 적합하지 않음. 
+
+1. packet switching : 인터넷에 사용되는 스위칭 기법. 메세지는 packet으로 IP/MAC/Port number가 식별된 상태로 분할되어 개별적으로 다음 노드에게 전달됨. **개별적으로 packet이 전달되기 때문에 packet의 sequence가 중요**해지고, 이를 위해 sequence number도 함께 부착되어 전달됨. 
+
+#### 패킷 스위칭 - datagram
+datagram 패킷 스위칭 기법은 데이터 전송 경로가 정해져 있지 않으므로 connectionless라고도 불린다. 전송된 패킷들은 목적지에서 sequence number를 통해 재조립된다. 
+
+<img src="reference/datagram-packet-switching.png" width=701 height=240 alt="데이터그램 패킷 스위칭" />
+
+#### 패킷 스위칭 - virtual circuit
+virtual circut 패킷 스위칭 기법은 데이터 전송 경로가 사전에 정해지므로 connection-oriented라고도 불린다. 전송된 패킷들은 목적지에서 sequence number를 통해 재조립된다. 
+
+<img src="reference/virtual-circuit-packet-switching.png" width=713 height=225 alt="버추얼 서킷 패킷 스위칭" />
 
 ### OSI(Open Systems Interconnection model) 모델 
 OSI 모델은 서로 다른 시스템 간 하드웨어/소프트웨어의 규격(논리)을 바꾸지 않더라도 소통이 가능하도록 도와주는 이론적 모델을 의미한다. OSI 모델의 7개 레이어 구성은 **순서가 중요**하며, 아래와 같은 형태를 취한다. 
@@ -385,17 +452,10 @@ OSI 모델을 이용한 두 노드간의 데이터 송/수신 순서는 아래�
 1. Data link layer: 노드 간 데이터 전달을 담당함(framing, 물리 주소 부여, 에러 핸들링, 접근 컨트롤)
 1. Physical layer: 전송 수단을 통해 비트를 전달함(e.g 전송 수단(유/무선)의 물리적 특성 관리, 인코딩, 초당 전송률, line configuration(point to point, point to multi-point), 물리적 토폴로지)
 
-<details>
-<summary>포트 번호란?(펼쳐보기)</summary>
 
-- 노드 A가 노드 B에게 프로그램 a를 요청 =====> IP 주소 ====(네트워크 상 PC를 식별)=====> Port 번호 =====(식별된 PC 상에서 응용 프로그램의 목적지를 식별) ====> 노드 B가 포트 번호 확인 후 응용 프로그램 활성화.
 
-> A port number is **the logical address of each application or process that uses** a network or the Internet to communicate. A port number uniquely identifies a network-based application on a computer. Each application/program is allocated **a 16-bit integer port number**. This number is **assigned automatically by the OS**, manually by the user or is set as a default for some popular applications.
 
-> A port number primarily aids in **the transmission of data between a network and an application**. Port numbers work in collaboration with networking protocols to achieve this. For example, in an incoming message/packet, **the IP address is used to identify the destination computer/node, whereas the port number further specifies the destination application/program in that computer**. Similarly, all outgoing network packets contain application port numbers in the packet header to enable the receiver to distinguish the specific application.
 
-> Port numbers are mainly used in TCP and UDP based networks, with an available range of 65,535 for assigning port numbers. Although an application can change its port number, some commonly used Internet/network services are allocated with global port numbers such as Port Number 80 for HTTP, 23 for Telnet and 25 for SMTP.
-</details>
 
 ## 레퍼런스
 - [Wikipedia : Wi-Fi](https://en.wikipedia.org/wiki/Wi-Fi)
