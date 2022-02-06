@@ -21,5 +21,8 @@ int main() {
     for (i=0; i<n; i++) { 
         printf("%d", *(ptr+i));
     }
+
+    free(ptr); 
+    ptr = NULL;
     return 0;
 }

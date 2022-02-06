@@ -29,5 +29,9 @@ int main() {
     for (i=0; i<n+2; i++) { 
         printf("%d", *(ptr+i));
     }
+
+    free(ptr); 
+    ptr = NULL;
+    
     return 0;
 }
