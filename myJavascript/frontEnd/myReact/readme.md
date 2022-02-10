@@ -587,7 +587,7 @@ const MyComponent = () => {
 ```
 
 ##### useEffect 
-useEffect lets you perform side effects(listed below) in function components. By default, <bold>it runs both after the first render and after every update</bold>. It is similar to componentDidMount and componentDidUpdate. 
+useEffect lets you perform side effects(listed below) in function components. **By default, it runs both after the first render and after every update**. It is similar to componentDidMount and componentDidUpdate. 
 
 ```
 React updates DOM => React calls useEffect
@@ -597,7 +597,7 @@ React updates DOM => React calls useEffect
 - <bold>changing DOM</bold>
 - setting up a subscription
 
-By using useEffect hook, your components will <bold>do something else additionally after render</bold>. Every time we re-render, we schedule a different effect replacing the previous one.
+By using useEffect hook, your components will do something else additionally after render</. Every time we re-render, we schedule a different effect replacing the previous one.
 
 ```javascript
 import { useState, useEffect } from "react"
@@ -632,6 +632,19 @@ const MyComponent = () => {
     )
 }
 ```
+
+React under the hood checks useEffect dependency array to check if there is a change. Note that primitives are call by value and array, function, object are call by reference. 
+
+```js 
+// check every element in dependency array
+// prevDep and nextDep are array
+const useEffectDependency = (prevDep, nextDep) => {
+    prevDep.length === nextDep.length && prevDep.every((element, index) => element === nextDep[index])
+}
+```
+
+For example, if dependencies are based in call by reference mechanism it will signal useEffect to render again and again since it is considered a new value in dependency array. Remember to provide a specific **value** to dependency array. 
+
 
 ###### useEffect Cleanup Function
 As the name implies, cleanup function is a function inside the useEffect hook. Cleanup function prevents application from unintended results such as <bold>memory leaks, improving the application's performance</bold> by removing what is not necessary before the component unmounts. 
