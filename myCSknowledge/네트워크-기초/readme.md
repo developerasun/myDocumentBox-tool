@@ -421,7 +421,7 @@ virtual circut 패킷 스위칭 기법은 데이터 전송 경로가 사전에 �
 <img src="reference/virtual-circuit-packet-switching.png" width=713 height=225 alt="버추얼 서킷 패킷 스위칭" />
 
 ### OSI(Open Systems Interconnection model) 모델 
-OSI 모델은 서로 다른 시스템 간 하드웨어/소프트웨어의 규격(논리)을 바꾸지 않더라도 소통이 가능하도록 도와주는 이론적 모델을 의미한다. OSI 모델의 7개 레이어 구성은 **순서가 중요**하며, 아래와 같은 형태를 취한다. 
+OSI 모델은 서로 다른 시스템 간 하드웨어/소프트웨어의 규격(논리)을 바꾸지 않더라도 소통이 가능하도록 도와주는 이론적 모델을 의미한다. TCP/IP 모델이 프로토콜인 것과는 달리, OSI 모델은 프로토콜이 아닌 **가이드라인**이다. OSI 모델의 7개 레이어 구성은 **순서가 중요**하며, 아래와 같은 형태를 취한다. 
 
 <img src="reference/osi-model-layers.png" width=322 height=409 alt="OSI 모델 레이어 구성" />
 
@@ -452,10 +452,118 @@ OSI 모델을 이용한 두 노드간의 데이터 송/수신 순서는 아래�
 1. Data link layer: 노드 간 데이터 전달을 담당함(framing, 물리 주소 부여, 에러 핸들링, 접근 컨트롤)
 1. Physical layer: 전송 수단을 통해 비트를 전달함(e.g 전송 수단(유/무선)의 물리적 특성 관리, 인코딩, 초당 전송률, line configuration(point to point, point to multi-point), 물리적 토폴로지)
 
+### 네트워크 명령어(Network command)
+네트워크에서 사용 가능한 기본적인 명령어는 아래와 같다. 
 
+1. ipconfig
+1. ipconfig/all
+1. nslookup
+1. ping
+1. tracert
 
+#### 터미널 세팅
+가독성을 위해 터미널 폰트 색상을 변경할 수 있다.
 
+```shell
+# check colors available
+help color 
 
+# set bg : black, font : light green
+color 0b
+```
+
+터미널 언어를 영어로 변경할 수 있다. 
+
+```shell 
+chcp 437
+```
+
+#### ipconfig
+현재 컴퓨터에 저장된 ip configuration을 확인하기 위해 아래 명령어를 입력한다. 
+
+```Shell
+$ipconfig
+```
+
+ipconfig 명령어로 확인할 수 있는 정보는 OSI 모델 중 Layer3, 즉 네트워크 레이어에 해당하는 정보이다(논리 주소 부여, 라우팅). 
+
+<img src="reference/ipconfig-wifi.png" width=714 height=173 alt="ipconfig 명령어 확인" />
+
+- default gateway : 현재 네트워크 => 다른 네트워크로 데이터 전송시 만나게 되는 첫 번째 **라우터의 ip 주소**.
+
+#### ipconfig/all
+ipconfig/all 명령어로 OSI 모델 중 Layer2(데이터 링크 레이어, 물리 주소 부여-MAC)에 해당하는 정보를 확인할 수 있다.
+
+```shell
+ipconfig/all
+```
+
+<img src="reference/ipconfig-all-mac.png" width=794 height=211 alt="ipconfig/all 명령어 확인" />
+
+#### Nslookup
+nslookup(name server lookup) 명령어는 DNS(Domain Name System) 서버에게 특정 서버의 ip 주소를 요청하는 명령어이다.  
+
+<img src="reference/ns-lookup-google.png" width=386 height=275 alt="nslookup 명령어 구글 ip 주소 확인" />
+
+대개 유저가 브라우저 창에서 입력하는 url(e.g www.google.com)의 실제 ip 주소 변환은 DNS 서버가 담당한다. 
+
+네트워크 상의 노드 간의 데이터 송/수신은 mac(데이터 링크 레이어), ip(네트워크 레이어) 정보 모두를 필요로 하므로, 유저가 url만을 입력하더라도 DNS 서버가 IP주소를 찾아서 제공하므로 송/수신이 가능해진다.  
+
+#### Ping
+> A ping (Packet Internet or Inter-Network Groper) is a basic Internet program that allows a user to test and verify if a particular destination IP address exists and can accept requests in computer network administration. The acronym was contrived to match the submariners' term for the sound of a returned sonar pulse.
+
+> Ping is also used diagnostically to ensure that a host computer the user is trying to reach is operating. Any operating system (OS) with networking capability, including most embedded network administration software, can use ping.
+
+Pining in network means that you check if the host you are trying to reach is reachable from your computer(host).
+
+```shell
+$ping <ip address you try to reach>
+```
+
+<img src="reference/ping-google.png" width=633 height=261 alt="ping 명령어 google 패킷 확인" />
+
+#### Tracert(trace root)
+> When you connect with a website, the data you get must travel across multiple devices and networks along the way, particularly routers. A traceroute provides a map of how data on the internet travels from its source to its destination. 
+
+> A traceroute plays a different role than other diagnostic tools, such as packet capture, which analyzes data. Traceroute differs in that it examines how the data moves through the internet. Similarly, you can use Domain Name System time to live (DNS TTL) for tracerouting, but DNS TTL addresses the time needed to cache a query and does not follow the data path between routers.
+
+tracert 명령어는 A 호스트(default gateway)에서 B 호스트로 패킷(데이터)이 전달되기까지 거쳐가는 라우터의 목록을 보여준다(tracing). 
+
+1. ipconfig/all 명령어로 현재 default gateway를 확인한다(192.168.0.1).
+1. nslookup 명령어로 목적지 호스트 ip를 확인한다(www.google.com, 142.250.207.36)
+1. tracert 명령어로 default gateway ~ www.google.com 간의 패킷 루트를 추적한다. 
+
+<img src="reference/tracert-from-to.png" width=756 height=478 alt="tracert 명령어 패킷 루트 추적" />
+
+### Cisco Packet Tracer
+> Cisco Packet Tracer as the name suggests, is a tool built by Cisco. This tool provides a network simulation to practice simple and complex networks.
+
+> Engineers prefer to test any protocols on Cisco Packet Tracer before implementing them. Also, Engineers who would like to deploy any change in the production network prefer to use Cisco Packet Tracer to first test the required changes and proceed to deploy if and only if everything is working as expected.
+
+### Router
+라우터는 네트워크 상에서 다른 네트워크로 패킷(데이터)을 전송하는 네트워크 기기이다. 라우터가 지원하는 네트워크 연결은 아래와 같다. 
+
+1. LAN과 LAN을 연결 또는 LAN과 WAN을 연결
+1. LAN과 ISP(Internet Service Provider)를 연결
+
+라우터와 스위치는 네트워크 기기라는 점은 동일하다.
+
+라우터는 OSI 모델 레이어3(네트워크 레이어, IP주소)에 속하고 서로 다른 네트워크를 연결한다.
+
+스위치는 레이어2(데이터 링크 레이어, MAC주소)에 속하고, 서로 다른 기기를 하나의 네트워크에 연결한다. 
+
+<img src="reference/switch-vs-router.png" width=724 height=357 alt="네트워크 기기 스위치, 라우터 차이점" />
+
+> Every device has an IP address with two pieces: the client or host address and the server or network address. IP addresses are either configured by a DHCP server or manually configured (static IP addresses). The subnet mask splits the IP address into the host and network addresses, thereby defining which part of the IP address belongs to the device and which part belongs to the network.
+
+> The device called a gateway or default gateway connects local devices to other networks. This means that when a local device wants to send information to a device at an IP address on another network, it first sends its packets to the gateway, which then forwards the data on to its destination outside of the local network.
+
+<img src="reference/how-packet-trasnfers-to-other-network.webp" width=800 height=600 alt="패킷 이동 경로 : 호스트-스위치-라우터-서브넷마스크-서버-인터넷" />
+
+### Subnet mask 
+> A subnet mask is a 32-bit number created by setting host bits to all 0s and setting network bits to all 1s. In this way, the subnet mask separates the IP address into the network and host addresses.
+
+> When organizations need additional subnetworking, subnetting divides the host element of the IP address further into a subnet. The goal of subnet masks are simply to enable the subnetting process. The phrase “mask” is applied because the subnet mask essentially uses its own 32-bit number to mask the IP address.
 
 ## 레퍼런스
 - [Wikipedia : Wi-Fi](https://en.wikipedia.org/wiki/Wi-Fi)
@@ -466,3 +574,6 @@ OSI 모델을 이용한 두 노드간의 데이터 송/수신 순서는 아래�
 - [What is a VoIP Phone and how it works?](https://www.ringcentral.com/what-is-a-voip-phone.html#ring-s-off)
 - [Wikipedia : Coaxial cable](https://en.wikipedia.org/wiki/Coaxial_cable)
 - [Wikipedia : Bring your own device](https://en.wikipedia.org/wiki/Bring_your_own_device)
+- [TechTarget : Ping](https://www.techtarget.com/searchnetworking/definition/ping)
+- [Fortinet : What is Traceroute: What Does it Do & How Does It Work?](https://www.fortinet.com/resources/cyberglossary/traceroutes)
+- [Geeks for geeks : What is Cisco Packet Tracer](https://www.geeksforgeeks.org/what-is-cisco-packet-tracer/)
