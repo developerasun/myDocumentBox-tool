@@ -619,11 +619,59 @@ tracert 명령어는 A 호스트(default gateway)에서 B 호스트로 패킷(�
 1. session : 노드간 상호작용 관리, 동기화
 1. transport : 전달받은 데이터를 분할 후 TCP/UDP 헤더에 부착
 1. network : 전달받은 데이터에 Network 헤더 부착 ===> 패킷
-1. data link : 전달받은 데이터에 header/trailer 부착 ===> 프레임
-1. physical : 전달받은 데이터를 0과 1로 표현 ===> 비트. 비트는 시그널로 전환되어 데이터 전송 수단(스마트폰)을 통해 수신자 노드에게 전송됨
+1. data link : 전달받은 데이터에 header/trailer 부착 ===> 프레임(0과 1로 표현됨, 비트)
+1. physical : 비트를 시그널로 전환해 데이터 전송 수단(스마트폰)을 통해 수신자 노드에게 전송함.
 
 <img src="reference/whatsapp-osi-transmission.png" width=961 height=567 alt="왓츠앱 통화 과정" />
 
+#### 시그널
+시그널은 아날로그와 디지털 2가지 종류로 나뉘어진다. 
+
+1. 아날로그 시그널 : 지정된 범위 내에 어떠한 값이라도 취할 수 있다는 것이 특징(연속성).
+
+<img src="reference/ananlogue-signal.png" width=733 height=308 alt="아날로그 시그널" />
+
+1. 디지털 시그널 : 지정된 범위 내에 단 하나의 값만 취할 수 있다는 것이 특징(비연속성).
+
+<img src="reference/digital-signal.png" width=741 height=271 alt="디지털 시그널" />
+
+#### 라인 구성(Line configuration)
+physical layer(layer 1)은 data link layer(layer 2)에서 전송한 frame 데이터(비트)를 전송 수단(medium)을 통해 수신자 노드에게 전송하는 역할을 한다.
+
+- data link layer ===(bits)===> physical layer
+- physical layer ===(signal, medium)===> recipient node
+
+라인 구성(line configuration)이란 네트워크 상 노드 간의 연결을 가상의 선으로 구성하고, 이를 조정하는 것을 말한다. 
+
+- node A ----(imaginary line)---- node B 
+
+라인 구성은 1) point-to-point 2) multipoints의 방식으로 구분된다. 
+
+##### Point-to-point 
+point to point 라인 구성 방식은 두 노드 간 전용 링크(dedicated link)를 설치하는 것을 말한다. 해당 링크의 수용 능력은 두 노드에 국한된다.
+
+<img src="reference/point-to-point-line.png" width=695 height=472 alt="전용 링크 라인 구성" />
+
+##### Multi-point 
+multi-point 라인 구성 방식은 여러 노드가 하나의 링크를 공유하는 것을 말한다. 하나의 링크가 공유되어 있으므로 기기간 데이터를 보내는 순서를 지정해 데이터 충돌이 일어나지 않도록 주의한다. 
+
+<img src="reference/multi-point-line.png" width=670 height=348 alt="멀티 포인트 라인 구성" />
+
+### Data link layer(layer 2)
+데이터 링크 레이어(link layer for short)는 네트워크 레이어로부터 
+
+1. 전달받은 packet에 header와 trailer를 부착하고(packet becomes a frame)
+1. 데이터를 캡슐화 한 뒤(physical address 등)
+1. 해당 frame을 다른 node에게 forward 하는 역할을 담당한다. 
+
+링크 레이어의 핵심 역할은 다음과 같다. 
+
+#### Framing
+framing이란 링크 레이어의 핵심 역할 중 하나로, 네트워크 레이어로부터 전달받은 패킷(0,1로 구성된 비트)을 구분자(delimeter)를 통해 구별하는 작업을 의미한다. 
+
+> A frame is a unit of communication in the data link layer. Data link layer takes the packets from the Network Layer and encapsulates them into frames. If the frame size becomes too large, then the packet may be divided into small sized frames.
+
+<img src="reference/data-link-layer-frame.jpg" width=416 height=110 alt="링크 레이어 프레임 구성" />
 
 
 
