@@ -1,8 +1,5 @@
 # 컴퓨터 사이언스 필수 과목 정리
-주말을 이용해 **컴퓨터 공학 과목**들을 공부하고 그 내용을 공유하는 저장소입니다. HTTP, TCP/IP, 자료구조와 알고리즘, 네트워크, 운영 체제, 프로그래밍을 위한 수학 등의 토픽을 정리중입니다. 참여를 원하실 경우 아래 이메일로 연락주시기 바랍니다. 
-```
-nellow1102@gmail.com
-```
+주말을 이용해 컴퓨터 공학 과목들을 공부하고 그 내용을 공유하는 저장소입니다.
 
 ## CS 학습 리스트
 - [X] [유데미 - 반드시 알고 넘어가야 하는 웹 기술 기초(HTTP)](https://www.udemy.com/course/web-technology-fundamentals/)
@@ -12,26 +9,13 @@ nellow1102@gmail.com
 - [X] [Neso Academy - 운영체제 (영문)](https://youtube.com/playlist?list=PLBlnK6fEyqRiVhbXDGLXDk_OQAeuVcp2O)
 - [X] [Neso Academy - 데이터베이스 (영문)](https://www.youtube.com/playlist?list=PLBlnK6fEyqRi_CUQ-FXxgzKQ1dwr_ZJWZ) 
 - [ ] [Neso Academy - 컴퓨터 네트워크 (영문)](https://youtube.com/playlist?list=PLBlnK6fEyqRgMCUAG0XRw78UA8qnv6jEx) ☜ 2022.02 진행 중
-- [ ] [Neso Academy - 자료구조 (영문)](https://youtube.com/playlist?list=PLBlnK6fEyqRj9lld8sWIUNwlKfdUoPd1Y) ☜ 2022.02 진행 중
-- [ ] [유튜브 - 자료구조와 알고리즘(자바스크립트, 영문)](https://youtube.com/playlist?list=PLn2ipk-jqgZiAHiA70hOxAj8RMUeqYNK3) 
+- [ ] [Neso Academy - 자료구조 (영문)](https://youtube.com/playlist?list=PLBlnK6fEyqRj9lld8sWIUNwlKfdUoPd1Y) ☜ 2022.02 진행 중 
 - [ ] [Neso Academy - 암호학과 네트워크 보안(영문)](https://youtube.com/playlist?list=PLBlnK6fEyqRgJU3EsOYDTW7m6SUmW6kII)
 - [ ] [Stanford - 스탠포드 CS 101 프로그래밍 방법론 (영문)](https://youtu.be/KkMDCCdjyW8)
-- [ ] [부스트코스 - 모두를 위한 컴퓨터 과학 - 데이비드 밀런](https://www.boostcourse.org/cs112)
-- [ ] [Kmooc - 쉽게 배우는 소프트웨어 공학](http://www.kmooc.kr/courses/course-v1:KONGJUk+FD_KNU03+2021_01/course/)
 - [ ] [유튜브 - 이산수학 (영문)](https://youtube.com/playlist?list=PLBlnK6fEyqRhqJPDXcvYlLfXPh37L89g3)
 - [ ] [유튜브 - 프로그래머를 위한 수학 (영문)](https://youtube.com/playlist?list=PLWKjhJtqVAbndUuYBE5sVViMIvyzp_dB1)
-- [ ] [부스트코스 - 모두를 위한 선형 대수](https://www.boostcourse.org/ai151)
-- [ ] [부스트코스 - 확률론 기초](https://www.boostcourse.org/ai152)
 
 ## 참여자
 <a href="https://github.com/developerasun">
 <img src="https://github.com/developerasun.png?size=50" alt="Jake Sung"/>
-</a>
-
-<a href="https://github.com/jshhhhh">
-<img src="https://github.com/jshhhhh.png" width=50px height=50px alt="정석환"/>
-</a>
-
-<a href="https://github.com/omago123">
-<img src="https://github.com/omago123.png" width=50px height=50px alt="김정기"/>
 </a>
