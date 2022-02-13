@@ -1,1 +1,0 @@
-console.log("tsconfig file test")
