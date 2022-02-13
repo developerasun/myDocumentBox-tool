@@ -565,6 +565,68 @@ tracert 명령어는 A 호스트(default gateway)에서 B 호스트로 패킷(�
 
 > When organizations need additional subnetworking, subnetting divides the host element of the IP address further into a subnet. The goal of subnet masks are simply to enable the subnetting process. The phrase “mask” is applied because the subnet mask essentially uses its own 32-bit number to mask the IP address.
 
+### 브릿지
+브릿지는 동일 프로토콜 상의 LAN을 연결하는 반면, 라우터는 이종 프로토콜 상의 LAN을 연결한다는 것이 차이점이다. 또한 브릿지는 MAC 주소를 관리하는 데이터 링크 레이어(layer 2)이지만, 라우터의 경우 IP 주소를 관리하는 네트워크 레이어(layer 3) 기기에 해당된다.
+
+> A network bridge is a computer networking device that creates a single, aggregate network from multiple communication networks or network segments. This function is called network bridging.[1] Bridging is distinct from routing. Routing allows multiple networks to communicate independently and yet remain separate, whereas bridging connects two separate networks as if they were a single network.
+
+### 네트워크 기기
+네트워크는 종료와 목적에 따른 다양한 기기들로 구성된다. 
+
+1. repeater 
+> Repeaters are network devices operating at physical layer of the OSI model that amplify or regenerate an incoming signal before retransmitting it. They are incorporated in networks to expand its coverage area. They are also known as signal boosters.
+
+<img src="reference/network-repeater.jpg" width=432 height=342 alt="네트워크 리피터" />
+
+1. hub : LAN & layer1 기기, 수신 받은 것을 송신하는 역할()
+
+1. switch : LAN & layer2 기기, hub와 달리 MAC 주소에 기반해 패킷 송/수신 가능(MAC 주소 테이블 저장)
+
+1. bridge : layer 2, 동일 프로토콜을 네트워크 상에서 연결 (repeater + MAC 주소 읽기)
+
+1. router : layer 3, 패킷을 IP 주소에 기반해 전송, 이종 프로토콜을 네트워크 상에서 연결
+
+1. multi-layer switch : layer 3, 기존의 스위치 + 라우터 기능이 섞인 것.
+
+1. brouter : bridge + router
+
+1. modem(Modulator-Demodulator) : 
+> A modulator-demodulator, or simply modem, is a computer hardware device that converts data from a digital format into a format suitable for an analog such as telephone or radio. A modem transmits data by modulating one or more carrier wave signals to encode digital information, while the receiver demodulates the signal to recreate the original digital information. 
+> The goal is to produce an electrical signal that can be transmitted easily and decoded reliably. Modems can be used with almost any means of transmitting analog signals, from light-emitting diodes to radio.
+
+1. firewall : filters data packets sent based on port number and such.
+> In computing, a firewall is a network security system that monitors and controls incoming and outgoing network traffic based on predetermined security rules.[1] A firewall typically establishes a barrier between a trusted network and an untrusted network, such as the Internet.[2]
+
+> Firewalls are categorized as a network-based or a host-based system. Network-based firewalls can be positioned anywhere within a LAN or WAN.[8] They are either a software appliance running on general-purpose hardware, a hardware appliance running on special-purpose hardware, or a virtual appliance running on a virtual host controlled by a hypervisor
+
+<details>
+<summary>Proxy란 무엇인가? </summary>
+
+> In computer networking, a proxy server is a server application that acts as an intermediary between a client requesting a resource and the server providing that resource.[1]
+
+> Instead of connecting directly to a server that can fulfill a requested resource, such as a file or web page, the client directs the request to the proxy server, which evaluates the request and performs the required network transactions. This serves as a method to simplify or control the complexity of the request, or provide additional benefits such as load balancing, privacy, or security. 
+
+> Proxies were devised to add structure and encapsulation to distributed systems.[2] A proxy server thus functions on behalf of the client when requesting service, potentially masking the true origin of the request to the resource server.
+
+<img src="reference/network-proxy.jpg" width=416 height=312 alt="네트워크 프록시 서버" />
+</details>
+
+### Physical layer (layer 1)
+다음 과정은 두 명의 스마트폰 사용자가 whatsapp을 통해 원거리 통신을 시행할 때 레이어간 데이터 전환 과정을 OSI 모델에 근거해 설명한 것이다. 
+
+1. application : 사용자 데이터(음성)를 수집, presentation 레이어에 전달
+1. presentation : 전달받은 데이터를 암호화, 압축
+1. session : 노드간 상호작용 관리, 동기화
+1. transport : 전달받은 데이터를 분할 후 TCP/UDP 헤더에 부착
+1. network : 전달받은 데이터에 Network 헤더 부착 ===> 패킷
+1. data link : 전달받은 데이터에 header/trailer 부착 ===> 프레임
+1. physical : 전달받은 데이터를 0과 1로 표현 ===> 비트. 비트는 시그널로 전환되어 데이터 전송 수단(스마트폰)을 통해 수신자 노드에게 전송됨
+
+<img src="reference/whatsapp-osi-transmission.png" width=961 height=567 alt="왓츠앱 통화 과정" />
+
+
+
+
 ## 레퍼런스
 - [Wikipedia : Wi-Fi](https://en.wikipedia.org/wiki/Wi-Fi)
 - [Cnet : modem-vs-router-whats-the-difference (Eng)](https://www.cnet.com/home/internet/modem-vs-router-whats-the-difference/)
@@ -577,3 +639,7 @@ tracert 명령어는 A 호스트(default gateway)에서 B 호스트로 패킷(�
 - [TechTarget : Ping](https://www.techtarget.com/searchnetworking/definition/ping)
 - [Fortinet : What is Traceroute: What Does it Do & How Does It Work?](https://www.fortinet.com/resources/cyberglossary/traceroutes)
 - [Geeks for geeks : What is Cisco Packet Tracer](https://www.geeksforgeeks.org/what-is-cisco-packet-tracer/)
+- [Wikipedia : bridge](https://en.wikipedia.org/wiki/Bridging_(networking))
+- [Wikipedia : modem](https://en.wikipedia.org/wiki/Modem)
+- [Wikipedia : firewall](https://en.wikipedia.org/wiki/Firewall_(computing))
+- [Tutorials point : What are Repeaters in Computer Network?](https://www.tutorialspoint.com/what-are-repeaters-in-computer-network)
